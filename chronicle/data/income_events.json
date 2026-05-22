@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
+  "entry_template": {
+    "id": "income-YYYYMMDD-unique",
+    "symbol": "RSSB",
+    "event_type": "dividend",
+    "ex_date": "YYYY-MM-DD",
+    "pay_date": "YYYY-MM-DD",
+    "gross_usd": 0,
+    "tax_usd": 0,
+    "net_usd": 0,
+    "destination": "keep_as_cash",
+    "destination_bucket_id": "dividend-cash-pool",
+    "reinvested_symbol": null,
+    "note_en": "Describe where the income went."
+  },
+  "events": [],
+  "event_type_reference": {
+    "dividend": "Cash dividend from a holding.",
+    "distribution": "Fund distribution or similar income event.",
+    "interest_income": "Cash interest received in broker or bank.",
+    "return_of_capital": "Non-dividend capital return event."
+  },
+  "destination_reference": {
+    "keep_as_cash": "Income stays in a strategy cash bucket.",
+    "reinvest_same_symbol": "Income reinvested into the same symbol.",
+    "reinvest_other_symbol": "Income reinvested into a different symbol.",
+    "use_for_loan_payment": "Income reserved to support debt service."
+  }
+}

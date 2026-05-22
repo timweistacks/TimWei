@@ -1,0 +1,37 @@
+{
+  "amortization_basis": "contract_principal",
+  "official_schedule_file": "loan_official_schedule.json",
+  "annual_nominal_rate": 0.045,
+  "contract": {
+    "currency": "TWD",
+    "principal_twd": 1350000
+  },
+  "disbursement": {
+    "cross_bank_fee_twd": 30,
+    "handling_fee_twd": 9000,
+    "net_to_account_twd": 1340970
+  },
+  "due": {
+    "day_of_month": 13,
+    "first_due_date": "2026-05-13",
+    "note": "Payment described as shortly after midnight on the due calendar day."
+  },
+  "reminder": {
+    "calendar_day": 13,
+    "note_zh": "每月 13 日清晨扣款；需提醒（可接行事曆或手機，此處僅紀錄）。"
+  },
+  "interest": {
+    "day_count_basis": 365,
+    "method": "daily_365",
+    "note": "Daily interest: round(balance * (annual_rate/365) * days); days = period_start to payment_date (exclusive start, inclusive end convention matches first period 2026-04-13 -> 2026-05-13 = 30 days)."
+  },
+  "lock_in_months": 24,
+  "monthly_payment_twd": 18765,
+  "origin_date": "2026-04-13",
+  "payments_logged": [],
+  "rounding": {
+    "note": "After term_months, if model balance_end is below this TWD, liabilities use 0 for net worth (integer rounding vs bank core).",
+    "treat_under_twd_as_paid_after_term": 500
+  },
+  "term_months": 84
+}

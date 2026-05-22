@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "summary_note_en": "Rule events log when a strategy rule was observed, triggered, ignored, or completed. This is the trigger history, not the execution ledger.",
+  "entry_template": {
+    "id": "rule-YYYYMMDD-unique",
+    "event_date": "YYYY-MM-DD",
+    "detected_at": "YYYY-MM-DDTHH:MM:SS",
+    "rule_type": "drawdown_add",
+    "status": "triggered",
+    "phase_id": "phase-a",
+    "metric_name": "nav_drawdown_pct",
+    "metric_value": -20.0,
+    "threshold_value": -20.0,
+    "target_symbol": "RSSB",
+    "suggested_actions": [],
+    "linked_rebalance_id": null,
+    "note_en": "Describe what rule fired and why."
+  },
+  "events": [],
+  "rule_type_reference": {
+    "drawdown_add": "NAV fell from peak enough to trigger extra capital deployment.",
+    "rebalance_band_breach": "Allocation drift exceeded the configured band.",
+    "monthly_contribution_target": "Rule selected a target sleeve for the next contribution.",
+    "manual_override": "User intentionally overrode the default rule."
+  },
+  "status_reference": {
+    "observed": "Condition detected but no action decided yet.",
+    "triggered": "Condition confirmed and awaiting action.",
+    "executed": "Action completed and linked to a log entry.",
+    "dismissed": "Condition intentionally ignored or cancelled."
+  }
+}

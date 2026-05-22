@@ -1,0 +1,62 @@
+{
+  "cash_twd": 0,
+  "cash_usd": 10.2,
+  "nav": {
+    "cash_like_symbols": ["BOXX"],
+    "equity_includes_cash_usd": true,
+    "note_zh": "NAV green line: equity sleeve only (position_mv). Idle broker USD and BOXX are USD cash, not NAV units. Units change on equity ETF buy/sell only; FX does not change units. Shadow SPY/SSO mirrors equity trades only."
+  },
+  "cash_usd_note": "trades.json buys: cash debit = total_usd + fee_usd + other_fees_usd (principal vs fees explicit). cash_usd = broker wallet.",
+  "drawdown_reinvest": {
+    "include_cash_twd_in_investment_total": false,
+    "include_cash_usd_in_investment_total": false,
+    "note": "Peak/drawdown uses ETF position MV in TWD only. Cash USD/TWD from FX is excluded until deployed; set include_* true if you want cash in the total.",
+    "peak_investment_value_twd": null,
+    "trigger_drawdown_from_peak_pct": 0.2
+  },
+  "positions": [
+    {
+      "cost_basis_usd": 17993.31,
+      "symbol": "RSSB",
+      "trade_fees_usd": 0,
+      "units": 605,
+      "yahoo_ticker": "RSSB"
+    },
+    {
+      "cost_basis_usd": 5681.55,
+      "listed": true,
+      "symbol": "RSIT",
+      "trade_fees_usd": 0,
+      "units": 277,
+      "yahoo_ticker": "RSIT"
+    },
+    {
+      "cost_basis_usd": 12291.98,
+      "symbol": "RSST",
+      "trade_fees_usd": 0,
+      "units": 379,
+      "yahoo_ticker": "RSST"
+    },
+    {
+      "cost_basis_usd": 5620.97,
+      "symbol": "RSSY",
+      "trade_fees_usd": 0,
+      "units": 227,
+      "yahoo_ticker": "RSSY"
+    },
+    {
+      "cost_basis_usd": 0,
+      "note": "BOXX position closed 2026-04-30; cash-like via broker USD if re-opened.",
+      "symbol": "BOXX",
+      "trade_fees_usd": 0,
+      "units": 0,
+      "yahoo_ticker": "BOXX"
+    }
+  ],
+  "valuation": {
+    "note": "Current valuation uses Yahoo USDTWD=X close. portfolio.usd_twd_rate remains fallback only if Yahoo is unavailable. fx.json events are historical ledger records, not the live valuation rate.",
+    "usd_twd_policy": "yahoo",
+    "usd_twd_rate": 31.708,
+    "yahoo_usdtwd_ticker": "USDTWD=X"
+  }
+}

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+.eggs/
+dist/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Cursor AI (local assistant config; not part of the public site)
+.cursor/
+
+# Local scratch / debug
+tmp_trace.txt
+*.log
+
+# Optional: keep a private override copy locally (public repo uses site-config.js)
+site-config.local.js

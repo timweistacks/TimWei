@@ -1,0 +1,53 @@
+{
+  "coverage_note_zh": "以下為銀行「攤還試算明細」登錄；可視需要補齊第 2～84 期（目前含第 1 期完整與若干期餘額錨點）。",
+  "linked_loan_file": "loan.json",
+  "rows": [
+    {
+      "balance_after_twd": 1336228,
+      "days": 30,
+      "interest_twd": 4993,
+      "payment_date": "2026-05-13",
+      "payment_twd": 18765,
+      "period": 1,
+      "principal_twd": 13772
+    },
+    {
+      "balance_after_twd": 1182149,
+      "note_zh": "錨點列：其餘欄位可自原表補上",
+      "payment_date": "2027-04-13",
+      "payment_twd": 18765,
+      "period": 12
+    },
+    {
+      "balance_after_twd": 1006714,
+      "note_zh": "錨點列",
+      "payment_date": "2028-04-13",
+      "payment_twd": 18765,
+      "period": 24
+    },
+    {
+      "balance_after_twd": 823091,
+      "note_zh": "錨點列",
+      "payment_date": "2029-04-13",
+      "payment_twd": 18765,
+      "period": 36
+    }
+  ],
+  "source": {
+    "account_no": null,
+    "amortization_method_zh": "本息平均",
+    "currency": "TWD",
+    "document_title_zh": "攤還試算明細",
+    "grace_period_note_zh": "寬限期 0000（無）",
+    "institution_zh": null,
+    "interest_rate_annual": 0.045,
+    "loan_start_date": "2026-04-13",
+    "payment_calendar_day": 13,
+    "payment_fixed_twd": 18765,
+    "principal_twd": 1350000,
+    "product_name_zh": "信貸中放-本利攤指數",
+    "roc_calendar_note_zh": "原表放款起日 115/04/13 = 2026-04-13",
+    "schedule_image_hint": "Scan or PNG of the full bank table: place under chronicle/data/reference/ (see reference/README.txt).",
+    "term_months": 84
+  }
+}

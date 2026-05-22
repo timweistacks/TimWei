@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "purpose_zh": "口述紀錄與約定；技術細節以 loan.json、loan_official_schedule.json、fx.json 為準。",
+    "updated_at": "2026-05-21"
+  },
+  "pending_followups_zh": [
+    "自有資金投入待補：首次自有資金投入日期、金額、幣別，以及未來每月定期定額規則。",
+    "貸款實際扣款待補：首期扣款後請補 paid_at、payment_twd、principal_twd、interest_twd、remaining_balance_twd。",
+    "配息與分配待補：之後若有配息，請補 gross、tax、net、destination、是否再投入。",
+    "規則執行待補：若發生跌破高點 20% 加碼、再平衡或手動覆寫，請補建議與實際執行內容。"
+  ],
+  "sections": [
+    {
+      "bullets": [
+        "本帳本定位：個人投資與負債的長期紀錄；行情以 yfinance 收盤為快照。",
+        "開啟方式：優先使用 scripts/open-site.bat（先更新快照再開瀏覽器）。",
+        "買入後由你彙報部位、時間點、手續費；再平衡與每月再投入見 allocations.json。"
+      ],
+      "heading": "總覽"
+    },
+    {
+      "bullets": [
+        "2026-04-13 申貸：合約本金 1,350,000 TWD；年利率 4.5%；手續費 9,000、跨行 30，實際入帳 1,340,970 TWD。",
+        "銀行紙本／試算攤還表：見 loan_official_schedule.json（可補齊各期）；與 loan.json 並存。",
+        "每月應繳 18,765 TWD；繳款日每月 13 日；綁約 2 年；期數 84。",
+        "淨值模型用合約本金攤還；入帳淨額見 disbursement。"
+      ],
+      "heading": "信貸"
+    },
+    {
+      "bullets": [
+        "換匯紀錄在 fx.json：逐筆保存匯率與金額，方便日後查「當時用哪個匯率換的」。",
+        "不強制把「各筆換得美元加總」當成唯一美金現金；你可能另有舊美金。若要讓淨值含美元現金，於 portfolio.json 手動填 cash_usd；可維持 null。"
+      ],
+      "heading": "換匯"
+    },
+    {
+      "bullets": [
+        "約至 2026-05-06 前：RSSB 50%、RSST 35%、RSSY 15%。",
+        "2026-05-07 至 2026-05-18（phase-b）：RSSB 50%、RSST 20%、RSIT 15%、RSSY 15%。",
+        "2026-05-19 起（phase-c）：RSSB 40%、RSST 30%、RSSY 15%、RSIT 15%。理由：預期升息或停止降息循環。",
+        "若通膨回落或其他因素使降息循環再啟動，改回 phase-b 權重（50/20/15/15）；見 allocations.json phase-c.revert_to_phase_id。",
+        "2026-05-19 22:07:16 買入 RSST 37 股 @33.05，成交 1222.85 USD，手續費 3（phase-c 加碼 RSST）。",
+        "2026-05-21 22:15:05 買入 RSST 95 股 @33.33，成交 3166.35 USD，手續費 3（phase-c 加碼 RSST）。"
+      ],
+      "heading": "目標配置"
+    },
+    {
+      "bullets": [
+        "再平衡：目標權重 ±20% 帶寬。",
+        "每月再投入：加在相對跌最深的那一檔（見 monthly_contribution）。",
+        "策略帳本重點：追蹤總投入、自有資金 / 借入資金拆分、規則觸發、實際執行、配息與現金池。"
+      ],
+      "heading": "再平衡與再投入"
+    },
+    {
+      "bullets": [
+        "新增骨架檔：capital_events.json、cash_buckets.json、rule_events.json、rebalance_log.json、income_events.json。",
+        "交接摘要輸出：chronicle/export/current_summary.md，由 scripts/export-summary.bat 或 scripts/open-site.bat 一併更新。",
+        "capital_events.json 用於統計整套策略累計投入，不只看貸款，也包含未來自有資金與配息回流。",
+        "cash_buckets.json 用於記錄策略專用現金池，不等於一般生活現金。",
+        "rule_events.json 與 rebalance_log.json 分開保存規則觸發與實際執行。",
+        "income_events.json 專門記配息與現金用途，避免和 trades.json 混在一起。"
+      ],
+      "heading": "策略帳本骨架"
+    }
+  ],
+  "title": "個人投資紀錄與約定"
+}

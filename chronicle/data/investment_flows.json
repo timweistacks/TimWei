@@ -1,0 +1,236 @@
+{
+  "flows": [
+    {
+      "date": "2026-04-14",
+      "executed_at": "2026-04-14T22:07:04",
+      "symbol": "RSST",
+      "side": "buy",
+      "units": 363,
+      "price_usd": 30.3899,
+      "usd": 11031.53,
+      "fees_usd": 3,
+      "note": "Matches trades.json: principal + fee = cash deployed."
+    },
+    {
+      "date": "2026-04-14",
+      "executed_at": "2026-04-14T22:08:50",
+      "symbol": "RSSB",
+      "side": "buy",
+      "units": 538,
+      "price_usd": 29.135,
+      "usd": 15674.63,
+      "fees_usd": 3,
+      "note": "Matches trades.json: principal + fee = cash deployed."
+    },
+    {
+      "date": "2026-04-14",
+      "executed_at": "2026-04-14T22:11:59",
+      "symbol": "RSSY",
+      "side": "buy",
+      "units": 203,
+      "price_usd": 23.46,
+      "usd": 4762.38,
+      "fees_usd": 3,
+      "note": "Matches trades.json: principal + fee = cash deployed."
+    },
+    {
+      "date": "2026-04-16",
+      "executed_at": "2026-04-16T21:55:46",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 321,
+      "price_usd": 29.3,
+      "usd": -9353.89,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 9405.3 fee 3 other 0.2. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-16",
+      "executed_at": "2026-04-16T21:56:12",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 217,
+      "price_usd": 30.84,
+      "usd": -6596.1,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 6692.28 fee 3 other 0.14. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-16",
+      "executed_at": "2026-04-16T21:59:33",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 121,
+      "price_usd": 23.84,
+      "usd": -2840.45,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 2884.64 fee 3 other 0.06. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-17",
+      "executed_at": "2026-04-17T03:59:53",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 41,
+      "price_usd": 23.94,
+      "usd": -962.46,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 981.54 fee 3 other 0.03. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-17",
+      "executed_at": "2026-04-17T03:59:54",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 73,
+      "price_usd": 31.03,
+      "usd": -2219.37,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 2265.19 fee 3 other 0.05. Last sell adjusted so flow sum matches portfolio cost_basis. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-17",
+      "executed_at": "2026-04-17T23:20:53",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 117,
+      "price_usd": 29.9,
+      "usd": -3409.76,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); gross 3498.3 fee 3 other 0.08. Drawdown hedge: cash ~85% target."
+    },
+    {
+      "date": "2026-04-20",
+      "executed_at": "2026-04-20T21:51:39",
+      "symbol": "BOXX",
+      "side": "buy",
+      "units": 259,
+      "price_usd": 116.4161,
+      "usd": 30151.77,
+      "fees_usd": 3,
+      "note": "Matches trades.json BOXX buy (principal usd + fees_usd)."
+    },
+    {
+      "date": "2026-04-21",
+      "executed_at": "2026-04-21T23:38:48",
+      "symbol": "BOXX",
+      "side": "buy",
+      "units": 30,
+      "price_usd": 116.435,
+      "usd": 3493.05,
+      "fees_usd": 3,
+      "note": "Matches trades.json BOXX buy (principal usd + fees_usd)."
+    },
+    {
+      "date": "2026-04-30",
+      "executed_at": "2026-04-30T22:16:50",
+      "symbol": "BOXX",
+      "side": "sell",
+      "units": 289,
+      "price_usd": 116.53,
+      "usd": -33650.82,
+      "fees_usd": 0,
+      "note": "Cost basis released (full BOXX lot); gross 33677.17 fee 3 other 0.7. Matches portfolio cost_basis before sell."
+    },
+    {
+      "date": "2026-05-04",
+      "executed_at": "2026-05-04T22:16:19",
+      "symbol": "RSSY",
+      "side": "buy",
+      "units": 149,
+      "price_usd": 25,
+      "usd": 3725,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-04",
+      "executed_at": "2026-05-04T22:17:01",
+      "symbol": "RSST",
+      "side": "buy",
+      "units": 274,
+      "price_usd": 31.98,
+      "usd": 8762.52,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-04",
+      "executed_at": "2026-05-04T22:18:15",
+      "symbol": "RSSB",
+      "side": "buy",
+      "units": 433,
+      "price_usd": 29.7299,
+      "usd": 12873.05,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-07",
+      "executed_at": "2026-05-07T22:09:58",
+      "symbol": "RSSY",
+      "side": "buy",
+      "units": 37,
+      "price_usd": 25.07,
+      "usd": 927.59,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-07",
+      "executed_at": "2026-05-07T22:12:48",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 100,
+      "price_usd": 32.51,
+      "usd": -3165.59,
+      "fees_usd": 0,
+      "note": "Cost basis released (avg cost); matches realized_pnl cost_basis_usd for this fill."
+    },
+    {
+      "date": "2026-05-07",
+      "executed_at": "2026-05-07T22:14:40",
+      "symbol": "RSIT",
+      "side": "buy",
+      "units": 277,
+      "price_usd": 20.5,
+      "usd": 5678.5,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-07",
+      "executed_at": "2026-05-07T22:27:59",
+      "symbol": "RSSB",
+      "side": "buy",
+      "units": 72,
+      "price_usd": 30.56,
+      "usd": 2200.32,
+      "fees_usd": 3,
+      "note": "Matches trades.json."
+    },
+    {
+      "date": "2026-05-19",
+      "executed_at": "2026-05-19T22:07:16",
+      "symbol": "RSST",
+      "side": "buy",
+      "units": 37,
+      "price_usd": 33.05,
+      "usd": 1222.85,
+      "fees_usd": 3,
+      "note": "phase-c: add RSST toward 30% target. Matches trades.json."
+    },
+    {
+      "date": "2026-05-21",
+      "executed_at": "2026-05-21T22:15:05",
+      "symbol": "RSST",
+      "side": "buy",
+      "units": 95,
+      "price_usd": 33.33,
+      "usd": 3166.35,
+      "fees_usd": 3,
+      "note": "phase-c: add RSST toward 30% target. Matches trades.json."
+    }
+  ],
+  "note": "Buys: usd = principal (same as trades total_usd), fees_usd = commission; deployed = usd+fees_usd. Sells: negative usd = cost basis released (avg cost) so cumulative flows match remaining portfolio cost_basis_usd."
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "summary_note_en": "Cash buckets are manual snapshots of money reserved for this strategy only. They are not general personal spending cash. Use snapshots when the user reports current balances.",
+  "snapshot_template": {
+    "as_of": "YYYY-MM-DD",
+    "buckets": [
+      {
+        "bucket_id": "strategy-usd-deploy",
+        "amount": 0,
+        "currency": "USD",
+        "location_name": "broker_or_sub_account_name",
+        "note_en": "Only strategy-reserved cash belongs here."
+      }
+    ]
+  },
+  "bucket_definitions": [
+    {
+      "id": "strategy-twd-deploy",
+      "label_zh": "TWD 待投入現金",
+      "currency": "TWD",
+      "location_type": "bank_sub_account",
+      "purpose": "undeployed_capital"
+    },
+    {
+      "id": "strategy-usd-deploy",
+      "label_zh": "USD 待投入現金",
+      "currency": "USD",
+      "location_type": "broker_cash",
+      "purpose": "undeployed_capital"
+    },
+    {
+      "id": "loan-payment-reserve",
+      "label_zh": "月付款預備金",
+      "currency": "TWD",
+      "location_type": "bank_sub_account",
+      "purpose": "debt_service_reserve"
+    },
+    {
+      "id": "rebalance-reserve",
+      "label_zh": "再平衡預備金",
+      "currency": "USD",
+      "location_type": "broker_cash",
+      "purpose": "rebalance_reserve"
+    },
+    {
+      "id": "dividend-cash-pool",
+      "label_zh": "配息待用現金",
+      "currency": "USD",
+      "location_type": "broker_cash",
+      "purpose": "income_reserve"
+    }
+  ],
+  "snapshots": []
+}

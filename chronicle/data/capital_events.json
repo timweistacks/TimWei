@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "summary_note_en": "Capital events track strategy-level funding in/out. Use this file to measure total contributed capital, debt-funded capital, self-funded capital, and withdrawals. Do not use it for market valuation.",
+  "cost_method_for_realized_pnl": "average_cost",
+  "entry_template": {
+    "id": "cap-YYYYMMDD-unique",
+    "date": "YYYY-MM-DD",
+    "event_type": "manual_contribution",
+    "direction": "in",
+    "source_kind": "self_funded",
+    "source_name": "bank_transfer_or_income_source",
+    "amount_twd": null,
+    "amount_usd": null,
+    "target_bucket_id": "strategy-usd-deploy",
+    "counts_as_external_capital": true,
+    "counts_as_strategy_cash": true,
+    "linked_file": null,
+    "note_en": "Describe why this event matters."
+  },
+  "events": [
+    {
+      "id": "cap-20260413-loan-draw",
+      "date": "2026-04-13",
+      "event_type": "loan_draw",
+      "direction": "in",
+      "source_kind": "debt",
+      "source_name": "Personal loan",
+      "amount_twd": 1350000,
+      "amount_usd": null,
+      "target_bucket_id": "strategy-twd-deploy",
+      "counts_as_external_capital": true,
+      "counts_as_strategy_cash": true,
+      "linked_file": "loan.json",
+      "note_en": "Initial debt-funded capital allocated to the strategy."
+    }
+  ],
+  "event_type_reference": {
+    "loan_draw": "Debt-funded capital entering the strategy.",
+    "manual_contribution": "Self-funded manual capital addition.",
+    "monthly_contribution": "Scheduled recurring self-funded capital addition.",
+    "irregular_topup": "One-off extra capital addition.",
+    "withdrawal_from_strategy": "Capital withdrawn out of the strategy.",
+    "dividend_to_cash": "Income received into strategy cash.",
+    "sale_proceeds_to_cash": "Sale proceeds returned to strategy cash.",
+    "tax_or_fee_outflow": "Non-trade cost paid from strategy capital."
+  }
+}

@@ -1,0 +1,65 @@
+name: Publish Investment Chronicle
+
+on:
+  push:
+    branches: [main, master]
+  schedule:
+    # 07:00 Asia/Taipei (UTC+8) == 23:00 UTC previous calendar day
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build dashboard snapshot
+        run: python chronicle/build/build_dashboard_data.py
+
+      - name: Export handoff summary
+        run: python chronicle/build/export_current_summary.py
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: chronicle/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Sync generated files to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add chronicle/data chronicle/site/data chronicle/export/current_summary.md
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: sync snapshot after build [skip ci]"
+          git push

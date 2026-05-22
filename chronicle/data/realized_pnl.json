@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-05-22",
+  "cost_method": "average_cost",
+  "total_realized_pnl_usd": 431.73,
+  "sell_count": 8,
+  "rows": [
+    {
+      "executed_at": "2026-04-16T21:55:46",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 321.0,
+      "net_proceeds_usd": 9402.1,
+      "cost_basis_usd": 9354.12,
+      "realized_pnl_usd": 47.98
+    },
+    {
+      "executed_at": "2026-04-16T21:56:12",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 217.0,
+      "net_proceeds_usd": 6689.14,
+      "cost_basis_usd": 6596.4,
+      "realized_pnl_usd": 92.74
+    },
+    {
+      "executed_at": "2026-04-16T21:59:33",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 121.0,
+      "net_proceeds_usd": 2881.58,
+      "cost_basis_usd": 2840.45,
+      "realized_pnl_usd": 41.13
+    },
+    {
+      "executed_at": "2026-04-17T03:59:53",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 41.0,
+      "net_proceeds_usd": 978.51,
+      "cost_basis_usd": 962.47,
+      "realized_pnl_usd": 16.04
+    },
+    {
+      "executed_at": "2026-04-17T03:59:54",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 73.0,
+      "net_proceeds_usd": 2262.14,
+      "cost_basis_usd": 2219.07,
+      "realized_pnl_usd": 43.07
+    },
+    {
+      "executed_at": "2026-04-17T23:20:53",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 117.0,
+      "net_proceeds_usd": 3495.22,
+      "cost_basis_usd": 3409.45,
+      "realized_pnl_usd": 85.77
+    },
+    {
+      "executed_at": "2026-04-30T22:16:50",
+      "symbol": "BOXX",
+      "side": "sell",
+      "units": 289.0,
+      "net_proceeds_usd": 33673.47,
+      "cost_basis_usd": 33650.82,
+      "realized_pnl_usd": 22.65
+    },
+    {
+      "executed_at": "2026-05-07T22:12:48",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 100.0,
+      "net_proceeds_usd": 3247.93,
+      "cost_basis_usd": 3165.59,
+      "realized_pnl_usd": 82.34
+    }
+  ],
+  "total_realized_pnl_twd": 13593.88
+}

@@ -1,0 +1,96 @@
+{
+  "monthly_contribution": {
+    "mode": "add_to_worst_performer",
+    "note": "Rule: add monthly contribution to the sleeve that fell the most vs prior (use manual preferred_ticker until automated).",
+    "note_zh": "加在相對跌最深的那一檔",
+    "preferred_ticker": null
+  },
+  "phases": [
+    {
+      "effective_from": "2026-04-13",
+      "effective_to": "2026-05-06",
+      "id": "phase-a",
+      "note": "Until mid-May 2026 (approximate).",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.5
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.35
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.15
+        }
+      ]
+    },
+    {
+      "effective_from": "2026-05-07",
+      "effective_to": "2026-05-18",
+      "id": "phase-b",
+      "note": "RSIT sleeve: trim RSST and fund RSIT to target weight. Revert target if easing cycle resumes (see phase-c note).",
+      "transition_reason_zh": "2026-05-07 起納入 RSIT（當日掛牌）。為達成約 63% 美股、37% 國際股票曝險，在維持 RSSB 50% 的前提下，以 RSIT 補強國際部位（自 RSST 調出權重）。",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.5
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.2
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.15
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        }
+      ]
+    },
+    {
+      "effective_from": "2026-05-19",
+      "effective_to": null,
+      "id": "phase-c",
+      "note": "Hawkish macro: expect rate hikes or end of easing; overweight RSST vs phase-b. Revert to phase-b weights (50/20/15/15) if inflation eases and cuts resume.",
+      "transition_reason_zh": "宏觀轉偏鷹：市場定價升息或至少非降息循環，故下調 RSSB、提高 RSST 曝險。若之後通膨回落、降息循環再起，可依設定回到 phase-b（RSSB 50% 等權重）。",
+      "revert_to_phase_id": "phase-b",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.4
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.3
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.15
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        }
+      ]
+    }
+  ],
+  "rebalance": {
+    "band_relative_to_target": 0.2,
+    "broker_fee_usd_per_trade": 3,
+    "buy_fee_min_notional_multiplier_other": 1.15,
+    "buy_fee_min_notional_multiplier_priority": 0.85,
+    "buy_fee_note_zh": "每筆買入與賣出皆計 broker_fee_usd_per_trade。若該筆手續費÷名目大於 max_trade_fee_as_pct_of_notional（數值可比照 max_buy_fee_as_pct_of_notional），前台不列下單建議（僅見偏低／偏高）。買進名目過小則再等較大金額一筆調；buy_fee_priority_symbols 門檻較低；其餘用 other；清單可空改 default。",
+    "buy_fee_priority_symbols": ["RSIT", "RSSB"],
+    "deploy_all_cash_usd": false,
+    "exact_target_min_trade_usd": 5,
+    "include_cash_usd_in_denominator": true,
+    "max_buy_fee_as_pct_of_notional": 0.003,
+    "max_trade_fee_as_pct_of_notional": 0.003,
+    "note": "Trigger when sleeve weight is below target*(1-band) or above target*(1+band). Example: 50% -> 40%-60%; 15% -> 12%-18%.",
+    "note_zh": "include_cash_usd_in_denominator=true：分母含券商 USD 現金。deploy_all_cash_usd=false：僅在權重偏離帶寬外才建議再平衡（例 15%±20% → 12%–18% 內不動）。exact_target_min_trade_usd：帶寬外若差額仍低於此 USD 仍可標示調整名目過小。"
+  }
+}

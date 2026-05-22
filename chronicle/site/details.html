@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-page="details">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>投資史冊明細</title>
+    <meta
+      name="description"
+      content="Investment ledger details: allocation, FX log, loan amortization, performance charts, and trade history."
+    />
+    <meta property="og:title" content="Investment Chronicle Details | 投資史冊明細" />
+    <meta
+      property="og:description"
+      content="Investment ledger details: allocation, FX log, loan amortization, performance charts, and trade history."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="" />
+    <script src="site-config.js"></script>
+    <script src="js/analytics.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="wrap">
+      <div id="lang-gate" class="lang-gate" hidden aria-hidden="true">
+        <div class="lang-gate-card">
+          <h2 class="lang-gate-title" data-i18n="gate.title">選擇語言</h2>
+          <p class="lang-gate-sub" data-i18n="gate.subtitle">之後可在頂部列隨時切換。</p>
+          <div class="lang-gate-actions">
+            <button type="button" class="lang-gate-btn" data-pick-lang="zh-Hant" data-i18n="gate.zh">中文（台幣）</button>
+            <button type="button" class="lang-gate-btn lang-gate-btn-alt" data-pick-lang="en" data-i18n="gate.en">English (USD)</button>
+          </div>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <div class="brand-block">
+          <span class="site-nav-brand" data-i18n="nav.brand">Personal Ledger</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">投資史冊</a>
+        </div>
+        <div class="site-nav-links">
+          <a class="site-nav-link" href="index.html" data-i18n="nav.overview">總覽</a>
+          <a class="site-nav-link is-active" href="details.html#performance" aria-current="page" data-i18n="nav.details">明細</a>
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-switch-btn" data-set-lang="zh-Hant" data-i18n="nav.lang.zh">中文</button>
+            <button type="button" class="lang-switch-btn" data-set-lang="en" data-i18n="nav.lang.en">EN</button>
+          </div>
+        </div>
+      </nav>
+
+      <header class="hero hero-compact">
+        <div class="hero-copy hero-copy-compact">
+          <p class="hero-tag" data-i18n="hero.details">明細</p>
+          <h1 id="detail-page-title">績效</h1>
+          <div class="hero-meta">
+            <span><span data-i18n="meta.snapshot">快照</span> <strong id="meta-generated">—</strong></span>
+            <span id="detail-page-meta">—</span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="detail-switcher" aria-label="Detail tabs">
+        <a class="detail-switcher-link is-active" data-detail-link="performance" href="#performance" data-i18n="detail.performance">績效</a>
+        <a class="detail-switcher-link" data-detail-link="portfolio" href="#portfolio" data-i18n="detail.portfolio">部位</a>
+        <a class="detail-switcher-link" data-detail-link="loan" href="#loan" data-i18n="detail.loan">負債</a>
+        <a class="detail-switcher-link" data-detail-link="allocation" href="#allocation" data-i18n="detail.allocation">配置</a>
+        <a class="detail-switcher-link" data-detail-link="fx" href="#fx" data-i18n="detail.fx">換匯</a>
+      </nav>
+
+      <section class="detail-panel" data-detail-panel="performance">
+        <div class="focus-metric-grid focus-metric-grid-performance">
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.nav">NAV</span>
+            <strong class="focus-metric-value" id="nav-index-kpi">—</strong>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.vs_spy">相對大盤</span>
+            <strong class="focus-metric-value" id="detail-beat-market">—</strong>
+            <span class="focus-metric-unit">SPY</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.position_mv">部位市值</span>
+            <strong class="focus-metric-value" id="nav-mv-usd">—</strong>
+            <span class="focus-metric-unit">USD</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.unrealized">未實現損益</span>
+            <strong class="focus-metric-value" id="nav-pnl-usd">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.realized">已實現損益（累計）</span>
+            <strong class="focus-metric-value" id="perf-realized-usd">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+            <p class="focus-metric-note" id="perf-realized-twd" hidden></p>
+          </article>
+        </div>
+
+        <div
+          id="perf-spy-stats-root"
+          class="spy-compare-wrap"
+          hidden
+          aria-label="Prior day"
+        ></div>
+
+        <div class="detail-stack perf-layout-stack">
+          <article class="card perf-chart-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.nav_perf">績效</p>
+                <h2 data-i18n="detail.nav_chart_title">組合 NAV</h2>
+              </div>
+            </div>
+            <div class="chart-box perf-main-chart" id="nav-chart-container"></div>
+          </article>
+
+          <article class="card perf-metrics-card">
+            <div class="section-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="th.metric">指標</p>
+                <h2 data-i18n="detail.nav_metrics">報酬與風險指標</h2>
+              </div>
+              <p class="section-note" id="perf-metrics-range">—</p>
+            </div>
+            <div id="perf-metrics-root"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-panel" data-detail-panel="portfolio" hidden>
+        <div class="focus-metric-grid focus-metric-grid-portfolio">
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.invested_cost">場內成本</span>
+            <strong class="focus-metric-value" id="portfolio-invested-twd">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.holdings_mv">持股市值</span>
+            <strong class="focus-metric-value" id="portfolio-held-mv">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.unrealized">未實現損益</span>
+            <strong class="focus-metric-value" id="portfolio-unrealized-pnl">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="label.realized">已實現損益（累計）</span>
+            <strong class="focus-metric-value" id="portfolio-realized-twd">—</strong>
+            <span class="focus-metric-unit">TWD</span>
+            <p class="focus-metric-note" id="portfolio-realized-sub" hidden></p>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label">NAV</span>
+            <strong class="focus-metric-value" id="portfolio-nav-index">—</strong>
+          </article>
+        </div>
+
+        <div class="portfolio-detail-layout">
+          <article class="card portfolio-pos-card">
+            <div class="section-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="section.positions">部位</p>
+                <h2 data-i18n="section.positions_table">目前部位表</h2>
+              </div>
+            </div>
+            <div id="positions-root" class="portfolio-pos-shell pll-scroll"></div>
+          </article>
+
+          <article class="card portfolio-history-card">
+            <div class="section-head portfolio-history-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="detail.history">歷史</p>
+                <h2 data-i18n="portfolio.history_title">成交紀錄</h2>
+              </div>
+              <p
+                class="section-note muted portfolio-history-meta"
+                id="portfolio-history-meta"
+                hidden
+                data-i18n="realized.avg_cost"
+              >
+                平均成本法
+              </p>
+            </div>
+            <div
+              class="portfolio-history-tabs"
+              role="tablist"
+              aria-label="Trade history tabs"
+            >
+              <button
+                type="button"
+                class="portfolio-history-tab is-active"
+                role="tab"
+                aria-selected="true"
+                data-portfolio-history-tab="all"
+                data-i18n="portfolio.tab.all"
+              >
+                全部
+              </button>
+              <button
+                type="button"
+                class="portfolio-history-tab"
+                role="tab"
+                aria-selected="false"
+                data-portfolio-history-tab="buy"
+                data-i18n="portfolio.tab.buy"
+              >
+                買入
+              </button>
+              <button
+                type="button"
+                class="portfolio-history-tab"
+                role="tab"
+                aria-selected="false"
+                data-portfolio-history-tab="sell"
+                data-i18n="portfolio.tab.sell"
+              >
+                賣出
+              </button>
+            </div>
+            <div class="portfolio-history-body">
+              <div
+                id="trade-history-root"
+                class="portfolio-history-panel pll-scroll"
+                data-portfolio-history-panel="all"
+                role="tabpanel"
+              ></div>
+              <div
+                id="buy-history-root"
+                class="portfolio-history-panel pll-scroll"
+                data-portfolio-history-panel="buy"
+                role="tabpanel"
+                hidden
+              ></div>
+              <div
+                id="sell-history-root"
+                class="portfolio-history-panel pll-scroll"
+                data-portfolio-history-panel="sell"
+                role="tabpanel"
+                hidden
+              ></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-panel" data-detail-panel="loan" hidden>
+        <div class="detail-stack">
+          <article class="card loan-info-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.debt">負債</p>
+                <h2 data-i18n="detail.loan_info">貸款資訊</h2>
+              </div>
+            </div>
+            <div id="loan-info-root" class="loan-info"></div>
+          </article>
+
+          <article class="card loan-schedule-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.amort">攤還</p>
+                <h2 data-i18n="detail.amort_table">攤還表</h2>
+              </div>
+            </div>
+            <p class="fineprint" id="loan-computed-caption" hidden></p>
+            <div class="table-wrap table-scroll loan-schedule-panel pll-scroll">
+              <table class="quotes schedule-table" id="loan-computed-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="th.period">期</th>
+                    <th data-i18n="th.due_date">還款日</th>
+                    <th data-i18n="th.days">天數</th>
+                    <th data-i18n="th.payment">還款</th>
+                    <th data-i18n="th.principal">本金</th>
+                    <th data-i18n="th.interest">利息</th>
+                    <th data-i18n="th.balance">餘額</th>
+                  </tr>
+                </thead>
+                <tbody id="loan-computed-body"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-panel" data-detail-panel="allocation" hidden>
+        <div class="focus-metric focus-metric-allocation-bar">
+          <div class="alloc-bar-group alloc-bar-group-phase">
+            <span class="focus-metric-label" data-i18n="detail.alloc_current_label">目前配置</span>
+            <div id="detail-phase-line" class="focus-metric-phase-body">—</div>
+            <span class="focus-metric-unit focus-metric-phase-status" data-i18n="alloc.active">作用中</span>
+          </div>
+          <div class="alloc-bar-group alloc-bar-group-rebalance">
+            <span class="focus-metric-label" data-i18n="section.rebalance">再平衡</span>
+            <strong class="focus-metric-inline-value" id="allocation-rebalance-state">—</strong>
+            <span class="focus-metric-unit" data-i18n="alloc.status">狀態</span>
+          </div>
+          <div class="alloc-bar-group alloc-bar-group-band">
+            <span class="focus-metric-label" data-i18n="alloc.band">容許帶</span>
+            <strong class="focus-metric-inline-value" id="allocation-band-label">—</strong>
+            <span class="focus-metric-unit" data-i18n="alloc.vs_target">相對目標</span>
+          </div>
+        </div>
+
+        <div class="detail-stack">
+          <article class="card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.allocation">配置</p>
+                <h2 data-i18n="detail.alloc_current">目前部位 vs 目標</h2>
+              </div>
+              <p class="section-note" id="alloc-status-caption">—</p>
+            </div>
+            <div id="alloc-status-root"></div>
+            <div class="section-spacer"></div>
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="section.rebalance_actions">動作</p>
+                <h2 data-i18n="detail.alloc_actions">再平衡建議</h2>
+              </div>
+            </div>
+            <div id="alloc-action-root"></div>
+          </article>
+
+          <article class="card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.alloc_rules">規則</p>
+                <h2 data-i18n="detail.alloc_rules">配置階段與再投入</h2>
+              </div>
+              <p class="section-note" data-i18n="alloc.phase_delta_hint">權重旁標示為相較前一階段之增減（百分點）</p>
+            </div>
+            <div class="detail-stack-inner">
+              <dl class="dl-grid" id="dd-dl"></dl>
+              <div id="alloc-root" class="alloc-phase-grid"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-panel" data-detail-panel="fx" hidden>
+        <div class="fx-leg-panel">
+          <p class="fx-leg-heading" data-i18n="fx.twd_usd">台幣 → 美金</p>
+          <div class="focus-metric-grid">
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.count">筆數</span>
+              <strong class="focus-metric-value" id="fx-twd-buy-usd-count">—</strong>
+              <span class="focus-metric-unit" data-i18n="unit.trades">筆</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.avg_rate">平均匯率</span>
+              <strong class="focus-metric-value" id="fx-twd-buy-usd-rate">—</strong>
+              <span class="focus-metric-unit">TWD / USD</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.twd_total">累計付出台幣</span>
+              <strong class="focus-metric-value" id="fx-twd-buy-usd-twd">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.usd_in_total">累計進帳美元</span>
+              <strong class="focus-metric-value" id="fx-twd-buy-usd-usd">—</strong>
+              <span class="focus-metric-unit">USD</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="fx-leg-panel">
+          <p class="fx-leg-heading" data-i18n="fx.usd_twd">美金 → 台幣</p>
+          <div class="focus-metric-grid">
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.count">筆數</span>
+              <strong class="focus-metric-value" id="fx-usd-sell-twd-count">—</strong>
+              <span class="focus-metric-unit" data-i18n="unit.trades">筆</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.avg_rate">平均匯率</span>
+              <strong class="focus-metric-value" id="fx-usd-sell-twd-rate">—</strong>
+              <span class="focus-metric-unit">TWD / USD</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.usd_out_total">累計賣出美元</span>
+              <strong class="focus-metric-value" id="fx-usd-sell-twd-usd">—</strong>
+              <span class="focus-metric-unit">USD</span>
+            </article>
+            <article class="focus-metric">
+              <span class="focus-metric-label" data-i18n="fx.twd_in_total">累計進帳台幣</span>
+              <strong class="focus-metric-value" id="fx-usd-sell-twd-twd">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="detail-stack fx-history-stack">
+          <article class="card fx-history-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.fx_detail">換匯 · 明細</p>
+                <h2 data-i18n="detail.fx_twd_usd">台幣換美金</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="quotes fx-history-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="th.date">日期</th>
+                    <th data-i18n="th.time">時間</th>
+                    <th data-i18n="th.twd_out">付出台幣</th>
+                    <th data-i18n="th.rate">匯率</th>
+                    <th data-i18n="th.usd_in">進帳美元</th>
+                  </tr>
+                </thead>
+                <tbody id="fx-body-twd-to-usd"></tbody>
+              </table>
+            </div>
+          </article>
+          <article class="card fx-history-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="detail.fx_detail">換匯 · 明細</p>
+                <h2 data-i18n="detail.fx_usd_twd">美金換台幣</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="quotes fx-history-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="th.date">日期</th>
+                    <th data-i18n="th.time">時間</th>
+                    <th data-i18n="th.usd_out">賣出美元</th>
+                    <th data-i18n="th.rate">匯率</th>
+                    <th data-i18n="th.twd_in">進帳台幣</th>
+                  </tr>
+                </thead>
+                <tbody id="fx-body-usd-to-twd"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div class="back-to-overview">
+        <a class="btn-secondary" href="index.html" data-i18n="back.overview">返回總覽</a>
+      </div>
+
+      <div id="errors" class="errors" hidden></div>
+    </div>
+    <script src="data/snapshot.js"></script>
+    <script src="locale.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

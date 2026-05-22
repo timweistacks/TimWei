@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update the Sitemap URL after GitHub Pages is live (see README).
+Sitemap: https://timweistacks.github.io/TimWei/sitemap.xml

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-page="overview">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>投資史冊總覽</title>
+    <meta
+      name="description"
+      content="Transparent investment chronicle: portfolio, trades, NAV history, loan schedule, and rebalance log."
+    />
+    <meta property="og:title" content="Investment Chronicle | 投資史冊" />
+    <meta
+      property="og:description"
+      content="Transparent investment chronicle: portfolio, trades, NAV history, loan schedule, and rebalance log."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="" />
+    <script src="site-config.js"></script>
+    <script src="js/analytics.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="wrap">
+      <div id="lang-gate" class="lang-gate" hidden aria-hidden="true">
+        <div class="lang-gate-card">
+          <h2 class="lang-gate-title" data-i18n="gate.title">選擇語言</h2>
+          <p class="lang-gate-sub" data-i18n="gate.subtitle">之後可在頂部列隨時切換。</p>
+          <div class="lang-gate-actions">
+            <button type="button" class="lang-gate-btn" data-pick-lang="zh-Hant" data-i18n="gate.zh">中文（台幣）</button>
+            <button type="button" class="lang-gate-btn lang-gate-btn-alt" data-pick-lang="en" data-i18n="gate.en">English (USD)</button>
+          </div>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="主要導覽">
+        <div class="brand-block">
+          <span class="site-nav-brand" data-i18n="nav.brand">Personal Ledger</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">投資史冊</a>
+        </div>
+        <div class="site-nav-links">
+          <a class="site-nav-link is-active" href="index.html" aria-current="page" data-i18n="nav.overview">總覽</a>
+          <a class="site-nav-link" href="details.html#performance" data-i18n="nav.details">明細</a>
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-switch-btn" data-set-lang="zh-Hant" data-i18n="nav.lang.zh">中文</button>
+            <button type="button" class="lang-switch-btn" data-set-lang="en" data-i18n="nav.lang.en">EN</button>
+          </div>
+        </div>
+      </nav>
+
+      <header class="hero hero-compact">
+        <div class="hero-copy hero-copy-compact">
+          <p class="hero-tag" data-i18n="hero.overview">總覽</p>
+          <h1 data-i18n="nav.title">投資史冊</h1>
+          <div class="hero-meta">
+            <span><span data-i18n="meta.snapshot">快照</span> <strong id="meta-generated">—</strong></span>
+            <span class="hero-meta-phase"><span data-i18n="meta.phase">目前階段</span> <span id="ov-phase-targets" class="hero-phase-targets">—</span></span>
+            <span><span data-i18n="meta.next">下個事件</span> <strong id="ov-next-focus">—</strong></span>
+          </div>
+        </div>
+      </header>
+
+      <p class="overview-error" id="overview-error" hidden></p>
+
+      <section class="focus-metric-grid overview-asset-grid" aria-label="Assets">
+        <article class="focus-metric">
+          <span class="focus-metric-label" data-i18n="metric.real_assets">真實資產</span>
+          <strong class="focus-metric-value" id="ov-real-assets" data-state="neutral">—</strong>
+          <span class="focus-metric-unit">TWD</span>
+          <p class="focus-metric-note" id="ov-real-assets-alt" hidden></p>
+        </article>
+        <article class="focus-metric">
+          <span class="focus-metric-label" data-i18n="metric.market_assets">股市資產</span>
+          <strong class="focus-metric-value" id="ov-market-assets" data-state="neutral">—</strong>
+          <span class="focus-metric-unit">TWD</span>
+          <p class="focus-metric-note" id="ov-market-assets-alt" hidden></p>
+          <p class="focus-metric-note focus-metric-note-profit" id="ov-market-assets-pnl">—</p>
+        </article>
+        <article class="focus-metric">
+          <span class="focus-metric-label" data-i18n="metric.cash">手上現金</span>
+          <strong class="focus-metric-value" id="ov-cash-assets" data-state="neutral">—</strong>
+          <span class="focus-metric-unit">TWD</span>
+          <p class="focus-metric-note" id="ov-cash-assets-alt" hidden></p>
+        </article>
+        <article class="focus-metric">
+          <span class="focus-metric-label" data-i18n="metric.liability">剩餘負債</span>
+          <strong class="focus-metric-value" id="ov-remaining-liability" data-state="neutral">—</strong>
+          <span class="focus-metric-unit">TWD</span>
+          <p class="focus-metric-note" id="ov-remaining-liability-alt" hidden></p>
+        </article>
+      </section>
+
+      <section class="status-chip-row" aria-label="Status">
+        <div class="status-chip">
+          <span data-i18n="chip.benchmark">大盤比較</span>
+          <strong id="ov-beat-market" data-state="neutral">—</strong>
+        </div>
+        <div class="status-chip">
+          <span data-i18n="chip.rebalance">再平衡</span>
+          <strong id="ov-rebalance-pill" data-state="neutral">—</strong>
+        </div>
+        <div class="status-chip">
+          <span data-i18n="chip.debt">負債</span>
+          <strong id="ov-liability-chip">—</strong>
+          <small class="status-chip-note" id="ov-liability-chip-note" hidden></small>
+        </div>
+        <div class="status-chip">
+          <span data-i18n="chip.due">下期還款</span>
+          <strong id="ov-due-chip">—</strong>
+          <small class="status-chip-note" id="ov-due-chip-note" hidden></small>
+        </div>
+      </section>
+
+      <section class="overview-main-grid">
+        <div class="overview-primary-stack">
+          <article class="card overview-table-card">
+            <div class="section-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="section.positions">部位</p>
+                <h2 data-i18n="section.positions_table">目前部位表</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#portfolio" data-i18n="link.view_positions">看部位</a>
+            </div>
+            <p class="section-note section-note-block" id="ov-position-note">—</p>
+            <div id="overview-position-root"></div>
+          </article>
+
+          <article class="card overview-chart-card">
+            <div class="section-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="section.compare">同期比較</p>
+                <h2 data-i18n="section.nav_vs_spy">我的 NAV vs SPY</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#performance" data-i18n="link.view_performance">看績效</a>
+            </div>
+            <div id="ov-spy-stats" class="spy-compare-wrap" hidden aria-label="Prior day"></div>
+            <div class="chart-box overview-chart-box" id="overview-performance-chart"></div>
+          </article>
+        </div>
+
+        <div class="overview-side-stack">
+          <article class="card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="section.rebalance">再平衡</p>
+                <h2 data-i18n="section.rebalance_actions">應買 / 應賣</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#allocation" data-i18n="link.view_allocation">看配置</a>
+            </div>
+            <p class="overview-callout" id="ov-rebalance-headline">—</p>
+            <p class="overview-subtext" id="ov-rebalance-detail">—</p>
+            <div id="ov-rebalance-actions-root"></div>
+          </article>
+
+          <article class="card overview-loan-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="section.loan">貸款</p>
+                <h2 data-i18n="section.debt_status">債務現況</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#loan" data-i18n="link.view_loan">看負債</a>
+            </div>
+            <div class="overview-loan-body">
+            <p class="overview-callout" id="ov-loan-main">—</p>
+            <p class="overview-subtext" id="ov-loan-sub">—</p>
+            <ul class="overview-loan-facts">
+              <li>
+                <span data-i18n="loan.next">下期還款</span>
+                <strong id="ov-loan-next-payment">—</strong>
+              </li>
+              <li>
+                <span data-i18n="loan.principal_interest">本金 / 利息</span>
+                <strong id="ov-loan-breakdown">—</strong>
+              </li>
+              <li>
+                <span data-i18n="loan.after">繳後負債</span>
+                <strong id="ov-loan-after">—</strong>
+              </li>
+              <li>
+                <span data-i18n="loan.coverage">股市覆蓋</span>
+                <strong id="ov-loan-coverage">—</strong>
+              </li>
+            </ul>
+            </div>
+          </article>
+
+          <article class="card overview-summary-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="section.summary">摘要</p>
+                <h2 data-i18n="section.records">當前紀錄</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#fx" data-i18n="link.view_fx">看換匯</a>
+            </div>
+            <ul class="summary-list overview-summary-list">
+              <li>
+                <span data-i18n="summary.trades">交易筆數</span>
+                <strong id="ov-trade-count">—</strong>
+              </li>
+              <li>
+                <span data-i18n="summary.capital">資金事件</span>
+                <strong id="ov-capital-event-count">—</strong>
+              </li>
+              <li>
+                <span data-i18n="summary.cash_snap">現金快照</span>
+                <strong id="ov-cash-snapshot-count">—</strong>
+              </li>
+              <li>
+                <span data-i18n="summary.rules">規則 / 再平衡</span>
+                <strong id="ov-rule-count">—</strong>
+              </li>
+              <li>
+                <span data-i18n="summary.income">配息紀錄</span>
+                <strong id="ov-income-count">—</strong>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <div id="errors" class="errors" hidden></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="data/snapshot.js"></script>
+    <script src="locale.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "events": [
+    {
+      "date": "2026-04-13",
+      "id": "fx-opening-usd-20260413",
+      "note_en": "Opening USD cash in brokerage wallet before first TWD conversion.",
+      "time_local": "12:00:00",
+      "usd_amount": 5
+    },
+    {
+      "date": "2026-04-14",
+      "id": "fx-20260414-a",
+      "rate_twd_per_usd": 31.708,
+      "time_local": "11:16:00",
+      "twd_amount": 499999,
+      "usd_amount": 15768.86
+    },
+    {
+      "date": "2026-04-14",
+      "id": "fx-20260414-b",
+      "rate_twd_per_usd": 31.71,
+      "time_local": "11:31:00",
+      "twd_amount": 500000,
+      "usd_amount": 15767.9
+    },
+    {
+      "date": "2026-04-16",
+      "id": "fx-20260416-a",
+      "rate_twd_per_usd": 31.57,
+      "time_local": "09:57:00",
+      "twd_amount": 100000,
+      "usd_amount": 3167.56
+    },
+    {
+      "date": "2026-04-20",
+      "id": "fx-20260420-a",
+      "rate_twd_per_usd": 31.57,
+      "time_local": "09:26:00",
+      "twd_amount": 100000,
+      "usd_amount": 3167.56
+    },
+    {
+      "date": "2026-04-20",
+      "id": "fx-20260420-b",
+      "rate_twd_per_usd": 31.52,
+      "time_local": "09:58:06",
+      "twd_amount": 50000,
+      "usd_amount": 1586.29
+    },
+    {
+      "date": "2026-04-27",
+      "id": "fx-20260427-a",
+      "rate_twd_per_usd": 31.43,
+      "time_local": "14:33:09",
+      "twd_amount": 30000,
+      "usd_amount": 954.5
+    },
+    {
+      "date": "2026-05-05",
+      "direction": "usd_to_twd",
+      "id": "fx-20260505-a",
+      "rate_twd_per_usd": 31.63977955811623,
+      "time_local": "09:31:00",
+      "twd_amount": 31577,
+      "usd_amount": -998
+    },
+    {
+      "date": "2026-05-06",
+      "direction": "usd_to_twd",
+      "id": "fx-20260506-a",
+      "rate_twd_per_usd": 31.49,
+      "time_local": "10:55:00",
+      "twd_amount": 157450,
+      "usd_amount": -5000
+    },
+    {
+      "date": "2026-05-07",
+      "id": "fx-20260507-a",
+      "rate_twd_per_usd": 31.38,
+      "time_local": "12:49:03",
+      "twd_amount": 72305,
+      "usd_amount": 2304.17
+    },
+    {
+      "date": "2026-05-19",
+      "id": "fx-20260519-a",
+      "rate_twd_per_usd": 31.6601,
+      "time_local": "10:40:49",
+      "twd_amount": 38000,
+      "usd_amount": 1200.25
+    },
+    {
+      "date": "2026-05-21",
+      "id": "fx-20260521-a",
+      "rate_twd_per_usd": 31.6,
+      "time_local": "09:12:41",
+      "twd_amount": 100000,
+      "usd_amount": 3164.56
+    }
+  ],
+  "policy": {
+    "note_en": "events[] is the authoritative FX log. TWD->USD: twd_amount = TWD out, usd_amount = USD in (positive). USD->TWD: optional direction usd_to_twd; twd_amount = TWD in, usd_amount = USD sold as negative (broker USD wallet delta). NAV sums usd_amount. Do not infer brokerage USD cash by naive sum alone; use portfolio.cash_usd.",
+    "note_zh": "逐筆保存換匯。台幣換美金／美金換台幣：僅影響券商 USD 現金，不增減 NAV 單位（閒置現金不在 NAV 分子）。NAV 單位僅在權益型 ETF 買賣時調整。美金餘額以 portfolio.cash_usd 對齊券商；BOXX 視同美金現金。"
+  }
+}
