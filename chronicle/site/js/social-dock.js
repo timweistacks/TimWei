@@ -1,4 +1,4 @@
-(function initSocialFooter(global) {
+(function initSocialDock(global) {
   var ICONS = {
     threads:
       '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.28 11.24c-.08 3.64-2.52 4.66-4.58 4.66-2.48 0-4.5-2.01-4.5-4.5s2.02-4.5 4.5-4.5c.99 0 1.92.32 2.68.86l1.2-1.38A6.9 6.9 0 0 0 11.7 4.5C7.36 4.5 3.82 8.04 3.82 12.4s3.54 7.9 7.88 7.9c4.82 0 7.98-3.36 7.98-9.08 0-.24-.02-.48-.05-.72H11.7v2.74h4.58z"/></svg>',
@@ -12,13 +12,10 @@
 
   var LABELS = {
     group: { zh: "討論社團", en: "Discussion group" },
+    dock: { zh: "交流連結", en: "Community links" },
     threads: { zh: "Threads", en: "Threads" },
     instagram: { zh: "Instagram", en: "Instagram" },
     "facebook-profile": { zh: "Facebook", en: "Facebook" },
-    note: {
-      zh: "交流與討論（非投資建議）",
-      en: "Community links (not investment advice)",
-    },
   };
 
   function t(key) {
@@ -30,11 +27,15 @@
     return (LABELS[key] && LABELS[key][bucket]) || key;
   }
 
-  function iconLink(id, url) {
+  function iconLink(id, url, extraClass) {
     return (
-      '<a class="site-footer-icon" href="' +
+      '<a class="social-dock-link ' +
+      (extraClass || "") +
+      '" href="' +
       url +
-      '" target="_blank" rel="noopener noreferrer" aria-label="' +
+      '" target="_blank" rel="noopener noreferrer" title="' +
+      t(id) +
+      '" aria-label="' +
       t(id) +
       '">' +
       (ICONS[id] || "") +
@@ -45,8 +46,11 @@
   function render() {
     var cfg = global.PERSONAL_LEDGER_SITE || {};
     var social = cfg.social || {};
-    var mount = document.getElementById("site-footer");
+    var mount = document.getElementById("social-dock");
     if (!mount || !social.group || !social.group.url) {
+      if (mount) {
+        mount.hidden = true;
+      }
       return;
     }
 
@@ -55,31 +59,20 @@
         return item && item.url && ICONS[item.id];
       })
       .map(function (item) {
-        return iconLink(item.id, item.url);
+        return iconLink(item.id, item.url, "social-dock-link-icon");
       })
       .join("");
 
     mount.innerHTML =
-      '<div class="site-footer-inner">' +
-      '<p class="site-footer-note">' +
-      t("note") +
-      "</p>" +
-      '<div class="site-footer-row">' +
-      '<a class="site-footer-group" href="' +
-      social.group.url +
-      '" target="_blank" rel="noopener noreferrer">' +
-      '<span class="site-footer-group-icon" aria-hidden="true">' +
-      ICONS.group +
-      "</span>" +
-      "<span>" +
-      t("group") +
-      "</span>" +
-      "</a>" +
-      (icons ? '<span class="site-footer-divider" aria-hidden="true"></span>' + icons : "") +
-      "</div>" +
+      '<div class="social-dock-stack">' +
+      iconLink("group", social.group.url, "social-dock-link-primary") +
+      icons +
       "</div>";
     mount.hidden = false;
+    mount.setAttribute("aria-label", t("dock"));
   }
+
+  global.refreshSocialDock = render;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", render);

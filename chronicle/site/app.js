@@ -3332,6 +3332,9 @@ function rerenderApp() {
     return;
   }
   PLLocale.applyStaticLabels();
+  if (typeof window.refreshSocialDock === "function") {
+    window.refreshSocialDock();
+  }
   if (PAGE === "overview") {
     renderOverview(cachedSnapshot);
     return;
