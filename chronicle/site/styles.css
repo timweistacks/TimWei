@@ -2903,6 +2903,105 @@ table.quotes tr:last-child td {
   }
 }
 
+.back-to-overview {
+  margin-top: 1.5rem;
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer[hidden] {
+  display: none !important;
+}
+
+.site-footer-inner {
+  display: grid;
+  gap: 0.65rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.site-footer-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.site-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem 0.75rem;
+}
+
+.site-footer-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 249, 0.72);
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: color 0.2s var(--ease-out-quart), border-color 0.2s var(--ease-out-quart),
+    background 0.2s var(--ease-out-quart);
+}
+
+.site-footer-group:hover {
+  color: var(--wood-dark);
+  border-color: var(--line-strong);
+  background: rgba(255, 253, 249, 0.95);
+}
+
+.site-footer-group-icon,
+.site-footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-footer-group-icon svg,
+.site-footer-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.site-footer-divider {
+  width: 1px;
+  height: 1rem;
+  background: var(--line);
+}
+
+.site-footer-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out-quart), border-color 0.2s var(--ease-out-quart),
+    background 0.2s var(--ease-out-quart);
+}
+
+.site-footer-icon:hover {
+  color: var(--wood-dark);
+  border-color: var(--line);
+  background: rgba(255, 253, 249, 0.88);
+}
+
+.site-footer-icon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
 @media (max-width: 919px) {
   .portfolio-detail-layout .portfolio-pos-grid {
     min-width: 36rem;
