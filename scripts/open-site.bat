@@ -2,7 +2,6 @@
 setlocal
 chcp 65001 >nul
 set "ROOT=%~dp0.."
-set "SITE=%ROOT%\chronicle\site"
 set "PORT=8765"
 cd /d "%ROOT%"
 
@@ -20,7 +19,7 @@ if errorlevel 1 (
   exit /b 1
 )
 
-start "ChronicleLocal" /MIN cmd /c "cd /d \"%SITE%\" && python -m http.server %PORT%"
-timeout /t 2 /nobreak >nul
+start "ChronicleLocal" /MIN "%~dp0serve-site.bat"
+timeout /t 3 /nobreak >nul
 start "" "http://127.0.0.1:%PORT%/"
 exit /b 0
