@@ -2249,6 +2249,44 @@ function schedulePerfLayoutHeightSync() {
   });
 }
 
+function syncLoanLayoutHeights() {
+  const infoCard = document.querySelector(
+    '.detail-panel[data-detail-panel="loan"]:not([hidden]) .loan-info-card'
+  );
+  const scheduleCard = document.querySelector(
+    '.detail-panel[data-detail-panel="loan"]:not([hidden]) .loan-schedule-card'
+  );
+  if (!infoCard || !scheduleCard) {
+    return;
+  }
+
+  scheduleCard.style.height = "";
+  scheduleCard.style.minHeight = "";
+  scheduleCard.style.maxHeight = "";
+
+  if (window.innerWidth < 920) {
+    return;
+  }
+
+  const targetHeight = infoCard.offsetHeight;
+  if (targetHeight <= 0) {
+    return;
+  }
+
+  scheduleCard.style.height = `${targetHeight}px`;
+  scheduleCard.style.maxHeight = `${targetHeight}px`;
+}
+
+function scheduleLoanLayoutHeightSync() {
+  requestAnimationFrame(() => {
+    syncLoanLayoutHeights();
+    requestAnimationFrame(() => {
+      syncLoanLayoutHeights();
+      window.setTimeout(syncLoanLayoutHeights, 120);
+    });
+  });
+}
+
 function renderTradeHistory(snapshot) {
   const root = document.getElementById("trade-history-root");
   if (!root) {
@@ -2508,6 +2546,7 @@ function renderLoan(snapshot) {
       )}
     </div>
   `;
+  scheduleLoanLayoutHeightSync();
 }
 
 function renderLoanComputedTable(snapshot) {
@@ -2530,6 +2569,7 @@ function renderLoanComputedTable(snapshot) {
   );
   if (!rows.length) {
     tbody.innerHTML = `<tr><td colspan="7">${pllT("empty.no_data")}</td></tr>`;
+    scheduleLoanLayoutHeightSync();
     return;
   }
   tbody.innerHTML = rows
@@ -2547,6 +2587,7 @@ function renderLoanComputedTable(snapshot) {
       `
     )
     .join("");
+  scheduleLoanLayoutHeightSync();
 }
 
 function fxEventSortKey(event) {
@@ -3213,6 +3254,7 @@ function syncDetailSection(snapshot) {
             })
         : "—"
     );
+    scheduleLoanLayoutHeightSync();
     return;
   }
   if (key === "allocation") {
@@ -3306,4 +3348,5 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("resize", () => {
   schedulePerfLayoutHeightSync();
   scheduleOverviewLayoutHeightSync();
+  scheduleLoanLayoutHeightSync();
 });
