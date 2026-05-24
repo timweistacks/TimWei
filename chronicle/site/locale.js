@@ -84,6 +84,9 @@
     "bench.flat": { en: "About flat vs SPY shadow", zh: "約與 SPY 影子持平" },
     "bench.ahead": { en: "Ahead of SPY shadow by {n}", zh: "領先 SPY 影子 {n}" },
     "bench.behind": { en: "Behind SPY shadow by {n}", zh: "落後 SPY 影子 {n}" },
+    "spy.day_ahead": { en: "Beat market yesterday", zh: "昨日贏大盤" },
+    "spy.day_behind": { en: "Trailed market yesterday", zh: "昨日輸大盤" },
+    "spy.day_flat": { en: "Flat vs market yesterday", zh: "昨日與大盤持平" },
     "rebalance.unbuilt": { en: "Not invested", zh: "未建倉" },
     "rebalance.review": { en: "Review needed", zh: "需檢視" },
     "rebalance.deferred": {

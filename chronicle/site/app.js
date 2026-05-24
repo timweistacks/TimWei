@@ -736,8 +736,6 @@ function tradeHistoryTimelineHtml(trades) {
         const price = trade.price_usd != null ? `${fmtUsd(trade.price_usd)} USD` : "—";
         const notional = trade.total_usd != null ? `${fmtUsd(trade.total_usd)} USD` : "—";
         const fee = trade.fee_usd != null ? `${fmtUsd(trade.fee_usd)} USD` : "—";
-        const noteText = trade.note || "";
-        
         return `
           <div class="timeline-item">
             <div class="timeline-badge ${sideClass}"></div>
@@ -767,12 +765,6 @@ function tradeHistoryTimelineHtml(trades) {
                   <span class="timeline-detail-value">${fee}</span>
                 </div>
               </div>
-              ${noteText.trim() ? `
-                <div class="timeline-reason-card">
-                  <span class="timeline-reason-label">${pllT("trade.reason")}</span>
-                  <p>${noteText}</p>
-                </div>
-              ` : ""}
             </div>
           </div>
         `;
@@ -794,8 +786,6 @@ function sellHistoryTimelineHtml(rows) {
         const proceeds = `${fmtUsd(r.net_proceeds_usd)} USD`;
         const cost = `${fmtUsd(r.cost_basis_usd)} USD`;
         const pnl = `${fmtUsdSigned(r.realized_pnl_usd)} USD`;
-        const noteText = r.note || "";
-        
         return `
           <div class="timeline-item">
             <div class="timeline-badge ${sideClass}"></div>
@@ -825,12 +815,6 @@ function sellHistoryTimelineHtml(rows) {
                   <span class="timeline-detail-value" style="color: ${r.realized_pnl_usd >= 0 ? "var(--green)" : "var(--danger)"};">${pnl}</span>
                 </div>
               </div>
-              ${noteText.trim() ? `
-                <div class="timeline-reason-card">
-                  <span class="timeline-reason-label">${pllT("trade.reason")}</span>
-                  <p>${noteText}</p>
-                </div>
-              ` : ""}
             </div>
           </div>
         `;
@@ -1646,31 +1630,21 @@ function benchmarkSummary(snapshot) {
   if (!held.length) {
     return { state: "neutral", text: pllT("bench.none") };
   }
-  const comparison = samePeriodPerformance(snapshot);
-  if (!comparison) {
+  const priorRow = snapshot.nav_summary?.spy_nav_benchmark_stats?.prior_row;
+  if (!priorRow) {
     return { state: "neutral", text: pllT("bench.insufficient") };
   }
-  const navValue = lastDefinedValue(comparison.navChart.datasets[0]?.data);
-  const spyValue = lastDefinedValue(
-    comparison.combinedChart.datasets.find((row) => row.id === "spy_shadow")?.data
-  );
-  if (navValue === null || spyValue === null) {
+  const excess = Number(priorRow.excess_pct_points);
+  if (Number.isNaN(excess)) {
     return { state: "neutral", text: pllT("bench.insufficient") };
   }
-  const diff = navValue - spyValue;
-  if (Math.abs(diff) < 0.5) {
-    return { state: "neutral", text: pllT("bench.flat") };
+  if (Math.abs(excess) < 0.05) {
+    return { state: "neutral", text: pllT("spy.day_flat") };
   }
-  if (diff > 0) {
-    return {
-      state: "good",
-      text: pllT("bench.ahead", { n: fmtAmount(diff, 2) }),
-    };
+  if (excess > 0) {
+    return { state: "good", text: pllT("spy.day_ahead") };
   }
-  return {
-    state: "bad",
-    text: pllT("bench.behind", { n: fmtAmount(Math.abs(diff), 2) }),
-  };
+  return { state: "bad", text: pllT("spy.day_behind") };
 }
 
 function displayDateChip(raw) {
@@ -1700,43 +1674,7 @@ function fmtSignedPtsCompact(value, digits = 2) {
 }
 
 function buildSpyBenchmarkMarkup(snapshot) {
-  const s = snapshot.nav_summary?.spy_nav_benchmark_stats;
-  if (!s?.ready) {
-    return "";
-  }
-  const pr = s.prior_row;
-  const pdFrom = displayDateChip(pr.prior_date);
-  const pdTo = displayDateChip(pr.last_date);
-  const mvInline =
-    pr.mv_usd_delta != null &&
-    pr.mv_usd_pct != null &&
-    pr.mv_usd_prior != null &&
-    pr.mv_usd_last != null
-      ? `<span class="spy-compare-dot" aria-hidden="true">·</span><span class="spy-compare-mv">${pllT("spy.total_mv", {
-          from: fmtUsd(pr.mv_usd_prior),
-          to: fmtUsd(pr.mv_usd_last),
-          pct: fmtSignedRatioPercent(pr.mv_usd_pct),
-        })}</span>`
-      : "";
-  const excessPts = pllT("spy.excess_pts", {
-    n: fmtSignedPtsCompact(pr.excess_pct_points),
-  });
-  return (
-    '<div class="spy-compare-strip">' +
-    `<span class="spy-compare-kicker">${pllT("spy.vs_prior")}</span>` +
-    `<span class="spy-compare-range">${pdFrom} → ${pdTo}</span>` +
-    '<span class="spy-compare-dot" aria-hidden="true">·</span>' +
-    '<span class="spy-compare-metric"><span class="spy-compare-k">NAV</span> ' +
-    `<span class="spy-compare-v">${fmtSignedRatioPercent(pr.nav_1d_pct)}</span></span>` +
-    '<span class="spy-compare-dot" aria-hidden="true">·</span>' +
-    `<span class="spy-compare-metric"><span class="spy-compare-k">${chartSeriesLabel("spy_shadow")}</span> ` +
-    `<span class="spy-compare-v">${fmtSignedRatioPercent(pr.spy_1d_pct)}</span></span>` +
-    '<span class="spy-compare-dot" aria-hidden="true">·</span>' +
-    `<span class="spy-compare-metric"><span class="spy-compare-k">${pllT("spy.excess")}</span> ` +
-    `<span class="spy-compare-v">${excessPts}</span></span>` +
-    mvInline +
-    "</div>"
-  );
+  return "";
 }
 
 function renderSpyNavBenchmarkPanels(snapshot) {
