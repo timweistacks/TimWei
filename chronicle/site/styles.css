@@ -3113,8 +3113,13 @@ table.quotes tr:last-child td {
 }
 
 @media (max-width: 680px) {
+  body {
+    overflow-x: clip;
+  }
+
   .wrap {
     padding-inline: 0.85rem;
+    overflow-x: clip;
   }
 
   html {
@@ -3161,7 +3166,8 @@ table.quotes tr:last-child td {
   }
 
   .loan-kpi-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
   }
 
   .loan-dl-section-grid {
@@ -3194,6 +3200,126 @@ table.quotes tr:last-child td {
 
   .loan-kpi-primary .loan-kpi-value {
     font-size: clamp(1.2rem, 4.2vw, 1.55rem);
+  }
+
+  /* Homepage asset cards: two compact columns on phone */
+  .overview-asset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .overview-asset-grid .focus-metric {
+    min-height: 92px;
+    padding: 0.72rem 0.78rem;
+  }
+
+  .overview-asset-grid .focus-metric-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+  }
+
+  .overview-asset-grid .focus-metric-value {
+    margin-top: 0.2rem;
+    font-size: clamp(0.95rem, 4.2vw, 1.32rem);
+  }
+
+  .overview-asset-grid .focus-metric-unit {
+    font-size: 0.72rem;
+  }
+
+  /* FX summary metrics: match compact two-column layout */
+  .fx-leg-panel .focus-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .fx-leg-panel .focus-metric {
+    min-height: 86px;
+    padding: 0.72rem 0.78rem;
+  }
+
+  .fx-leg-panel .focus-metric-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+  }
+
+  .fx-leg-panel .focus-metric-value {
+    margin-top: 0.2rem;
+    font-size: clamp(0.95rem, 3.8vw, 1.3rem);
+  }
+
+  .overview-asset-grid .focus-metric:last-child:nth-child(odd),
+  .fx-leg-panel .focus-metric-grid .focus-metric:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  /* Loan panel: keep cards inside viewport margins */
+  .detail-panel[data-detail-panel="loan"] .card {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .loan-info,
+  .loan-kpi-row,
+  .loan-dl-sections,
+  .loan-progress-block {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .loan-kpi {
+    min-width: 0;
+    padding: 0.85rem 0.72rem;
+  }
+
+  .loan-kpi-value {
+    overflow-wrap: anywhere;
+  }
+
+  .loan-dl-section-grid dd {
+    overflow-wrap: anywhere;
+  }
+
+  /* Allocation table: scroll inside card instead of squeezing page margins */
+  .detail-panel[data-detail-panel="allocation"] .card {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] #alloc-status-root .table-wrap {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] #alloc-status-root table.quotes {
+    width: max-content;
+    min-width: 100%;
+    font-size: 0.78rem;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] #alloc-status-root table.quotes th,
+  .detail-panel[data-detail-panel="allocation"] #alloc-status-root table.quotes td {
+    padding: 0.55rem 0.4rem;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] .deviation-slider-wrapper {
+    min-width: 108px;
+    max-width: 128px;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] .deviation-slider-labels {
+    font-size: 0.58rem;
+  }
+
+  .detail-panel[data-detail-panel="allocation"] .pv-status {
+    font-size: 0.66rem;
+    padding: 0.14rem 0.42rem;
+    white-space: nowrap;
   }
 }
 
