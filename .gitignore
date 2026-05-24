@@ -27,3 +27,6 @@ tmp_trace.txt
 
 # Optional: keep a private override copy locally (public repo uses site-config.js)
 site-config.local.js
+
+# Backup files (local only, never push to GitHub)
+*.bak

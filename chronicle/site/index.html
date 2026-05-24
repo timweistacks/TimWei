@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>投資史冊總覽</title>
+    <title>Tim Wei 報酬疊加實驗 | 25歲貸款投資實錄</title>
     <meta
       name="description"
-      content="Transparent investment chronicle: portfolio, trades, NAV history, loan schedule, and rebalance log."
+      content="25歲用貸款做�槓桿投資，公開記錄資產堆疊全過程。NAV走勢、持倉比例、還款進度一覽無遺。"
     />
-    <meta property="og:title" content="Investment Chronicle | 投資史冊" />
+    <meta property="og:title" content="Tim Wei 報酬疊加實驗 | 25歲貸款投資實錄" />
     <meta
       property="og:description"
-      content="Transparent investment chronicle: portfolio, trades, NAV history, loan schedule, and rebalance log."
+      content="25歲用貸款做槓桿投資，公開記錄資產堆疊全過程。NAV走勢、持倉比例、還款進度一覽無遺。"
     />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="" />
@@ -32,10 +32,13 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=5" />
   </head>
   <body>
     <div class="paper-noise" aria-hidden="true"></div>
+    <!-- 背景光暈裝飾 -->
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
     <div class="wrap">
       <div id="lang-gate" class="lang-gate" hidden aria-hidden="true">
         <div class="lang-gate-card">
@@ -49,8 +52,8 @@
       </div>
       <nav class="site-nav" aria-label="主要導覽">
         <div class="brand-block">
-          <span class="site-nav-brand" data-i18n="nav.brand">Personal Ledger</span>
-          <a class="site-nav-title" href="index.html" data-i18n="nav.title">投資史冊</a>
+          <span class="site-nav-brand" data-i18n="nav.brand">25歲貸款投資實錄</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">Tim Wei 報酬疊加實驗</a>
         </div>
         <div class="site-nav-links">
           <a class="site-nav-link is-active" href="index.html" aria-current="page" data-i18n="nav.overview">總覽</a>
@@ -64,10 +67,15 @@
 
       <header class="hero hero-compact">
         <div class="hero-copy hero-copy-compact">
-          <p class="hero-tag" data-i18n="hero.overview">總覽</p>
-          <h1 data-i18n="nav.title">投資史冊</h1>
+          <p class="hero-tag" data-i18n="meta.snapshot">快照</p>
+          <h1 data-i18n="hero.overview_title">資產總覽</h1>
           <div class="hero-meta">
             <span><span data-i18n="meta.snapshot">快照</span> <strong id="meta-generated">—</strong></span>
+            <span class="hero-meta-live">
+              <span class="live-heartbeat"></span>
+              <span data-i18n="meta.live_stream">實錄直播中</span>
+              <strong id="live-experiment-days">—</strong>
+            </span>
             <span class="hero-meta-phase"><span data-i18n="meta.phase">目前階段</span> <span id="ov-phase-targets" class="hero-phase-targets">—</span></span>
             <span><span data-i18n="meta.next">下個事件</span> <strong id="ov-next-focus">—</strong></span>
           </div>
@@ -76,6 +84,7 @@
 
       <p class="overview-error" id="overview-error" hidden></p>
 
+      <!-- 資產指標卡片 -->
       <section class="focus-metric-grid overview-asset-grid" aria-label="Assets">
         <article class="focus-metric">
           <span class="focus-metric-label" data-i18n="metric.real_assets">真實資產</span>
@@ -104,6 +113,7 @@
         </article>
       </section>
 
+      <!-- 狀態 chip 列 -->
       <section class="status-chip-row" aria-label="Status">
         <div class="status-chip">
           <span data-i18n="chip.benchmark">大盤比較</span>
@@ -125,20 +135,74 @@
         </div>
       </section>
 
+      <!-- 最新動態卡片 -->
+      <section class="live-activity-section" aria-label="最新動態">
+        <div class="live-activity-card">
+          <div class="live-activity-header">
+            <div class="live-activity-title-wrap">
+              <span class="live-heartbeat"></span>
+              <h2 class="live-activity-title" data-i18n="ticker.live_activity">最新動態</h2>
+            </div>
+            <span class="live-activity-subtitle" id="live-experiment-days-inline">—</span>
+          </div>
+          <div class="live-activity-list" id="live-ticker-content">
+            <!-- JS 動態生成 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 視覺化圖表列（新增） -->
+      <section class="overview-viz-row" aria-label="視覺化摘要">
+        <!-- Return Stacking 200% 總資產曝險面板 -->
+        <article class="card viz-card viz-stack-card">
+          <div class="section-head section-head-tight">
+            <div>
+              <h2>Return Stacking 策略拆解</h2>
+            </div>
+          </div>
+          
+          <div class="viz-exposure-panel">
+            <!-- 2D 同心雙環圖表區 -->
+            <div class="viz-exposure-chart-side">
+              <div class="canvas-container">
+                <canvas id="ov-stack-nested" aria-label="Return Stacking 雙層曝險比例同心圖"></canvas>
+                <div class="viz-donut-center">
+                  <span class="viz-donut-center-label" data-i18n="layer.total_exposure">總曝險</span>
+                  <strong class="viz-donut-center-value">200%</strong>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 右側資訊與雙欄圖例 -->
+            <div class="viz-exposure-info-side">
+              <div class="exposure-summary-card">
+                <span class="summary-title" data-i18n="viz.title_3d">Return Stacking 雙層堆疊機制</span>
+                <p class="summary-desc" data-i18n="viz.desc_3d">此配置精準將 100% 的本金放大一倍，提供 200% 的總資產曝險。以下是為您拆解至最細顆粒度的雙層（股票 100% + 替代與債券 100%）底層持倉與量化策略佔比。</p>
+                <a class="strategy-official-link" href="https://www.returnstackedetfs.com/" target="_blank" rel="noopener noreferrer">
+                  <span data-i18n="strategy.official_link">官方網站</span>
+                  <svg viewBox="0 0 24 24" class="link-icon" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zm-2 16H5V8h7v-2H3v15h15v-9h-2v7z"/></svg>
+                </a>
+              </div>
+              
+              <div class="stack-legend-grid">
+                <div class="legend-column">
+                  <h3 class="legend-group-title" data-i18n="legend.core">股票部位 (總佔比 100%)</h3>
+                  <ul class="viz-legend-vertical" id="ov-exposure-core-legend" aria-label="股票部位圖例"></ul>
+                </div>
+                <div class="legend-column">
+                  <h3 class="legend-group-title" data-i18n="legend.alt">替代與債券部位 (總佔比 100%)</h3>
+                  <ul class="viz-legend-vertical" id="ov-exposure-alt-legend" aria-label="替代與債券圖例"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 主要內容格線 -->
       <section class="overview-main-grid">
         <div class="overview-primary-stack">
-          <article class="card overview-table-card">
-            <div class="section-head section-head-tight">
-              <div>
-                <p class="section-kicker" data-i18n="section.positions">部位</p>
-                <h2 data-i18n="section.positions_table">目前部位表</h2>
-              </div>
-              <a class="card-jump-link" href="details.html#portfolio" data-i18n="link.view_positions">看部位</a>
-            </div>
-            <p class="section-note section-note-block" id="ov-position-note">—</p>
-            <div id="overview-position-root"></div>
-          </article>
-
+          <!-- 同期比較折線圖 -->
           <article class="card overview-chart-card">
             <div class="section-head section-head-tight">
               <div>
@@ -149,6 +213,18 @@
             </div>
             <div id="ov-spy-stats" class="spy-compare-wrap" hidden aria-label="Prior day"></div>
             <div class="chart-box overview-chart-box" id="overview-performance-chart"></div>
+          </article>
+
+          <article class="card overview-table-card">
+            <div class="section-head section-head-tight">
+              <div>
+                <p class="section-kicker" data-i18n="section.positions">部位</p>
+                <h2 data-i18n="section.positions_table">目前部位表</h2>
+              </div>
+              <a class="card-jump-link" href="details.html#portfolio" data-i18n="link.view_positions">看部位</a>
+            </div>
+            <p class="section-note section-note-block" id="ov-position-note">—</p>
+            <div id="overview-position-root"></div>
           </article>
         </div>
 
@@ -164,38 +240,6 @@
             <p class="overview-callout" id="ov-rebalance-headline">—</p>
             <p class="overview-subtext" id="ov-rebalance-detail">—</p>
             <div id="ov-rebalance-actions-root"></div>
-          </article>
-
-          <article class="card overview-loan-card">
-            <div class="section-head">
-              <div>
-                <p class="section-kicker" data-i18n="section.loan">貸款</p>
-                <h2 data-i18n="section.debt_status">債務現況</h2>
-              </div>
-              <a class="card-jump-link" href="details.html#loan" data-i18n="link.view_loan">看負債</a>
-            </div>
-            <div class="overview-loan-body">
-            <p class="overview-callout" id="ov-loan-main">—</p>
-            <p class="overview-subtext" id="ov-loan-sub">—</p>
-            <ul class="overview-loan-facts">
-              <li>
-                <span data-i18n="loan.next">下期還款</span>
-                <strong id="ov-loan-next-payment">—</strong>
-              </li>
-              <li>
-                <span data-i18n="loan.principal_interest">本金 / 利息</span>
-                <strong id="ov-loan-breakdown">—</strong>
-              </li>
-              <li>
-                <span data-i18n="loan.after">繳後負債</span>
-                <strong id="ov-loan-after">—</strong>
-              </li>
-              <li>
-                <span data-i18n="loan.coverage">股市覆蓋</span>
-                <strong id="ov-loan-coverage">—</strong>
-              </li>
-            </ul>
-            </div>
           </article>
 
           <article class="card overview-summary-card">
@@ -229,6 +273,22 @@
               </li>
             </ul>
           </article>
+
+          <article class="card overview-social-card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker" data-i18n="section.social">社群</p>
+                <h2 data-i18n="section.social_links">交流與連結</h2>
+              </div>
+            </div>
+            <div class="social-card-body">
+              <a class="social-fb-group-btn" id="social-fb-group-btn" href="#" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="btn-icon"><path fill="currentColor" d="M9 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 0a2.7 2.7 0 1 0-2.7-2.7A2.7 2.7 0 0 0 17 11zm-8 2c-2.67 0-8 1.34-8 4v2h8v-2c0-.92.28-1.77.76-2.5-1.04-.33-2.28-.5-3.76-.5zm8 0c-.55 0-1.07.04-1.57.11 1.05.72 1.77 1.74 1.77 3.02v1.87H24v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span data-i18n="social.join_fb">加入 FB 槓桿投資交流社團</span>
+              </a>
+              <div class="social-sub-links" id="social-sub-links-container"></div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -237,8 +297,8 @@
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js"></script>
+    <script src="locale.js?v=5"></script>
     <script src="js/social-dock.js"></script>
-    <script src="app.js"></script>
+    <script src="app.js?v=5"></script>
   </body>
 </html>

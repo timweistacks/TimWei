@@ -5,6 +5,14 @@
   const LANG_EN = "en";
 
   const STRINGS = {
+    "layer.equity": { en: "Equity Layer 100%", zh: "股票部位 100%" },
+    "layer.equity_label": { en: "Equity Exp.", zh: "股票曝險" },
+    "layer.alt_bond": { en: "Alt & Bond Layer 100%", zh: "替代與債券 100%" },
+    "layer.alt_bond_label": { en: "Alt & Bond", zh: "替代與債券" },
+    "viz.title_3d": { en: "Return Stacking Strategy", zh: "報酬疊加策略拆解" },
+    "viz.desc_3d": { en: "This custom configuration leverages 100% principal to get 200% total exposure. Below is the granular breakdown of the double layers (100% Equity + 100% Alt & Bonds).", zh: "此配置由Tim Wei 自製搭建，將 100% 的本金放大一倍，提供 200% 的總資產曝險。以下是為您拆解至最細顆粒度的雙層（股票 100% + 替代與債券 100%）底層持倉與量化策略佔比。" },
+    "legend.core": { en: "Equity exposure (100% total)", zh: "股票部位 (總佔比 100%)" },
+    "legend.alt": { en: "Alt & Bond exposure (100% total)", zh: "替代與債券部位 (總佔比 100%)" },
     "gate.title": { en: "Choose language", zh: "選擇語言" },
     "gate.subtitle": {
       en: "You can switch anytime from the top bar.",
@@ -12,13 +20,15 @@
     },
     "gate.zh": { en: "中文（台幣）", zh: "中文（台幣）" },
     "gate.en": { en: "English (USD)", zh: "English (USD)" },
-    "nav.brand": { en: "Personal Ledger", zh: "Personal Ledger" },
-    "nav.title": { en: "Investment Chronicle", zh: "投資史冊" },
+    "nav.brand": { en: "25y Debt Investing Ledger", zh: "25歲貸款投資實錄" },
+    "nav.title": { en: "Return Stacking Lab", zh: "Tim Wei 報酬疊加實驗" },
     "nav.overview": { en: "Overview", zh: "總覽" },
     "nav.details": { en: "Details", zh: "明細" },
     "nav.lang.zh": { en: "中文", zh: "中文" },
     "nav.lang.en": { en: "EN", zh: "EN" },
     "hero.overview": { en: "Overview", zh: "總覽" },
+    "hero.overview_title": { en: "Asset Overview", zh: "資產總覽" },
+    "layer.total_exposure": { en: "Total Exp.", zh: "總曝險" },
     "hero.details": { en: "Details", zh: "明細" },
     "meta.snapshot": { en: "Snapshot", zh: "快照" },
     "meta.phase": { en: "Phase", zh: "目前階段" },
@@ -41,6 +51,9 @@
     "section.debt_status": { en: "Debt status", zh: "債務現況" },
     "section.summary": { en: "Summary", zh: "摘要" },
     "section.records": { en: "Records", zh: "當前紀錄" },
+    "section.social": { en: "Socials", zh: "社群" },
+    "section.social_links": { en: "Community & Links", zh: "交流與連結" },
+    "social.join_fb": { en: "Join FB Return Stacking Group", zh: "加入 FB 報酬疊加交流社團" },
     "link.view_positions": { en: "Positions", zh: "看部位" },
     "link.view_performance": { en: "Performance", zh: "看績效" },
     "link.view_allocation": { en: "Allocation", zh: "看配置" },
@@ -164,8 +177,8 @@
     "chart.spy_shadow": { en: "SPY shadow", zh: "SPY 影子" },
     "chart.sso_shadow": { en: "SSO 2x shadow", zh: "SSO 正二影子" },
     "chart.index_base": {
-      en: "Indexed (day 1 = 100)",
-      zh: "區間指數（首日＝100）",
+      en: "Indexed",
+      zh: "區間指數",
     },
     "chart.portfolio_nav": { en: "Portfolio NAV", zh: "組合 NAV" },
     "spy.vs_prior": { en: "vs prior day", zh: "較前一日" },
@@ -337,6 +350,18 @@
     "perf.observationDays": { en: "Trading days", zh: "樣本交易日" },
     "perf.skewness": { en: "Skewness", zh: "偏度" },
     "perf.kurtosis": { en: "Excess kurtosis", zh: "峰度（超額）" },
+    "portfolio.view.table": { en: "Table View", zh: "表格檢視" },
+    "portfolio.view.timeline": { en: "Timeline View", zh: "時間軸檢視" },
+    "trade.reason": { en: "Decision notes", zh: "決策原因" },
+    "trade.details": { en: "Trade details", zh: "交易細節" },
+    "strategy.official_link": { en: "Official Website", zh: "官方網站" },
+    "meta.live_stream": { en: "Live Stream", zh: "實錄直播中" },
+    "meta.live_days": { en: "Day {day} / 25 Years", zh: "第 {day} 天 / 25年" },
+    "ticker.live_activity": { en: "Live Activity", zh: "最新動態" },
+    "ticker.trade": { en: "Trade", zh: "交易" },
+    "ticker.fx": { en: "FX", zh: "換匯" },
+    "ticker.loan": { en: "Debt", zh: "貸款" },
+    "ticker.status": { en: "Status", zh: "狀態" },
   };
 
   let memoryLang = "";
@@ -429,11 +454,11 @@
     document.title =
       document.documentElement.dataset.page === "details"
         ? isEn()
-          ? "Details — Investment Chronicle"
-          : "投資史冊明細"
+          ? "Details — Stack Experiment"
+          : "資產堆疊實驗 · 明細"
         : isEn()
-          ? "Overview — Investment Chronicle"
-          : "投資史冊總覽";
+          ? "Stack Experiment | 25歲貸款投資實錄"
+          : "資產堆疊實驗 | 25歲貸款投資實錄";
     syncLangSwitcherUi();
   }
 
@@ -499,11 +524,8 @@
     applyStaticLabels();
     bindGatePickers(onReady);
     bindSwitcher(onReady);
-    if (!saved) {
-      showLangGate();
-    } else {
-      hideLangGate();
-    }
+    // 永遠不顯示語言選擇 Gate，直接用中文開始
+    hideLangGate();
     if (typeof onReady === "function") {
       onReady();
     }

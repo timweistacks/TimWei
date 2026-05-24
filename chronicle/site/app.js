@@ -12,6 +12,8 @@ const DETAIL_META = {
   portfolio: { titleKey: "detail.portfolio" },
 };
 
+let currentHistoryViewMode = "table";
+
 function isEnLocale() {
   return typeof PLLocale !== "undefined" && PLLocale.isEn();
 }
@@ -52,12 +54,12 @@ function formatLoanTwdDisplay(snapshot, twdValue) {
 }
 
 const CHART_COLORS = {
-  nav: "#496c59",
-  spy_idx: "#8c5f34",
-  spy_shadow: "#8c5f34",
-  sso_shadow: "#6f5a9a",
-  SPY: "#8c5f34",
-  SSO: "#6f5a9a",
+  nav: "#a4733f",
+  spy_idx: "#4a6b82",
+  spy_shadow: "#4a6b82",
+  sso_shadow: "#7e57c2",
+  SPY: "#4a6b82",
+  SSO: "#7e57c2",
 };
 
 const THEME = {
@@ -127,7 +129,7 @@ function fmtUsdSigned(value) {
     return "—";
   }
   const amount = Number(value);
-  const sign = amount < 0 ? "-" : "";
+  const sign = amount > 0 ? "+" : amount < 0 ? "-" : "";
   return `${sign}${fmtUsd(Math.abs(amount))}`;
 }
 
@@ -721,12 +723,131 @@ function renderRealizedPnlPanel(snapshot) {
   renderSellHistory(snapshot);
 }
 
+function tradeHistoryTimelineHtml(trades) {
+  if (!trades.length) return "";
+  return `
+    <div class="trade-timeline">
+      ${trades.map((trade) => {
+        const sideClass = String(trade.side || "").toLowerCase() === "buy" ? "buy" : "sell";
+        const sideText = tradeSideLabel(trade.side);
+        const timeText = trade.executed_at ? formatExecutedAtDisplay(trade.executed_at) : "—";
+        const sym = trade.symbol || "—";
+        const units = trade.units != null ? fmtUnits(trade.units) : "—";
+        const price = trade.price_usd != null ? `${fmtUsd(trade.price_usd)} USD` : "—";
+        const notional = trade.total_usd != null ? `${fmtUsd(trade.total_usd)} USD` : "—";
+        const fee = trade.fee_usd != null ? `${fmtUsd(trade.fee_usd)} USD` : "—";
+        const noteText = trade.note || "";
+        
+        return `
+          <div class="timeline-item">
+            <div class="timeline-badge ${sideClass}"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div class="timeline-meta-left">
+                  <span class="timeline-symbol">${sym}</span>
+                  <span class="timeline-action ${sideClass}">${sideText}</span>
+                </div>
+                <span class="timeline-time">${timeText}</span>
+              </div>
+              <div class="timeline-details-grid">
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.units")}</span>
+                  <span class="timeline-detail-value">${units}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.price")}</span>
+                  <span class="timeline-detail-value">${price}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.notional")}</span>
+                  <span class="timeline-detail-value">${notional}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.fee")}</span>
+                  <span class="timeline-detail-value">${fee}</span>
+                </div>
+              </div>
+              ${noteText.trim() ? `
+                <div class="timeline-reason-card">
+                  <span class="timeline-reason-label">${pllT("trade.reason")}</span>
+                  <p>${noteText}</p>
+                </div>
+              ` : ""}
+            </div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function sellHistoryTimelineHtml(rows) {
+  if (!rows.length) return "";
+  return `
+    <div class="trade-timeline">
+      ${rows.map((r) => {
+        const sideClass = "sell";
+        const sideText = pllT("trade.sell");
+        const timeText = r.executed_at ? formatExecutedAtDisplay(r.executed_at) : "—";
+        const sym = r.symbol || "—";
+        const units = fmtUnits(r.units);
+        const proceeds = `${fmtUsd(r.net_proceeds_usd)} USD`;
+        const cost = `${fmtUsd(r.cost_basis_usd)} USD`;
+        const pnl = `${fmtUsdSigned(r.realized_pnl_usd)} USD`;
+        const noteText = r.note || "";
+        
+        return `
+          <div class="timeline-item">
+            <div class="timeline-badge ${sideClass}"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div class="timeline-meta-left">
+                  <span class="timeline-symbol">${sym}</span>
+                  <span class="timeline-action ${sideClass}">${sideText}</span>
+                </div>
+                <span class="timeline-time">${timeText}</span>
+              </div>
+              <div class="timeline-details-grid">
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.shares")}</span>
+                  <span class="timeline-detail-value">${units}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.net_proceeds")}</span>
+                  <span class="timeline-detail-value">${proceeds}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.cost_usd")}</span>
+                  <span class="timeline-detail-value">${cost}</span>
+                </div>
+                <div class="timeline-detail-col">
+                  <span class="timeline-detail-label">${pllT("th.realized_usd")}</span>
+                  <span class="timeline-detail-value" style="color: ${r.realized_pnl_usd >= 0 ? "var(--green)" : "var(--danger)"};">${pnl}</span>
+                </div>
+              </div>
+              ${noteText.trim() ? `
+                <div class="timeline-reason-card">
+                  <span class="timeline-reason-label">${pllT("trade.reason")}</span>
+                  <p>${noteText}</p>
+                </div>
+              ` : ""}
+            </div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
 function tradeHistoryTableHtml(trades, emptyKey) {
   if (!trades.length) {
     return emptyState(emptyKey);
   }
+  const isTableHidden = currentHistoryViewMode === "timeline" ? "style=\"display: none;\"" : "";
+  const isTimelineHidden = currentHistoryViewMode === "table" ? "style=\"display: none;\"" : "";
+  
   return `
-    <div class="table-wrap table-scroll portfolio-scroll-panel pll-scroll trade-history-panel">
+    <div class="table-wrap table-scroll portfolio-scroll-panel pll-scroll trade-history-panel" ${isTableHidden}>
       <table class="quotes trade-history-table">
         <thead>
           <tr>
@@ -744,6 +865,9 @@ function tradeHistoryTableHtml(trades, emptyKey) {
         </tbody>
       </table>
     </div>
+    <div class="trade-timeline-wrap" ${isTimelineHidden}>
+      ${tradeHistoryTimelineHtml(trades)}
+    </div>
   `;
 }
 
@@ -751,8 +875,11 @@ function sellHistoryTableHtml(rows) {
   if (!rows.length) {
     return emptyState("realized.none");
   }
+  const isTableHidden = currentHistoryViewMode === "timeline" ? "style=\"display: none;\"" : "";
+  const isTimelineHidden = currentHistoryViewMode === "table" ? "style=\"display: none;\"" : "";
+  
   return `
-    <div class="table-wrap table-scroll portfolio-scroll-panel pll-scroll trade-history-panel">
+    <div class="table-wrap table-scroll portfolio-scroll-panel pll-scroll trade-history-panel" ${isTableHidden}>
       <table class="quotes sell-history-table">
         <thead>
           <tr>
@@ -781,6 +908,9 @@ function sellHistoryTableHtml(rows) {
             .join("")}
         </tbody>
       </table>
+    </div>
+    <div class="trade-timeline-wrap" ${isTimelineHidden}>
+      ${sellHistoryTimelineHtml(rows)}
     </div>
   `;
 }
@@ -1779,6 +1909,7 @@ function rebalanceActionCardHtml(action, snapshot) {
         ${moneyPairUsdPrimaryHtml(snapshot, Math.abs(action.delta_mv_usd))}
       </div>
       <p class="rebalance-action-meta">${meta}</p>
+      ${generateRebalanceSliderHtml(sleeve)}
     </article>
   `;
 }
@@ -1798,6 +1929,64 @@ function rebalanceDeferredCardHtml(row, snapshot) {
   `;
 }
 
+// 產生部位微型底層曝險堆疊條 Spark-bar (創意視覺化)
+function generateExposureSparkBarHtml(symbol) {
+  return "";
+}
+
+// 產生再平衡偏離度天平 (天平偏離軌道 創意視覺化)
+function generateRebalanceSliderHtml(sleeve) {
+  if (!sleeve) return "";
+  const target = Number(sleeve.target_pct || 0);
+  const current = Number(sleeve.current_pct || 0);
+  if (target === 0) return "";
+  
+  const devRatio = (current - target) / target;
+  const devPct = devRatio * 100;
+  
+  const isOutOfBand = Math.abs(devRatio) > 0.2;
+  const displayLimit = 0.4;
+  const clampedDev = Math.max(-displayLimit, Math.min(displayLimit, devRatio));
+  const dotPosition = 50 + (clampedDev / displayLimit) * 50;
+  
+  const bandLeft = 50 - (0.2 / displayLimit) * 50;
+  const bandRight = 50 + (0.2 / displayLimit) * 50;
+  
+  let statusColor;
+  let statusGlow;
+  if (devPct >= 0) {
+    statusColor = isOutOfBand ? "var(--amber)" : "#275c40";
+    statusGlow = isOutOfBand ? "var(--amber-soft)" : "rgba(39, 92, 64, 0.14)";
+  } else {
+    statusColor = isOutOfBand ? "var(--danger)" : "#1d526f";
+    statusGlow = isOutOfBand ? "var(--danger-soft)" : "rgba(29, 82, 111, 0.14)";
+  }
+
+  const devText = isEnLocale() ? "dev" : "偏離";
+
+  const bandLow = sleeve.band_low_pct != null ? fmtPct(sleeve.band_low_pct) : "—";
+  const bandHigh = sleeve.band_high_pct != null ? fmtPct(sleeve.band_high_pct) : "—";
+  const tgtText = fmtPct(sleeve.target_pct);
+
+  return `
+    <div class="deviation-slider-wrapper">
+      <div class="deviation-slider-labels">
+        <span>${bandLow}</span>
+        <span>${tgtText}</span>
+        <span>${bandHigh}</span>
+      </div>
+      <div class="deviation-slider-track">
+        <div class="deviation-slider-band" style="left: ${bandLeft}%; right: ${100 - bandRight}%;"></div>
+        <div class="deviation-slider-target-line"></div>
+        <div class="deviation-slider-dot" style="left: ${dotPosition}%; background: ${statusColor}; box-shadow: 0 0 8px ${statusGlow};" title="${isEnLocale() ? "Deviation" : "偏離度"}: ${devPct >= 0 ? "+" : ""}${devPct.toFixed(1)}%"></div>
+      </div>
+      <span class="deviation-slider-value" style="color: ${statusColor}; font-weight: 700; text-align: center; display: block; margin-top: 0.25rem; font-size: 0.78rem;">
+        ${devPct >= 0 ? "+" : ""}${devPct.toFixed(1)}% ${devText}
+      </span>
+    </div>
+  `;
+}
+
 function renderOverviewPositionTable(snapshot) {
   const root = document.getElementById("overview-position-root");
   if (!root) {
@@ -1810,7 +1999,7 @@ function renderOverviewPositionTable(snapshot) {
     return;
   }
   root.innerHTML = `
-    <div class="overview-pos-grid pll-scroll" role="table" aria-label="${pllT("section.positions_table")}">
+    <div class="overview-pos-grid" role="table" aria-label="${pllT("section.positions_table")}">
       <div class="overview-pos-row overview-pos-head" role="row">
         <div class="ov-col ov-col-sym" role="columnheader">${pllT("th.symbol")}</div>
         <div class="ov-col ov-col-pct" role="columnheader">${pllT("th.target")}</div>
@@ -1837,7 +2026,12 @@ function renderOverviewPositionTable(snapshot) {
                 : "—";
           return `
             <div class="overview-pos-row" role="row">
-              <div class="ov-col ov-col-sym sym" role="cell">${sleeve.symbol}</div>
+              <div class="ov-col ov-col-sym sym" role="cell">
+                <div class="symbol-with-spark">
+                  <strong>${sleeve.symbol}</strong>
+                  ${generateExposureSparkBarHtml(sleeve.symbol)}
+                </div>
+              </div>
               <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve.target_pct)}</div>
               <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve.current_pct)}</div>
               <div class="ov-col ov-col-money" role="cell">${entryCell}</div>
@@ -2043,7 +2237,12 @@ function renderHeldPositions(snapshot) {
               : `${fmtUsd(row.avg_entry_usd)} USD`;
           return `
             <div class="overview-pos-row" role="row">
-              <div class="ov-col ov-col-sym sym" role="cell">${positionSymbolLabel(row)}</div>
+              <div class="ov-col ov-col-sym sym" role="cell">
+                <div class="symbol-with-spark">
+                  <strong>${positionSymbolLabel(row)}</strong>
+                  ${generateExposureSparkBarHtml(row.symbol)}
+                </div>
+              </div>
               <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve?.target_pct)}</div>
               <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve?.current_pct)}</div>
               <div class="ov-col ov-col-money" role="cell">${entryCell}</div>
@@ -2061,6 +2260,40 @@ function renderHeldPositions(snapshot) {
         .join("")}
     </div>
   `;
+}
+
+function initTradeHistoryViewSwitcher() {
+  const switcher = document.querySelector(".history-view-switcher");
+  if (!switcher) return;
+  if (switcher.dataset.switcherBound === "1") return;
+  switcher.dataset.switcherBound = "1";
+  
+  const buttons = switcher.querySelectorAll(".view-switch-btn");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetView = btn.dataset.view;
+      if (!targetView || targetView === currentHistoryViewMode) return;
+      
+      currentHistoryViewMode = targetView;
+      
+      buttons.forEach((b) => {
+        const active = b.dataset.view === targetView;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-checked", active ? "true" : "false");
+      });
+      
+      const tablePanels = document.querySelectorAll(".trade-history-panel");
+      const timelineWraps = document.querySelectorAll(".trade-timeline-wrap");
+      
+      if (targetView === "table") {
+        tablePanels.forEach((el) => el.style.display = "");
+        timelineWraps.forEach((el) => el.style.display = "none");
+      } else {
+        tablePanels.forEach((el) => el.style.display = "none");
+        timelineWraps.forEach((el) => el.style.display = "");
+      }
+    });
+  });
 }
 
 let portfolioHistoryTab = "all";
@@ -2314,7 +2547,7 @@ function renderAllocationTable(snapshot) {
             <th>${pllT("th.symbol")}</th>
             <th>${pllT("th.current")}</th>
             <th>${pllT("th.target")}</th>
-            <th>${pllT("th.band")}</th>
+            <th>${isEnLocale() ? "Deviation Slider" : "偏離度天平"}</th>
             <th>${pllT("th.mv")}</th>
             <th>${pllT("th.status")}</th>
           </tr>
@@ -2324,10 +2557,15 @@ function renderAllocationTable(snapshot) {
             .map(
               (sleeve) => `
                 <tr>
-                  <td class="sym">${sleeve.symbol}</td>
+                  <td class="sym">
+                    <div class="symbol-with-spark">
+                      <strong>${sleeve.symbol}</strong>
+                      ${generateExposureSparkBarHtml(sleeve.symbol)}
+                    </div>
+                  </td>
                   <td>${fmtPct(sleeve.current_pct)}</td>
                   <td>${fmtPct(sleeve.target_pct)}</td>
-                  <td>${fmtPct(sleeve.band_low_pct)} - ${fmtPct(sleeve.band_high_pct)}</td>
+                  <td>${generateRebalanceSliderHtml(sleeve)}</td>
                   <td>${
                     isEnLocale() && sleeve.mv_usd != null
                       ? `${fmtUsd(sleeve.mv_usd)} USD`
@@ -2692,6 +2930,19 @@ function portfolioStatusClass(status) {
   return "pv-status pv-ok";
 }
 
+function hexToRgba(hex, alpha) {
+  if (!hex || typeof hex !== 'string') return `rgba(140, 118, 95, ${alpha})`;
+  hex = hex.replace('#', '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(char => char + char).join('');
+  }
+  if (hex.length !== 6) return `rgba(140, 118, 95, ${alpha})`;
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 function renderLineChart(canvas, chartBlock, yAxisText) {
   const labels = chartBlock?.labels || [];
   const datasets = chartBlock?.datasets || [];
@@ -2702,16 +2953,39 @@ function renderLineChart(canvas, chartBlock, yAxisText) {
     type: "line",
     data: {
       labels,
-      datasets: datasets.map((dataset) => ({
-        backgroundColor: "transparent",
-        borderColor: dataset.borderColor || CHART_COLORS[dataset.id] || "#8c765f",
-        borderWidth: 2.2,
-        data: dataset.data,
-        label: dataset.label,
-        pointRadius: 0,
-        spanGaps: true,
-        tension: 0.18,
-      })),
+      datasets: datasets.map((dataset) => {
+        let backgroundColor = "transparent";
+        let fill = false;
+        if (canvas) {
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height || 300);
+            const borderCol = dataset.borderColor || CHART_COLORS[dataset.id] || "#8c765f";
+            const rgbaStart = hexToRgba(borderCol, 0.15);
+            const rgbaEnd = hexToRgba(borderCol, 0.0);
+            gradient.addColorStop(0, rgbaStart);
+            gradient.addColorStop(1, rgbaEnd);
+            backgroundColor = gradient;
+            fill = true;
+          }
+        }
+        const isNav = dataset.id === "nav" || dataset.label === pllT("chart.nav");
+        return {
+          backgroundColor,
+          fill,
+          borderColor: dataset.borderColor || CHART_COLORS[dataset.id] || "#8c765f",
+          borderWidth: isNav ? 3.5 : 1.5,
+          data: dataset.data,
+          label: dataset.label,
+          pointRadius: 0,
+          spanGaps: true,
+          tension: 0.3,
+          pointHoverRadius: isNav ? 7 : 5,
+          pointHoverBorderWidth: 2,
+          pointHoverBackgroundColor: "#fff",
+          order: isNav ? 1 : 2,
+        };
+      }),
     },
     options: {
       responsive: true,
@@ -2736,10 +3010,21 @@ function renderLineChart(canvas, chartBlock, yAxisText) {
       },
       scales: {
         x: {
-          ticks: { color: THEME.inkSoft, maxTicksLimit: 8 },
+          ticks: {
+            color: THEME.inkSoft,
+            maxTicksLimit: 5,
+            callback: function(value, index, values) {
+              const label = this.getLabelForValue(value);
+              if (typeof label === "string" && label.length === 10) {
+                return label.substring(5).replace("-", "/");
+              }
+              return label;
+            }
+          },
           grid: { color: THEME.grid },
         },
         y: {
+          grace: "2%",
           ticks: { color: THEME.inkSoft },
           grid: { color: THEME.grid },
           title: {
@@ -2751,6 +3036,38 @@ function renderLineChart(canvas, chartBlock, yAxisText) {
         },
       },
     },
+    plugins: [{
+      id: "pulsingDot",
+      afterDraw(chart) {
+        const container = chart.canvas.parentElement;
+        if (!container) return;
+        let dot = container.querySelector(".chart-pulse-dot");
+        if (!dot) {
+          dot = document.createElement("div");
+          dot.className = "chart-pulse-dot";
+          container.appendChild(dot);
+        }
+        const datasetIndex = chart.data.datasets.findIndex(d => d.id === "nav" || d.label === pllT("chart.nav"));
+        if (datasetIndex === -1) {
+          dot.style.display = "none";
+          return;
+        }
+        const meta = chart.getDatasetMeta(datasetIndex);
+        if (!meta.data.length) {
+          dot.style.display = "none";
+          return;
+        }
+        const lastPoint = meta.data[meta.data.length - 1];
+        if (lastPoint && !isNaN(lastPoint.x) && !isNaN(lastPoint.y)) {
+          dot.style.left = `${lastPoint.x}px`;
+          dot.style.top = `${lastPoint.y}px`;
+          dot.style.backgroundColor = chart.data.datasets[datasetIndex].borderColor;
+          dot.style.display = "block";
+        } else {
+          dot.style.display = "none";
+        }
+      }
+    }],
   });
 }
 
@@ -2997,10 +3314,206 @@ function renderOverview(snapshot) {
   renderSpyNavBenchmarkPanels(snapshot);
   renderRebalanceActions(snapshot, "ov-rebalance-actions-root");
   renderLoanSnapshot(snapshot);
+  renderAssetDonutChart(snapshot);
+  renderLoanRingChart(snapshot);
 
   renderErrors(snapshot);
+  renderOverviewSocialLinks();
   PLLocale.applyStaticLabels();
+  renderLiveExperimentDays(snapshot);
+  renderLiveTicker(snapshot);
   scheduleOverviewLayoutHeightSync();
+}
+
+function renderLiveExperimentDays(snapshot) {
+  const startDate = new Date("2026-04-14T00:00:00");
+  const today = new Date();
+  const diffDays = Math.max(1, Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+  const dayText = pllT("meta.live_days", { day: diffDays });
+
+  const el1 = document.getElementById("live-experiment-days");
+  if (el1) el1.textContent = dayText;
+
+  const el2 = document.getElementById("live-experiment-days-inline");
+  if (el2) el2.textContent = dayText;
+}
+
+function renderLiveTicker(snapshot) {
+  const container = document.getElementById("live-ticker-content");
+  if (!container) return;
+
+  const events = [];
+  const isEn = isEnLocale();
+  
+  const trades = [...tradeRows(snapshot)].sort(compareTradesNewestFirst).slice(0, 2);
+  trades.forEach((t) => {
+    const dateText = t.executed_at ? t.executed_at.substring(5, 10).replace("-", "/") : "";
+    const sideText = tradeSideLabel(t.side);
+    const text = isEn 
+      ? `${sideText} ${fmtUnits(t.units)} sh of ${t.symbol} at ${fmtUsd(t.price_usd)} USD`
+      : `${sideText} ${t.symbol} 共 ${fmtUnits(t.units)} 股，成交價 ${fmtUsd(t.price_usd)} USD`;
+    
+    events.push({
+      type: "trade",
+      typeLabel: pllT("ticker.trade"),
+      text: text,
+      date: dateText,
+      timestamp: t.executed_at ? new Date(t.executed_at).getTime() : 0
+    });
+  });
+  
+  const fxList = (snapshot.fx_events || []).filter(x => x.usd_amount > 0);
+  if (fxList.length > 0) {
+    const latestFx = [...fxList].sort((a,b) => {
+      const timeA = new Date((a.date || "") + "T" + (a.time_local || "00:00:00")).getTime();
+      const timeB = new Date((b.date || "") + "T" + (b.time_local || "00:00:00")).getTime();
+      return timeB - timeA;
+    })[0];
+    
+    const dateText = latestFx.date ? latestFx.date.substring(5, 10).replace("-", "/") : "";
+    const rateText = latestFx.rate_twd_per_usd ? ` (匯率 ${latestFx.rate_twd_per_usd})` : "";
+    const rateTextEn = latestFx.rate_twd_per_usd ? ` (at ${latestFx.rate_twd_per_usd})` : "";
+    const text = isEn
+      ? `Exchanged ${fmtAmount(latestFx.usd_amount, 2)} USD${rateTextEn}`
+      : `兌換美元 ${fmtAmount(latestFx.usd_amount, 2)} 元${rateText}`;
+      
+    events.push({
+      type: "fx",
+      typeLabel: pllT("ticker.fx"),
+      text: text,
+      date: dateText,
+      timestamp: new Date((latestFx.date || "") + "T" + (latestFx.time_local || "00:00:00")).getTime()
+    });
+  }
+  
+  if (snapshot.loan && snapshot.loan.payments_assumed_count > 0) {
+    const loan = snapshot.loan;
+    const paidCount = loan.payments_assumed_count;
+    const paidPrincipal = loan.cumulative_principal_paid_twd || 0;
+    const dateText = loan.first_due_date ? loan.first_due_date.substring(5, 10).replace("-", "/") : "";
+    const text = isEn
+      ? `Paid ${paidCount} loan period(s), repaid ${fmtTwd(paidPrincipal)} TWD principal`
+      : `已償還 ${paidCount} 期本息，累計還本 ${fmtTwd(paidPrincipal)} TWD`;
+      
+    events.push({
+      type: "loan",
+      typeLabel: pllT("ticker.loan"),
+      text: text,
+      date: dateText,
+      timestamp: loan.first_due_date ? new Date(loan.first_due_date).getTime() : 0
+    });
+  }
+  
+  if (snapshot.portfolio_view && snapshot.portfolio_view.sleeves) {
+    const sleeves = snapshot.portfolio_view.sleeves;
+    const hasDeviation = sleeves.some(s => s.status === "low" || s.status === "high");
+    const dateText = snapshot.generated_at ? snapshot.generated_at.substring(5, 10).replace("-", "/") : "";
+    const statusText = hasDeviation 
+      ? (isEn ? "Deviation detected, actions recommended" : "持倉偏離中，建議進行再平衡")
+      : (isEn ? "All allocations within tolerance bands" : "各標的部位均在正常容許帶內");
+    const text = isEn 
+      ? `Portfolio status: ${statusText}`
+      : `配置狀態：${statusText}`;
+      
+    events.push({
+      type: "status",
+      typeLabel: pllT("ticker.status"),
+      text: text,
+      date: dateText,
+      timestamp: snapshot.generated_at ? new Date(snapshot.generated_at).getTime() : 0
+    });
+  }
+  
+  events.sort((a, b) => b.timestamp - a.timestamp);
+
+  if (events.length === 0) {
+    container.innerHTML = `<div class="activity-item"><span class="ticker-text">${isEn ? "No recent activities" : "尚無最新動態"}</span></div>`;
+    return;
+  }
+
+  container.innerHTML = events.map((ev, idx) => `
+    <div class="activity-item" style="animation-delay: ${idx * 60}ms">
+      <span class="activity-badge activity-badge--${ev.type}">${ev.typeLabel}</span>
+      <span class="activity-text">
+        ${ev.text}${ev.date ? `<span class="activity-date"> · ${ev.date}</span>` : ""}
+      </span>
+    </div>
+  `).join("");
+
+  if (window.liveTickerInterval) {
+    clearInterval(window.liveTickerInterval);
+    window.liveTickerInterval = null;
+  }
+
+  const items = container.querySelectorAll(".activity-item");
+  if (items.length > 0) {
+    let highlightIndex = 0;
+    items[0].classList.add("is-highlighted");
+
+    window.liveTickerInterval = setInterval(() => {
+      highlightIndex = (highlightIndex + 1) % items.length;
+      items.forEach((el, idx) => {
+        if (idx === highlightIndex) {
+          el.classList.add("is-highlighted");
+        } else {
+          el.classList.remove("is-highlighted");
+        }
+      });
+    }, 3000);
+  }
+}
+
+
+
+function renderOverviewSocialLinks() {
+  const container = document.getElementById("social-sub-links-container");
+  const fbGroupBtn = document.getElementById("social-fb-group-btn");
+  if (!container || !fbGroupBtn) return;
+
+  const cfg = window.PERSONAL_LEDGER_SITE || {};
+  const social = cfg.social || {};
+
+  // 1. 設定 FB 社團按鈕連結
+  if (social.group && social.group.url) {
+    fbGroupBtn.href = social.group.url;
+    fbGroupBtn.style.display = "";
+  } else {
+    fbGroupBtn.style.display = "none";
+  }
+
+  // 2. 設定其它小社群連結
+  const ICONS = {
+    threads:
+      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="sub-btn-icon"><path fill="currentColor" d="M16.28 11.24c-.08 3.64-2.52 4.66-4.58 4.66-2.48 0-4.5-2.01-4.5-4.5s2.02-4.5 4.5-4.5c.99 0 1.92.32 2.68.86l1.2-1.38A6.9 6.9 0 0 0 11.7 4.5C7.36 4.5 3.82 8.04 3.82 12.4s3.54 7.9 7.88 7.9c4.82 0 7.98-3.36 7.98-9.08 0-.24-.02-.48-.05-.72H11.7v2.74h4.58z"/></svg>',
+    instagram:
+      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="sub-btn-icon"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM17.8 6.3a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg>',
+    "facebook-profile":
+      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="sub-btn-icon"><path fill="currentColor" d="M13.5 8.5V6.8c0-.8.1-1.2 1-1.2h1.7V3.2h-2.4c-2.3 0-3.3 1.4-3.3 3.5v1.8H8.5V11h2V21h3V11h2.1l.4-2.5H13.5z"/></svg>',
+  };
+
+  const LABELS = {
+    threads: "Threads",
+    instagram: "Instagram",
+    "facebook-profile": "Facebook",
+  };
+
+  if (Array.isArray(social.links)) {
+    const html = social.links
+      .filter(item => item && item.url && ICONS[item.id])
+      .map(item => {
+        const title = LABELS[item.id] || item.id;
+        return `
+          <a class="social-sub-link-btn" href="${item.url}" target="_blank" rel="noopener noreferrer" title="${title}" aria-label="${title}">
+            ${ICONS[item.id]}
+            <span>${title}</span>
+          </a>
+        `;
+      })
+      .join("");
+    container.innerHTML = html;
+  } else {
+    container.innerHTML = "";
+  }
 }
 
 function renderDetails(snapshot) {
@@ -3154,6 +3667,19 @@ function renderDetails(snapshot) {
     "fx-twd-buy-usd-usd",
     fx.twdToUsd.count > 0 ? fmtUsd(fx.twdToUsd.totalUsd) : "—"
   );
+
+  const flowTotalTwdNode = document.getElementById("fx-flow-total-twd");
+  const flowAvgRateNode = document.getElementById("fx-flow-avg-rate");
+  const flowTotalUsdNode = document.getElementById("fx-flow-total-usd");
+  if (flowTotalTwdNode) {
+    flowTotalTwdNode.textContent = fx.twdToUsd.count > 0 ? fmtTwd(fx.twdToUsd.totalTwd) : "—";
+  }
+  if (flowAvgRateNode) {
+    flowAvgRateNode.textContent = fx.twdToUsd.count > 0 ? fmtRate(fx.twdToUsd.avgRate) : "—";
+  }
+  if (flowTotalUsdNode) {
+    flowTotalUsdNode.textContent = fx.twdToUsd.count > 0 ? fmtUsd(fx.twdToUsd.totalUsd) : "—";
+  }
   setText("fx-usd-sell-twd-count", String(fx.usdToTwd.count));
   setText(
     "fx-usd-sell-twd-rate",
@@ -3181,6 +3707,7 @@ function renderDetails(snapshot) {
   renderTradeHistory(snapshot);
   renderBuyHistory(snapshot);
   initPortfolioHistoryTabs();
+  initTradeHistoryViewSwitcher();
   renderLoan(snapshot);
   renderLoanComputedTable(snapshot);
   renderDrawdown(snapshot);
@@ -3192,6 +3719,7 @@ function renderDetails(snapshot) {
   renderErrors(snapshot);
   syncDetailSection(snapshot);
   PLLocale.applyStaticLabels();
+  renderLiveExperimentDays(snapshot);
   window.addEventListener("hashchange", () => syncDetailSection(snapshot));
 }
 
@@ -3353,3 +3881,417 @@ window.addEventListener("resize", () => {
   scheduleOverviewLayoutHeightSync();
   scheduleLoanLayoutHeightSync();
 });
+
+/* ============================================================
+   資產結構 3D 堆疊圖 (Return Stacking)
+   資料：頂層 (200% 總曝險) vs 底層 (100% 本金來源)
+   ============================================================ */
+let _nestedStackChart = null;
+
+// 計算 Return Stacking 底層實際曝險 (7大成分，總和為 200%)
+function calculateReturnStackingExposures(snapshot) {
+  const sleeves = snapshot.portfolio_view?.sleeves || [];
+  
+  // 找出這四檔 ETF 的 current_pct
+  const getSleevePct = (sym) => {
+    const s = sleeves.find(x => x.symbol === sym);
+    // 如果找不到或者值未定義， fallback 到當前 targets 或預設配置
+    if (s && s.current_pct !== undefined) {
+      const val = Number(s.current_pct || 0);
+      // 如果大於 1.0 說明已經是百分比格式 (例如 43.02 代表 43.02%)
+      // 否則為小數格式，需要乘以 100
+      return val > 1.0 ? val : val * 100;
+    }
+    // 預設配置值（改為百分比格式）
+    const defaults = { "RSSB": 40.0, "RSST": 30.0, "RSSY": 15.0, "RSIT": 15.0 };
+    return defaults[sym] || 0;
+  };
+  
+  // 自適應百分比，不再在下方乘以 100
+  const rssb = getSleevePct("RSSB");
+  const rsst = getSleevePct("RSST");
+  const rssy = getSleevePct("RSSY");
+  const rsit = getSleevePct("RSIT");
+  
+  // 動態分配這 7 大曝險在 200% 中佔的百分比 (若持倉總和為 100%，曝險總和為 200%)
+  const usLarge = rsst + rssy + rssb * 0.50;      // 美國大型股 (預設 30 + 15 + 20 = 65%)
+  const usSmall = rssb * 0.10;                   // 美國中小型股 (預設 4%)
+  const intlDev = rsit + rssb * 0.30;            // 國際已開發國家股 (預設 15 + 12 = 27%)
+  const intlEmerg = rssb * 0.10;                 // 國際新興市場股 (預設 4%)
+  const usBonds = rssb;                          // 美國政府公債 (預設 40%)
+  const trend = rsst + rsit;                     // 趨勢跟蹤策略 (預設 30 + 15 = 45%)
+  const carry = rssy;                            // 套利策略 (預設 15%)
+  
+  const total = usLarge + usSmall + intlDev + intlEmerg + usBonds + trend + carry;
+  
+  return {
+    usLarge,
+    usSmall,
+    intlDev,
+    intlEmerg,
+    usBonds,
+    trend,
+    carry,
+    total
+  };
+}
+
+function renderAssetDonutChart(snapshot) {
+  const canvasNested = document.getElementById("ov-stack-nested");
+  
+  if (typeof Chart === "undefined") {
+    return;
+  }
+  
+  const isEn = isEnLocale();
+  const exp = calculateReturnStackingExposures(snapshot);
+  
+  const COLORS = {
+    usLarge: "#3d6b52",   // 翡翠深綠
+    usSmall: "#558a6f",   // 翡翠淺綠
+    intlDev: "#496c80",   // 藍灰
+    intlEmerg: "#67899c", // 淺藍灰
+    usBonds: "#b8844e",   // 金棕色
+    trend: "#c47a2a",     // 琥珀橘
+    carry: "#d99a4e"      // 亮金黃
+  };
+  
+  const expLabels = isEn
+    ? [
+        "US Large Cap",
+        "US Mid/Small Cap",
+        "Intl Developed Markets",
+        "Intl Emerging Markets",
+        "US Treasuries (Composite)",
+        "Trend Following (Trend)",
+        "Arbitrage (Carry)"
+      ]
+    : [
+        "美國大型股",
+        "美國中小型股",
+        "國際已開發國家股",
+        "國際新興市場股",
+        "美國政府公債 (綜合天期)",
+        "趨勢跟蹤策略 (Trend)",
+        "套利策略 (Carry)"
+      ];
+      
+  const expValues = [
+    exp.usLarge,
+    exp.usSmall,
+    exp.intlDev,
+    exp.intlEmerg,
+    exp.usBonds,
+    exp.trend,
+    exp.carry
+  ];
+  
+  const expColors = [
+    COLORS.usLarge,
+    COLORS.usSmall,
+    COLORS.intlDev,
+    COLORS.intlEmerg,
+    COLORS.usBonds,
+    COLORS.trend,
+    COLORS.carry
+  ];
+  
+  // 渲染股票部位圖例 (前 4 項)
+  const coreLegendEl = document.getElementById("ov-exposure-core-legend");
+  if (coreLegendEl) {
+    coreLegendEl.innerHTML = expLabels.slice(0, 4).map((label, idx) => {
+      const valPct = expValues[idx];
+      if (valPct <= 0) return "";
+      return `<li>
+        <span class="legend-left-side">
+          <span class="viz-legend-dot" style="background:${expColors[idx]}"></span>
+          <span class="viz-legend-label">${label}</span>
+        </span>
+        <span class="viz-legend-value">${valPct.toFixed(1)}%</span>
+      </li>`;
+    }).join("");
+  }
+  
+  // 渲染替代與債券部位圖例 (後 3 項)
+  const altLegendEl = document.getElementById("ov-exposure-alt-legend");
+  if (altLegendEl) {
+    altLegendEl.innerHTML = expLabels.slice(4, 7).map((label, idx) => {
+      const realIdx = idx + 4;
+      const valPct = expValues[realIdx];
+      if (valPct <= 0) return "";
+      return `<li>
+        <span class="legend-left-side">
+          <span class="viz-legend-dot" style="background:${expColors[realIdx]}"></span>
+          <span class="viz-legend-label">${label}</span>
+        </span>
+        <span class="viz-legend-value">${valPct.toFixed(1)}%</span>
+      </li>`;
+    }).join("");
+  }
+  
+  if (!canvasNested) {
+    return;
+  }
+
+  const nestedData = {
+    labels: expLabels,
+    datasets: [
+      {
+        label: isEn ? "Equity Sleeve" : "股票部位",
+        data: expValues.slice(0, 4),
+        backgroundColor: expColors.slice(0, 4),
+        borderColor: "rgba(255,252,246,0.95)",
+        borderWidth: 2,
+        hoverOffset: 4
+      },
+      {
+        label: isEn ? "Alt & Bond Sleeve" : "替代與債券部位",
+        data: expValues.slice(4, 7),
+        backgroundColor: expColors.slice(4, 7),
+        borderColor: "rgba(255,252,246,0.95)",
+        borderWidth: 2,
+        hoverOffset: 4
+      }
+    ]
+  };
+
+  const nestedOptions = {
+    cutout: "55%",
+    responsive: true,
+    maintainAspectRatio: true,
+    animation: { duration: 600, easing: "easeOutQuart" },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: "#2f241a",
+        borderColor: "rgba(255,247,235,0.18)",
+        borderWidth: 1,
+        titleColor: "rgba(255,244,230,0.9)",
+        bodyColor: "rgba(255,244,230,0.75)",
+        padding: 8,
+        callbacks: {
+          title(context) {
+            const index = context[0].datasetIndex;
+            return index === 0 
+              ? (isEn ? "Equity Layer" : "股票部位") 
+              : (isEn ? "Alt & Bond Layer" : "替代與債券部位");
+          },
+          label(ctx) {
+            const idx = ctx.datasetIndex === 0 ? ctx.dataIndex : ctx.dataIndex + 4;
+            const labelText = expLabels[idx];
+            return ` ${labelText}: ${ctx.raw.toFixed(1)}%`;
+          }
+        }
+      }
+    }
+  };
+
+  if (_nestedStackChart) {
+    _nestedStackChart.data = nestedData;
+    _nestedStackChart.update("none");
+  } else {
+    _nestedStackChart = new Chart(canvasNested, {
+      type: "doughnut",
+      data: nestedData,
+      options: nestedOptions
+    });
+  }
+}
+
+/* ============================================================
+   槓桿安全防衛塔 (首頁)
+   顯示：股市覆蓋率能量條、三道安全防線、本金還款里程碑
+   ============================================================ */
+function renderLoanRingChart(snapshot) {
+  const isEn = isEnLocale();
+  const usdTwd = liveUsdTwdRate(snapshot) || 31.5;
+  const loan = snapshot.loan || {};
+  const capital = snapshot.capital_summary || {};
+  
+  const mvUsd = snapshot.investment_mv_usd;
+  const mvTwd = mvUsd != null ? Number(mvUsd) * usdTwd : Number(capital.investment_mv_twd || 0);
+  const outstanding = Math.max(0, Number(loan.outstanding_twd || capital.loan_outstanding_twd || 0));
+  
+  // 1. 股市覆蓋率能量條
+  const coverage = outstanding > 0 ? (mvTwd / outstanding) * 100 : 0;
+  
+  const coveragePctEl = document.getElementById("ov-defense-coverage-pct");
+  if (coveragePctEl) {
+    coveragePctEl.textContent = `${coverage.toFixed(2)}%`;
+  }
+  
+  const coverageFillEl = document.getElementById("ov-defense-coverage-fill");
+  if (coverageFillEl) {
+    // 能量條寬度以 100% 為上限，若超過 100% 就保持滿格
+    const fillWidth = Math.min(100, coverage);
+    coverageFillEl.style.width = `${fillWidth}%`;
+    
+    // 超過 100% 使用滿格綠色流光，低於 100% 使用琥珀色流光
+    if (coverage >= 100) {
+      coverageFillEl.style.background = "linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%)";
+      coverageFillEl.style.boxShadow = "0 0 10px var(--accent-glow)";
+    } else {
+      coverageFillEl.style.background = "linear-gradient(90deg, var(--warn) 0%, var(--amber) 100%)";
+      coverageFillEl.style.boxShadow = "0 0 10px var(--amber-soft)";
+    }
+  }
+  
+  const statusDescEl = document.getElementById("ov-defense-status-desc");
+  if (statusDescEl) {
+    if (coverage >= 100) {
+      statusDescEl.textContent = isEn 
+        ? "Fortress: Assets fully cover leverage. Entering growth phase."
+        : "防禦盾牌完全充能：資產已能 100% 覆蓋負債，進入純回報增長階段。";
+      statusDescEl.style.color = "var(--accent)";
+    } else if (coverage >= 90) {
+      statusDescEl.textContent = isEn
+        ? "Safe: Assets close to loan value. Defensive shield is healthy."
+        : "防禦防線穩健：資產總額接近負債，安全體系良好。";
+      statusDescEl.style.color = "var(--ink-soft)";
+    } else {
+      statusDescEl.textContent = isEn
+        ? "Caution: Assets below 90% coverage. Monitor risk & reserve."
+        : "防禦盾牌警戒：資產已低於負債逾 10%，請確保月還款預備金充裕。";
+      statusDescEl.style.color = "var(--danger)";
+    }
+  }
+  
+  // 2. 三道防線
+  // 第一防線：預備金水位
+  const cashBuckets = snapshot.cash_buckets || {};
+  // 尋找最近的快照或定義
+  let reserveTwd = 0;
+  if (cashBuckets.snapshots && cashBuckets.snapshots.length > 0) {
+    const latestSnap = cashBuckets.snapshots[0] || {};
+    const reserveBucket = (latestSnap.buckets || []).find(b => b.bucket_id === "loan-payment-reserve");
+    if (reserveBucket) {
+      reserveTwd = Number(reserveBucket.amount || 0);
+      if (reserveBucket.currency === "USD") {
+        reserveTwd *= usdTwd;
+      }
+    }
+  }
+  
+  // 如果 snapshots 沒寫，但 cash_twd 大於 0，也可以作為參考
+  if (reserveTwd === 0) {
+    reserveTwd = Number(capital.cash_twd || 0) + Number(capital.cash_usd_twd || 0);
+  }
+  
+  const monthlyPayment = Number(loan.next_due_amount_twd || 18765);
+  const reserveMonths = monthlyPayment > 0 ? (reserveTwd / monthlyPayment) : 0;
+  
+  const reserveMonthsEl = document.getElementById("ov-shield-reserve-months");
+  if (reserveMonthsEl) {
+    reserveMonthsEl.textContent = `${reserveMonths.toFixed(1)} 個月`;
+    if (reserveMonths >= 12) {
+      reserveMonthsEl.style.color = "var(--accent)";
+    } else if (reserveMonths >= 6) {
+      reserveMonthsEl.style.color = "var(--gold-bright)";
+    } else {
+      reserveMonthsEl.style.color = "var(--danger)";
+    }
+  }
+  
+  const reserveDetailEl = document.getElementById("ov-shield-reserve-detail");
+  if (reserveDetailEl) {
+    reserveDetailEl.textContent = isEn
+      ? `Reserve: USD ${fmtUsd(reserveTwd / usdTwd)}`
+      : `預備金餘額：${fmtTwd(reserveTwd)} TWD`;
+  }
+  
+  // 第二防線：資產覆蓋差額 (Net Assets)
+  const netCoverage = mvTwd - outstanding;
+  const netCoverageEl = document.getElementById("ov-shield-net-coverage");
+  if (netCoverageEl) {
+    const sign = netCoverage >= 0 ? "+" : "-";
+    const absValText = isEn
+      ? `USD ${fmtUsd(Math.abs(netCoverage) / usdTwd)}`
+      : `${fmtTwd(Math.abs(netCoverage))} TWD`;
+    netCoverageEl.textContent = `${sign} ${absValText}`;
+    netCoverageEl.style.color = netCoverage >= 0 ? "var(--accent)" : "var(--warn)";
+  }
+  
+  const netCoverageSubEl = document.getElementById("ov-shield-net-coverage-sub");
+  if (netCoverageSubEl) {
+    netCoverageSubEl.textContent = isEn
+      ? "Asset minus debt outstanding"
+      : `資產與貸款餘額差額 (${netCoverage >= 0 ? "淨賺" : "水下"})`;
+  }
+  
+  // 第三防線：再平衡偏離度 (Rebalance Deviation)
+  const held = getHeldRows(snapshot);
+  const phase = activePhase(snapshot) || {};
+  const targets = phase.targets || [];
+  
+  let maxDev = 0;
+  let maxDevSym = "—";
+  let maxDevDirection = "";
+  
+  targets.forEach(t => {
+    const sym = t.symbol;
+    const targetW = Number(t.weight || 0);
+    const pos = held.find(p => p.symbol === sym) || {};
+    const actualW = Number(pos.weight || 0);
+    const dev = actualW - targetW;
+    
+    if (Math.abs(dev) > Math.abs(maxDev)) {
+      maxDev = dev;
+      maxDevSym = sym;
+      maxDevDirection = dev >= 0 ? (isEn ? "overweight" : "偏高") : (isEn ? "underweight" : "偏低");
+    }
+  });
+  
+  const rebalanceDevEl = document.getElementById("ov-shield-rebalance-dev");
+  if (rebalanceDevEl) {
+    if (maxDevSym === "—" || maxDev === 0) {
+      rebalanceDevEl.textContent = isEn ? "Balanced" : "配置平衡";
+      rebalanceDevEl.style.color = "var(--accent)";
+    } else {
+      rebalanceDevEl.textContent = `${maxDevSym} ${maxDevDirection} ${(Math.abs(maxDev) * 100).toFixed(1)}%`;
+      if (Math.abs(maxDev) >= 0.05) {
+        rebalanceDevEl.style.color = "var(--warn)";
+      } else {
+        rebalanceDevEl.style.color = "var(--ink)";
+      }
+    }
+  }
+  
+  const rebalanceSubEl = document.getElementById("ov-shield-rebalance-sub");
+  if (rebalanceSubEl) {
+    if (Math.abs(maxDev) >= 0.05) {
+      rebalanceSubEl.textContent = isEn ? "Deviation high. Rebalance suggested." : "偏離幅度較大，建議適時再平衡。";
+    } else {
+      rebalanceSubEl.textContent = isEn ? "Deviation low. Portfolio aligned." : "偏離度安全，持倉高度契合目標。";
+    }
+  }
+  
+  // 3. 還款里程碑進度條
+  const principal = Number(loan.contract_principal_twd || capital.contract_principal_twd || 1350000);
+  const repaid = Math.max(0, principal - outstanding);
+  const repaidPct = principal > 0 ? (repaid / principal) * 100 : 0;
+  
+  const repayProgressPctEl = document.getElementById("ov-repay-progress-pct");
+  if (repayProgressPctEl) {
+    repayProgressPctEl.textContent = `${repaidPct.toFixed(2)}%`;
+  }
+  
+  const repayProgressFillEl = document.getElementById("ov-repay-progress-fill");
+  if (repayProgressFillEl) {
+    repayProgressFillEl.style.width = `${repaidPct}%`;
+  }
+  
+  const repayPaidEl = document.getElementById("ov-repay-principal-paid");
+  if (repayPaidEl) {
+    repayPaidEl.textContent = isEn
+      ? `USD ${fmtUsd(repaid / usdTwd)}`
+      : `${fmtTwd(repaid)} TWD`;
+  }
+  
+  const repayOutstandingEl = document.getElementById("ov-repay-principal-outstanding");
+  if (repayOutstandingEl) {
+    repayOutstandingEl.textContent = isEn
+      ? `USD ${fmtUsd(outstanding / usdTwd)}`
+      : `${fmtTwd(outstanding)} TWD`;
+  }
+}
+

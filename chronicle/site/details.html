@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>投資史冊明細</title>
+    <title>Tim Wei 報酬疊加實驗 · 明細</title>
     <meta
       name="description"
-      content="Investment ledger details: allocation, FX log, loan amortization, performance charts, and trade history."
+      content="25歲貸款投資實錄明細：績效走勢、持倉配置、貸款決策、換匯記錄全公開。"
     />
-    <meta property="og:title" content="Investment Chronicle Details | 投資史冊明細" />
+    <meta property="og:title" content="Tim Wei 報酬疊加實驗 · 明細" />
     <meta
       property="og:description"
-      content="Investment ledger details: allocation, FX log, loan amortization, performance charts, and trade history."
+      content="25歲貸款投資實錄明細：績效走勢、持倉配置、貸款決策、換匯記錄全公開。"
     />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="" />
@@ -32,7 +32,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=5" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   </head>
   <body>
@@ -50,8 +50,8 @@
       </div>
       <nav class="site-nav" aria-label="Main">
         <div class="brand-block">
-          <span class="site-nav-brand" data-i18n="nav.brand">Personal Ledger</span>
-          <a class="site-nav-title" href="index.html" data-i18n="nav.title">投資史冊</a>
+          <span class="site-nav-brand" data-i18n="nav.brand">25歲貸款投資實錄</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">Tim Wei 報酬疊加實驗</a>
         </div>
         <div class="site-nav-links">
           <a class="site-nav-link" href="index.html" data-i18n="nav.overview">總覽</a>
@@ -69,6 +69,11 @@
           <h1 id="detail-page-title">績效</h1>
           <div class="hero-meta">
             <span><span data-i18n="meta.snapshot">快照</span> <strong id="meta-generated">—</strong></span>
+            <span class="hero-meta-live">
+              <span class="live-heartbeat"></span>
+              <span data-i18n="meta.live_stream">實錄直播中</span>
+              <strong id="live-experiment-days">—</strong>
+            </span>
             <span id="detail-page-meta">—</span>
           </div>
         </div>
@@ -197,41 +202,66 @@
                 平均成本法
               </p>
             </div>
-            <div
-              class="portfolio-history-tabs"
-              role="tablist"
-              aria-label="Trade history tabs"
-            >
-              <button
-                type="button"
-                class="portfolio-history-tab is-active"
-                role="tab"
-                aria-selected="true"
-                data-portfolio-history-tab="all"
-                data-i18n="portfolio.tab.all"
+            <div class="portfolio-history-controls">
+              <div
+                class="portfolio-history-tabs"
+                role="tablist"
+                aria-label="Trade history tabs"
               >
-                全部
-              </button>
-              <button
-                type="button"
-                class="portfolio-history-tab"
-                role="tab"
-                aria-selected="false"
-                data-portfolio-history-tab="buy"
-                data-i18n="portfolio.tab.buy"
-              >
-                買入
-              </button>
-              <button
-                type="button"
-                class="portfolio-history-tab"
-                role="tab"
-                aria-selected="false"
-                data-portfolio-history-tab="sell"
-                data-i18n="portfolio.tab.sell"
-              >
-                賣出
-              </button>
+                <button
+                  type="button"
+                  class="portfolio-history-tab is-active"
+                  role="tab"
+                  aria-selected="true"
+                  data-portfolio-history-tab="all"
+                  data-i18n="portfolio.tab.all"
+                >
+                  全部
+                </button>
+                <button
+                  type="button"
+                  class="portfolio-history-tab"
+                  role="tab"
+                  aria-selected="false"
+                  data-portfolio-history-tab="buy"
+                  data-i18n="portfolio.tab.buy"
+                >
+                  買入
+                </button>
+                <button
+                  type="button"
+                  class="portfolio-history-tab"
+                  role="tab"
+                  aria-selected="false"
+                  data-portfolio-history-tab="sell"
+                  data-i18n="portfolio.tab.sell"
+                >
+                  賣出
+                </button>
+              </div>
+              
+              <div class="history-view-switcher" role="radiogroup" aria-label="View mode">
+                <button
+                  type="button"
+                  class="view-switch-btn is-active"
+                  role="radio"
+                  aria-checked="true"
+                  data-view="table"
+                  data-i18n="portfolio.view.table"
+                >
+                  表格檢視
+                </button>
+                <button
+                  type="button"
+                  class="view-switch-btn"
+                  role="radio"
+                  aria-checked="false"
+                  data-view="timeline"
+                  data-i18n="portfolio.view.timeline"
+                >
+                  時間軸檢視
+                </button>
+              </div>
             </div>
             <div class="portfolio-history-body">
               <div
@@ -357,6 +387,8 @@
       </section>
 
       <section class="detail-panel" data-detail-panel="fx" hidden>
+
+
         <div class="fx-leg-panel">
           <p class="fx-leg-heading" data-i18n="fx.twd_usd">台幣 → 美金</p>
           <div class="focus-metric-grid">
@@ -465,8 +497,8 @@
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js"></script>
+    <script src="locale.js?v=5"></script>
     <script src="js/social-dock.js"></script>
-    <script src="app.js"></script>
+    <script src="app.js?v=5"></script>
   </body>
 </html>
