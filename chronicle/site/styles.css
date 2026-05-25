@@ -297,9 +297,11 @@ body::after {
   box-shadow: 0 20px 48px rgba(45, 30, 18, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0,0,0,0.06);
   backdrop-filter: blur(22px) saturate(140%);
   -webkit-backdrop-filter: blur(22px) saturate(140%);
+  position: -webkit-sticky;
   position: sticky;
-  top: 1rem;
-  z-index: 100;
+  top: max(0.75rem, env(safe-area-inset-top, 0px));
+  z-index: 200;
+  align-self: start;
 }
 
 .brand-block {
@@ -3189,16 +3191,14 @@ table.quotes tr:last-child td {
 }
 
 @media (max-width: 680px) {
-  body {
-    overflow-x: hidden;
-  }
-
   :root {
+    --site-nav-mobile-height: 6.35rem;
     --site-padding-inline: 0.85rem;
   }
 
   .wrap {
     padding-inline: var(--site-padding-inline);
+    padding-top: calc(var(--site-padding-block-start) + var(--site-nav-mobile-height));
   }
 
   html {
@@ -3218,86 +3218,68 @@ table.quotes tr:last-child td {
   }
 
   .site-nav {
-    position: sticky;
+    position: fixed;
     top: max(0.35rem, env(safe-area-inset-top, 0px));
-    z-index: 110;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      "brand actions"
-      "links links";
-    align-items: center;
-    gap: 0.38rem 0.5rem;
-    padding: 0.45rem 0.5rem 0.5rem;
-    margin-bottom: 0.65rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: rgba(255, 250, 243, 0.94);
-    color: var(--ink);
-    box-shadow: 0 8px 22px rgba(74, 55, 38, 0.08);
-    backdrop-filter: blur(12px) saturate(125%);
-    -webkit-backdrop-filter: blur(12px) saturate(125%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(
+      calc(100% - (2 * var(--site-padding-inline))),
+      calc(var(--site-max-width) - (2 * var(--site-padding-inline)))
+    );
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.65rem 0.75rem 0.7rem;
+    margin-bottom: 0;
   }
 
   .brand-block {
-    grid-area: brand;
     min-width: 0;
   }
 
   .site-nav-brand {
-    display: none;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
   }
 
   .site-nav-title {
-    display: block;
-    font-size: 0.88rem;
-    line-height: 1.25;
-    color: var(--wood-dark);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1rem;
+    line-height: 1.2;
   }
 
   .site-nav-row {
-    display: contents;
-  }
-
-  .site-nav-actions {
-    grid-area: actions;
-    width: auto;
-    margin-left: 0;
-    justify-content: flex-end;
-  }
-
-  .site-nav .lang-switch {
-    border-color: rgba(79, 58, 38, 0.12);
-    background: rgba(79, 58, 38, 0.05);
-  }
-
-  .site-nav .lang-switch-btn {
-    min-height: 28px;
-    padding: 0.2rem 0.45rem;
-    font-size: 0.68rem;
-    color: var(--ink-soft);
-  }
-
-  .site-nav .lang-switch-btn.is-active {
-    background: var(--wood-dark);
-    color: #fff7eb;
-  }
-
-  .site-nav-links {
-    grid-area: links;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 0.32rem;
+    gap: 0.45rem;
     width: 100%;
     min-width: 0;
-    padding: 0.22rem;
-    border-radius: 999px;
-    border: 1px solid rgba(79, 58, 38, 0.1);
-    background: rgba(79, 58, 38, 0.05);
+  }
+
+  .site-nav-actions {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .site-nav .lang-switch-btn {
+    min-height: 30px;
+    padding: 0.22rem 0.48rem;
+    font-size: 0.7rem;
+  }
+
+  .site-nav-links {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
@@ -3310,29 +3292,15 @@ table.quotes tr:last-child td {
 
   .site-nav-link {
     flex: 0 0 auto;
-    min-height: 30px;
-    padding: 0.28rem 0.72rem;
-    font-size: 0.76rem;
-    border-radius: 999px;
-    color: var(--ink-soft);
-    border: 1px solid transparent;
-    background: transparent;
+    min-height: 34px;
+    padding: 0.38rem 0.75rem;
+    font-size: 0.8rem;
     scroll-snap-align: center;
     transform: none;
   }
 
   .site-nav-link:hover {
-    color: var(--wood-dark);
-    border-color: rgba(79, 58, 38, 0.12);
-    background: rgba(255, 253, 249, 0.72);
     transform: none;
-  }
-
-  .site-nav-link.is-active {
-    color: var(--wood-dark);
-    background: rgba(255, 253, 249, 0.96);
-    border-color: rgba(79, 58, 38, 0.14);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
   }
 
   .hero-copy,
@@ -3355,8 +3323,8 @@ table.quotes tr:last-child td {
   }
 
   [data-page="details"] .detail-switcher {
-    top: max(5.35rem, calc(env(safe-area-inset-top, 0px) + 5rem));
-    z-index: 100;
+    top: calc(max(0.35rem, env(safe-area-inset-top, 0px)) + var(--site-nav-mobile-height) + 0.35rem);
+    z-index: 190;
   }
 
   .dl-grid dd {
