@@ -15,7 +15,7 @@ ETF_DIR = SITE / "etfs"
 CSS_VER = "30"
 JS_VER = "11"
 LOCALE_VER = "7"
-STYLES_VER = "11"
+STYLES_VER = "12"
 
 I18N_REGISTRY: dict[str, dict[str, str]] = {}
 
