@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-page="etfs" data-title-i18n="meta.title.etfs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>ETF 百科 | Return Stacked 全系列</title>
+    <meta name="description" content="8 檔 Return Stacked ETF 完整說明：結構、費率、持股、績效、相關性。" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1F0YJSFDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-P1F0YJSFDW", { anonymize_ip: true });
+    </script>
+    <script src="site-config.js"></script>
+    <script src="js/analytics.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=8" />
+    <link rel="stylesheet" href="guide.css?v=30" />
+  </head>
+  <body class="guide-page">
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <div class="wrap">
+      <nav class="site-nav" aria-label="Site navigation">
+        <div class="brand-block">
+          <span class="site-nav-brand" data-i18n="nav.brand">25歲貸款投資實錄</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">Tim Wei 報酬疊加實驗</a>
+        </div>
+        <div class="site-nav-row">
+          <div class="site-nav-links">
+          <a class="site-nav-link" href="index.html" data-i18n="nav.overview">實測總覽</a>
+          <a class="site-nav-link" href="learn.html" data-i18n="nav.learn">認識實驗</a>
+          <a class="site-nav-link" href="layer2.html" data-i18n="nav.layer2">第二層策略</a>
+          <a class="site-nav-link is-active" href="etfs.html" data-i18n="nav.etfs" aria-current="page">ETF 百科</a>
+          <a class="site-nav-link" href="details.html#performance" data-i18n="nav.details">帳本明細</a>
+          </div>
+          <div class="site-nav-actions">
+            <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-switch-btn" data-set-lang="zh-Hant" data-i18n="nav.lang.zh">中文</button>
+            <button type="button" class="lang-switch-btn" data-set-lang="en" data-i18n="nav.lang.en">EN</button>
+          </div>
+          </div>
+        </div>
+      </nav>
+      <header class="hero hero-compact guide-hero">
+        <div class="hero-copy hero-copy-compact guide-hero-copy">
+          <p class="hero-tag" data-i18n="guide.etfs.hero.tag">ETF 百科</p>
+          <h1 data-i18n="guide.etfs.hero.title">Return Stacked 全系列</h1>
+          <p class="guide-lead" data-i18n="guide.etfs.hero.lead">以下整理自各檔 Product Brief、Fact Sheet 與 Q1 2026 Commentary（截至 2026-03-31）。這是網站上的完整教材；社群貼文只會挑其中幾個重點。</p>
+        </div>
+      </header>
+
+      <section class="card guide-layer2-promo">
+        <div class="section-head section-head-tight">
+          <div>
+            <p class="section-kicker" data-i18n="guide.learn.promo.kicker">建議閱讀順序</p>
+            <h2 data-i18n="guide.learn.promo.title">第二層策略才是關卡</h2>
+          </div>
+          <a class="card-jump-link" href="layer2.html" data-i18n="guide.learn.promo.link">前往第二層策略</a>
+        </div>
+        <p class="guide-note" data-i18n="guide.learn.promo.note">各檔真正不同的地方在第二層。專頁用白話拆解「多出來的 100% 在買什麼」，不含第一層。</p>
+      </section>
+      <section class="card" aria-label="ETF lineup table">
+        <div class="section-head section-head-tight">
+          <div><p class="section-kicker">總表</p><h2 data-i18n="guide.etfs.table.title">8 檔對照</h2></div>
+        </div>
+        <div class="table-wrap table-scroll guide-table-wrap">
+      <table class="quotes guide-table guide-table-suite guide-table-suite-metrics">
+        <thead><tr><th data-i18n="guide.table.ticker">代號</th><th data-i18n="guide.table.zh_name">中文名</th><th data-i18n="guide.table.layer1">第一層</th><th data-i18n="guide.table.layer2">第二層</th><th data-i18n="guide.table.inception">成立</th><th data-i18n="guide.table.aum">AUM</th><th data-i18n="guide.table.tim">Tim 實測</th></tr></thead>
+        <tbody><tr><td>RSSB</td><td><span data-i18n="etf.rssb.name">全球股債</span></td><td><span data-i18n="etf.rssb.base">全球股票</span></td><td><span data-i18n="etf.rssb.stack">美國公債</span></td><td>2023-12-04</td><td>$431.6M</td><td>●</td></tr><tr><td>RSST</td><td><span data-i18n="etf.rsst.name">美股＋管理期貨趨勢</span></td><td><span data-i18n="etf.rsst.base">美國股票</span></td><td><span data-i18n="etf.rsst.stack">管理期貨（趨勢）</span></td><td>2023-09-06</td><td>$347.5M</td><td>●</td></tr><tr><td>RSSY</td><td><span data-i18n="etf.rssy.name">美股＋期貨展期收益</span></td><td><span data-i18n="etf.rssy.base">美國股票</span></td><td><span data-i18n="etf.rssy.stack">期貨展期收益</span></td><td>2024-05-29</td><td>$94.4M</td><td>●</td></tr><tr><td>RSIT</td><td><span data-i18n="etf.rsit.name">國際股＋管理期貨</span></td><td><span data-i18n="etf.rsit.base">國際股票</span></td><td><span data-i18n="etf.rsit.stack">管理期貨（趨勢）</span></td><td>2026-05-07</td><td>新標的</td><td>●</td></tr><tr><td>RSSX</td><td><span data-i18n="etf.rssx.name">美股＋黃金／比特幣</span></td><td><span data-i18n="etf.rssx.base">美國股票</span></td><td><span data-i18n="etf.rssx.stack">黃金＋比特幣（風險平價）</span></td><td>2025-05-29</td><td>$57.8M</td><td>—</td></tr><tr><td>RSBT</td><td><span data-i18n="etf.rsbt.name">債券＋管理期貨</span></td><td><span data-i18n="etf.rsbt.base">美國債券</span></td><td><span data-i18n="etf.rsbt.stack">管理期貨（趨勢）</span></td><td>2023-02-06</td><td>$118.3M</td><td>—</td></tr><tr><td>RSBY</td><td><span data-i18n="etf.rsby.name">債券＋期貨展期收益</span></td><td><span data-i18n="etf.rsby.base">美國債券</span></td><td><span data-i18n="etf.rsby.stack">期貨展期收益</span></td><td>2024-08-20</td><td>$84.2M</td><td>—</td></tr><tr><td>RSBA</td><td><span data-i18n="etf.rsba.name">債券＋併購套利</span></td><td><span data-i18n="etf.rsba.base">美國公債</span></td><td><span data-i18n="etf.rsba.stack">併購套利</span></td><td>2024-12-17</td><td>$57.1M</td><td>—</td></tr></tbody>
+      </table>
+    </div>
+      </section>
+
+      <section class="guide-etf-grid" aria-label="ETF cards">
+        <article class="card guide-etf-card guide-etf-capital">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rssb.html">RSSB</a>
+            <span class="guide-badge guide-badge-live"><span data-i18n="guide.etfs.badge.live">實測有配</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rssb.name">全球股債</span></h2>
+          <p class="guide-etf-sub">Global Stocks &amp; Bonds</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rssb.base">全球股票</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rssb.stack">美國公債</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2023-12-04</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$431.6M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">Return Stacked 系列的地基：100% 全球股 ＋ 100% 美債，一檔 ETF 搞定 200% 曝險。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rssb.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-alt">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rsst.html">RSST</a>
+            <span class="guide-badge guide-badge-live"><span data-i18n="guide.etfs.badge.live">實測有配</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rsst.name">美股＋管理期貨趨勢</span></h2>
+          <p class="guide-etf-sub">U.S. Stocks &amp; Managed Futures</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rsst.base">美國股票</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rsst.stack">管理期貨（趨勢）</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2023-09-06</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$347.5M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">底下全倉大盤美股，上面再疊一層會做多也會做空的管理期貨趨勢策略。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rsst.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-alt">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rssy.html">RSSY</a>
+            <span class="guide-badge guide-badge-live"><span data-i18n="guide.etfs.badge.live">實測有配</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rssy.name">美股＋期貨展期收益</span></h2>
+          <p class="guide-etf-sub">U.S. Stocks &amp; Futures Yield</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rssy.base">美國股票</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rssy.stack">期貨展期收益</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2024-05-29</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$94.4M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 美股 ＋ 100% 跨資產期貨 Carry（展期收益）策略。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rssy.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-alt">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rsit.html">RSIT</a>
+            <span class="guide-badge guide-badge-live"><span data-i18n="guide.etfs.badge.live">實測有配</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rsit.name">國際股＋管理期貨</span></h2>
+          <p class="guide-etf-sub">International Stocks &amp; Managed Futures</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rsit.base">國際股票</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rsit.stack">管理期貨（趨勢）</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2026-05-07</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>新標的</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 已開發市場國際股 ＋ 100% 管理期貨趨勢——RSST 的國際版。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rsit.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-alt">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rssx.html">RSSX</a>
+            <span class="guide-badge guide-badge-ref"><span data-i18n="guide.etfs.badge.ref">參考標的</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rssx.name">美股＋黃金／比特幣</span></h2>
+          <p class="guide-etf-sub">U.S. Stocks &amp; Gold/Bitcoin</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rssx.base">美國股票</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rssx.stack">黃金＋比特幣（風險平價）</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2025-05-29</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$57.8M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 美股 ＋ 100% 黃金／比特幣——依 63 日波動做風險平價，每月再平衡。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rssx.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-bond">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rsbt.html">RSBT</a>
+            <span class="guide-badge guide-badge-ref"><span data-i18n="guide.etfs.badge.ref">參考標的</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rsbt.name">債券＋管理期貨</span></h2>
+          <p class="guide-etf-sub">Bonds &amp; Managed Futures</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rsbt.base">美國債券</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rsbt.stack">管理期貨（趨勢）</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2023-02-06</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$118.3M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 美國債券 ＋ 100% 管理期貨趨勢——在債券底層上疊 CTA。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rsbt.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-bond">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rsby.html">RSBY</a>
+            <span class="guide-badge guide-badge-ref"><span data-i18n="guide.etfs.badge.ref">參考標的</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rsby.name">債券＋期貨展期收益</span></h2>
+          <p class="guide-etf-sub">Bonds &amp; Futures Yield</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rsby.base">美國債券</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rsby.stack">期貨展期收益</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2024-08-20</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$84.2M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 美國債券 ＋ 100% 跨資產期貨 Carry——RSBY 是 RSSY 的債券底層版。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rsby.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article><article class="card guide-etf-card guide-etf-bond">
+          <div class="guide-etf-card-head">
+            <a class="guide-etf-ticker" href="etfs/rsba.html">RSBA</a>
+            <span class="guide-badge guide-badge-ref"><span data-i18n="guide.etfs.badge.ref">參考標的</span></span>
+          </div>
+          <h2 class="guide-etf-title"><span data-i18n="etf.rsba.name">債券＋併購套利</span></h2>
+          <p class="guide-etf-sub">Bonds &amp; Merger Arbitrage</p>
+          <dl class="guide-etf-meta">
+            <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd><span data-i18n="etf.rsba.base">美國公債</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd><span data-i18n="etf.rsba.stack">併購套利</span></dd></div>
+            <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>2024-12-17</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>$57.1M</dd></div>
+          </dl>
+          <p class="guide-etf-blurb">100% 美國公債 ＋ 100% 併購套利——在債券底層上疊事件驅動型策略。</p>
+          <a class="btn-secondary guide-etf-card-btn" href="etfs/rsba.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
+        </article>
+      </section>
+
+      <section class="card guide-card guide-tim-allocation">
+        <p class="section-kicker" data-i18n="guide.etfs.tim.kicker">Tim Wei 的配置</p>
+        <h2 data-i18n="guide.etfs.tim.title">目前實測用哪幾檔？</h2>
+        <div class="guide-tim-groups">
+          <div class="guide-tim-group">
+            <p class="guide-tim-group-label" data-i18n="guide.etfs.tim.group.core">核心</p>
+            <div class="guide-tim-chips"><a class="guide-tim-chip guide-tim-chip-live" href="etfs/rssb.html">RSSB</a></div>
+          </div>
+          <div class="guide-tim-group">
+            <p class="guide-tim-group-label" data-i18n="guide.etfs.tim.group.overlay">疊加（實測有配）</p>
+            <div class="guide-tim-chips"><a class="guide-tim-chip guide-tim-chip-live" href="etfs/rsst.html">RSST</a><a class="guide-tim-chip guide-tim-chip-live" href="etfs/rssy.html">RSSY</a><a class="guide-tim-chip guide-tim-chip-live" href="etfs/rsit.html">RSIT</a></div>
+          </div>
+          <div class="guide-tim-group guide-tim-group-ref">
+            <p class="guide-tim-group-label" data-i18n="guide.etfs.tim.group.ref">百科收錄、尚未配置</p>
+            <div class="guide-tim-chips"><a class="guide-tim-chip guide-tim-chip-ref" href="etfs/rssx.html">RSSX</a><a class="guide-tim-chip guide-tim-chip-ref" href="etfs/rsbt.html">RSBT</a><a class="guide-tim-chip guide-tim-chip-ref" href="etfs/rsby.html">RSBY</a><a class="guide-tim-chip guide-tim-chip-ref" href="etfs/rsba.html">RSBA</a></div>
+          </div>
+        </div>
+        <p class="guide-note" data-i18n="guide.etfs.tim.note">配置比例與再平衡邏輯見實測總覽的策略拆解與帳本明細的配置明細。</p>
+      </section>
+
+      <div class="guide-footer-cta card">
+        <div>
+          <p class="section-kicker" data-i18n="guide.footer.kicker">下一步</p>
+          <h2 data-i18n="guide.footer.title">學完概念，看 Tim Wei 的實測數據</h2>
+          <p class="guide-lead" data-i18n="guide.footer.lead">總覽頁有 NAV、持倉、再平衡與貸款進度；細節可到帳本明細。想討論歡迎加入 FB 社團。</p>
+        </div>
+        <div class="guide-footer-actions">
+          <a class="btn-primary" href="index.html" data-i18n="guide.footer.overview">看實測總覽</a>
+          <a class="btn-secondary" href="details.html#performance" data-i18n="guide.footer.details">看帳本明細</a>
+          <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
+        </div>
+      </div>
+    </div>
+    <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
+    <script src="locale.js?v=7"></script>
+    <script src="guide-locale.js?v=30"></script>
+    <script src="js/guide.js?v=11"></script>
+    <script src="js/social-dock.js"></script>
+  </body>
+</html>

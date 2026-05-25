@@ -147,6 +147,10 @@ html[data-locale="en"] .focus-metric-unit {
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --site-max-width: 1280px;
+  --site-padding-inline: 1rem;
+  --site-padding-block-start: 1.4rem;
+  --site-padding-block-end: 4rem;
 }
 
 *,
@@ -159,6 +163,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 body {
@@ -269,9 +274,10 @@ body::after {
 .wrap {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
+  width: min(100%, var(--site-max-width));
+  max-width: var(--site-max-width);
   margin: 0 auto;
-  padding: 1.4rem 1rem 4rem;
+  padding: var(--site-padding-block-start) var(--site-padding-inline) var(--site-padding-block-end);
 }
 
 .site-nav {
@@ -320,6 +326,40 @@ body::after {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.site-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.site-nav-actions {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.site-nav .lang-switch {
+  margin-left: 0;
+  border-color: rgba(255, 244, 230, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.site-nav .lang-switch-btn {
+  color: rgba(255, 244, 230, 0.82);
+}
+
+.site-nav .lang-switch-btn.is-active {
+  background: rgba(255, 247, 235, 0.92);
+  color: var(--wood-dark);
 }
 
 .site-nav-link {
@@ -2869,8 +2909,14 @@ table.quotes tr:last-child td {
 }
 
 @media (min-width: 920px) {
+  :root {
+    --site-padding-inline: 1.25rem;
+    --site-padding-block-start: 1.6rem;
+    --site-padding-block-end: 4.4rem;
+  }
+
   .wrap {
-    padding: 1.6rem 1.25rem 4.4rem;
+    padding: var(--site-padding-block-start) var(--site-padding-inline) var(--site-padding-block-end);
   }
 
   .status-chip-row {
@@ -2879,22 +2925,35 @@ table.quotes tr:last-child td {
 
   .overview-main-grid {
     grid-template-columns: minmax(0, 1.78fr) minmax(250px, 320px);
-    align-items: start;
+    align-items: stretch;
   }
 
   .overview-primary-stack,
   .overview-side-stack {
-    align-self: start;
+    align-self: stretch;
   }
 
   .overview-primary-stack {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+    min-height: 100%;
   }
 
   .overview-chart-card {
     flex: 0 0 auto;
+    min-height: 0;
+  }
+
+  .overview-table-card {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .overview-table-card #overview-position-root {
+    flex: 1 1 auto;
     min-height: 0;
   }
 
@@ -2920,6 +2979,12 @@ table.quotes tr:last-child td {
     display: grid;
     grid-template-rows: auto auto minmax(0, 1fr);
     align-content: stretch;
+  }
+
+  .overview-side-stack > .overview-social-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .overview-side-stack > .card {
@@ -3117,8 +3182,12 @@ table.quotes tr:last-child td {
     overflow-x: clip;
   }
 
+  :root {
+    --site-padding-inline: 0.85rem;
+  }
+
   .wrap {
-    padding-inline: 0.85rem;
+    padding-inline: var(--site-padding-inline);
     overflow-x: clip;
   }
 
@@ -3140,6 +3209,25 @@ table.quotes tr:last-child td {
 
   .site-nav {
     padding: 0.9rem 0.95rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-nav-row {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .site-nav-actions {
+    width: 100%;
+    justify-content: flex-end;
+    order: -1;
+  }
+
+  .site-nav-links {
+    width: 100%;
   }
 
   .hero-copy,
@@ -5029,6 +5117,28 @@ table.quotes tr:last-child td {
 
 .strategy-official-link:hover .link-icon {
   transform: translate(1px, -1px);
+}
+
+.strategy-official-link-muted {
+  margin-left: 0.75rem;
+  color: var(--ink-soft);
+  border-bottom-color: rgba(79, 58, 38, 0.22);
+}
+
+.strategy-official-link-muted:hover {
+  color: var(--wood-dark);
+}
+
+.exposure-summary-card .strategy-official-link {
+  margin-right: 0;
+}
+
+@media (max-width: 520px) {
+  .exposure-summary-card .strategy-official-link-muted {
+    margin-left: 0;
+    margin-top: 0.35rem;
+    display: inline-flex;
+  }
 }
 
 /* --- 最新動態活動卡片 --- */

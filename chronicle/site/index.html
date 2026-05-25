@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <title>Tim Wei 報酬疊加實驗 | 25歲貸款投資實錄</title>
     <meta
       name="description"
@@ -32,7 +33,8 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="guide.css?v=21" />
   </head>
   <body>
     <div class="paper-noise" aria-hidden="true"></div>
@@ -55,12 +57,19 @@
           <span class="site-nav-brand" data-i18n="nav.brand">25歲貸款投資實錄</span>
           <a class="site-nav-title" href="index.html" data-i18n="nav.title">Tim Wei 報酬疊加實驗</a>
         </div>
-        <div class="site-nav-links">
-          <a class="site-nav-link is-active" href="index.html" aria-current="page" data-i18n="nav.overview">總覽</a>
-          <a class="site-nav-link" href="details.html#performance" data-i18n="nav.details">明細</a>
+        <div class="site-nav-row">
+          <div class="site-nav-links">
+          <a class="site-nav-link is-active" href="index.html" aria-current="page" data-i18n="nav.overview">實測總覽</a>
+          <a class="site-nav-link" href="learn.html" data-i18n="nav.learn">認識實驗</a>
+          <a class="site-nav-link" href="layer2.html" data-i18n="nav.layer2">第二層策略</a>
+          <a class="site-nav-link" href="etfs.html" data-i18n="nav.etfs">ETF 百科</a>
+          <a class="site-nav-link" href="details.html#performance" data-i18n="nav.details">帳本明細</a>
+          </div>
+          <div class="site-nav-actions">
           <div class="lang-switch" role="group" aria-label="Language">
             <button type="button" class="lang-switch-btn" data-set-lang="zh-Hant" data-i18n="nav.lang.zh">中文</button>
             <button type="button" class="lang-switch-btn" data-set-lang="en" data-i18n="nav.lang.en">EN</button>
+          </div>
           </div>
         </div>
       </nav>
@@ -83,6 +92,14 @@
       </header>
 
       <p class="overview-error" id="overview-error" hidden></p>
+
+      <aside class="overview-learn-banner" aria-label="新訪客指引">
+        <p><strong>第一次來？</strong>這個網站是完整教材：先懂 Return Stacking 與 ETF 家族，再看下方實測數據。Threads、FB 等社群貼文只挑重點，完整內容都在這裡。</p>
+        <div class="overview-learn-banner-actions">
+          <a class="banner-primary" href="learn.html">從認識實驗開始</a>
+          <a class="banner-secondary" href="etfs.html">ETF 百科</a>
+        </div>
+      </aside>
 
       <!-- 資產指標卡片 -->
       <section class="focus-metric-grid overview-asset-grid" aria-label="Assets">
@@ -178,8 +195,12 @@
               <div class="exposure-summary-card">
                 <span class="summary-title" data-i18n="viz.title_3d">Return Stacking 雙層堆疊機制</span>
                 <p class="summary-desc" data-i18n="viz.desc_3d">此配置精準將 100% 的本金放大一倍，提供 200% 的總資產曝險。以下是為您拆解至最細顆粒度的雙層（股票 100% + 替代與債券 100%）底層持倉與量化策略佔比。</p>
-                <a class="strategy-official-link" href="https://www.returnstackedetfs.com/" target="_blank" rel="noopener noreferrer">
-                  <span data-i18n="strategy.official_link">官方網站</span>
+                <a class="strategy-official-link" href="learn.html">
+                  <span>不懂這張圖？先看 Return Stacking 概念</span>
+                  <svg viewBox="0 0 24 24" class="link-icon" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zm-2 16H5V8h7v-2H3v15h15v-9h-2v7z"/></svg>
+                </a>
+                <a class="strategy-official-link strategy-official-link-muted" href="etfs.html">
+                  <span>各檔 ETF 完整說明</span>
                   <svg viewBox="0 0 24 24" class="link-icon" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zm-2 16H5V8h7v-2H3v15h15v-9h-2v7z"/></svg>
                 </a>
               </div>
@@ -297,7 +318,7 @@
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js?v=5"></script>
+    <script src="locale.js?v=7"></script>
     <script src="js/social-dock.js"></script>
     <script src="app.js?v=5"></script>
   </body>

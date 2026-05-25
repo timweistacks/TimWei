@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-page="layer2" data-title-i18n="meta.title.layer2">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>第二層策略 · Return Stacking | Tim Wei</title>
+    <meta name="description" content="管理期貨、期貨展期收益、黃金比特幣、併購套利——白話拆解多出來的 100% 在買什麼。" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1F0YJSFDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-P1F0YJSFDW", { anonymize_ip: true });
+    </script>
+    <script src="site-config.js"></script>
+    <script src="js/analytics.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=8" />
+    <link rel="stylesheet" href="guide.css?v=30" />
+  </head>
+  <body class="guide-page">
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <div class="wrap">
+      <nav class="site-nav" aria-label="Site navigation">
+        <div class="brand-block">
+          <span class="site-nav-brand" data-i18n="nav.brand">25歲貸款投資實錄</span>
+          <a class="site-nav-title" href="index.html" data-i18n="nav.title">Tim Wei 報酬疊加實驗</a>
+        </div>
+        <div class="site-nav-row">
+          <div class="site-nav-links">
+          <a class="site-nav-link" href="index.html" data-i18n="nav.overview">實測總覽</a>
+          <a class="site-nav-link" href="learn.html" data-i18n="nav.learn">認識實驗</a>
+          <a class="site-nav-link is-active" href="layer2.html" data-i18n="nav.layer2" aria-current="page">第二層策略</a>
+          <a class="site-nav-link" href="etfs.html" data-i18n="nav.etfs">ETF 百科</a>
+          <a class="site-nav-link" href="details.html#performance" data-i18n="nav.details">帳本明細</a>
+          </div>
+          <div class="site-nav-actions">
+            <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-switch-btn" data-set-lang="zh-Hant" data-i18n="nav.lang.zh">中文</button>
+            <button type="button" class="lang-switch-btn" data-set-lang="en" data-i18n="nav.lang.en">EN</button>
+          </div>
+          </div>
+        </div>
+      </nav>
+      <header class="hero hero-compact guide-hero">
+        <div class="hero-copy hero-copy-compact guide-hero-copy">
+          <p class="hero-tag" data-i18n="guide.l2.hero.tag">第二層策略</p>
+          <h1 data-i18n="guide.l2.hero.title">多出來的 100% 在買什麼？</h1>
+          <p class="guide-lead" data-i18n="guide.l2.hero.lead">報酬疊加 ETF 用衍生品再建立約 100% 的額外曝險。以下只講這一層——不含第一層股票或債券。</p>
+        </div>
+      </header>
+
+      <nav class="guide-l2-jump-nav" id="layer2-jump-nav" aria-label="Strategy shortcuts"><div class="guide-l2-jump-track"><a class="guide-l2-jump guide-l2-jump-bond" href="#layer2-us-bonds"><span class="guide-l2-jump-num" aria-hidden="true">01</span><span class="guide-l2-jump-copy"><span class="guide-l2-jump-name"><span data-i18n="layer2.us-bonds.nav">美國公債</span></span><span class="guide-l2-jump-etfs">RSSB</span></span></a><a class="guide-l2-jump guide-l2-jump-trend" href="#layer2-managed-futures"><span class="guide-l2-jump-num" aria-hidden="true">02</span><span class="guide-l2-jump-copy"><span class="guide-l2-jump-name"><span data-i18n="layer2.managed-futures.nav">管理期貨</span></span><span class="guide-l2-jump-etfs">RSST · RSIT · RSBT</span></span></a><a class="guide-l2-jump guide-l2-jump-carry" href="#layer2-futures-carry"><span class="guide-l2-jump-num" aria-hidden="true">03</span><span class="guide-l2-jump-copy"><span class="guide-l2-jump-name"><span data-i18n="layer2.futures-carry.nav">期貨展期收益</span></span><span class="guide-l2-jump-etfs">RSSY · RSBY</span></span></a><a class="guide-l2-jump guide-l2-jump-hard" href="#layer2-gold-bitcoin"><span class="guide-l2-jump-num" aria-hidden="true">04</span><span class="guide-l2-jump-copy"><span class="guide-l2-jump-name"><span data-i18n="layer2.gold-bitcoin.nav">金＋幣</span></span><span class="guide-l2-jump-etfs">RSSX</span></span></a><a class="guide-l2-jump guide-l2-jump-arb" href="#layer2-merger-arb"><span class="guide-l2-jump-num" aria-hidden="true">05</span><span class="guide-l2-jump-copy"><span class="guide-l2-jump-name"><span data-i18n="layer2.merger-arb.nav">併購套利</span></span><span class="guide-l2-jump-etfs">RSBA</span></span></a></div></nav>
+      <section class="guide-layer2-section" aria-label="第二層策略詳解">
+        <div class="guide-layer2-grid guide-layer2-grid-stacked">
+          <article class="guide-layer2-card guide-layer2-card-rich guide-l2-accent-bond" id="layer2-us-bonds">
+        <header class="guide-l2-card-head">
+          <span class="guide-l2-card-num" aria-hidden="true">01</span>
+          <div class="guide-l2-card-head-copy">
+            <h3><span data-i18n="layer2.us-bonds.title">美國公債</span></h3>
+            <p class="guide-layer2-card-etfs"><span data-i18n="guide.l2.seen_in">見於</span> RSSB</p>
+          </div>
+        </header>
+        <div class="guide-l2-card-split">
+          <div class="guide-l2-pane guide-l2-pane-def">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.what">在做什麼</p>
+            <p class="guide-layer2-card-lead"><span data-i18n="layer2.us-bonds.pitch">若第二層選美國公債，代表用多出來的資金建立「約 100% 美國公債曝險」。實務上通常不是去買整張美債本票，而是買美國公債期貨——2 年、5 年、10 年、長天期等，多半等權分散。債券報酬主要來自兩塊：持有一天算一天的利息（債息），以及利率變化造成的價格漲跌（利率升，債價通常跌；利率降，債價通常漲）。</span></p>
+          </div>
+          <div class="guide-l2-pane guide-l2-pane-viz" aria-hidden="false">
+            <p class="guide-l2-block-label guide-l2-block-label-viz" data-i18n="guide.l2.block.viz">結構示意</p>
+            
+          <div class="guide-l2-viz guide-l2-viz-bonds">
+            <div class="guide-l2-ladder">
+              <div class="guide-l2-ladder-bar" style="--h:42%"><span>2Y</span></div>
+              <div class="guide-l2-ladder-bar" style="--h:58%"><span>5Y</span></div>
+              <div class="guide-l2-ladder-bar" style="--h:72%"><span>10Y</span></div>
+              <div class="guide-l2-ladder-bar" style="--h:88%"><span>長天期</span></div>
+            </div>
+            <p class="guide-l2-viz-cap">美債期貨梯 · 等權分散</p>
+          </div>
+          </div>
+        </div>
+        <div class="guide-example-box guide-l2-how-box">
+          <p class="guide-example-label" data-i18n="guide.l2.block.how">這 100% 怎麼運作</p>
+          <p><span data-i18n="layer2.us-bonds.example">假設多出來的 100% 全部配置在美債第二層：ETF 會同時持有數檔不同天期的美債期貨，讓利率敏感度分散，不必自己挑「買 10 年還是 30 年」。市場避險、利率下跌時，這層有機會抵銷部分股票回撤；通膨升溫、利率快速上升時，這層可能拖累整體。重點是：這是債券本身的投資邏輯，跟底下第一層是股還是債無關。</span></p>
+        </div>
+        <div class="guide-l2-points-block">
+          <p class="guide-l2-block-label" data-i18n="guide.l2.block.points">重點整理</p>
+          <div class="guide-l2-points-grid"><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">1</span>
+              <p><span data-i18n="layer2.us-bonds.points.0">工具是期貨，不是整張美債；用保證金撬動名義曝險，報酬疊加才做得到「100% 第二層」。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">2</span>
+              <p><span data-i18n="layer2.us-bonds.points.1">RSSB 官報常見持倉如 2 年、5 年、10 年、長天期美債期貨（代碼會隨到期月份更新）。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">3</span>
+              <p><span data-i18n="layer2.us-bonds.points.2">持倉表加總不到 100% 很正常：表列的是保證金佔淨值比例，不是名義曝險。</span></p>
+            </div></div>
+        </div>
+        <div class="guide-l2-footnotes">
+          <div class="guide-l2-footnote guide-l2-footnote-official">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.official">官方怎麼說</p>
+            <p><span data-i18n="layer2.us-bonds.official">RSSB Product Brief：第二層等權配置 2 年、5 年、10 年、長天期美債期貨。</span></p>
+          </div>
+          <div class="guide-l2-footnote guide-l2-footnote-diff">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.diff">別跟誰搞混</p>
+            <p><span data-i18n="layer2.us-bonds.diff">不是「追趨勢的管理期貨」，也不是「賺展期價差的展期收益策略」。就是最傳統的利率／債券曝險——跟一般債券 ETF 邏輯相近，只是塞在第二層。</span></p>
+          </div>
+        </div>
+        
+      </article><article class="guide-layer2-card guide-layer2-card-rich guide-l2-accent-trend" id="layer2-managed-futures">
+        <header class="guide-l2-card-head">
+          <span class="guide-l2-card-num" aria-hidden="true">02</span>
+          <div class="guide-l2-card-head-copy">
+            <h3><span data-i18n="layer2.managed-futures.title">管理期貨（趨勢追蹤）</span></h3>
+            <p class="guide-layer2-card-etfs"><span data-i18n="guide.l2.seen_in">見於</span> RSST、RSIT、RSBT</p>
+          </div>
+        </header>
+        <div class="guide-l2-card-split">
+          <div class="guide-l2-pane guide-l2-pane-def">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.what">在做什麼</p>
+            <p class="guide-layer2-card-lead"><span data-i18n="layer2.managed-futures.pitch">這裡的「管理期貨」指的是趨勢追蹤（官方常稱管理期貨趨勢策略）。核心想法：價格形成上升趨勢就做多，形成下降趨勢就做空，盤整時可能減碼或換方向。不是看公司盈餘、也不是長期持有某個商品，而是跟著價格走。標的是一籃子期貨：原油、黃金、農產品、匯率、各國利率、股指等，分散在約二十多種市場。</span></p>
+          </div>
+          <div class="guide-l2-pane guide-l2-pane-viz" aria-hidden="false">
+            <p class="guide-l2-block-label guide-l2-block-label-viz" data-i18n="guide.l2.block.viz">結構示意</p>
+            
+          <div class="guide-l2-viz guide-l2-viz-trend">
+            <svg class="guide-l2-trend-svg" viewBox="0 0 160 72" aria-hidden="true">
+              <polyline points="8,58 40,48 72,52 104,28 152,12" />
+            </svg>
+            <div class="guide-l2-trend-tags">
+              <span class="guide-l2-pill guide-l2-pill-up">上升 → 做多</span>
+              <span class="guide-l2-pill guide-l2-pill-down">下降 → 做空</span>
+            </div>
+            <p class="guide-l2-viz-cap">跟價格走 · 約 27 種期貨</p>
+          </div>
+          </div>
+        </div>
+        <div class="guide-example-box guide-l2-how-box">
+          <p class="guide-example-label" data-i18n="guide.l2.block.how">這 100% 怎麼運作</p>
+          <p><span data-i18n="layer2.managed-futures.example">多出來的 100% 會依模型訊號，在這些期貨上建立多頭或空頭。例如原油數月來屢創新高 → 模型可能維持做多原油期貨；若美股進入明顯空頭趨勢 → 可能放空標普 500 期貨。這 100% 的報酬來自「有沒有抓到趨勢」，可能跟股票完全不同步——官方 Presentation 提到，部分空頭月份這類策略曾出現正報酬（非保證未來）。RSST 這類結構還有一條 -100% 國庫券融資腿（空頭短期美債）支撐槓桿，通常不在前十大持倉表內。</span></p>
+        </div>
+        <div class="guide-l2-points-block">
+          <p class="guide-l2-block-label" data-i18n="guide.l2.block.points">重點整理</p>
+          <div class="guide-l2-points-grid"><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">1</span>
+              <p><span data-i18n="layer2.managed-futures.points.0">就算「做多原油」，持有的是原油期貨，不是石油公司股票。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">2</span>
+              <p><span data-i18n="layer2.managed-futures.points.1">RSST 採由上而下加由下而上混合複製，同時看大盤趨勢與個別市場訊號。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">3</span>
+              <p><span data-i18n="layer2.managed-futures.points.2">RSST、RSIT、RSBT 第二層邏輯相同，差別只在第一層是美股、國際股或美債。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">4</span>
+              <p><span data-i18n="layer2.managed-futures.points.3">趨勢策略在盤整市可能來回被洗；不是每個空頭年都會賺。</span></p>
+            </div></div>
+        </div>
+        <div class="guide-l2-footnotes">
+          <div class="guide-l2-footnote guide-l2-footnote-official">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.official">官方怎麼說</p>
+            <p><span data-i18n="layer2.managed-futures.official">RSST Presentation「Stacking in Action」：100% 美股／100% 管理期貨趨勢／-100% 國庫券；Q1 Commentary 另有管理期貨複製品質與不同股價環境績效。</span></p>
+          </div>
+          <div class="guide-l2-footnote guide-l2-footnote-diff">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.diff">別跟誰搞混</p>
+            <p><span data-i18n="layer2.managed-futures.diff">不要跟期貨展期收益搞混——展期收益賺的是「換月時遠近價差」，不管趨勢方向；管理期貨賭的是「價格有沒有持續往一個方向走」。</span></p>
+          </div>
+        </div>
+        
+      </article><article class="guide-layer2-card guide-layer2-card-rich guide-l2-accent-carry" id="layer2-futures-carry">
+        <header class="guide-l2-card-head">
+          <span class="guide-l2-card-num" aria-hidden="true">03</span>
+          <div class="guide-l2-card-head-copy">
+            <h3><span data-i18n="layer2.futures-carry.title">期貨展期收益</span></h3>
+            <p class="guide-layer2-card-etfs"><span data-i18n="guide.l2.seen_in">見於</span> RSSY、RSBY</p>
+          </div>
+        </header>
+        <div class="guide-l2-card-split">
+          <div class="guide-l2-pane guide-l2-pane-def">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.what">在做什麼</p>
+            <p class="guide-layer2-card-lead"><span data-i18n="layer2.futures-carry.pitch">期貨每隔一段時間要展期：把快到期的近月合約賣掉，買入較遠的遠月合約，才能一直維持曝險。展期收益策略賺的就是這個換月過程裡，近月與遠月之間的價差。當近月比遠月貴（市場稱逆價差），賣近買遠時常能「高賣低買」，累積展期收益；當遠月比近月貴（正價差），換月可能要補貼遠月，可能拖累報酬。RSSY、RSBY 的第二層不是賭原油暴漲暴跌，而是長期持有這種展期結構因子。</span></p>
+          </div>
+          <div class="guide-l2-pane guide-l2-pane-viz" aria-hidden="false">
+            <p class="guide-l2-block-label guide-l2-block-label-viz" data-i18n="guide.l2.block.viz">結構示意</p>
+            
+          <div class="guide-l2-viz guide-l2-viz-carry">
+            <div class="guide-l2-carry-row">
+              <span class="guide-l2-carry-label">近月</span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-high"><span>較貴</span></div>
+            </div>
+            <div class="guide-l2-carry-row">
+              <span class="guide-l2-carry-label">遠月</span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-low"><span>較便宜</span></div>
+            </div>
+            <p class="guide-l2-viz-cap">逆價差 · 換月可能賺展期</p>
+          </div>
+          </div>
+        </div>
+        <div class="guide-example-box guide-l2-how-box">
+          <p class="guide-example-label" data-i18n="guide.l2.block.how">這 100% 怎麼運作</p>
+          <p><span data-i18n="layer2.futures-carry.example">多出來的 100% 會配置在一籃子商品、利率等期貨的展期收益模型上。簡化例子：天然氣近月 3 元、遠月 2.8 元 → 近月較貴；展期換成遠月時，價差中的一部分可能變成收益（實務更複雜，且有風控）。反之近月 2.8 元、遠月 3.2 元 → 遠月較貴，展期可能付出成本。官方 Product Brief 稱這類為期貨展期收益因子——重點在遠近月結構，不在猜單一商品漲跌方向。</span></p>
+        </div>
+        <div class="guide-l2-points-block">
+          <p class="guide-l2-block-label" data-i18n="guide.l2.block.points">重點整理</p>
+          <div class="guide-l2-points-grid"><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">1</span>
+              <p><span data-i18n="layer2.futures-carry.points.0">名字都有「期貨」，但跟管理期貨完全是兩套邏輯：一個管趨勢，一個管換月價差。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">2</span>
+              <p><span data-i18n="layer2.futures-carry.points.1">部分商品長年正價差（例如某些年份的原油），展期收益可能平淡甚至為負——這是策略特性。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">3</span>
+              <p><span data-i18n="layer2.futures-carry.points.2">RSSY 第一層是美股；RSBY 第一層是美債——第二層展期收益邏輯相同。</span></p>
+            </div></div>
+        </div>
+        <div class="guide-l2-footnotes">
+          <div class="guide-l2-footnote guide-l2-footnote-official">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.official">官方怎麼說</p>
+            <p><span data-i18n="layer2.futures-carry.official">RSSY Product Brief：第二層為期貨展期收益策略；正價差／逆價差結構是報酬主要驅動。</span></p>
+          </div>
+          <div class="guide-l2-footnote guide-l2-footnote-diff">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.diff">別跟誰搞混</p>
+            <p><span data-i18n="layer2.futures-carry.diff">不是管理期貨趨勢追蹤，也不是買現貨商品 ETF；更不是「看技術分析猜方向」。</span></p>
+          </div>
+        </div>
+        
+      </article><article class="guide-layer2-card guide-layer2-card-rich guide-l2-accent-hard" id="layer2-gold-bitcoin">
+        <header class="guide-l2-card-head">
+          <span class="guide-l2-card-num" aria-hidden="true">04</span>
+          <div class="guide-l2-card-head-copy">
+            <h3><span data-i18n="layer2.gold-bitcoin.title">黃金＋比特幣（風險平價）</span></h3>
+            <p class="guide-layer2-card-etfs"><span data-i18n="guide.l2.seen_in">見於</span> RSSX</p>
+          </div>
+        </header>
+        <div class="guide-l2-card-split">
+          <div class="guide-l2-pane guide-l2-pane-def">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.what">在做什麼</p>
+            <p class="guide-layer2-card-lead"><span data-i18n="layer2.gold-bitcoin.pitch">RSSX 的第二層同時配置黃金期貨與比特幣期貨，但不是固定各 50%。官方採風險平價：看過去 63 天誰的波動較大，波動大的減碼、波動小的加碼，大約每月再平衡，讓兩者對組合的風險貢獻盡量接近。黃金常被視為避險資產；比特幣波動通常更大——兩者一起配，是要在「硬資產」這條腿上分散，而不是只押一邊。</span></p>
+          </div>
+          <div class="guide-l2-pane guide-l2-pane-viz" aria-hidden="false">
+            <p class="guide-l2-block-label guide-l2-block-label-viz" data-i18n="guide.l2.block.viz">結構示意</p>
+            
+          <div class="guide-l2-viz guide-l2-viz-hard">
+            <div class="guide-l2-balance">
+              <div class="guide-l2-balance-side">
+                <span class="guide-l2-balance-icon guide-l2-balance-gold"></span>
+                <span>黃金</span>
+              </div>
+              <div class="guide-l2-balance-beam" aria-hidden="true"></div>
+              <div class="guide-l2-balance-side">
+                <span class="guide-l2-balance-icon guide-l2-balance-btc"></span>
+                <span>比特幣</span>
+              </div>
+            </div>
+            <p class="guide-l2-viz-cap">63 天波動 · 動態調權</p>
+          </div>
+          </div>
+        </div>
+        <div class="guide-example-box guide-l2-how-box">
+          <p class="guide-example-label" data-i18n="guide.l2.block.how">這 100% 怎麼運作</p>
+          <p><span data-i18n="layer2.gold-bitcoin.example">多出來的 100% 會依波動率動態調整黃金、比特幣期貨權重。假設某月比特幣波動明顯放大 → 模型可能減少比特幣曝險、增加黃金，避免整條第二層被高波動資產主導。反之比特幣進入相對穩定期 → 可能多配一點。這 100% 用期貨實現，不是買金條或冷錢包囤幣；期貨同樣有保證金與展期。黃金、比特幣與美股相關性歷史上較低（官方 Brief 約 0.09、0.23），因此適合作不同路的第二層——但相關性可能隨市場改變。</span></p>
+        </div>
+        <div class="guide-l2-points-block">
+          <p class="guide-l2-block-label" data-i18n="guide.l2.block.points">重點整理</p>
+          <div class="guide-l2-points-grid"><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">1</span>
+              <p><span data-i18n="layer2.gold-bitcoin.points.0">不是「現貨買幣＋買黃金 ETF」的簡單疊加，是統一在風險平價框架下管兩種期貨。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">2</span>
+              <p><span data-i18n="layer2.gold-bitcoin.points.1">硬資產仍可能大跌——比特幣歷史回撤幅度遠大於黃金。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">3</span>
+              <p><span data-i18n="layer2.gold-bitcoin.points.2">持倉細節（期貨、現貨 ETF 比例）以該檔最新公開資料為準。</span></p>
+            </div></div>
+        </div>
+        <div class="guide-l2-footnotes">
+          <div class="guide-l2-footnote guide-l2-footnote-official">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.official">官方怎麼說</p>
+            <p><span data-i18n="layer2.gold-bitcoin.official">RSSX Product Brief：黃金與標普 500 相關約 0.09、比特幣約 0.23；約每 63 天依波動再平衡。</span></p>
+          </div>
+          <div class="guide-l2-footnote guide-l2-footnote-diff">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.diff">別跟誰搞混</p>
+            <p><span data-i18n="layer2.gold-bitcoin.diff">不是買黃金 ETF 或現貨比特幣就畢事；也不是固定一半一半，而是動態風險平價。</span></p>
+          </div>
+        </div>
+        
+      </article><article class="guide-layer2-card guide-layer2-card-rich guide-l2-accent-arb" id="layer2-merger-arb">
+        <header class="guide-l2-card-head">
+          <span class="guide-l2-card-num" aria-hidden="true">05</span>
+          <div class="guide-l2-card-head-copy">
+            <h3><span data-i18n="layer2.merger-arb.title">併購套利</span></h3>
+            <p class="guide-layer2-card-etfs"><span data-i18n="guide.l2.seen_in">見於</span> RSBA</p>
+          </div>
+        </header>
+        <div class="guide-l2-card-split">
+          <div class="guide-l2-pane guide-l2-pane-def">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.what">在做什麼</p>
+            <p class="guide-layer2-card-lead"><span data-i18n="layer2.merger-arb.pitch">併購套利是事件驅動策略：公司 A 宣布併購公司 B 之後，B 股價通常會往上跳，但多半仍低於 A 出價——市場擔心併購失敗、延期或削價。基金通常買 B（被併購方），並避險 A（併購方），賭的是：若併購順利完成，B 會漲向收購價，中間價差就是報酬來源。</span></p>
+          </div>
+          <div class="guide-l2-pane guide-l2-pane-viz" aria-hidden="false">
+            <p class="guide-l2-block-label guide-l2-block-label-viz" data-i18n="guide.l2.block.viz">結構示意</p>
+            
+          <div class="guide-l2-viz guide-l2-viz-arb">
+            <div class="guide-l2-arb-track">
+              <span class="guide-l2-arb-price">市價 45</span>
+              <span class="guide-l2-arb-gap">價差</span>
+              <span class="guide-l2-arb-price guide-l2-arb-target">收購價 50</span>
+            </div>
+            <p class="guide-l2-viz-cap">成交 → 價差收斂</p>
+          </div>
+          </div>
+        </div>
+        <div class="guide-example-box guide-l2-how-box">
+          <p class="guide-example-label" data-i18n="guide.l2.block.how">這 100% 怎麼運作</p>
+          <p><span data-i18n="layer2.merger-arb.example">多出來的 100% 會追蹤併購套利指數，分散在多起進行中的併購案。簡化例子：A 出價每股 50 元買 B，B 現價 45 → 買 B，並對沖相關風險（例如放空部分 A 或做市場避險），若成交 B 漲向 50，價差收斂即獲利。若監管否決、A 放棄、或 B 業績轉差 → B 可能跌回併購前，單一案子虧損可以很大；因此必須高度分散。這條腿與日常股債大盤連動性通常較低（官方約 -0.02 與美債），但不是無風險。</span></p>
+        </div>
+        <div class="guide-l2-points-block">
+          <p class="guide-l2-block-label" data-i18n="guide.l2.block.points">重點整理</p>
+          <div class="guide-l2-points-grid"><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">1</span>
+              <p><span data-i18n="layer2.merger-arb.points.0">不是長期押併購題材股「等消息」——而是已公告、進行中的案子，持續時間常以月計。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">2</span>
+              <p><span data-i18n="layer2.merger-arb.points.1">換手率高、事件密集，跟買指數型 ETF 的體驗完全不同。</span></p>
+            </div><div class="guide-l2-point-card">
+              <span class="guide-l2-point-num">3</span>
+              <p><span data-i18n="layer2.merger-arb.points.2">最大風險是併購破局，不是一般熊市那種大盤連動回撤。</span></p>
+            </div></div>
+        </div>
+        <div class="guide-l2-footnotes">
+          <div class="guide-l2-footnote guide-l2-footnote-official">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.official">官方怎麼說</p>
+            <p><span data-i18n="layer2.merger-arb.official">RSBA Product Brief：追蹤 AlphaBeta 併購套利指數；與美債相關約 -0.02。</span></p>
+          </div>
+          <div class="guide-l2-footnote guide-l2-footnote-diff">
+            <p class="guide-l2-block-label" data-i18n="guide.l2.block.diff">別跟誰搞混</p>
+            <p><span data-i18n="layer2.merger-arb.diff">不是一般「併購概念股」投資；跟管理期貨、展期收益、債券曝險都無關。</span></p>
+          </div>
+        </div>
+        
+      </article>
+        </div>
+      </section>
+
+      
+      <div class="guide-footer-cta card">
+        <div>
+          <p class="section-kicker" data-i18n="guide.footer.kicker">下一步</p>
+          <h2 data-i18n="guide.footer.title">學完概念，看 Tim Wei 的實測數據</h2>
+          <p class="guide-lead" data-i18n="guide.footer.lead">總覽頁有 NAV、持倉、再平衡與貸款進度；細節可到帳本明細。想討論歡迎加入 FB 社團。</p>
+        </div>
+        <div class="guide-footer-actions">
+          <a class="btn-primary" href="index.html" data-i18n="guide.footer.overview">看實測總覽</a>
+          <a class="btn-secondary" href="details.html#performance" data-i18n="guide.footer.details">看帳本明細</a>
+          <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
+        </div>
+      </div>
+    </div>
+    <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
+    <script src="locale.js?v=7"></script>
+    <script src="guide-locale.js?v=30"></script>
+    <script src="js/guide.js?v=11"></script>
+    <script src="js/social-dock.js"></script>
+  </body>
+</html>

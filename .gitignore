@@ -30,3 +30,11 @@ site-config.local.js
 
 # Backup files (local only, never push to GitHub)
 *.bak
+*_backup.*
+*backup*.py
+*backup*.css
+*backup*.bat
+chronicle/build/_stats_*.txt
+
+# Private research PDFs, writing drafts, and personal notes (local only)
+AII/

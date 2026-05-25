@@ -22,7 +22,10 @@
     "gate.en": { en: "English (USD)", zh: "English (USD)" },
     "nav.brand": { en: "25y Debt Investing Ledger", zh: "25歲貸款投資實錄" },
     "nav.title": { en: "Return Stacking Lab", zh: "Tim Wei 報酬疊加實驗" },
-    "nav.overview": { en: "Overview", zh: "總覽" },
+    "nav.overview": { en: "Overview", zh: "實測總覽" },
+    "nav.learn": { en: "Learn", zh: "認識實驗" },
+    "nav.layer2": { en: "Layer 2", zh: "第二層策略" },
+    "nav.etfs": { en: "ETF Guide", zh: "ETF 百科" },
     "nav.details": { en: "Details", zh: "明細" },
     "nav.lang.zh": { en: "中文", zh: "中文" },
     "nav.lang.en": { en: "EN", zh: "EN" },
@@ -420,8 +423,17 @@
     return isEn() ? "en-US" : "zh-TW";
   }
 
-  function t(key, vars) {
+  function lookupString(key) {
     const row = STRINGS[key];
+    if (row) {
+      return row;
+    }
+    const guide = global.GUIDE_STRINGS && global.GUIDE_STRINGS[key];
+    return guide || null;
+  }
+
+  function t(key, vars) {
+    const row = lookupString(key);
     if (!row) {
       return key;
     }
@@ -444,8 +456,14 @@
   function applyStaticLabels() {
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.getAttribute("data-i18n");
-      if (key) {
-        node.textContent = t(key);
+      if (!key) {
+        return;
+      }
+      const text = t(key);
+      if (/<\/?(?:strong|em|br)\b/i.test(text)) {
+        node.innerHTML = text;
+      } else {
+        node.textContent = text;
       }
     });
     document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
@@ -455,13 +473,15 @@
       }
     });
     document.title =
-      document.documentElement.dataset.page === "details"
-        ? isEn()
-          ? "Details — Stack Experiment"
-          : "資產堆疊實驗 · 明細"
-        : isEn()
-          ? "Stack Experiment | 25歲貸款投資實錄"
-          : "資產堆疊實驗 | 25歲貸款投資實錄";
+      document.querySelector("[data-title-i18n]")
+        ? t(document.documentElement.getAttribute("data-title-i18n") || "")
+        : document.documentElement.dataset.page === "details"
+          ? isEn()
+            ? "Details — Stack Experiment"
+            : "資產堆疊實驗 · 明細"
+          : isEn()
+            ? "Stack Experiment | 25y Debt Investing Ledger"
+            : "資產堆疊實驗 | 25歲貸款投資實錄";
     syncLangSwitcherUi();
   }
 
