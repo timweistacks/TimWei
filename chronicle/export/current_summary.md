@@ -6,13 +6,13 @@
 
 ## Current State
 
-- Net worth: TWD 1,417
-- Market value: TWD 1,337,325 / USD 42,587.24
+- Net worth: TWD 2,524
+- Market value: TWD 1,338,432 / USD 42,587.24
 - Remaining liability: TWD 1,336,228
 - NAV index: 105.78
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 21,837
-- Market vs debt: 100.08% market coverage
+- Unrealized PnL in TWD view: TWD 22,944
+- Market vs debt: 100.16% market coverage
 - Next loan payment: 2026-06-13 / TWD 18,765
 
 ## Capital Structure
