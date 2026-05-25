@@ -439,11 +439,17 @@
   margin-top: 0.35rem;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  touch-action: pan-x;
+}
+
+.guide-table-wrap.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(255, 253, 249, 0.98);
+  box-shadow: 0 1px 0 var(--line);
 }
 
 .guide-table {

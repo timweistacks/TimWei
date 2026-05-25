@@ -2322,14 +2322,20 @@ table.positions-table thead th:first-child {
 }
 
 .table-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
   margin: 0 -0.15rem;
   padding: 0 0.15rem;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  touch-action: pan-x;
   max-width: 100%;
+}
+
+.table-wrap.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(255, 253, 249, 0.98);
+  box-shadow: 0 1px 0 var(--line);
 }
 
 table.quotes {
@@ -3212,8 +3218,9 @@ table.quotes tr:last-child td {
   }
 
   .site-nav {
-    position: static;
-    top: auto;
+    position: sticky;
+    top: max(0.35rem, env(safe-area-inset-top, 0px));
+    z-index: 110;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
@@ -3280,8 +3287,13 @@ table.quotes tr:last-child td {
   }
 
   .detail-switcher {
-    top: 0.55rem;
+    top: max(0.35rem, env(safe-area-inset-top, 0px));
     border-radius: var(--radius-lg);
+  }
+
+  [data-page="details"] .detail-switcher {
+    top: max(8.1rem, calc(env(safe-area-inset-top, 0px) + 7.75rem));
+    z-index: 100;
   }
 
   .dl-grid dd {
