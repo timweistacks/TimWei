@@ -2322,9 +2322,14 @@ table.positions-table thead th:first-child {
 }
 
 .table-wrap {
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   margin: 0 -0.15rem;
   padding: 0 0.15rem;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  max-width: 100%;
 }
 
 table.quotes {
@@ -3179,7 +3184,7 @@ table.quotes tr:last-child td {
 
 @media (max-width: 680px) {
   body {
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   :root {
@@ -3188,7 +3193,6 @@ table.quotes tr:last-child td {
 
   .wrap {
     padding-inline: var(--site-padding-inline);
-    overflow-x: clip;
   }
 
   html {
@@ -3208,26 +3212,57 @@ table.quotes tr:last-child td {
   }
 
   .site-nav {
-    padding: 0.9rem 0.95rem;
-    flex-direction: column;
-    align-items: stretch;
+    position: static;
+    top: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand actions"
+      "links links";
+    align-items: center;
+    gap: 0.5rem 0.65rem;
+    padding: 0.65rem 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .brand-block {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .site-nav-title {
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .site-nav-brand {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
   }
 
   .site-nav-row {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.55rem;
+    display: contents;
   }
 
   .site-nav-actions {
-    width: 100%;
+    grid-area: actions;
+    width: auto;
+    margin-left: 0;
     justify-content: flex-end;
-    order: -1;
   }
 
   .site-nav-links {
+    grid-area: links;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .site-nav-link {
+    min-height: 36px;
+    padding: 0.38rem 0.5rem;
+    font-size: 0.8rem;
   }
 
   .hero-copy,
@@ -3294,6 +3329,30 @@ table.quotes tr:last-child td {
   .status-chip-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.65rem;
+  }
+
+  .focus-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .focus-metric-grid .focus-metric {
+    min-height: 86px;
+    padding: 0.72rem 0.78rem;
+  }
+
+  .focus-metric-grid .focus-metric-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+  }
+
+  .focus-metric-grid .focus-metric-value {
+    margin-top: 0.2rem;
+    font-size: clamp(0.92rem, 3.8vw, 1.2rem);
+  }
+
+  .focus-metric-grid .focus-metric:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   .status-chip {
@@ -4720,15 +4779,17 @@ table.quotes tr:last-child td {
 }
 
 /* --- 明細頁主/副導覽列粘滯定位分流樣式 --- */
-[data-page="details"] .site-nav {
-  position: relative !important;
-  top: auto !important;
-}
+@media (min-width: 681px) {
+  [data-page="details"] .site-nav {
+    position: relative !important;
+    top: auto !important;
+  }
 
-[data-page="details"] .detail-switcher {
-  position: sticky !important;
-  top: 1rem !important;
-  z-index: 100 !important;
+  [data-page="details"] .detail-switcher {
+    position: sticky !important;
+    top: 1rem !important;
+    z-index: 100 !important;
+  }
 }
 
 /* --- 折線圖終點呼吸燈 (Pulsing Dot) --- */

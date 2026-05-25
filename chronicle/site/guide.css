@@ -438,8 +438,12 @@
 .guide-table-wrap {
   margin-top: 0.35rem;
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
 }
 
 .guide-table {
@@ -2075,22 +2079,12 @@ a.guide-etf-ticker:hover {
 }
 
 @media (max-width: 520px) {
-  .site-nav-links {
-    width: 100%;
-  }
-
-  .site-nav-link {
-    flex: 1 1 calc(50% - 0.3rem);
-    font-size: 0.84rem;
-    padding-inline: 0.65rem;
-  }
-
   .guide-table {
     font-size: 0.78rem;
   }
 
-  .guide-etf-meta {
-    grid-template-columns: 1fr;
+  .guide-etf-nav .guide-inline-tags {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .guide-footer-actions {
@@ -2218,6 +2212,26 @@ a.guide-etf-ticker:hover {
 }
 
 @media (max-width: 680px) {
+  .guide-page .card,
+  .guide-split-row > .card {
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .guide-metric-strip.focus-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .guide-metric-strip .focus-metric {
+    min-height: 86px;
+    padding: 0.72rem 0.78rem;
+  }
+
+  .guide-etf-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .guide-holdings-donut-panel {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -2238,7 +2252,18 @@ a.guide-etf-ticker:hover {
   }
 
   .guide-table {
-    min-width: 480px;
+    min-width: 36rem;
+    width: max-content;
+    max-width: none;
+  }
+
+  .guide-table-suite,
+  .guide-table-num {
+    min-width: 34rem;
+  }
+
+  .guide-table-holdings {
+    min-width: 28rem;
   }
 }
 
