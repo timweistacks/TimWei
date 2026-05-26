@@ -7,7 +7,7 @@
     <title>Tim Wei 報酬疊加實驗 | 25歲貸款投資實錄</title>
     <meta
       name="description"
-      content="25歲用貸款做�槓桿投資，公開記錄資產堆疊全過程。NAV走勢、持倉比例、還款進度一覽無遺。"
+      content="25歲用貸款做槓桿投資，公開記錄資產堆疊全過程。NAV走勢、持倉比例、還款進度一覽無遺。"
     />
     <meta property="og:title" content="Tim Wei 報酬疊加實驗 | 25歲貸款投資實錄" />
     <meta
@@ -15,6 +15,7 @@
       content="25歲用貸款做槓桿投資，公開記錄資產堆疊全過程。NAV走勢、持倉比例、還款進度一覽無遺。"
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
     <link rel="canonical" href="" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1F0YJSFDW"></script>
     <script>
@@ -33,10 +34,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=14" />
-    <link rel="stylesheet" href="guide.css?v=21" />
+    <link rel="stylesheet" href="styles.css?v=17" />
+    <link rel="stylesheet" href="guide.css?v=22" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
     <div class="paper-noise" aria-hidden="true"></div>
     <!-- 背景光暈裝飾 -->
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
@@ -74,6 +76,7 @@
         </div>
       </nav>
 
+      <main id="main-content">
       <header class="hero hero-compact">
         <div class="hero-copy hero-copy-compact">
           <p class="hero-tag" data-i18n="meta.snapshot">快照</p>
@@ -91,43 +94,57 @@
         </div>
       </header>
 
-      <p class="overview-error" id="overview-error" hidden></p>
+      <p class="overview-error" id="overview-error" role="alert" aria-live="polite" hidden></p>
 
-      <aside class="overview-learn-banner" aria-label="新訪客指引">
-        <p><strong>第一次來？</strong>這個網站是完整教材：先懂 Return Stacking 與 ETF 家族，再看下方實測數據。Threads、FB 等社群貼文只挑重點，完整內容都在這裡。</p>
+      <aside class="overview-learn-banner" id="overview-learn-banner" aria-labelledby="overview-learn-banner-title">
+        <button type="button" class="overview-learn-banner-dismiss" data-banner-dismiss data-i18n-aria="banner.dismiss_label" aria-label="關閉新訪客提示">&times;</button>
+        <p id="overview-learn-banner-title">
+          <strong data-i18n="banner.new.title">第一次來？</strong>
+          <span data-i18n="banner.new.body">這個網站是完整教材：先懂 Return Stacking 與 ETF 家族，再看下方實測數據。Threads、FB 等社群貼文只挑重點，完整內容都在這裡。</span>
+        </p>
         <div class="overview-learn-banner-actions">
-          <a class="banner-primary" href="learn.html">從認識實驗開始</a>
-          <a class="banner-secondary" href="etfs.html">ETF 百科</a>
+          <a class="banner-primary" href="learn.html" data-i18n="banner.learn_cta">從認識實驗開始</a>
+          <a class="banner-secondary" href="etfs.html" data-i18n="banner.etfs_cta">ETF 百科</a>
         </div>
       </aside>
 
-      <!-- 資產指標卡片 -->
-      <section class="focus-metric-grid overview-asset-grid" aria-label="Assets">
-        <article class="focus-metric">
-          <span class="focus-metric-label" data-i18n="metric.real_assets">真實資產</span>
-          <strong class="focus-metric-value" id="ov-real-assets" data-state="neutral">—</strong>
-          <span class="focus-metric-unit">TWD</span>
-          <p class="focus-metric-note" id="ov-real-assets-alt" hidden></p>
-        </article>
-        <article class="focus-metric">
-          <span class="focus-metric-label" data-i18n="metric.market_assets">股市資產</span>
-          <strong class="focus-metric-value" id="ov-market-assets" data-state="neutral">—</strong>
-          <span class="focus-metric-unit">TWD</span>
-          <p class="focus-metric-note" id="ov-market-assets-alt" hidden></p>
-          <p class="focus-metric-note focus-metric-note-profit" id="ov-market-assets-pnl">—</p>
-        </article>
-        <article class="focus-metric">
-          <span class="focus-metric-label" data-i18n="metric.cash">手上現金</span>
-          <strong class="focus-metric-value" id="ov-cash-assets" data-state="neutral">—</strong>
-          <span class="focus-metric-unit">TWD</span>
-          <p class="focus-metric-note" id="ov-cash-assets-alt" hidden></p>
-        </article>
-        <article class="focus-metric">
-          <span class="focus-metric-label" data-i18n="metric.liability">剩餘負債</span>
-          <strong class="focus-metric-value" id="ov-remaining-liability" data-state="neutral">—</strong>
-          <span class="focus-metric-unit">TWD</span>
-          <p class="focus-metric-note" id="ov-remaining-liability-alt" hidden></p>
-        </article>
+      <section class="overview-asset-section" aria-labelledby="overview-asset-heading">
+        <h2 id="overview-asset-heading" class="overview-asset-title" data-i18n="section.overview_assets">資產快照</h2>
+        <div class="focus-metric-grid overview-asset-grid">
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="metric.real_assets">真實資產</span>
+            <div class="focus-metric-value-row">
+              <strong class="focus-metric-value" id="ov-real-assets" data-state="neutral">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </div>
+            <p class="focus-metric-note" id="ov-real-assets-alt" hidden></p>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="metric.market_assets">股市資產</span>
+            <div class="focus-metric-value-row">
+              <strong class="focus-metric-value" id="ov-market-assets" data-state="neutral">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </div>
+            <p class="focus-metric-note" id="ov-market-assets-alt" hidden></p>
+            <p class="focus-metric-note focus-metric-note-profit" id="ov-market-assets-pnl">—</p>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="metric.cash">手上現金</span>
+            <div class="focus-metric-value-row">
+              <strong class="focus-metric-value" id="ov-cash-assets" data-state="neutral">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </div>
+            <p class="focus-metric-note" id="ov-cash-assets-alt" hidden></p>
+          </article>
+          <article class="focus-metric">
+            <span class="focus-metric-label" data-i18n="metric.liability">剩餘負債</span>
+            <div class="focus-metric-value-row">
+              <strong class="focus-metric-value" id="ov-remaining-liability" data-state="neutral">—</strong>
+              <span class="focus-metric-unit">TWD</span>
+            </div>
+            <p class="focus-metric-note" id="ov-remaining-liability-alt" hidden></p>
+          </article>
+        </div>
       </section>
 
       <!-- 狀態 chip 列 -->
@@ -162,7 +179,7 @@
             </div>
             <span class="live-activity-subtitle" id="live-experiment-days-inline">—</span>
           </div>
-          <div class="live-activity-list" id="live-ticker-content">
+          <div class="live-activity-list" id="live-ticker-content" aria-live="polite" aria-relevant="additions text">
             <!-- JS 動態生成 -->
           </div>
         </div>
@@ -228,12 +245,12 @@
             <div class="section-head section-head-tight">
               <div>
                 <p class="section-kicker" data-i18n="section.compare">同期比較</p>
-                <h2 data-i18n="section.nav_vs_spy">我的 NAV vs SPY</h2>
+                <h2 id="overview-perf-chart-title" data-i18n="section.nav_vs_spy">我的 NAV vs SPY</h2>
               </div>
               <a class="card-jump-link" href="details.html#performance" data-i18n="link.view_performance">看績效</a>
             </div>
             <div id="ov-spy-stats" class="spy-compare-wrap" hidden aria-label="Prior day"></div>
-            <div class="chart-box overview-chart-box" id="overview-performance-chart"></div>
+            <div class="chart-box overview-chart-box" id="overview-performance-chart" role="img" aria-labelledby="overview-perf-chart-title"></div>
           </article>
 
           <article class="card overview-table-card">
@@ -314,12 +331,14 @@
       </section>
 
       <div id="errors" class="errors" hidden></div>
+      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js?v=7"></script>
+    <script src="locale.js?v=9"></script>
     <script src="js/social-dock.js"></script>
-    <script src="app.js?v=5"></script>
+    <script src="js/site-polish.js"></script>
+    <script src="app.js?v=7"></script>
   </body>
 </html>

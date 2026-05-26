@@ -18,10 +18,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=14" />
+    <link rel="stylesheet" href="../styles.css?v=16" />
     <link rel="stylesheet" href="../guide.css?v=30" />
   </head>
   <body class="guide-page">
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
+    <div class="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
     <div class="paper-noise" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
@@ -52,6 +54,8 @@
         <span aria-hidden="true">/</span>
         <span>RSBY</span>
       </nav>
+
+      <main id="main-content">
 
       <header class="hero hero-compact guide-hero guide-etf-hero">
         <div class="hero-copy hero-copy-compact guide-hero-copy">
@@ -214,11 +218,13 @@
           <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
         </div>
       </div>
+      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
-    <script src="../locale.js?v=7"></script>
+    <script src="../locale.js?v=8"></script>
     <script src="../guide-locale.js?v=30"></script>
     <script src="../js/guide.js?v=11"></script>
     <script src="../js/social-dock.js"></script>
+    <script src="../js/site-polish.js"></script>
   </body>
 </html>

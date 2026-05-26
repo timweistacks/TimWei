@@ -10,17 +10,32 @@
 
 ```
 .
-├── chronicle/              # 投資史冊（資料 + 建置 + 網站）
+├── chronicle/              # 投資史冊（資料 + 建置 + 網站）— 公開核心
 │   ├── data/               # 帳本 JSON（source of truth）
 │   ├── build/              # Python 建置腳本
 │   ├── site/               # 靜態網站（GitHub Pages 根目錄）
 │   └── export/             # 自動產生的交接摘要
-├── research/               # 選用：量化研究（不影響網站部署）
+├── research/               # 選用：量化研究（公開 repo 內，不影響 Pages 部署）
 ├── scripts/                # 本機捷徑（.bat）
+├── tests/                  # 建置與 guide 頁面測試
 ├── .github/workflows/      # 自動 build + 部署
 ├── requirements.txt
 └── LICENSE
 ```
+
+### 本機專用（不推送 GitHub）
+
+| 路徑 | 說明 |
+|------|------|
+| `.cursor/` | Cursor IDE 設定 |
+| `.agents/` | Cursor Agent Skills（UI 審查、impeccable 等） |
+| `.impeccable/` | 本機 UI 審查報告 |
+| `PRODUCT.md` / `DESIGN.md` | 本機設計筆記（impeccable teach 產物） |
+| `AII/` | 私人研究 PDF、草稿 |
+| `chronicle/__pycache__/` | Python 快取 |
+| `site-config.local.js` | 本機覆寫 GA / 網址（若有） |
+
+公開訪客只看 **`chronicle/site/`** 與 GitHub Actions 建置結果；其餘為開發或私人資料。
 
 | 路徑 | 說明 |
 |------|------|

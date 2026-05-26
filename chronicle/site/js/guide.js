@@ -6,6 +6,10 @@
     }
   });
 
+  document.querySelectorAll(".guide-etf-ticker, .guide-l2-jump-etfs").forEach((node) => {
+    node.setAttribute("translate", "no");
+  });
+
   if (globalThis.PLLocale) {
     globalThis.PLLocale.initGate(() => {
       if (typeof globalThis.refreshSocialDock === "function") {

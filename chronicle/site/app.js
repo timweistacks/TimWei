@@ -366,6 +366,13 @@ function setState(element, text, state = "neutral") {
   }
   element.textContent = text;
   element.dataset.state = state;
+  const stateKey = `state.${state}`;
+  const stateLabel = pllT(stateKey);
+  if (stateLabel && stateLabel !== stateKey && text && text !== "—") {
+    element.setAttribute("aria-label", `${text} (${stateLabel})`);
+  } else {
+    element.removeAttribute("aria-label");
+  }
 }
 
 const PHASE_TARGET_SYMBOL_ORDER = ["RSSB", "RSST", "RSSY", "RSIT"];
@@ -2232,6 +2239,26 @@ function initTradeHistoryViewSwitcher() {
       }
     });
   });
+
+  switcher.addEventListener("keydown", (event) => {
+    const radioButtons = Array.from(switcher.querySelectorAll(".view-switch-btn"));
+    if (!radioButtons.length) {
+      return;
+    }
+    const currentIndex = radioButtons.findIndex((btn) => btn.classList.contains("is-active"));
+    let nextIndex = currentIndex;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      nextIndex = (currentIndex + 1) % radioButtons.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      nextIndex = (currentIndex - 1 + radioButtons.length) % radioButtons.length;
+    } else {
+      return;
+    }
+    radioButtons[nextIndex].click();
+    radioButtons[nextIndex].focus();
+  });
 }
 
 let portfolioHistoryTab = "all";
@@ -3013,6 +3040,36 @@ function showChartEmpty(container, i18nKey) {
   container.innerHTML = emptyState(i18nKey);
 }
 
+function renderChartAccessibleSummary(container, comparison) {
+  if (!container || !comparison?.combinedChart) {
+    return;
+  }
+  const summaryId = `${container.id}-summary`;
+  let summary = container.querySelector(".chart-a11y-summary");
+  if (!summary) {
+    summary = document.createElement("p");
+    summary.id = summaryId;
+    summary.className = "chart-a11y-summary visually-hidden";
+    container.appendChild(summary);
+  }
+  const seriesText = comparison.combinedChart.datasets
+    .map((dataset) => {
+      const latest = dataset.data?.[dataset.data.length - 1];
+      const value =
+        latest === null || latest === undefined || Number.isNaN(Number(latest))
+          ? "—"
+          : Number(latest).toFixed(1);
+      return pllT("chart.series_latest", { label: dataset.label, value });
+    })
+    .join("; ");
+  summary.textContent = pllT("chart.summary_a11y", {
+    start: comparison.startDate,
+    end: comparison.endDate,
+    series: seriesText,
+  });
+  container.setAttribute("aria-describedby", summaryId);
+}
+
 function renderOverviewPerformanceChart(snapshot) {
   const root = document.getElementById("overview-performance-chart");
   if (!root) {
@@ -3038,6 +3095,7 @@ function renderOverviewPerformanceChart(snapshot) {
     chart.options.maintainAspectRatio = false;
     chart.resize();
   }
+  renderChartAccessibleSummary(root, comparison);
   scheduleOverviewLayoutHeightSync();
 }
 
@@ -3063,6 +3121,7 @@ function renderPerformanceCharts(snapshot) {
     chart.options.maintainAspectRatio = false;
     chart.resize();
   }
+  renderChartAccessibleSummary(navBox, comparison);
   renderPerformanceMetrics(snapshot);
   schedulePerfLayoutHeightSync();
 }
@@ -3261,6 +3320,10 @@ function renderOverview(snapshot) {
   renderLiveExperimentDays(snapshot);
   renderLiveTicker(snapshot);
   scheduleOverviewLayoutHeightSync();
+  const assetSection = document.querySelector(".overview-asset-section");
+  if (assetSection) {
+    assetSection.classList.add("is-ready");
+  }
 }
 
 function renderLiveExperimentDays(snapshot) {

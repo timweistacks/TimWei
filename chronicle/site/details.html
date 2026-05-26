@@ -15,6 +15,7 @@
       content="25歲貸款投資實錄明細：績效走勢、持倉配置、貸款決策、換匯記錄全公開。"
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
     <link rel="canonical" href="" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1F0YJSFDW"></script>
     <script>
@@ -33,11 +34,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=14" />
+    <link rel="stylesheet" href="styles.css?v=16" />
     <link rel="stylesheet" href="guide.css?v=21" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
     <div class="paper-noise" aria-hidden="true"></div>
     <div class="wrap">
       <div id="lang-gate" class="lang-gate" hidden aria-hidden="true">
@@ -72,6 +73,7 @@
         </div>
       </nav>
 
+      <main id="main-content">
       <header class="hero hero-compact">
         <div class="hero-copy hero-copy-compact">
           <p class="hero-tag" data-i18n="hero.details">明細</p>
@@ -137,10 +139,10 @@
             <div class="section-head">
               <div>
                 <p class="section-kicker" data-i18n="detail.nav_perf">績效</p>
-                <h2 data-i18n="detail.nav_chart_title">組合 NAV</h2>
+                <h2 id="nav-chart-title" data-i18n="detail.nav_chart_title">組合 NAV</h2>
               </div>
             </div>
-            <div class="chart-box perf-main-chart" id="nav-chart-container"></div>
+            <div class="chart-box perf-main-chart" id="nav-chart-container" role="img" aria-labelledby="nav-chart-title"></div>
           </article>
 
           <article class="card perf-metrics-card">
@@ -502,12 +504,15 @@
         <a class="btn-secondary" href="index.html" data-i18n="back.overview">返回總覽</a>
       </div>
 
-      <div id="errors" class="errors" hidden></div>
+      <div id="errors" class="errors" role="alert" aria-live="polite" hidden></div>
+      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js?v=7"></script>
+    <script src="locale.js?v=8"></script>
     <script src="js/social-dock.js"></script>
-    <script src="app.js?v=5"></script>
+    <script src="js/site-polish.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="app.js?v=7"></script>
   </body>
 </html>

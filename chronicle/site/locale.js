@@ -3,6 +3,37 @@
   const STORAGE_KEY = "personal-ledger-lang";
   const LANG_ZH = "zh-Hant";
   const LANG_EN = "en";
+  const URL_LANG_PARAM = "lang";
+
+  function readLangFromUrl() {
+    try {
+      const params = new URLSearchParams(global.location.search);
+      const raw = params.get(URL_LANG_PARAM);
+      if (raw === "en") {
+        return LANG_EN;
+      }
+      if (raw === "zh" || raw === "zh-Hant") {
+        return LANG_ZH;
+      }
+    } catch {
+      /* ignore */
+    }
+    return "";
+  }
+
+  function syncLangToUrl(lang) {
+    try {
+      const url = new URL(global.location.href);
+      if (lang === LANG_ZH) {
+        url.searchParams.delete(URL_LANG_PARAM);
+      } else if (lang === LANG_EN) {
+        url.searchParams.set(URL_LANG_PARAM, "en");
+      }
+      global.history.replaceState(null, "", url.toString());
+    } catch {
+      /* ignore */
+    }
+  }
 
   const STRINGS = {
     "layer.equity": { en: "Equity Layer 100%", zh: "股票部位 100%" },
@@ -40,6 +71,16 @@
     "metric.market_assets": { en: "Equity holdings", zh: "股市資產" },
     "metric.cash": { en: "Cash", zh: "手上現金" },
     "metric.liability": { en: "Remaining debt", zh: "剩餘負債" },
+    "section.overview_assets": { en: "Asset snapshot", zh: "資產快照" },
+    "a11y.skip": { en: "Skip to main content", zh: "跳至主要內容" },
+    "banner.new.title": { en: "First time here?", zh: "第一次來？" },
+    "banner.new.body": {
+      en: "This site is the full curriculum: learn Return Stacking and the ETF family first, then explore the live data below. Social posts only highlight a few points; everything lives here.",
+      zh: "這個網站是完整教材：先懂 Return Stacking 與 ETF 家族，再看下方實測數據。Threads、FB 等社群貼文只挑重點，完整內容都在這裡。",
+    },
+    "banner.learn_cta": { en: "Start with Learn", zh: "從認識實驗開始" },
+    "banner.etfs_cta": { en: "ETF Guide", zh: "ETF 百科" },
+    "banner.dismiss_label": { en: "Dismiss welcome banner", zh: "關閉新訪客提示" },
     "chip.benchmark": { en: "vs market", zh: "大盤比較" },
     "chip.rebalance": { en: "Rebalance", zh: "再平衡" },
     "chip.debt": { en: "Debt", zh: "負債" },
@@ -82,6 +123,22 @@
       en: "Data unavailable. Regenerate snapshot.json first.",
       zh: "資料無法載入，請先重新生成 snapshot.json。",
     },
+    "chart.summary_a11y": {
+      en: "Indexed performance from {start} to {end}. {series}",
+      zh: "指數化績效 {start} 至 {end}。{series}",
+    },
+    "chart.series_latest": {
+      en: "{label} latest index {value}",
+      zh: "{label} 最新指數 {value}",
+    },
+    "a11y.chart_overview": {
+      en: "NAV vs benchmark indexed performance chart",
+      zh: "NAV 與基準指數化績效圖",
+    },
+    "state.good": { en: "positive", zh: "偏多" },
+    "state.bad": { en: "negative", zh: "偏空" },
+    "state.warn": { en: "caution", zh: "注意" },
+    "state.neutral": { en: "neutral", zh: "中性" },
     "bench.none": { en: "No performance yet", zh: "尚無績效" },
     "bench.insufficient": { en: "Insufficient data", zh: "資料不足" },
     "bench.flat": { en: "About flat vs SPY shadow", zh: "約與 SPY 影子持平" },
@@ -407,6 +464,10 @@
   }
 
   function getLang() {
+    const fromUrl = readLangFromUrl();
+    if (fromUrl) {
+      return fromUrl;
+    }
     const raw = readStorage(STORAGE_KEY) || memoryLang;
     return raw === LANG_EN || raw === LANG_ZH ? raw : "";
   }
@@ -454,6 +515,12 @@
   }
 
   function applyStaticLabels() {
+    document.querySelectorAll("[data-i18n-aria]").forEach((node) => {
+      const key = node.getAttribute("data-i18n-aria");
+      if (key) {
+        node.setAttribute("aria-label", t(key));
+      }
+    });
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.getAttribute("data-i18n");
       if (!key) {
@@ -498,6 +565,7 @@
       return;
     }
     writeStorage(STORAGE_KEY, lang);
+    syncLangToUrl(lang);
     applyDocumentLang();
     applyStaticLabels();
     hideLangGate();
@@ -538,6 +606,10 @@
   }
 
   function initGate(onReady) {
+    const urlLang = readLangFromUrl();
+    if (urlLang) {
+      writeStorage(STORAGE_KEY, urlLang);
+    }
     const saved = getLang();
     const lang = saved || LANG_ZH;
     if (!saved) {
