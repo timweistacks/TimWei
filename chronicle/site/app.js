@@ -1945,8 +1945,7 @@ function renderOverviewPositionTable(snapshot) {
     <div class="overview-pos-grid" role="table" aria-label="${pllT("section.positions_table")}">
       <div class="overview-pos-row overview-pos-head" role="row">
         <div class="ov-col ov-col-sym" role="columnheader">${pllT("th.symbol")}</div>
-        <div class="ov-col ov-col-pct" role="columnheader">${pllT("th.target")}</div>
-        <div class="ov-col ov-col-pct" role="columnheader">${pllT("th.current")}</div>
+        <div class="ov-col ov-col-deviation" role="columnheader">${pllT("th.deviation")}</div>
         <div class="ov-col ov-col-money" role="columnheader">${pllT("th.entry_avg")}</div>
         <div class="ov-col ov-col-money" role="columnheader">${pllT("th.last_price")}</div>
         <div class="ov-col ov-col-mv" role="columnheader">${pllT("th.mv")}</div>
@@ -1975,8 +1974,7 @@ function renderOverviewPositionTable(snapshot) {
                   ${generateExposureSparkBarHtml(sleeve.symbol)}
                 </div>
               </div>
-              <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve.target_pct)}</div>
-              <div class="ov-col ov-col-pct" role="cell">${fmtPct(sleeve.current_pct)}</div>
+              <div class="ov-col ov-col-deviation" role="cell">${generateRebalanceSliderHtml(sleeve)}</div>
               <div class="ov-col ov-col-money" role="cell">${entryCell}</div>
               <div class="ov-col ov-col-money" role="cell">${lastCell}</div>
               <div class="ov-col ov-col-mv" role="cell">${formatPositionMvCell(sleeve)}</div>
@@ -2511,7 +2509,7 @@ function renderAllocationTable(snapshot) {
             <th>${pllT("th.symbol")}</th>
             <th>${pllT("th.current")}</th>
             <th>${pllT("th.target")}</th>
-            <th>${isEnLocale() ? "Deviation Slider" : "偏離度天平"}</th>
+            <th>${pllT("th.deviation")}</th>
             <th>${pllT("th.mv")}</th>
             <th>${pllT("th.status")}</th>
           </tr>

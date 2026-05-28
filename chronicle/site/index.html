@@ -34,7 +34,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20" />
+    <link rel="stylesheet" href="styles.css?v=22" />
     <link rel="stylesheet" href="guide.css?v=32" />
   </head>
   <body>
@@ -191,7 +191,7 @@
         <article class="card viz-card viz-stack-card">
           <div class="section-head section-head-tight">
             <div>
-              <h2>Return Stacking 策略拆解</h2>
+              <h2 data-i18n="viz.section_title">Return Stacking 策略拆解</h2>
             </div>
           </div>
           
@@ -199,7 +199,7 @@
             <!-- 2D 同心雙環圖表區 -->
             <div class="viz-exposure-chart-side">
               <div class="canvas-container">
-                <canvas id="ov-stack-nested" aria-label="Return Stacking 雙層曝險比例同心圖"></canvas>
+                <canvas id="ov-stack-nested" data-i18n-aria="viz.aria.stack_chart" aria-label="Return Stacking 雙層曝險比例同心圖"></canvas>
                 <div class="viz-donut-center">
                   <span class="viz-donut-center-label" data-i18n="layer.total_exposure">總曝險</span>
                   <strong class="viz-donut-center-value">200%</strong>
@@ -213,11 +213,11 @@
                 <span class="summary-title" data-i18n="viz.title_3d">Return Stacking 雙層堆疊機制</span>
                 <p class="summary-desc" data-i18n="viz.desc_3d">此配置精準將 100% 的本金放大一倍，提供 200% 的總資產曝險。以下是為您拆解至最細顆粒度的雙層（股票 100% + 替代與債券 100%）底層持倉與量化策略佔比。</p>
                 <a class="strategy-official-link" href="learn.html">
-                  <span>不懂這張圖？先看 Return Stacking 概念</span>
+                  <span data-i18n="viz.link.learn">不懂這張圖？先看 Return Stacking 概念</span>
                   <svg viewBox="0 0 24 24" class="link-icon" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zm-2 16H5V8h7v-2H3v15h15v-9h-2v7z"/></svg>
                 </a>
                 <a class="strategy-official-link strategy-official-link-muted" href="etfs.html">
-                  <span>各檔 ETF 完整說明</span>
+                  <span data-i18n="viz.link.etfs">各檔 ETF 完整說明</span>
                   <svg viewBox="0 0 24 24" class="link-icon" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zm-2 16H5V8h7v-2H3v15h15v-9h-2v7z"/></svg>
                 </a>
               </div>
@@ -225,11 +225,11 @@
               <div class="stack-legend-grid">
                 <div class="legend-column">
                   <h3 class="legend-group-title" data-i18n="legend.core">股票部位 (總佔比 100%)</h3>
-                  <ul class="viz-legend-vertical" id="ov-exposure-core-legend" aria-label="股票部位圖例"></ul>
+                  <ul class="viz-legend-vertical" id="ov-exposure-core-legend" data-i18n-aria="viz.aria.legend_core" aria-label="股票部位圖例"></ul>
                 </div>
                 <div class="legend-column">
                   <h3 class="legend-group-title" data-i18n="legend.alt">替代與債券部位 (總佔比 100%)</h3>
-                  <ul class="viz-legend-vertical" id="ov-exposure-alt-legend" aria-label="替代與債券圖例"></ul>
+                  <ul class="viz-legend-vertical" id="ov-exposure-alt-legend" data-i18n-aria="viz.aria.legend_alt" aria-label="替代與債券圖例"></ul>
                 </div>
               </div>
             </div>
@@ -336,10 +336,10 @@
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="data/snapshot.js"></script>
-    <script src="locale.js?v=11"></script>
+    <script src="locale.js?v=13"></script>
     <script src="js/horizontal-scroll.js?v=2"></script>
     <script src="js/social-dock.js"></script>
     <script src="js/site-polish.js"></script>
-    <script src="app.js?v=13"></script>
+    <script src="app.js?v=14"></script>
   </body>
 </html>

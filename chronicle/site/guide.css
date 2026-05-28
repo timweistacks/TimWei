@@ -691,8 +691,17 @@
   max-width: 100%;
 }
 
-.guide-table-compact .guide-table {
+.guide-table-wrap.guide-table-compact,
+.guide-table-wrap.guide-corr-wrap {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+.guide-table-compact .guide-table,
+.guide-corr-wrap .guide-table {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .guide-page .guide-table th,
@@ -2341,18 +2350,45 @@ a.guide-etf-ticker:hover {
     padding: 0.5rem 0;
   }
 
-  .guide-table {
-    min-width: 36rem;
+  .guide-table-wrap.guide-table-compact .guide-table,
+  .guide-table-wrap.guide-corr-wrap .guide-table {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    table-layout: fixed;
+  }
+
+  .guide-table-wrap.guide-table-compact th,
+  .guide-table-wrap.guide-table-compact td,
+  .guide-table-wrap.guide-corr-wrap th,
+  .guide-table-wrap.guide-corr-wrap td {
+    padding: 0.45rem 0.3rem;
+  }
+
+  .guide-table-wrap.guide-table-compact th,
+  .guide-table-wrap.guide-corr-wrap th {
+    white-space: normal;
+    line-height: 1.35;
+    hyphens: auto;
+  }
+
+  .guide-table-wrap.guide-table-compact td:not(:first-child),
+  .guide-table-wrap.guide-corr-wrap td:not(:first-child) {
+    white-space: nowrap;
+  }
+
+  .guide-table-wrap:not(.guide-table-compact):not(.guide-corr-wrap) .guide-table {
+    min-width: 28rem;
     width: max-content;
     max-width: none;
   }
 
-  .guide-table-suite,
-  .guide-table-num {
+  .guide-table-wrap:not(.guide-table-compact):not(.guide-corr-wrap) .guide-table-suite,
+  .guide-table-wrap:not(.guide-table-compact):not(.guide-corr-wrap) .guide-table-num {
     min-width: 34rem;
   }
 
-  .guide-table-holdings {
+  .guide-table-wrap:not(.guide-table-compact):not(.guide-corr-wrap) .guide-table-holdings {
     min-width: 28rem;
   }
 }

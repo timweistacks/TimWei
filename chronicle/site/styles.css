@@ -1295,8 +1295,7 @@ button:focus-visible,
   display: grid;
   grid-template-columns:
     minmax(3.2rem, 0.78fr)
-    minmax(3.4rem, 0.68fr)
-    minmax(3.4rem, 0.68fr)
+    minmax(7rem, 1.35fr)
     minmax(5rem, 1.05fr)
     minmax(5rem, 1.05fr)
     minmax(5.5rem, 1.12fr)
@@ -1325,7 +1324,10 @@ button:focus-visible,
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.25;
 }
 
 .overview-pos-grid .ov-col {
@@ -1342,15 +1344,20 @@ button:focus-visible,
   white-space: nowrap;
 }
 
-.overview-pos-row .ov-col:nth-child(2) {
-  padding-right: 0.2rem;
+.overview-pos-grid .ov-col-deviation {
+  text-align: center;
+  white-space: normal;
+  overflow: visible;
 }
 
-.overview-pos-row .ov-col:nth-child(3) {
-  padding-left: 0.2rem;
+.overview-pos-grid .ov-col-deviation .deviation-slider-wrapper {
+  width: min(100%, 11rem);
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: auto;
 }
 
-.overview-pos-grid .ov-col-pnl {
+.overview-pos-row:not(.overview-pos-head) .ov-col-pnl {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -3482,7 +3489,8 @@ table.quotes tr:last-child td {
   }
 
   .portfolio-detail-layout .portfolio-pos-grid {
-    min-width: 36rem;
+    min-width: 0;
+    width: 100%;
   }
 
   .portfolio-history-panel {
@@ -5822,17 +5830,30 @@ table.quotes tr:last-child td {
 
   .overview-pos-row {
     grid-template-columns:
-      minmax(3.2rem, 0.9fr)
-      minmax(3.2rem, 0.75fr)
-      minmax(3.2rem, 0.75fr)
-      minmax(4.8rem, 1.1fr)
-      minmax(4.8rem, 1.1fr)
-      minmax(5.2rem, 1.15fr)
-      minmax(5.8rem, 1.25fr);
+      minmax(3rem, 0.85fr)
+      minmax(6.5rem, 1.2fr)
+      minmax(4.5rem, 1fr)
+      minmax(4.5rem, 1fr)
+      minmax(4.8rem, 1.05fr)
+      minmax(5rem, 1.1fr);
+  }
+
+  .overview-pos-grid .ov-col-deviation .deviation-slider-wrapper {
+    width: min(100%, 9.5rem);
+  }
+
+  .portfolio-detail-layout .portfolio-pos-grid .overview-pos-row {
+    grid-template-columns:
+      minmax(2.8rem, 0.82fr)
+      minmax(2.6rem, 0.62fr)
+      minmax(2.6rem, 0.62fr)
+      minmax(4.2rem, 0.95fr)
+      minmax(5.4rem, 1.12fr)
+      minmax(3.6rem, 0.82fr);
   }
 
   .overview-pos-grid {
-    min-width: 30rem;
+    min-width: 0;
   }
 }
 

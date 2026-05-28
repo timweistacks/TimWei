@@ -29,9 +29,9 @@ from guide_i18n_en import (
 SITE = Path(__file__).resolve().parents[1] / "site"
 ETF_DIR = SITE / "etfs"
 
-CSS_VER = "32"
+CSS_VER = "33"
 JS_VER = "11"
-LOCALE_VER = "11"
+LOCALE_VER = "12"
 STYLES_VER = "14"
 
 I18N_REGISTRY: dict[str, dict[str, str]] = {}
@@ -1157,9 +1157,11 @@ def render_table(
     table_class: str = "guide-table-num",
     html_cells: bool = False,
 ) -> str:
-    wrap_cls = "table-wrap table-scroll guide-table-wrap"
+    wrap_cls = "table-wrap guide-table-wrap"
     if compact:
         wrap_cls += " guide-table-compact"
+    else:
+        wrap_cls += " table-scroll"
     th_parts = []
     for item in headers:
         if isinstance(item, tuple):
@@ -1673,7 +1675,7 @@ def render_holdings_section(
 
     summary = f"""<div class="guide-exposure-summary">
         <p class="guide-exposure-lead">{T('guide.holdings.lead', *ui_pair('guide.holdings.lead'))}</p>
-        <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
+        <div class="table-wrap guide-table-wrap guide-table-compact">
           <table class="quotes guide-table guide-exposure-table">
             <thead><tr><th>{T('guide.holdings.th.item', *ui_pair('guide.holdings.th.item', '項目'))}</th><th>{T('guide.holdings.th.target', *ui_pair('guide.holdings.th.target', '策略目標'))}</th><th>{T('guide.holdings.th.listed', *ui_pair('guide.holdings.th.listed', '前十大表列'))}</th><th>{T('guide.holdings.th.why', *ui_pair('guide.holdings.th.why', '為何不同'))}</th></tr></thead>
             <tbody>
@@ -1774,7 +1776,7 @@ def render_backtest_section(backtest: dict, slug: str = "") -> str:
     period = backtest.get("period", "")
     note = backtest.get("note", "")
     years = 20
-    table = f"""<div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
+    table = f"""<div class="table-wrap guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
         <thead><tr>
           <th>{T('guide.backtest.col.asset', *ui_pair('guide.backtest.col.asset'))}</th>
@@ -1806,7 +1808,7 @@ def render_backtest_section(backtest: dict, slug: str = "") -> str:
         growth_block = f"""
         <div class="guide-backtest-col guide-backtest-col-growth">
           <p class="guide-backtest-col-label">{T(f'etf.{slug}.backtest.growth.title', growth_title_zh, growth_title_en)}</p>
-          <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
+          <div class="table-wrap guide-table-wrap guide-table-compact">
             <table class="quotes guide-table guide-table-num">
               <thead><tr>
                 <th>{T('guide.backtest.col.asset', *ui_pair('guide.backtest.col.asset'))}</th>
