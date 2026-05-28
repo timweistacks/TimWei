@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -62,4 +65,13 @@ jobs:
           git add chronicle/data chronicle/site/data chronicle/export/current_summary.md
           git diff --staged --quiet && exit 0
           git commit -m "chore: sync snapshot after build [skip ci]"
-          git push
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push attempt ${attempt} failed; retrying in $((attempt * 10))s..."
+            sleep $((attempt * 10))
+          done
+          echo "All push attempts failed."
+          exit 1
