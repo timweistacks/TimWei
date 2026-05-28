@@ -26,6 +26,10 @@ Thumbs.db
 # Design notes generated during local UI review (optional; keep out of public repo)
 PRODUCT.md
 DESIGN.md
+DEV.md
+
+# Local dev notes (never push)
+scripts/README.md
 
 # Local scratch / debug
 tmp_trace.txt
