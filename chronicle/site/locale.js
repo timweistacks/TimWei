@@ -49,6 +49,10 @@
       en: "You can switch anytime from the top bar.",
       zh: "之後可在頂部列隨時切換。",
     },
+    "ui.scroll_hint": {
+      en: "Swipe horizontally to see more columns",
+      zh: "左右滑動查看更多欄位",
+    },
     "gate.zh": { en: "中文（台幣）", zh: "中文（台幣）" },
     "gate.en": { en: "English (USD)", zh: "English (USD)" },
     "nav.brand": { en: "25y Debt Investing Ledger", zh: "25歲貸款投資實錄" },
@@ -240,8 +244,8 @@
     "chart.spy_shadow": { en: "SPY shadow", zh: "SPY 影子" },
     "chart.sso_shadow": { en: "SSO 2x shadow", zh: "SSO 正二影子" },
     "chart.index_base": {
-      en: "Indexed",
-      zh: "區間指數",
+      en: "Index (base ~100)",
+      zh: "指數（基期 100）",
     },
     "chart.portfolio_nav": { en: "Portfolio NAV", zh: "組合 NAV" },
     "spy.vs_prior": { en: "vs prior day", zh: "較前一日" },

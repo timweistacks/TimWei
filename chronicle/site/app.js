@@ -1005,15 +1005,6 @@ function samePeriodPerformance(snapshot) {
     return null;
   }
 
-  const bases = {};
-  for (const id of seriesIds) {
-    const base = Number(rawById[id][startIndex]);
-    if (!Number.isFinite(base) || base <= 0) {
-      return null;
-    }
-    bases[id] = base;
-  }
-
   const outLabels = [];
   const scaled = Object.fromEntries(seriesIds.map((id) => [id, []]));
   for (let index = startIndex; index < limit; index += 1) {
@@ -1030,7 +1021,7 @@ function samePeriodPerformance(snapshot) {
     }
     outLabels.push(formatChartAxisLabel(labels[index]));
     for (const id of seriesIds) {
-      scaled[id].push((Number(rawById[id][index]) / bases[id]) * 100);
+      scaled[id].push(Number(rawById[id][index]));
     }
   }
   if (!outLabels.length) {
@@ -1544,16 +1535,19 @@ function winnerIndicesForMetric(columns, rowKey) {
   return new Set(winners.map((entry) => entry.index));
 }
 
-function perfMetricCellMarkup(raw, format, isWinner) {
+function perfMetricCellMarkup(raw, format, isWinner, colLabel = "") {
   const text = formatPerfMetricCell(raw, format);
+  const colAttr = colLabel
+    ? ` data-col-label="${String(colLabel).replace(/"/g, "&quot;")}"`
+    : "";
   if (text === "—") {
-    return `<td class="tabular perf-metric-data-cell">—</td>`;
+    return `<td class="tabular perf-metric-data-cell"${colAttr}>—</td>`;
   }
   const badge = isWinner
     ? `<span class="perf-metric-winner" title="${pllT("perf.best")}" aria-label="${pllT("perf.best")}">♛</span>`
     : "";
   const winnerClass = isWinner ? " perf-metric-winner-cell" : "";
-  return `<td class="tabular perf-metric-data-cell${winnerClass}"><span class="perf-metric-cell-inner"><span class="perf-metric-value">${text}</span><span class="perf-metric-badge-slot">${badge}</span></span></td>`;
+  return `<td class="tabular perf-metric-data-cell${winnerClass}"${colAttr}><span class="perf-metric-cell-inner"><span class="perf-metric-value">${text}</span><span class="perf-metric-badge-slot">${badge}</span></span></td>`;
 }
 
 function renderPerformanceMetrics(snapshot) {
@@ -1575,6 +1569,7 @@ function renderPerformanceMetrics(snapshot) {
   }
   const metricRows = PERF_METRIC_ROWS;
   const benchLevels = aligned.series.spy_shadow || [];
+  const colLabels = PERF_METRIC_SERIES.map((meta) => chartSeriesLabel(meta.id));
   const columns = PERF_METRIC_SERIES.map((meta) => {
     const levels = aligned.series[meta.id] || [];
     const base = performanceRiskStats(levels);
@@ -1600,7 +1595,8 @@ function renderPerformanceMetrics(snapshot) {
     return { ...meta, stats: { ...base, ...(rel || {}) } };
   });
   root.innerHTML = `
-    <div class="table-wrap table-scroll perf-metrics-table-wrap">
+    <p class="table-scroll-hint" aria-hidden="true">${pllT("ui.scroll_hint")}</p>
+    <div class="table-wrap table-scroll perf-metrics-table-wrap pll-scroll">
       <table class="quotes perf-metrics-table">
         <thead>
           <tr>
@@ -1616,10 +1612,10 @@ function renderPerformanceMetrics(snapshot) {
                 .map((col, colIndex) => {
                   const stats = col.stats;
                   if (!stats) {
-                    return "<td>—</td>";
+                    return `<td class="perf-metric-data-cell" data-col-label="${String(colLabels[colIndex]).replace(/"/g, "&quot;")}">—</td>`;
                   }
                   const raw = stats[row.key];
-                  return perfMetricCellMarkup(raw, row.format, winners.has(colIndex));
+                  return perfMetricCellMarkup(raw, row.format, winners.has(colIndex), colLabels[colIndex]);
                 })
                 .join("");
               return `<tr><th scope="row">${pllT(`perf.${row.key}`)}</th>${cells}</tr>`;
@@ -1944,6 +1940,8 @@ function renderOverviewPositionTable(snapshot) {
     return;
   }
   root.innerHTML = `
+    <p class="table-scroll-hint" aria-hidden="true">${pllT("ui.scroll_hint")}</p>
+    <div class="overview-pos-scroll pll-scroll">
     <div class="overview-pos-grid" role="table" aria-label="${pllT("section.positions_table")}">
       <div class="overview-pos-row overview-pos-head" role="row">
         <div class="ov-col ov-col-sym" role="columnheader">${pllT("th.symbol")}</div>
@@ -1997,6 +1995,7 @@ function renderOverviewPositionTable(snapshot) {
           `;
         })
         .join("")}
+    </div>
     </div>
   `;
   scheduleOverviewLayoutHeightSync();
@@ -2462,7 +2461,7 @@ function syncLoanLayoutHeights() {
   scheduleCard.style.minHeight = "";
   scheduleCard.style.maxHeight = "";
 
-  if (window.innerWidth < 920) {
+  if (window.innerWidth < 1080) {
     return;
   }
 
@@ -3320,6 +3319,7 @@ function renderOverview(snapshot) {
   renderLiveExperimentDays(snapshot);
   renderLiveTicker(snapshot);
   scheduleOverviewLayoutHeightSync();
+  refreshHorizontalScrollAffordances();
   const assetSection = document.querySelector(".overview-asset-section");
   if (assetSection) {
     assetSection.classList.add("is-ready");
@@ -3545,12 +3545,17 @@ function renderDetails(snapshot) {
     investmentCost.unrealized_pnl_twd != null
       ? Number(investmentCost.unrealized_pnl_twd)
       : liveTwdFromUsd(snapshot, unrealizedPnlUsdDisplay);
-  const comp = samePeriodPerformance(snapshot);
-  const navIndex = comp
-    ? lastDefinedValue(comp.navChart.datasets[0]?.data)
-    : snapshot.nav_summary?.nav_index_100 != null
-      ? Number(snapshot.nav_summary.nav_index_100)
+  const summaryNav = snapshot.nav_summary?.nav_index_100;
+  let navIndex =
+    summaryNav != null && !Number.isNaN(Number(summaryNav))
+      ? Number(summaryNav)
       : null;
+  if (navIndex == null) {
+    const comp = samePeriodPerformance(snapshot);
+    const tail = comp ? lastDefinedValue(comp.navChart.datasets[0]?.data) : null;
+    navIndex =
+      tail != null && !Number.isNaN(Number(tail)) ? Number(tail) : null;
+  }
 
   setText("meta-generated", snapshot.generated_at || "—");
 
@@ -3721,6 +3726,7 @@ function renderDetails(snapshot) {
   syncDetailSection(snapshot);
   PLLocale.applyStaticLabels();
   renderLiveExperimentDays(snapshot);
+  refreshHorizontalScrollAffordances();
   window.addEventListener("hashchange", () => syncDetailSection(snapshot));
 }
 
@@ -3758,12 +3764,14 @@ function syncDetailSection(snapshot) {
         : pllT("meta.not_built")
     );
     initPortfolioHistoryTabs();
+    refreshHorizontalScrollAffordances();
     return;
   }
   if (key === "performance") {
     renderPerformanceCharts(snapshot);
     schedulePerfLayoutHeightSync();
     setText("detail-page-meta", benchmarkSummary(snapshot).text);
+    refreshHorizontalScrollAffordances();
     return;
   }
   if (key === "loan") {
@@ -3803,6 +3811,7 @@ function syncDetailSection(snapshot) {
         : pllT("meta.no_fx")
     );
   }
+  refreshHorizontalScrollAffordances();
 }
 
 async function loadSnapshot() {
@@ -3857,12 +3866,12 @@ async function main() {
 let cachedSnapshot = null;
 
 function rerenderApp() {
-  if (!cachedSnapshot) {
-    return;
-  }
   PLLocale.applyStaticLabels();
   if (typeof window.refreshSocialDock === "function") {
     window.refreshSocialDock();
+  }
+  if (!cachedSnapshot) {
+    return;
   }
   if (PAGE === "overview") {
     renderOverview(cachedSnapshot);
@@ -3871,16 +3880,27 @@ function rerenderApp() {
   renderDetails(cachedSnapshot);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ready = () => {
+function onLocaleChange() {
+  rerenderApp();
+  if (!cachedSnapshot) {
     main();
-  };
-  PLLocale.initGate(ready);
+  }
+}
+
+function refreshHorizontalScrollAffordances() {
+  if (typeof window.initHorizontalScrollAffordances === "function") {
+    window.initHorizontalScrollAffordances();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  PLLocale.initGate(onLocaleChange);
 });
 window.addEventListener("resize", () => {
   schedulePerfLayoutHeightSync();
   scheduleOverviewLayoutHeightSync();
   scheduleLoanLayoutHeightSync();
+  refreshHorizontalScrollAffordances();
 });
 
 /* ============================================================

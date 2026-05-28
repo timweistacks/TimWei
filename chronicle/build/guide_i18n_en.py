@@ -80,6 +80,7 @@ UI: dict[str, str | tuple[str, str]] = {
     "guide.learn.compare.r3.label": "Typical Layer 2",
     "guide.learn.compare.r3.lev": "—",
     "guide.learn.compare.r3.rs": "US Treasuries, managed futures (trend), futures yield, merger arb…",
+    "guide.learn.suite.kicker": ("系列一覽", "Family lineup"),
     "guide.learn.suite.title": "Return Stacked ETF family (2026 Q1 data)",
     "guide.learn.suite.link": "Full guide",
     "guide.learn.suite.foot": "AUM as of 2026-03-31 from Return Stacked Q1 2026 Commentary. Past performance is not indicative of future results.",
@@ -116,6 +117,7 @@ UI: dict[str, str | tuple[str, str]] = {
     "guide.etfs.hero.title": "Return Stacked full lineup",
     "guide.etfs.hero.lead": "Summarized from each fund's Product Brief, Fact Sheet, and Q1 2026 Commentary (as of 2026-03-31). This is the full curriculum on site; social posts only cover highlights.",
     "guide.etfs.table.title": "8-fund comparison",
+    "guide.etfs.table.kicker": ("總表", "Overview"),
     "guide.etfs.tim.kicker": "Tim Wei's allocation",
     "guide.etfs.tim.title": "Which tickers are in the live book?",
     "guide.etfs.tim.note": "Allocation weights and rebalance logic are on the overview strategy breakdown and ledger allocation tab.",
@@ -130,16 +132,133 @@ UI: dict[str, str | tuple[str, str]] = {
     "guide.etfs.meta.inception": "Inception",
     "guide.etf.holdings": "In live book",
     "guide.etf.holdings.no": "Not in live book",
-    "guide.etf.holdings.link": "View {ticker} on overview",
     "guide.etf.nav.kicker": "More reading",
     "guide.etf.nav.title": "Other Return Stacked tickers",
     "guide.etf.nav.desc": "Current page: {ticker}. Other tickers:",
     "guide.etf.breadcrumb": "ETF Guide",
     "guide.l2.deep.kicker": "Layer 2 strategy",
+    "guide.etf.section.structure.kicker": ("雙層結構", "Structure"),
+    "guide.etf.section.structure.title": ("這一檔怎麼疊？", "How is this fund stacked?"),
+    "guide.etf.section.why.kicker": ("為什麼存在", "Why it exists"),
+    "guide.etf.section.why.title": ("設計邏輯與使用情境", "Design logic and use cases"),
+    "guide.etf.section.perf.kicker": ("績效", "Performance"),
+    "guide.etf.section.perf.title": ("基金報酬（截至 2026-03-31）", "Fund returns (through 2026-03-31)"),
+    "guide.etf.section.perf.foot": (
+        "過往績效不代表未來結果。短於一年為累計報酬。",
+        "Past performance is not indicative of future results. Shorter than one year is cumulative.",
+    ),
+    "guide.etf.section.benchmark.kicker": ("基準對照", "Benchmark"),
+    "guide.etf.section.benchmark.title": (
+        "與基準指數及 100/100 組合對照",
+        "Vs benchmarks and 100/100 blend",
+    ),
+    "guide.etf.section.fund.kicker": ("基金資料", "Fund facts"),
+    "guide.etf.section.fund.title": ("規格表", "Specifications"),
+    "guide.etf.section.holdings.kicker": ("持股", "Holdings"),
+    "guide.etf.section.holdings.title": ("主要持倉（2026-03-31）", "Top holdings (2026-03-31)"),
+    "guide.etf.section.holdings.foot": (
+        "持倉會變動，僅供理解結構，非即時資料。占比摘自官方 Q1 Commentary。",
+        "Holdings change; for structure only, not live data. Weights from official Q1 Commentary.",
+    ),
+    "guide.etf.section.corr.kicker": ("相關性", "Correlation"),
+    "guide.etf.section.corr.title": (
+        "歷史相關矩陣（官方 Product Brief）",
+        "Historical correlation matrix (official Product Brief)",
+    ),
+    "guide.etf.section.corr.foot": (
+        "相關性會隨時間改變，僅供理解第二層與核心的關係。",
+        "Correlations change over time; for understanding Layer 2 vs core only.",
+    ),
+    "guide.etf.section.tim.kicker": ("Tim Wei 實測", "Tim Wei live book"),
+    "guide.etf.section.tim.title": ("這一檔與本實驗的關係", "How this ticker fits the experiment"),
+    "guide.etf.section.risk.kicker": ("主要風險", "Key risks"),
+    "guide.etf.section.risk.title": ("投資前必知（摘要）", "Before you invest (summary)"),
+    "guide.etf.section.risk.foot": (
+        "完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。",
+        "See each fund prospectus for full risks. Educational summary only—not advice.",
+    ),
+    "guide.etf.metric.net_fee": ("淨費率", "Net fee"),
+    "guide.etf.holdings.link": ("在總覽看 {ticker} 持倉 →", "View {ticker} on overview →"),
+    "guide.table.period": ("期間", "Period"),
+    "guide.table.nav": ("NAV", "NAV"),
+    "guide.table.market": ("市價", "Market price"),
+    "guide.holdings.lead": (
+        "策略<strong>確實目標 200% 多頭曝險</strong>（100% ＋ 100%）。下方表列數字是「持倉市值占 NAV」，不是把曝險直接相加，所以<strong>不會</strong>加總成 200%。",
+        "The strategy <strong>does target 200% long exposure</strong> (100% + 100%). Figures below are <strong>position market value as % of NAV</strong>, not summed notional exposure, so they <strong>will not</strong> add to 200%.",
+    ),
+    "guide.holdings.th.item": ("項目", "Item"),
+    "guide.holdings.th.target": ("策略目標", "Strategy target"),
+    "guide.holdings.th.listed": ("前十大表列", "Top 10 listed"),
+    "guide.holdings.th.why": ("為何不同", "Why different"),
+    "guide.holdings.tbills.item": ("融資腿（國庫券）", "Financing leg (T-Bills)"),
+    "guide.holdings.tbills.target": ("-100%", "-100%"),
+    "guide.holdings.tbills.listed": ("不在前十", "Not in top 10"),
+    "guide.holdings.total.item": ("多頭合計", "Long total"),
+    "guide.holdings.analogy.title": (
+        "為什麼表格加總不等於 200%？（會計占比 vs. 真實曝險）",
+        "Why doesn't the table add to 200%? (Accounting weight vs. notional exposure)",
+    ),
+    "guide.holdings.analogy.margin.label": (
+        "會計記帳 (官方持倉表)",
+        "Accounting (official holdings)",
+    ),
+    "guide.holdings.analogy.margin.desc": (
+        "僅記錄期貨的<strong>「保證金占比」</strong>（通常僅為 5% ~ 15%）而非 1:1 名義合約價值。",
+        "Futures rows show <strong>margin as % of NAV</strong> (often 5–15%), not 1:1 contract notional.",
+    ),
+    "guide.holdings.analogy.notional.label": (
+        "策略目標 (真實曝險)",
+        "Strategy target (notional exposure)",
+    ),
+    "guide.holdings.analogy.notional.desc": (
+        "每投入 $1，即疊加 $1 基礎 ＋ $1 策略，獲取 200% 的<strong>名義曝險</strong>。",
+        "Each $1 invested stacks $1 base + $1 overlay for <strong>200% notional exposure</strong>.",
+    ),
+    "guide.holdings.analogy.example.tag": ("🏠 生活比喻", "🏠 Analogy"),
+    "guide.holdings.analogy.example.body": (
+        "買一間 <strong>1,000 萬</strong> 的房子，你只需支付 <strong>200 萬首付款</strong>（20% 資金占用），但你背後擁有的是 <strong>1,000 萬</strong> 的房價波動曝險（100% 名義曝險）。官方持倉表像<strong>首付款</strong>，而 200% 則是背後的<strong>總房屋價值</strong>。",
+        "Buy a <strong>$1M</strong> home with <strong>$200k down</strong> (20% capital posted) but you still have <strong>$1M</strong> of price exposure (100% notional). Holdings look like the <strong>down payment</strong>; 200% is the <strong>full stacked exposure</strong>.",
+    ),
+    "guide.holdings.col.ticker": ("代碼", "Ticker"),
+    "guide.holdings.col.name": ("名稱", "Name"),
+    "guide.holdings.col.weight": ("占比", "Weight"),
+    "guide.holdings.layer1.note": (
+        "現股 ETF 加股指期貨；期貨列的是保證金市值/NAV，不是 1:1 名義曝險",
+        "Stock ETFs plus equity futures; futures show margin/NAV, not 1:1 notional",
+    ),
+    "guide.holdings.count.other": ("其餘小部位", "other small positions"),
+    "guide.backtest.kicker": ("官方歷史回測", "Official backtest"),
+    "guide.backtest.col.asset": ("資產／組合", "Asset / portfolio"),
+    "guide.backtest.col.ret": ("年化報酬", "Ann. return"),
+    "guide.backtest.col.vol": ("年化波動", "Ann. volatility"),
+    "guide.backtest.col.mdd": ("最大回撤", "Max drawdown"),
+    "guide.backtest.growth.note": (
+        "※「歷史回測」年化報酬數據源自官方歷史回測資料；「20 年後估算終值」為本站依此報酬率複利自行推算，非官方數據，亦非逐日回測曲線。",
+        "Historical backtest returns are from official sources; the 20-year estimated value is compounded locally from those returns—not official data or a daily backtest curve.",
+    ),
+    "guide.backtest.footnote": (
+        "過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。",
+        "Past performance is not indicative of future results; index returns are gross backtest, pre-fee and pre-tax.",
+    ),
+    "guide.regime.kicker": ("市場環境", "Market environment"),
+    "guide.regime.title": (
+        "不同股價環境下的年化報酬",
+        "Annualized returns by equity regime",
+    ),
+    "guide.regime.note": (
+        "依官方定義之 equity regime 分段年化報酬。",
+        "Segmented annualized returns per official equity regime definitions.",
+    ),
+    "guide.replication.kicker": ("複製品質", "Replication quality"),
+    "guide.replication.title": (
+        "管理期貨複製模型（3 年回顧）",
+        "Managed-futures replication model (3-year review)",
+    ),
 }
 
 LAYER2_EN = {
     "us-bonds": {
+        "nav": "US Treasuries",
         "title": "US Treasuries",
         "summary": "Treasury futures for rate exposure; earn carry and price moves.",
         "pitch": "If Layer 2 is US Treasuries, the overlay targets ~100% US bond exposure—usually via futures (2Y, 5Y, 10Y, long bond), often equal-weight. Returns come from carry and rate-driven price changes.",
@@ -153,6 +272,7 @@ LAYER2_EN = {
         "diff": "Not managed-futures trend or futures-yield carry—it is plain rate/bond exposure.",
     },
     "managed-futures": {
+        "nav": "Managed futures",
         "title": "Managed futures (trend)",
         "summary": "Long/short a basket of futures by price trend—different path from stocks.",
         "pitch": "Managed futures here means trend following: go long uptrends, short downtrends, reduce or flip in chop. Targets ~27 futures across commodities, FX, rates, and equity indices.",
@@ -167,6 +287,7 @@ LAYER2_EN = {
         "diff": "Not futures yield (roll structure)—this bets on sustained price direction.",
     },
     "futures-carry": {
+        "nav": "Futures yield",
         "title": "Futures yield",
         "summary": "Earn structural roll yield from near vs far futures prices.",
         "pitch": "Futures must roll to maintain exposure. Yield strategies harvest the near/far spread—often helpful in backwardation, costly in contango. Not a directional commodity bet.",
@@ -194,6 +315,7 @@ LAYER2_EN = {
         "diff": "Not static half/half spot exposure—dynamic risk parity on futures.",
     },
     "merger-arb": {
+        "nav": "Merger arb",
         "title": "Merger arbitrage",
         "summary": "Invest in announced deals, betting the spread to deal price closes.",
         "pitch": "Event-driven: after a deal is announced, target shares trade below offer due to completion risk. Funds typically buy target, hedge acquirer, earn spread if deal closes.",
@@ -330,4 +452,166 @@ ZH_DEFAULTS: dict[str, str] = {
     "guide.footer.lead": "總覽頁有 NAV、持倉、再平衡與貸款進度；細節可到帳本明細。想討論歡迎加入 FB 社團。",
     "guide.footer.overview": "看實測總覽",
     "guide.footer.details": "看帳本明細",
+}
+
+META_ETF: dict[str, dict[str, str]] = {
+    "etf-rssb": {
+        "title": "RSSB · Global stocks + bonds | ETF Guide",
+        "desc": "The foundation of Return Stacked: 100% global stocks + 100% US Treasuries in one ETF.",
+    },
+    "etf-rsst": {
+        "title": "RSST · U.S. stocks + managed futures | ETF Guide",
+        "desc": "Full US large-cap exposure plus a long/short managed-futures trend overlay.",
+    },
+    "etf-rssy": {
+        "title": "RSSY · U.S. stocks + futures yield | ETF Guide",
+        "desc": "100% US stocks + 100% cross-asset futures carry (roll-yield) strategy.",
+    },
+    "etf-rsit": {
+        "title": "RSIT · Intl stocks + managed futures | ETF Guide",
+        "desc": "100% developed-market international stocks + 100% managed-futures trend—the international RSST.",
+    },
+    "etf-rssx": {
+        "title": "RSSX · U.S. stocks + gold/Bitcoin | ETF Guide",
+        "desc": "100% US stocks + 100% gold/Bitcoin with 63-day vol risk parity, rebalanced monthly.",
+    },
+    "etf-rsbt": {
+        "title": "RSBT · U.S. bonds + managed futures | ETF Guide",
+        "desc": "100% US bonds + 100% managed-futures trend—a CTA overlay on a bond base.",
+    },
+    "etf-rsby": {
+        "title": "RSBY · U.S. bonds + futures yield | ETF Guide",
+        "desc": "100% US bonds + 100% cross-asset futures carry—the bond-base version of RSSY.",
+    },
+    "etf-rsba": {
+        "title": "RSBA · Treasuries + merger arb | ETF Guide",
+        "desc": "100% US Treasuries + 100% merger arbitrage—event-driven overlay on a bond base.",
+    },
+}
+
+RISK_EN: dict[str, str] = {
+    "衍生品／槓桿": "Derivatives / leverage",
+    "債券利率": "Bond / interest-rate risk",
+    "匯率": "Currency risk",
+    "海外市場": "Foreign markets",
+    "非分散": "Concentration / not diversified",
+    "標的 ETF 雙重費用": "Underlying ETF double fees",
+    "新基金": "Limited track record",
+    "開曼子基金": "Cayman sub-fund structure",
+    "商品池監管": "Commodity pool regulation",
+    "商品／匯率": "Commodity / FX risk",
+    "商品池": "Commodity pool",
+    "比特幣高度波動": "Bitcoin high volatility",
+    "數位資產監管": "Digital-asset regulation",
+    "黃金期貨": "Gold futures",
+    "利率": "Interest-rate risk",
+    "併購失敗／延遲": "Deal failure / delay",
+    "槓桿": "Leverage",
+    "高換手": "High turnover",
+    "指數策略": "Index strategy",
+    "做空": "Short selling",
+}
+
+PERIOD_EN: dict[str, str] = {
+    "YTD": "YTD",
+    "1 個月": "1 month",
+    "3 個月": "3 months",
+    "6 個月": "6 months",
+    "1 年": "1 year",
+    "成立以來": "Since inception",
+}
+
+FUND_LABEL_EN: dict[str, str] = {
+    "交易所": "Exchange",
+    "成立日": "Inception",
+    "持股數": "Holdings count",
+    "總費率（毛）": "Gross expense ratio",
+    "總費率（淨）": "Net expense ratio",
+    "30 日 SEC 殖利率": "30-day SEC yield",
+    "費率備註": "Fee note",
+}
+
+AUM_LABEL_EN: dict[str, str] = {
+    "新標的": "New listing",
+}
+
+CORR_LABEL_EN: dict[str, str] = {
+    "美股": "US stocks",
+    "美債": "US bonds",
+    "CTA 趨勢": "CTA trend",
+    "全球股": "Global stocks",
+    "公債": "Treasuries",
+    "黃金": "Gold",
+    "比特幣": "Bitcoin",
+    "國際股": "Intl stocks",
+    "管理期貨": "Managed futures",
+    "期貨展期收益": "Futures yield",
+}
+
+BENCHMARK_HEADER_EN: dict[str, str] = {
+    "期間": "Period",
+    "NAV": "NAV",
+    "美國股票": "US stocks",
+    "全球股票": "Global stocks",
+    "美國公債": "US Treasuries",
+    "美國債券": "US bonds",
+    "美債": "US bonds",
+    "美股": "US stocks",
+    "官方管理期貨指數": "Official managed-futures index",
+    "100/100 組合": "100/100 blend",
+    "短期美債": "Short-term Treasuries",
+    "併購套利指數": "Merger-arb index",
+}
+
+ANALYTICS_LABEL_EN: dict[str, str] = {
+    **BENCHMARK_HEADER_EN,
+    **CORR_LABEL_EN,
+    "全球股票": "Global stocks",
+    "美國債券": "US bonds",
+    "現金（T-Bills）": "Cash (T-Bills)",
+    "100/100（Return Stacked 組合）": "100/100 (Return Stacked blend)",
+    "美國股票（SPX）": "US stocks (SPX)",
+    "管理期貨指數": "Managed-futures index",
+    "短期國庫券": "Short-term T-Bills",
+    "美股＋管理期貨（Return Stacked）": "US stocks + managed futures (Return Stacked)",
+    "國際股票（MSCI EAFE）": "Intl stocks (MSCI EAFE)",
+    "國際股＋管理期貨（Return Stacked）": "Intl stocks + managed futures (Return Stacked)",
+    "市場環境": "Market regime",
+    "Return Stacked": "Return Stacked",
+    "熊市月份（約 17%）": "Bear months (~17%)",
+    "牛市月份（約 83%）": "Bull months (~83%)",
+    "全期間": "Full period",
+    "複製子模型": "Replication model",
+    "日相關（vs 官方管理期貨指數）": "Daily corr. (vs official MF index)",
+    "追蹤誤差": "Tracking error",
+}
+
+LAYER2_VIZ_DETAIL: dict[str, dict[str, str]] = {
+    "us-bonds": {
+        "long": "Long",
+        "cap": "Treasury ladder · equal weight",
+    },
+    "managed-futures": {
+        "up": "Up → long",
+        "down": "Down → short",
+        "cap": "Follow price · ~27 futures",
+    },
+    "futures-carry": {
+        "near": "Near",
+        "far": "Far",
+        "expensive": "Higher",
+        "cheap": "Lower",
+        "cap": "Backwardation · roll yield",
+    },
+    "gold-bitcoin": {
+        "gold": "Gold",
+        "btc": "Bitcoin",
+        "cap": "63-day vol · dynamic weights",
+    },
+    "merger-arb": {
+        "market": "Market 45",
+        "gap": "Spread",
+        "target": "Deal 50",
+        "cap": "Deal closes → spread narrows",
+    },
 }

@@ -1,19 +1,20 @@
-/** Guide pages: table scroll hint + locale init. */
+/** Guide pages: locale init + shared horizontal scroll affordances. */
 (function initGuidePage() {
-  document.querySelectorAll(".guide-table-wrap").forEach((wrap) => {
-    if (wrap.scrollWidth > wrap.clientWidth + 4) {
-      wrap.setAttribute("data-scrollable", "true");
-    }
-  });
-
   document.querySelectorAll(".guide-etf-ticker, .guide-l2-jump-etfs").forEach((node) => {
     node.setAttribute("translate", "no");
   });
+
+  if (typeof globalThis.initHorizontalScrollAffordances === "function") {
+    globalThis.initHorizontalScrollAffordances();
+  }
 
   if (globalThis.PLLocale) {
     globalThis.PLLocale.initGate(() => {
       if (typeof globalThis.refreshSocialDock === "function") {
         globalThis.refreshSocialDock();
+      }
+      if (typeof globalThis.initHorizontalScrollAffordances === "function") {
+        globalThis.initHorizontalScrollAffordances();
       }
     });
   }

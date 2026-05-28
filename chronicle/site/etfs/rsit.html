@@ -18,12 +18,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=16" />
-    <link rel="stylesheet" href="../guide.css?v=30" />
+    <link rel="stylesheet" href="../styles.css?v=14" />
+    <link rel="stylesheet" href="../guide.css?v=32" />
   </head>
   <body class="guide-page">
-    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
-    <div class="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
     <div class="paper-noise" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
@@ -49,126 +47,133 @@
           </div>
         </div>
       </nav>
-      <nav class="guide-breadcrumb" aria-label="麵包屑">
-        <span>ETF 百科</span>
+      <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+        <span data-i18n="guide.etf.breadcrumb">ETF 百科</span>
         <span aria-hidden="true">/</span>
         <span>RSIT</span>
       </nav>
 
-      <main id="main-content">
-
       <header class="hero hero-compact guide-hero guide-etf-hero">
         <div class="hero-copy hero-copy-compact guide-hero-copy">
           <p class="hero-tag">International Stocks &amp; Managed Futures</p>
-          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">RSIT</span> 國際股＋管理期貨</h1>
-          <p class="guide-lead">100% 已開發市場國際股 ＋ 100% 管理期貨趨勢——RSST 的國際版。</p>
-          <span class="guide-badge guide-badge-live">Tim 實測有配置</span>
+          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">RSIT</span> <span data-i18n="etf.rsit.display_name">國際股＋管理期貨</span></h1>
+          <p class="guide-lead"><span data-i18n="etf.rsit.tagline">100% 已開發市場國際股 ＋ 100% 管理期貨趨勢——RSST 的國際版。</span></p>
+          <span class="guide-badge guide-badge-live"><span data-i18n="guide.etf.holdings">Tim 實測有配置</span></span>
         </div>
       </header>
 
       <section class="guide-metric-strip focus-metric-grid" aria-label="Quick facts">
-        <article class="focus-metric"><span class="focus-metric-label">第一層</span><strong class="focus-metric-value guide-metric-text">國際股票</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">第二層</span><strong class="focus-metric-value guide-metric-text">管理期貨（趨勢）</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer1">第一層</span><strong class="focus-metric-value guide-metric-text"><span data-i18n="etf.rsit.base">國際股票</span></strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer2">第二層</span><strong class="focus-metric-value guide-metric-text"><span data-i18n="etf.rsit.stack">管理期貨（趨勢）</span></strong></article>
         <article class="focus-metric"><span class="focus-metric-label">AUM</span><strong class="focus-metric-value">新標的</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">淨費率</span><strong class="focus-metric-value">0.98%</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label"><span data-i18n="guide.etf.metric.net_fee">淨費率</span></span><strong class="focus-metric-value">0.98%</strong></article>
       </section>
 
       <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">雙層結構</p><h2>這一檔怎麼疊？</h2></div></div>
-        <div class="guide-layers"><div class="guide-layer-block"><h3>第一層 · 國際股票 100%</h3><p>已開發市場非北美大型／中型／小型股（S&amp;P Developed ex-US BMI 相關）。</p></div><div class="guide-layer-block"><h3>第二層 · 管理期貨 100%</h3><p>與 RSST 相同複製框架：27 期貨、Top-Down + Bottom-Up 混合。</p></div></div><div class="guide-layer2-deep guide-layer2-deep-compact">
-        <p class="guide-layer2-deep-kicker">第二層策略 · 管理期貨（趨勢追蹤）</p>
-        <p class="guide-layer2-card-lead">這裡的「管理期貨」指的是趨勢追蹤（官方常稱管理期貨趨勢策略）。核心想法：價格形成上升趨勢就做多，形成下降趨勢就做空，盤整時可能減碼或換方向。不是看公司盈餘、也不是長期持有某個商品，而是跟著價格走。標的是一籃子期貨：原油、黃金、農產品、匯率、各國利率、股指等，分散在約二十多種市場。</p>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.structure.kicker">雙層結構</span></p><h2><span data-i18n="guide.etf.section.structure.title">這一檔怎麼疊？</span></h2></div></div>
+        <div class="guide-layers"><div class="guide-layer-block"><h3><span data-i18n="etf.rsit.layer.0.title">第一層 · 國際股票 100%</span></h3><p><span data-i18n="etf.rsit.layer.0.body">已開發市場非北美大型／中型／小型股（S&amp;P Developed ex-US BMI 相關）。</span></p></div><div class="guide-layer-block"><h3><span data-i18n="etf.rsit.layer.1.title">第二層 · 管理期貨 100%</span></h3><p><span data-i18n="etf.rsit.layer.1.body">與 RSST 相同複製框架：27 期貨、Top-Down + Bottom-Up 混合。</span></p></div></div><div class="guide-layer2-deep guide-layer2-deep-compact">
+        <p class="guide-layer2-deep-kicker"><span data-i18n="etf.rsit.l2.kicker">第二層策略 · 管理期貨（趨勢追蹤）</span></p>
+        <p class="guide-layer2-card-lead"><span data-i18n="layer2.managed-futures.pitch">這裡的「管理期貨」指的是趨勢追蹤（官方常稱管理期貨趨勢策略）。核心想法：價格形成上升趨勢就做多，形成下降趨勢就做空，盤整時可能減碼或換方向。不是看公司盈餘、也不是長期持有某個商品，而是跟著價格走。標的是一籃子期貨：原油、黃金、農產品、匯率、各國利率、股指等，分散在約二十多種市場。</span></p>
       </div>
         
       </section>
       <section class="card guide-why-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">為什麼存在</p><h2>設計邏輯與使用情境</h2></div></div>
-        <div class="why-grid"><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🗺️</span>    <h4 class="why-card-title">全球化資產配置的拼圖</h4>  </div>  <p class="why-card-desc">對於想要<strong>分散美股集中度風險</strong>的投資人，RSIT 底倉提供 100% 的<strong>已開發市場非美股票曝險</strong>（涵蓋歐洲、亞太等發達國家中大型企業）。這有助於補齊全球化配置中非美股票的核心基本盤。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🛡️</span>    <h4 class="why-card-title">多重分散效應與危機保護</h4>  </div>  <p class="why-card-desc">第二層配置 100% 管理期貨趨勢策略。歷史上，已開發國家非美股市的波動與跌幅往往高於美股，透過管理期貨在股市大跌時做空股指、做多防禦性資產，能為國際股部位提供寶貴的 <strong>Crisis Alpha 避險收益</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚡</span>    <h4 class="why-card-title">高資本效率分散投資</h4>  </div>  <p class="why-card-desc">如果你原本的投資組合中配置了 20% 的非美開發市場股票，只要將其改買 20% 的 RSIT，即可在「<strong>非美股票曝險不變</strong>」的同時，無痛地在資產組合中疊加 20% 的管理期貨策略，<strong>完美釋放資金</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">📈</span>    <h4 class="why-card-title">精準追蹤官方管理期貨指標</h4>  </div>  <p class="why-card-desc">與 RSST 採用相同的複製框架，截至 2026 年 Q1 季報，複製模型 3 年日相關高達 <strong>0.84</strong>，追蹤誤差控制在 <strong>5.4%</strong>，是一套成熟且經過市場驗證的量化交易系統。</p></div></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.why.kicker">為什麼存在</span></p><h2><span data-i18n="guide.etf.section.why.title">設計邏輯與使用情境</span></h2></div></div>
+        <div class="why-grid"><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🗺️</span>    <h4 class="why-card-title"><span data-i18n="etf.rsit.why.0.title">全球化資產配置的拼圖</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rsit.why.0.desc">對於想要<strong>分散美股集中度風險</strong>的投資人，RSIT 底倉提供 100% 的<strong>已開發市場非美股票曝險</strong>（涵蓋歐洲、亞太等發達國家中大型企業）。這有助於補齊全球化配置中非美股票的核心基本盤。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🛡️</span>    <h4 class="why-card-title"><span data-i18n="etf.rsit.why.1.title">多重分散效應與危機保護</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rsit.why.1.desc">第二層配置 100% 管理期貨趨勢策略。歷史上，已開發國家非美股市的波動與跌幅往往高於美股，透過管理期貨在股市大跌時做空股指、做多防禦性資產，能為國際股部位提供寶貴的 <strong>Crisis Alpha 避險收益</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚡</span>    <h4 class="why-card-title"><span data-i18n="etf.rsit.why.2.title">高資本效率分散投資</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rsit.why.2.desc">如果你原本的投資組合中配置了 20% 的非美開發市場股票，只要將其改買 20% 的 RSIT，即可在「<strong>非美股票曝險不變</strong>」的同時，無痛地在資產組合中疊加 20% 的管理期貨策略，<strong>完美釋放資金</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">📈</span>    <h4 class="why-card-title"><span data-i18n="etf.rsit.why.3.title">精準追蹤官方管理期貨指標</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rsit.why.3.desc">與 RSST 採用相同的複製框架，截至 2026 年 Q1 季報，複製模型 3 年日相關高達 <strong>0.84</strong>，追蹤誤差控制在 <strong>5.4%</strong>，是一套成熟且經過市場驗證的量化交易系統。</p></div></div>
         
       </section>
       
       <div class="guide-split-row"><section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">基金資料</p><h2>規格表</h2></div></div>
-        <dl class="guide-spec-dl"><div class="guide-spec-row"><dt>交易所</dt><dd>CBOE</dd></div><div class="guide-spec-row"><dt>成立日</dt><dd>2026-05-07</dd></div><div class="guide-spec-row"><dt>持股數</dt><dd>28</dd></div><div class="guide-spec-row"><dt>總費率（毛）</dt><dd>0.98%</dd></div><div class="guide-spec-row"><dt>總費率（淨）</dt><dd>0.98%</dd></div><div class="guide-spec-row"><dt>30 日 SEC 殖利率</dt><dd>—</dd></div><div class="guide-spec-row"><dt>費率備註</dt><dd>2026 Q2 新標的；掛牌日依 Tim Wei 實驗紀錄</dd></div></dl>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.fund.kicker">基金資料</span></p><h2><span data-i18n="guide.etf.section.fund.title">規格表</span></h2></div></div>
+        <dl class="guide-spec-dl"><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.交易所">交易所</span></dt><dd>CBOE</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.成立日">成立日</span></dt><dd>2026-05-07</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.持股數">持股數</span></dt><dd>28</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.總費率_毛_">總費率（毛）</span></dt><dd>0.98%</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.總費率_淨_">總費率（淨）</span></dt><dd>0.98%</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.30_日_SEC_殖利率">30 日 SEC 殖利率</span></dt><dd>—</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.費率備註">費率備註</span></dt><dd><span data-i18n="etf.rsit.expense_note">2026 Q2 新標的；掛牌日依 Tim Wei 實驗紀錄</span></dd></div></dl>
         
       </section><section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">相關性</p><h2>歷史相關矩陣（官方 Product Brief）</h2></div></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.corr.kicker">相關性</span></p><h2><span data-i18n="guide.etf.section.corr.title">歷史相關矩陣（官方 Product Brief）</span></h2></div></div>
         <div class="table-wrap guide-table-wrap guide-corr-wrap">
       <table class="quotes guide-table guide-table-corr">
-        <thead><tr><th class="guide-corr-corner"></th><th>國際股</th><th>美債</th><th>管理期貨</th></tr></thead>
-        <tbody><tr><td class="guide-corr-rowhead">國際股</td><td class="guide-corr-val guide-corr-diag">1.00</td><td class="guide-corr-val">0.20</td><td class="guide-corr-val">-0.07</td></tr><tr><td class="guide-corr-rowhead">美債</td><td class="guide-corr-val">0.20</td><td class="guide-corr-val guide-corr-diag">1.00</td><td class="guide-corr-val">0.01</td></tr><tr><td class="guide-corr-rowhead">管理期貨</td><td class="guide-corr-val">-0.07</td><td class="guide-corr-val">0.01</td><td class="guide-corr-val guide-corr-diag">1.00</td></tr></tbody>
+        <thead><tr><th class="guide-corr-corner"></th><th><span data-i18n="etf.rsit.corr.header.國際股">國際股</span></th><th><span data-i18n="etf.rsit.corr.header.美債">美債</span></th><th><span data-i18n="etf.rsit.corr.header.管理期貨">管理期貨</span></th></tr></thead>
+        <tbody><tr><td class="guide-corr-rowhead"><span data-i18n="etf.rsit.corr.row.國際股">國際股</span></td><td class="guide-corr-val guide-corr-diag">1.00</td><td class="guide-corr-val">0.20</td><td class="guide-corr-val">-0.07</td></tr><tr><td class="guide-corr-rowhead"><span data-i18n="etf.rsit.corr.row.美債">美債</span></td><td class="guide-corr-val">0.20</td><td class="guide-corr-val guide-corr-diag">1.00</td><td class="guide-corr-val">0.01</td></tr><tr><td class="guide-corr-rowhead"><span data-i18n="etf.rsit.corr.row.管理期貨">管理期貨</span></td><td class="guide-corr-val">-0.07</td><td class="guide-corr-val">0.01</td><td class="guide-corr-val guide-corr-diag">1.00</td></tr></tbody>
       </table>
     </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">相關性會隨時間改變，僅供理解第二層與核心的關係。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.etf.section.corr.foot">相關性會隨時間改變，僅供理解第二層與核心的關係。</span></p></div>
       </section></div>
       
       
       <section class="card guide-backtest-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">官方歷史回測</p><h2>Stacking in Action（1999-12-31 ～ 2025-12-31）</h2></div></div>
+        <div class="section-head section-head-tight"><div>
+          <p class="section-kicker"><span data-i18n="guide.backtest.kicker">官方歷史回測</span></p>
+          <h2><span data-i18n="etf.rsit.backtest.title">Stacking in Action（1999-12-31 ～ 2025-12-31）</span></h2>
+        </div></div>
         <div class="guide-backtest-layout">
         <div class="guide-backtest-col guide-backtest-col-stats">
           <p class="guide-backtest-col-label guide-backtest-col-label-spacer" aria-hidden="true">Growth of $100</p>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>資產／組合</th><th>年化報酬</th><th>年化波動</th><th>最大回撤</th></tr></thead>
-        <tbody><tr><td>國際股票（MSCI EAFE）</td><td>4.5%</td><td>16.5%</td><td>-56.68%</td></tr><tr><td>管理期貨指數</td><td>5.4%</td><td>13.3%</td><td>-20.74%</td></tr><tr><td>短期國庫券</td><td>1.9%</td><td>0.6%</td><td>-0.01%</td></tr><tr class="guide-row-highlight"><td>國際股＋管理期貨（Return Stacked）</td><td>8.2%</td><td>20.4%</td><td>-47.46%</td></tr></tbody>
+        <thead><tr>
+          <th><span data-i18n="guide.backtest.col.asset">資產／組合</span></th>
+          <th><span data-i18n="guide.backtest.col.ret">年化報酬</span></th>
+          <th><span data-i18n="guide.backtest.col.vol">年化波動</span></th>
+          <th><span data-i18n="guide.backtest.col.mdd">最大回撤</span></th>
+        </tr></thead>
+        <tbody><tr><td><span data-i18n="etf.rsit.backtest.stat.國際股票_MSCI_EAFE_">國際股票（MSCI EAFE）</span></td><td>4.5%</td><td>16.5%</td><td>-56.68%</td></tr><tr><td><span data-i18n="etf.rsit.backtest.stat.管理期貨指數">管理期貨指數</span></td><td>5.4%</td><td>13.3%</td><td>-20.74%</td></tr><tr><td><span data-i18n="etf.rsit.backtest.stat.短期國庫券">短期國庫券</span></td><td>1.9%</td><td>0.6%</td><td>-0.01%</td></tr><tr class="guide-row-highlight"><td><span data-i18n="etf.rsit.backtest.stat.國際股_管理期貨_Return_Stacked_">國際股＋管理期貨（Return Stacked）</span></td><td>8.2%</td><td>20.4%</td><td>-47.46%</td></tr></tbody>
       </table>
     </div>
         </div>
         
         <div class="guide-backtest-col guide-backtest-col-growth">
-          <p class="guide-backtest-col-label">Growth of $100（20 年後估算終值）</p>
+          <p class="guide-backtest-col-label"><span data-i18n="etf.rsit.backtest.growth.title">Growth of $100（20 年後估算終值）</span></p>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
             <table class="quotes guide-table guide-table-num">
-              <thead><tr><th>資產／組合</th><th>20 年後</th></tr></thead>
-              <tbody><tr><td>國際股票（MSCI EAFE）</td><td>$241.2</td></tr><tr><td>管理期貨指數</td><td>$286.3</td></tr><tr><td>短期國庫券</td><td>$145.7</td></tr><tr class="guide-row-highlight"><td>國際股＋管理期貨（Return Stacked）</td><td>$483.7</td></tr></tbody>
+              <thead><tr>
+                <th><span data-i18n="guide.backtest.col.asset">資產／組合</span></th>
+                <th><span data-i18n="etf.rsit.backtest.growth.col">20 年後</span></th>
+              </tr></thead>
+              <tbody><tr><td><span data-i18n="etf.rsit.backtest.stat.國際股票_MSCI_EAFE_">國際股票（MSCI EAFE）</span></td><td>$241.2</td></tr><tr><td><span data-i18n="etf.rsit.backtest.stat.管理期貨指數">管理期貨指數</span></td><td>$286.3</td></tr><tr><td><span data-i18n="etf.rsit.backtest.stat.短期國庫券">短期國庫券</span></td><td>$145.7</td></tr><tr class="guide-row-highlight"><td><span data-i18n="etf.rsit.backtest.stat.國際股_管理期貨_Return_Stacked_">國際股＋管理期貨（Return Stacked）</span></td><td>$483.7</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint guide-backtest-growth-note">※「歷史回測」年化報酬數據源自官方歷史回測資料；「20 年後估算終值」為本站依此報酬率複利自行推算，非官方數據，亦非逐日回測曲線。</p><p class="fineprint guide-fineprint">100% 國際股 / 100% CTA Trend / -100% T-Bills。摘自 RSIT Presentation。 過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint guide-backtest-growth-note"><span data-i18n="guide.backtest.growth.note">※「歷史回測」年化報酬數據源自官方歷史回測資料；「20 年後估算終值」為本站依此報酬率複利自行推算，非官方數據，亦非逐日回測曲線。</span></p><p class="fineprint guide-fineprint"><span data-i18n="etf.rsit.backtest.note">100% 國際股 / 100% CTA Trend / -100% T-Bills。摘自 RSIT Presentation。</span> <span data-i18n="guide.backtest.footnote">過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。</span></p></div>
       </section>
-      <div class="guide-split-row">
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">市場環境</p><h2>不同股價環境下的年化報酬</h2></div></div>
+      <div class="guide-split-row"><section class="card">
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.regime.kicker">市場環境</span></p><h2><span data-i18n="guide.regime.title">不同股價環境下的年化報酬</span></h2></div></div>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>市場環境</th><th>國際股票</th><th>管理期貨</th><th>Return Stacked</th></tr></thead>
-        <tbody><tr><td>熊市月份（約 17%）</td><td>-24.3%</td><td>15.0%</td><td>-13.3%</td></tr><tr><td>牛市月份（約 83%）</td><td>15.7%</td><td>2.5%</td><td>15.6%</td></tr><tr><td>全期間</td><td>4.5%</td><td>5.4%</td><td>8.2%</td></tr></tbody>
+        <thead><tr><th data-i18n="etf.rsit.regime.header.0">市場環境</th><th data-i18n="etf.rsit.regime.header.1">國際股票</th><th data-i18n="etf.rsit.regime.header.2">管理期貨</th><th data-i18n="etf.rsit.regime.header.3">Return Stacked</th></tr></thead>
+        <tbody><tr><td><span data-i18n="etf.rsit.regime.row.0">熊市月份（約 17%）</span></td><td>-24.3%</td><td>15.0%</td><td>-13.3%</td></tr><tr><td><span data-i18n="etf.rsit.regime.row.1">牛市月份（約 83%）</span></td><td>15.7%</td><td>2.5%</td><td>15.6%</td></tr><tr><td><span data-i18n="etf.rsit.regime.row.2">全期間</span></td><td>4.5%</td><td>5.4%</td><td>8.2%</td></tr></tbody>
       </table>
     </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">依官方定義之 equity regime 分段年化報酬。</p></div>
-      </section>
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">複製品質</p><h2>管理期貨複製模型（3 年回顧）</h2></div></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.regime.note">依官方定義之 equity regime 分段年化報酬。</span></p></div>
+      </section><section class="card">
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.replication.kicker">複製品質</span></p><h2><span data-i18n="guide.replication.title">管理期貨複製模型（3 年回顧）</span></h2></div></div>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>複製子模型</th><th>日相關（vs 官方管理期貨指數）</th><th>追蹤誤差</th></tr></thead>
+        <thead><tr><th data-i18n="etf.rsit.replication.header.0">複製子模型</th><th data-i18n="etf.rsit.replication.header.1">日相關（vs 官方管理期貨指數）</th><th data-i18n="etf.rsit.replication.header.2">追蹤誤差</th></tr></thead>
         <tbody><tr><td>Top Down #1</td><td>0.63</td><td>9.4%</td></tr><tr><td>Top Down #2</td><td>0.72</td><td>6.7%</td></tr><tr><td>Bottom Up</td><td>0.82</td><td>6.9%</td></tr><tr><td>Blend（15/15/70）</td><td>0.84</td><td>5.4%</td></tr></tbody>
       </table>
     </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">與 RSST 相同之管理期貨複製框架（Q1 2026 Commentary）。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="etf.rsit.replication.note">與 RSST 相同之管理期貨複製框架（Q1 2026 Commentary）。</span></p></div>
       </section></div>
 
       <div class="guide-split-row"><section class="card guide-card-accent-soft">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">Tim Wei 實測</p><h2>這一檔與本實驗的關係</h2></div></div>
-        <p>Tim Wei 實驗有配置 RSIT。</p><p><a class="card-jump-link" href="../index.html">在總覽看 RSIT 持倉 →</a></p>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.tim.kicker">Tim Wei 實測</span></p><h2><span data-i18n="guide.etf.section.tim.title">這一檔與本實驗的關係</span></h2></div></div>
+        <p><span data-i18n="etf.rsit.tim_note">Tim Wei 實驗有配置 RSIT。</span></p><p><a class="card-jump-link" href="../index.html"><span data-i18n="etf.rsit.holdings_link">在總覽看 RSIT 持倉 →</span></a></p>
         
       </section><section class="card guide-card-warn">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">主要風險</p><h2>投資前必知（摘要）</h2></div></div>
-        <ul class="guide-list guide-list-compact"><li>衍生品／槓桿</li><li>開曼子基金</li><li>海外市場</li><li>匯率</li><li>非分散</li><li>新基金</li></ul>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。</p></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.risk.kicker">主要風險</span></p><h2><span data-i18n="guide.etf.section.risk.title">投資前必知（摘要）</span></h2></div></div>
+        <ul class="guide-list guide-list-compact"><li><span data-i18n="guide.risk.衍生品_槓桿">衍生品／槓桿</span></li><li><span data-i18n="guide.risk.開曼子基金">開曼子基金</span></li><li><span data-i18n="guide.risk.海外市場">海外市場</span></li><li><span data-i18n="guide.risk.匯率">匯率</span></li><li><span data-i18n="guide.risk.非分散">非分散</span></li><li><span data-i18n="guide.risk.新基金">新基金</span></li></ul>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.etf.section.risk.foot">完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。</span></p></div>
       </section></div>
 
-      <nav class="guide-etf-nav card" aria-label="其他 ETF">
+      <nav class="guide-etf-nav card" aria-label="Other ETFs">
         <div class="section-head section-head-tight">
           <div>
-            <p class="section-kicker">延伸閱讀</p>
-            <h2>Return Stacked 系列其他標的</h2>
+            <p class="section-kicker" data-i18n="guide.etf.nav.kicker">延伸閱讀</p>
+            <h2 data-i18n="guide.etf.nav.title">Return Stacked 系列其他標的</h2>
           </div>
         </div>
-        <p class="guide-nav-desc">目前頁面為 <strong>RSIT</strong>。其他標的：</p>
-        <div class="guide-inline-tags"><a class="guide-inline-tag" href="rssb.html"><span class="nav-ticker">RSSB</span><span class="nav-name">全球股債</span></a><a class="guide-inline-tag" href="rsst.html"><span class="nav-ticker">RSST</span><span class="nav-name">美股＋管理期貨趨勢</span></a><a class="guide-inline-tag" href="rssy.html"><span class="nav-ticker">RSSY</span><span class="nav-name">美股＋期貨展期收益</span></a><a class="guide-inline-tag" href="rssx.html"><span class="nav-ticker">RSSX</span><span class="nav-name">美股＋黃金／比特幣</span></a><a class="guide-inline-tag" href="rsbt.html"><span class="nav-ticker">RSBT</span><span class="nav-name">債券＋管理期貨</span></a><a class="guide-inline-tag" href="rsby.html"><span class="nav-ticker">RSBY</span><span class="nav-name">債券＋期貨展期收益</span></a><a class="guide-inline-tag" href="rsba.html"><span class="nav-ticker">RSBA</span><span class="nav-name">債券＋併購套利</span></a></div>
+        <p class="guide-nav-desc"><span data-i18n="etf.rsit.nav.desc">目前頁面為 RSIT。其他標的：</span></p>
+        <div class="guide-inline-tags"><a class="guide-inline-tag" href="rssb.html"><span class="nav-ticker">RSSB</span><span class="nav-name"><span data-i18n="etf.rssb.name">全球股債</span></span></a><a class="guide-inline-tag" href="rsst.html"><span class="nav-ticker">RSST</span><span class="nav-name"><span data-i18n="etf.rsst.name">美股＋管理期貨趨勢</span></span></a><a class="guide-inline-tag" href="rssy.html"><span class="nav-ticker">RSSY</span><span class="nav-name"><span data-i18n="etf.rssy.name">美股＋期貨展期收益</span></span></a><a class="guide-inline-tag" href="rssx.html"><span class="nav-ticker">RSSX</span><span class="nav-name"><span data-i18n="etf.rssx.name">美股＋黃金／比特幣</span></span></a><a class="guide-inline-tag" href="rsbt.html"><span class="nav-ticker">RSBT</span><span class="nav-name"><span data-i18n="etf.rsbt.name">債券＋管理期貨</span></span></a><a class="guide-inline-tag" href="rsby.html"><span class="nav-ticker">RSBY</span><span class="nav-name"><span data-i18n="etf.rsby.name">債券＋期貨展期收益</span></span></a><a class="guide-inline-tag" href="rsba.html"><span class="nav-ticker">RSBA</span><span class="nav-name"><span data-i18n="etf.rsba.name">債券＋併購套利</span></span></a></div>
       </nav>
 
       <div class="guide-footer-cta card">
@@ -183,13 +188,11 @@
           <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
         </div>
       </div>
-      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
-    <script src="../locale.js?v=8"></script>
-    <script src="../guide-locale.js?v=30"></script>
+    <script src="../locale.js?v=11"></script>
+    <script src="../guide-locale.js?v=32"></script>
     <script src="../js/guide.js?v=11"></script>
     <script src="../js/social-dock.js"></script>
-    <script src="../js/site-polish.js"></script>
   </body>
 </html>

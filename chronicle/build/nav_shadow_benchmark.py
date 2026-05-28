@@ -22,6 +22,72 @@ SHADOW_BENCHMARKS = (
 )
 
 
+def _event_snapshot_key(dt: datetime) -> str:
+    return dt.strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def _row_snapshot_key(raw_date: str) -> str | None:
+    raw = str(raw_date or "").strip()
+    if "T" not in raw:
+        return None
+    key = raw.replace("Z", "").split("+")[0]
+    if key.count(":") == 1:
+        key = f"{key}:00"
+    return key[:19] if len(key) >= 19 else None
+
+
+def _first_equity_buy_trade(
+    trades: list[dict[str, Any]], cash_equiv: frozenset[str]
+) -> dict[str, Any] | None:
+    best: dict[str, Any] | None = None
+    best_dt: datetime | None = None
+    for trade in trades:
+        symbol = str(trade.get("symbol", ""))
+        if symbol in cash_equiv:
+            continue
+        if str(trade.get("side", "")).strip().lower() != "buy":
+            continue
+        dt = _trade_event_dt(trade)
+        if best_dt is None or dt < best_dt:
+            best_dt = dt
+            best = trade
+    return best
+
+
+def _first_equity_trade_key(
+    trades: list[dict[str, Any]], cash_equiv: frozenset[str]
+) -> str | None:
+    candidates: list[datetime] = []
+    for trade in trades:
+        symbol = str(trade.get("symbol", ""))
+        if symbol in cash_equiv:
+            continue
+        if str(trade.get("side", "")).strip().lower() != "buy":
+            continue
+        candidates.append(_trade_event_dt(trade))
+    if not candidates:
+        return None
+    return _event_snapshot_key(min(candidates))
+
+
+def _resolve_row_snapshot(
+    raw_date: str,
+    day: str,
+    event_snapshots: dict[str, dict[str, Any]],
+    day_snapshots: dict[str, dict[str, Any]],
+    last_snap: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    row_key = _row_snapshot_key(raw_date)
+    if row_key is not None:
+        snap = event_snapshots.get(row_key)
+        if snap is not None:
+            return snap
+    snap = day_snapshots.get(day)
+    if snap is not None:
+        return snap
+    return last_snap
+
+
 def _calendar_key(raw: str) -> str:
     return str(raw)[:10] if raw else ""
 
@@ -137,6 +203,8 @@ def enrich_nav_unit_and_shadows(
         "SSO": {"shares": 0.0},
     }
     day_snapshots: dict[str, dict[str, Any]] = {}
+    event_snapshots: dict[str, dict[str, Any]] = {}
+    first_equity_trade_key = _first_equity_trade_key(trades, cash_equiv)
 
     for dt, kind, payload in events:
         day = dt.date().isoformat()
@@ -182,21 +250,35 @@ def enrich_nav_unit_and_shadows(
                             0.0, book["shares"] - min(book["shares"], shares_delta)
                         )
 
-        day_snapshots[day] = {
+        snap = {
             "fund_units": fund_units,
             "shadow": deepcopy(shadow),
         }
+        event_snapshots[_event_snapshot_key(dt)] = snap
+        day_snapshots[day] = snap
 
     shadow_idx: dict[str, float] = {t[0]: 100.0 for t in SHADOW_BENCHMARKS}
     prev_close: dict[str, float | None] = {t[0]: None for t in SHADOW_BENCHMARKS}
     shadow_started: dict[str, bool] = {t[0]: False for t in SHADOW_BENCHMARKS}
+    first_equity_trade = _first_equity_buy_trade(trades, cash_equiv)
+    first_fill_px: dict[str, float | None] = {t[0]: None for t in SHADOW_BENCHMARKS}
+    if first_equity_trade is not None:
+        for ticker, _, _ in SHADOW_BENCHMARKS:
+            px = _shadow_fill_price(
+                first_equity_trade, ticker, series_map, intraday_lookup
+            )
+            if px is not None and px > 1e-9:
+                first_fill_px[ticker] = float(px)
 
     out: list[dict[str, Any]] = []
     last_snap: dict[str, Any] | None = None
     for row in nav_rows:
         row_out = dict(row)
-        day = _calendar_key(str(row.get("date", "")))
-        snap = day_snapshots.get(day, last_snap)
+        raw_date = str(row.get("date", ""))
+        day = _calendar_key(raw_date)
+        snap = _resolve_row_snapshot(
+            raw_date, day, event_snapshots, day_snapshots, last_snap
+        )
         if snap is None:
             out.append(row_out)
             continue
@@ -204,8 +286,12 @@ def enrich_nav_unit_and_shadows(
         units = float(snap["fund_units"])
         nav_mv = float(row.get("position_mv_usd") or row.get("mv_usd", 0) or 0)
         as_of = parse_iso_date(day) if day else date.today()
+        row_key = _row_snapshot_key(raw_date)
         if units > 1e-9:
-            row_out["nav_index"] = round(nav_mv / units, 4)
+            if first_equity_trade_key and row_key == first_equity_trade_key:
+                row_out["nav_index"] = 100.0
+            else:
+                row_out["nav_index"] = round(nav_mv / units, 4)
             row_out["fund_units"] = round(units, 6)
         for ticker, field, _ in SHADOW_BENCHMARKS:
             book = snap["shadow"][ticker]
@@ -220,14 +306,23 @@ def enrich_nav_unit_and_shadows(
                 if not shadow_started[ticker]:
                     shadow_idx[ticker] = 100.0
                     shadow_started[ticker] = True
-                elif prev_close[ticker] is not None and prev_close[ticker] > 1e-9:
+                    fill_px = first_fill_px.get(ticker)
+                    if fill_px is not None and fill_px > 1e-9:
+                        prev_close[ticker] = fill_px
+                    row_out[field] = round(shadow_idx[ticker], 4)
+                elif (
+                    prev_close[ticker] is not None
+                    and prev_close[ticker] > 1e-9
+                    and close_px > 1e-9
+                ):
                     shadow_idx[ticker] *= close_px / prev_close[ticker]
-                row_out[field] = round(shadow_idx[ticker], 4)
-                prev_close[ticker] = close_px
+                    prev_close[ticker] = close_px
+                    row_out[field] = round(shadow_idx[ticker], 4)
         out.append(row_out)
 
     return out, {
         "nav_index_basis": "unit_fund_deployed_on_trade",
+        "nav_anchor_first_trade": first_equity_trade_key,
         "shadow_ready": True,
         "shadow_tickers": [s[0] for s in SHADOW_BENCHMARKS],
         "shadow_index_basis": "chained_benchmark_return_with_mirrored_shares",

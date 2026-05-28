@@ -7,26 +7,46 @@ import json
 import re
 from pathlib import Path
 
-from guide_i18n_en import BASE_EN, LAYER2_EN, LAYER2_VIZ_EN, STACK_EN, UI, ZH_DEFAULTS
+from guide_etf_en import BACKTEST_NOTES, BENCHMARK_NOTES, ETF_EN, REPLICATION_NOTES
+from guide_i18n_en import (
+    ANALYTICS_LABEL_EN,
+    BASE_EN,
+    AUM_LABEL_EN,
+    BENCHMARK_HEADER_EN,
+    CORR_LABEL_EN,
+    FUND_LABEL_EN,
+    LAYER2_EN,
+    LAYER2_VIZ_DETAIL,
+    LAYER2_VIZ_EN,
+    META_ETF,
+    PERIOD_EN,
+    RISK_EN,
+    STACK_EN,
+    UI,
+    ZH_DEFAULTS,
+)
 
 SITE = Path(__file__).resolve().parents[1] / "site"
 ETF_DIR = SITE / "etfs"
 
-CSS_VER = "30"
+CSS_VER = "32"
 JS_VER = "11"
-LOCALE_VER = "7"
+LOCALE_VER = "11"
 STYLES_VER = "14"
 
 I18N_REGISTRY: dict[str, dict[str, str]] = {}
 
 
 def register_i18n(key: str, zh: str, en: str) -> None:
+    if key in I18N_REGISTRY:
+        return
     I18N_REGISTRY[key] = {"zh": zh, "en": en}
 
 
 def T(key: str, zh: str, en: str | None = None) -> str:
     register_i18n(key, zh, en if en is not None else zh)
-    return f'<span data-i18n="{key}">{esc(zh)}</span>'
+    body = zh if re.search(r"<[^>]+>", zh) else esc(zh)
+    return f'<span data-i18n="{key}">{body}</span>'
 
 
 def Th(key: str, zh: str, en: str | None = None) -> str:
@@ -59,6 +79,71 @@ def layer2_en(key: str, field: str, zh: str) -> str:
     return strategy.get(field, zh)
 
 
+def etf_en(slug: str, field: str, zh: str = "", index: int | None = None) -> str:
+    data = ETF_EN.get(slug, {})
+    if index is not None:
+        layers = data.get("layers", [])
+        if field == "layer_title" and index < len(layers):
+            return layers[index][0]
+        if field == "layer_body" and index < len(layers):
+            return layers[index][1]
+        why = data.get("why", [])
+        if field == "why" and index < len(why):
+            return why[index]
+    return data.get(field, zh)
+
+
+def ui_label(key: str, zh: str) -> str:
+    return T(key, zh, ui_en(key, zh))
+
+
+def translate_period(label: str) -> str:
+    return PERIOD_EN.get(label, label)
+
+
+def translate_aum(label: str) -> str:
+    return AUM_LABEL_EN.get(label, label)
+
+
+def translate_corr(label: str) -> str:
+    return CORR_LABEL_EN.get(label, label)
+
+
+def translate_risk(label: str) -> str:
+    return RISK_EN.get(label, label)
+
+
+def translate_analytics_label(label: str) -> str:
+    return ANALYTICS_LABEL_EN.get(label, label)
+
+
+def register_table_headers(prefix: str, labels: list[str]) -> list[tuple[str, str]]:
+    headers = []
+    for idx, label in enumerate(labels):
+        key = f"{prefix}.{idx}"
+        headers.append((key, label))
+        register_i18n(key, label, translate_analytics_label(label))
+    return headers
+
+
+def register_table_rows(prefix: str, rows: list[tuple]) -> list[tuple]:
+    out = []
+    for ridx, row in enumerate(rows):
+        cells = []
+        for cidx, cell in enumerate(row):
+            if cidx == 0:
+                key = f"{prefix}.row.{ridx}"
+                cells.append(T(key, cell, translate_analytics_label(cell)))
+            else:
+                cells.append(cell)
+        out.append(tuple(cells))
+    return out
+
+
+def risk_i18n_key(label: str) -> str:
+    return re.sub(r"\W+", "_", label)
+
+
 def layer2_nav_label(key: str) -> str:
     strategy = LAYER2_STRATEGIES[key]
     nav_short = strategy.get("nav_short")
@@ -89,6 +174,15 @@ def ui_en(key: str, fallback: str = "") -> str:
     if isinstance(val, tuple):
         return val[1]
     return str(val)
+
+
+def ui_pair(key: str, fallback_zh: str = "") -> tuple[str, str]:
+    val = UI.get(key, fallback_zh)
+    if isinstance(val, tuple):
+        return val[0], val[1]
+    if isinstance(val, str):
+        return val, val
+    return fallback_zh, fallback_zh
 
 LAYER2_STRATEGIES: dict[str, dict] = {
     "us-bonds": {
@@ -879,7 +973,7 @@ def render_suite_table_rows(*, prefix: str = "") -> list[tuple]:
                 T(f"etf.{slug}.base", base, BASE_EN.get(base, base)),
                 T(f"etf.{slug}.stack", stack, STACK_EN.get(stack, stack)),
                 esc(launch),
-                esc(aum),
+                T(f"etf.{slug}.aum", aum, translate_aum(aum)),
                 "●" if tim_configured(row) else "—",
             )
         )
@@ -1090,11 +1184,22 @@ def render_table(
     </div>"""
 
 
-def render_spec_dl(rows: list[tuple[str, str]]) -> str:
+def render_spec_dl(rows: list[tuple[str, str]], slug: str = "") -> str:
     items = []
     for label, value in rows:
+        en_label = FUND_LABEL_EN.get(label, label)
+        safe = re.sub(r"\W+", "_", label.strip())
+        label_html = T(f"guide.fund.label.{safe}", label, en_label)
+        if label == "費率備註" and slug:
+            value_html = T(
+                f"etf.{slug}.expense_note",
+                value,
+                etf_en(slug, "expense_note", value),
+            )
+        else:
+            value_html = esc(value)
         items.append(
-            f'<div class="guide-spec-row"><dt>{esc(label)}</dt><dd>{esc(value)}</dd></div>'
+            f'<div class="guide-spec-row"><dt>{label_html}</dt><dd>{value_html}</dd></div>'
         )
     return f'<dl class="guide-spec-dl">{"".join(items)}</dl>'
 
@@ -1161,6 +1266,32 @@ def render_card(kicker: str, title: str, body: str, extra_class: str = "", footn
       </section>"""
 
 
+def render_card_i18n(
+    kicker_key: str,
+    kicker_zh: str,
+    title_key: str,
+    title_zh: str,
+    body: str,
+    extra_class: str = "",
+    footnote_key: str = "",
+    footnote_zh: str = "",
+) -> str:
+    cls = "card"
+    if extra_class:
+        cls = f"{cls} {extra_class}"
+    kicker_html = T(kicker_key, kicker_zh, ui_en(kicker_key, kicker_zh))
+    title_html = T(title_key, title_zh, ui_en(title_key, title_zh))
+    foot = ""
+    if footnote_key:
+        footnote_html = T(footnote_key, footnote_zh, ui_en(footnote_key, footnote_zh))
+        foot = render_card_foot(f'<p class="fineprint guide-fineprint">{footnote_html}</p>')
+    return f"""<section class="{cls}">
+        <div class="section-head section-head-tight"><div><p class="section-kicker">{kicker_html}</p><h2>{title_html}</h2></div></div>
+        {body}
+        {foot}
+      </section>"""
+
+
 def render_split_row(*sections: str) -> str:
     parts = [s for s in sections if s and s.strip()]
     if not parts:
@@ -1206,67 +1337,75 @@ def render_layer2_jump_nav() -> str:
     )
 
 
+def viz_label(l2_key: str, field: str, zh: str) -> str:
+    en = LAYER2_VIZ_DETAIL.get(l2_key, {}).get(field, zh)
+    return T(f"layer2.viz.{l2_key}.{field}", zh, en)
+
+
 def render_layer2_visual(key: str) -> str:
-    visuals = {
-        "us-bonds": """
+    if key == "us-bonds":
+        return f"""
           <div class="guide-l2-viz guide-l2-viz-bonds">
             <div class="guide-l2-ladder">
               <div class="guide-l2-ladder-bar" style="--h:42%"><span>2Y</span></div>
               <div class="guide-l2-ladder-bar" style="--h:58%"><span>5Y</span></div>
               <div class="guide-l2-ladder-bar" style="--h:72%"><span>10Y</span></div>
-              <div class="guide-l2-ladder-bar" style="--h:88%"><span>長天期</span></div>
+              <div class="guide-l2-ladder-bar" style="--h:88%"><span>{viz_label(key, "long", "長天期")}</span></div>
             </div>
-            <p class="guide-l2-viz-cap">美債期貨梯 · 等權分散</p>
-          </div>""",
-        "managed-futures": """
+            <p class="guide-l2-viz-cap">{viz_label(key, "cap", LAYER2_VIZ_EN.get(key, "美債期貨梯 · 等權分散"))}</p>
+          </div>"""
+    if key == "managed-futures":
+        return f"""
           <div class="guide-l2-viz guide-l2-viz-trend">
             <svg class="guide-l2-trend-svg" viewBox="0 0 160 72" aria-hidden="true">
               <polyline points="8,58 40,48 72,52 104,28 152,12" />
             </svg>
             <div class="guide-l2-trend-tags">
-              <span class="guide-l2-pill guide-l2-pill-up">上升 → 做多</span>
-              <span class="guide-l2-pill guide-l2-pill-down">下降 → 做空</span>
+              <span class="guide-l2-pill guide-l2-pill-up">{viz_label(key, "up", "上升 → 做多")}</span>
+              <span class="guide-l2-pill guide-l2-pill-down">{viz_label(key, "down", "下降 → 做空")}</span>
             </div>
-            <p class="guide-l2-viz-cap">跟價格走 · 約 27 種期貨</p>
-          </div>""",
-        "futures-carry": """
+            <p class="guide-l2-viz-cap">{viz_label(key, "cap", LAYER2_VIZ_EN.get(key, "跟價格走 · 約 27 種期貨"))}</p>
+          </div>"""
+    if key == "futures-carry":
+        return f"""
           <div class="guide-l2-viz guide-l2-viz-carry">
             <div class="guide-l2-carry-row">
-              <span class="guide-l2-carry-label">近月</span>
-              <div class="guide-l2-carry-bar guide-l2-carry-bar-high"><span>較貴</span></div>
+              <span class="guide-l2-carry-label">{viz_label(key, "near", "近月")}</span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-high"><span>{viz_label(key, "expensive", "較貴")}</span></div>
             </div>
             <div class="guide-l2-carry-row">
-              <span class="guide-l2-carry-label">遠月</span>
-              <div class="guide-l2-carry-bar guide-l2-carry-bar-low"><span>較便宜</span></div>
+              <span class="guide-l2-carry-label">{viz_label(key, "far", "遠月")}</span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-low"><span>{viz_label(key, "cheap", "較便宜")}</span></div>
             </div>
-            <p class="guide-l2-viz-cap">逆價差 · 換月可能賺展期</p>
-          </div>""",
-        "gold-bitcoin": """
+            <p class="guide-l2-viz-cap">{viz_label(key, "cap", LAYER2_VIZ_EN.get(key, "逆價差 · 換月可能賺展期"))}</p>
+          </div>"""
+    if key == "gold-bitcoin":
+        return f"""
           <div class="guide-l2-viz guide-l2-viz-hard">
             <div class="guide-l2-balance">
               <div class="guide-l2-balance-side">
                 <span class="guide-l2-balance-icon guide-l2-balance-gold"></span>
-                <span>黃金</span>
+                <span>{viz_label(key, "gold", "黃金")}</span>
               </div>
               <div class="guide-l2-balance-beam" aria-hidden="true"></div>
               <div class="guide-l2-balance-side">
                 <span class="guide-l2-balance-icon guide-l2-balance-btc"></span>
-                <span>比特幣</span>
+                <span>{viz_label(key, "btc", "比特幣")}</span>
               </div>
             </div>
-            <p class="guide-l2-viz-cap">63 天波動 · 動態調權</p>
-          </div>""",
-        "merger-arb": """
+            <p class="guide-l2-viz-cap">{viz_label(key, "cap", LAYER2_VIZ_EN.get(key, "63 天波動 · 動態調權"))}</p>
+          </div>"""
+    if key == "merger-arb":
+        return f"""
           <div class="guide-l2-viz guide-l2-viz-arb">
             <div class="guide-l2-arb-track">
-              <span class="guide-l2-arb-price">市價 45</span>
-              <span class="guide-l2-arb-gap">價差</span>
-              <span class="guide-l2-arb-price guide-l2-arb-target">收購價 50</span>
+              <span class="guide-l2-arb-price">{viz_label(key, "market", "市價 45")}</span>
+              <span class="guide-l2-arb-gap">{viz_label(key, "gap", "價差")}</span>
+              <span class="guide-l2-arb-price guide-l2-arb-target">{viz_label(key, "target", "收購價 50")}</span>
             </div>
-            <p class="guide-l2-viz-cap">成交 → 價差收斂</p>
-          </div>""",
-    }
-    return visuals.get(key, "")
+            <p class="guide-l2-viz-cap">{viz_label(key, "cap", LAYER2_VIZ_EN.get(key, "成交 → 價差收斂"))}</p>
+          </div>"""
+    return ""
 
 
 def render_layer2_body_text(
@@ -1364,43 +1503,68 @@ def render_layer2_strategy_card(key: str, prefix: str = "", *, index: int = 0, s
       </article>"""
 
 
-def render_layer2_explainer(stack_label: str, current_ticker: str = "", *, compact: bool = False) -> str:
+def render_layer2_explainer(
+    stack_label: str, current_ticker: str = "", *, compact: bool = False, slug: str = ""
+) -> str:
     key = layer2_strategy_key(stack_label)
     if not key or key not in LAYER2_STRATEGIES:
         return ""
     s = LAYER2_STRATEGIES[key]
+    kicker_zh = f"第二層策略 · {s['title']}"
+    kicker_en = f"Layer 2 strategy · {layer2_en(key, 'title', s['title'])}"
+    kicker_key = f"etf.{slug}.l2.kicker" if slug else f"layer2.{key}.compact.kicker"
+    pitch_html = T(f"layer2.{key}.pitch", s["pitch"], layer2_en(key, "pitch", s["pitch"]))
     return f"""<div class="guide-layer2-deep guide-layer2-deep-compact">
-        <p class="guide-layer2-deep-kicker">第二層策略 · {esc(s["title"])}</p>
-        <p class="guide-layer2-card-lead">{esc(s["pitch"])}</p>
+        <p class="guide-layer2-deep-kicker">{T(kicker_key, kicker_zh, kicker_en)}</p>
+        <p class="guide-layer2-card-lead">{pitch_html}</p>
       </div>"""
 
 
-def render_why_section(why_list: list[str]) -> str:
+def parse_why_card(x: str) -> tuple[str, str, str]:
+    parts = re.split(r"[:：]", x, maxsplit=1)
+    if len(parts) == 2:
+        header, desc = parts[0].strip(), parts[1].strip()
+    else:
+        header, desc = "", x.strip()
+
+    emoji_match = re.match(r"^([^\w\s<]+)", header)
+    if emoji_match:
+        emoji = emoji_match.group(1).strip()
+        header_text = header[len(emoji_match.group(0)) :].strip()
+    else:
+        emoji = "💡"
+        header_text = header.strip()
+
+    header_text = re.sub(r"<[^>]+>", "", header_text)
+    return emoji, header_text, desc
+
+
+def render_why_section(why_list: list[str], slug: str = "") -> str:
     cards = []
-    for x in why_list:
-        parts = re.split(r"[:：]", x, maxsplit=1)
-        if len(parts) == 2:
-            header, desc = parts[0].strip(), parts[1].strip()
+    for i, x in enumerate(why_list):
+        emoji, header_text, desc = parse_why_card(x)
+        en_raw = etf_en(slug, "why", x, index=i) if slug else ""
+        if en_raw:
+            _, en_header, en_desc = parse_why_card(en_raw)
         else:
-            header, desc = "", x.strip()
+            en_header, en_desc = header_text, desc
 
-        emoji_match = re.match(r"^([^\w\s<]+)", header)
-        if emoji_match:
-            emoji = emoji_match.group(1).strip()
-            header_text = header[len(emoji_match.group(0)):].strip()
+        if slug:
+            title_html = T(f"etf.{slug}.why.{i}.title", header_text, en_header)
+            desc_key = f"etf.{slug}.why.{i}.desc"
+            register_i18n(desc_key, desc, en_desc)
+            desc_html = f'<p class="why-card-desc" data-i18n="{desc_key}">{desc}</p>'
         else:
-            emoji = "💡"
-            header_text = header.strip()
-
-        header_text = re.sub(r"<[^>]+>", "", header_text)
+            title_html = esc(header_text)
+            desc_html = f'<p class="why-card-desc">{desc}</p>'
 
         cards.append(
             f'<div class="why-card">'
             f'  <div class="why-card-header">'
             f'    <span class="why-card-icon">{emoji}</span>'
-            f'    <h4 class="why-card-title">{esc(header_text)}</h4>'
+            f'    <h4 class="why-card-title">{title_html}</h4>'
             f'  </div>'
-            f'  <p class="why-card-desc">{desc}</p>'
+            f'  {desc_html}'
             f'</div>'
         )
     return f'<div class="why-grid">{"".join(cards)}</div>'
@@ -1409,14 +1573,16 @@ def render_why_section(why_list: list[str]) -> str:
 def render_etf_nav_tags(current_slug: str) -> str:
 
     tags = []
-    for ticker, zh_name, *_ in SUITE_ROWS:
+    for row in SUITE_ROWS:
+        ticker, zh_name, en_name, *_rest = row
         slug = ticker.lower()
         if slug == current_slug:
             continue
+        name_html = T(f"etf.{slug}.name", zh_name, en_name)
         tags.append(
             f'<a class="guide-inline-tag" href="{slug}.html">'
             f'<span class="nav-ticker">{esc(ticker)}</span>'
-            f'<span class="nav-name">{esc(zh_name)}</span>'
+            f'<span class="nav-name">{name_html}</span>'
             f'</a>'
         )
     return f'<div class="guide-inline-tags">{"".join(tags)}</div>'
@@ -1451,6 +1617,7 @@ def render_holdings_section(
     layer2_name: str,
     ticker: str = "",
     holding_count: str = "",
+    slug: str = "",
 ) -> str:
     if not holdings:
         return ""
@@ -1467,22 +1634,53 @@ def render_holdings_section(
             layer2_rows.append((t, name, pct_str))
             layer2_sum += pct
     listed_sum = layer1_sum + layer2_sum
-    count_note = f"全組合約 {holding_count} 檔" if holding_count and holding_count != "—" else "其餘小部位"
-
+    layer1_en = BASE_EN.get(layer1_name, layer1_name)
+    layer2_en_name = STACK_EN.get(layer2_name, layer2_name)
+    count_note_zh = (
+        f"全組合約 {holding_count} 檔"
+        if holding_count and holding_count != "—"
+        else ui_pair("guide.holdings.count.other", "其餘小部位")[0]
+    )
+    count_note_en = (
+        f"~{holding_count} names in full portfolio"
+        if holding_count and holding_count != "—"
+        else ui_pair("guide.holdings.count.other", "其餘小部位")[1]
+    )
+    l2_note_zh = f"僅列前十大；{count_note_zh}，且期貨同樣有保證金槓桿"
+    l2_note_en = f"Top ten only; {count_note_en}; futures also use margin leverage"
+    total_note_zh = (
+        f"200% 是疊加設計；表列 {listed_sum:.2f}% 是會計占比，兩者口徑不同"
+    )
+    total_note_en = (
+        f"200% is stacked design; listed {listed_sum:.2f}% is accounting weight—different measures"
+    )
     tbills_row = ""
     if ticker.lower() in ("rssb", "rsst", "rsit", "rsbt"):
-        tbills_row = f"<tr><td>融資腿（國庫券）</td><td>-100%</td><td>不在前十</td><td>空頭 T-Bills 負責融資（{ticker.upper()} 為 100/100/-100 結構），通常不跟多頭一起列在前十大</td></tr>"
+        tbills_note_zh = (
+            f"空頭 T-Bills 負責融資（{ticker.upper()} 為 100/100/-100 結構），"
+            "通常不跟多頭一起列在前十大"
+        )
+        tbills_note_en = (
+            f"Short T-Bills finance the stack ({ticker.upper()} is 100/100/-100); "
+            "usually not listed in top holdings with long legs"
+        )
+        tbills_row = (
+            f"<tr><td>{T('guide.holdings.tbills.item', *ui_pair('guide.holdings.tbills.item', '融資腿（國庫券）'))}</td>"
+            f"<td>{T('guide.holdings.tbills.target', '-100%', '-100%')}</td>"
+            f"<td>{T('guide.holdings.tbills.listed', *ui_pair('guide.holdings.tbills.listed', '不在前十'))}</td>"
+            f"<td>{T(f'etf.{slug}.holdings.tbills.note', tbills_note_zh, tbills_note_en)}</td></tr>"
+        )
 
     summary = f"""<div class="guide-exposure-summary">
-        <p class="guide-exposure-lead">策略<strong>確實目標 200% 多頭曝險</strong>（100% ＋ 100%）。下方表列數字是「持倉市值占 NAV」，不是把曝險直接相加，所以<strong>不會</strong>加總成 200%。</p>
+        <p class="guide-exposure-lead">{T('guide.holdings.lead', *ui_pair('guide.holdings.lead'))}</p>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
           <table class="quotes guide-table guide-exposure-table">
-            <thead><tr><th>項目</th><th>策略目標</th><th>前十大表列</th><th>為何不同</th></tr></thead>
+            <thead><tr><th>{T('guide.holdings.th.item', *ui_pair('guide.holdings.th.item', '項目'))}</th><th>{T('guide.holdings.th.target', *ui_pair('guide.holdings.th.target', '策略目標'))}</th><th>{T('guide.holdings.th.listed', *ui_pair('guide.holdings.th.listed', '前十大表列'))}</th><th>{T('guide.holdings.th.why', *ui_pair('guide.holdings.th.why', '為何不同'))}</th></tr></thead>
             <tbody>
-              <tr><td>第一層 · {esc(layer1_name)}</td><td>100%</td><td>{layer1_sum:.2f}%</td><td>現股 ETF 加股指期貨；期貨列的是保證金市值/NAV，不是 1:1 名義曝險</td></tr>
-              <tr><td>第二層 · {esc(layer2_name)}</td><td>100%</td><td>{layer2_sum:.2f}%</td><td>僅列前十大；{count_note}，且期貨同樣有保證金槓桿</td></tr>
+              <tr><td>{T(f'etf.{slug}.holdings.l1.label', f'第一層 · {layer1_name}', f'Layer 1 · {layer1_en}')}</td><td>100%</td><td>{layer1_sum:.2f}%</td><td>{T('guide.holdings.layer1.note', *ui_pair('guide.holdings.layer1.note'))}</td></tr>
+              <tr><td>{T(f'etf.{slug}.holdings.l2.label', f'第二層 · {layer2_name}', f'Layer 2 · {layer2_en_name}')}</td><td>100%</td><td>{layer2_sum:.2f}%</td><td>{T(f'etf.{slug}.holdings.l2.note', l2_note_zh, l2_note_en)}</td></tr>
               {tbills_row}
-              <tr class="guide-row-highlight"><td><strong>多頭合計</strong></td><td><strong>200%</strong></td><td>{listed_sum:.2f}%</td><td>200% 是疊加設計；表列 {listed_sum:.2f}% 是會計占比，兩者口徑不同</td></tr>
+              <tr class="guide-row-highlight"><td><strong>{T('guide.holdings.total.item', *ui_pair('guide.holdings.total.item', '多頭合計'))}</strong></td><td><strong>200%</strong></td><td>{listed_sum:.2f}%</td><td>{T(f'etf.{slug}.holdings.total.note', total_note_zh, total_note_en)}</td></tr>
             </tbody>
           </table>
         </div>
@@ -1490,39 +1688,49 @@ def render_holdings_section(
         <div class="guide-analogy-box">
           <div class="guide-analogy-header">
             <span class="guide-analogy-icon">💡</span>
-            <span class="guide-analogy-title">為什麼表格加總不等於 200%？（會計占比 vs. 真實曝險）</span>
+            <span class="guide-analogy-title">{T('guide.holdings.analogy.title', *ui_pair('guide.holdings.analogy.title'))}</span>
           </div>
           <div class="guide-analogy-content">
             <div class="guide-analogy-col">
               <div class="guide-analogy-card analogy-margin">
-                <span class="analogy-card-label">會計記帳 (官方持倉表)</span>
+                <span class="analogy-card-label">{T('guide.holdings.analogy.margin.label', *ui_pair('guide.holdings.analogy.margin.label'))}</span>
                 <span class="analogy-card-value">{listed_sum:.2f}%</span>
-                <p class="analogy-card-desc">僅記錄期貨的<strong>「保證金占比」</strong>（通常僅為 5% ~ 15%）而非 1:1 名義合約價值。</p>
+                <p class="analogy-card-desc">{T('guide.holdings.analogy.margin.desc', *ui_pair('guide.holdings.analogy.margin.desc'))}</p>
               </div>
             </div>
             <div class="guide-analogy-col">
               <div class="guide-analogy-card analogy-notional">
-                <span class="analogy-card-label">策略目標 (真實曝險)</span>
+                <span class="analogy-card-label">{T('guide.holdings.analogy.notional.label', *ui_pair('guide.holdings.analogy.notional.label'))}</span>
                 <span class="analogy-card-value">200%</span>
-                <p class="analogy-card-desc">每投入 $1，即疊加 $1 基礎 ＋ $1 策略，獲取 200% 的<strong>名義曝險</strong>。</p>
+                <p class="analogy-card-desc">{T('guide.holdings.analogy.notional.desc', *ui_pair('guide.holdings.analogy.notional.desc'))}</p>
               </div>
             </div>
           </div>
           <div class="guide-analogy-example">
-            <span class="example-tag">🏠 生活比喻</span>
-            <p>買一間 <strong>1,000 萬</strong> 的房子，你只需支付 <strong>200 萬首付款</strong>（20% 資金占用），但你背後擁有的是 <strong>1,000 萬</strong> 的房價波動曝險（100% 名義曝險）。官方持倉表像<strong>首付款</strong>，而 200% 則是背後的<strong>總房屋價值</strong>。</p>
+            <span class="example-tag">{T('guide.holdings.analogy.example.tag', *ui_pair('guide.holdings.analogy.example.tag'))}</span>
+            <p>{T('guide.holdings.analogy.example.body', *ui_pair('guide.holdings.analogy.example.body'))}</p>
           </div>
         </div>
       </div>"""
 
+    layer1_title = T(
+        f"etf.{slug}.holdings.layer1.title",
+        f"第一層 · {layer1_name}",
+        f"Layer 1 · {layer1_en}",
+    )
+    layer2_title = T(
+        f"etf.{slug}.holdings.layer2.title",
+        f"第二層 · {layer2_name}",
+        f"Layer 2 · {layer2_en_name}",
+    )
     layer_tables = render_split_row(
         f"""<div class="guide-holdings-layer">
-          <h3 class="guide-holdings-layer-title">第一層 · {esc(layer1_name)}</h3>
-          {render_table(["代碼", "名稱", "占比"], layer1_rows, compact=True, table_class="guide-table-holdings")}
+          <h3 class="guide-holdings-layer-title">{layer1_title}</h3>
+          {render_table([("guide.holdings.col.ticker", "代碼"), ("guide.holdings.col.name", "名稱"), ("guide.holdings.col.weight", "占比")], layer1_rows, compact=True, table_class="guide-table-holdings")}
         </div>""",
         f"""<div class="guide-holdings-layer">
-          <h3 class="guide-holdings-layer-title">第二層 · {esc(layer2_name)}</h3>
-          {render_table(["代碼", "名稱", "占比"], layer2_rows, compact=True, table_class="guide-table-holdings")}
+          <h3 class="guide-holdings-layer-title">{layer2_title}</h3>
+          {render_table([("guide.holdings.col.ticker", "代碼"), ("guide.holdings.col.name", "名稱"), ("guide.holdings.col.weight", "占比")], layer2_rows, compact=True, table_class="guide-table-holdings")}
         </div>""",
     )
 
@@ -1546,7 +1754,7 @@ def growth_end_value(ann_pct: str, years: float) -> float | None:
     return round(100 * ((1 + rate / 100) ** years), 1)
 
 
-def render_backtest_section(backtest: dict) -> str:
+def render_backtest_section(backtest: dict, slug: str = "") -> str:
     stats = backtest.get("stats") or []
     if not stats:
         return ""
@@ -1555,16 +1763,25 @@ def render_backtest_section(backtest: dict) -> str:
     for label, ret, vol, mdd in stats:
         mdd_disp = mdd if mdd is not None else "—"
         row_cls = ' class="guide-row-highlight"' if label == highlight else ""
+        label_html = T(
+            f"etf.{slug}.backtest.stat.{risk_i18n_key(label)}",
+            label,
+            translate_analytics_label(label),
+        )
         stat_rows.append(
-            f"<tr{row_cls}><td>{esc(label)}</td><td>{esc(ret)}</td><td>{esc(vol)}</td><td>{esc(mdd_disp)}</td></tr>"
+            f"<tr{row_cls}><td>{label_html}</td><td>{esc(ret)}</td><td>{esc(vol)}</td><td>{esc(mdd_disp)}</td></tr>"
         )
     period = backtest.get("period", "")
     note = backtest.get("note", "")
-    # 使用者有 20 年的投資/直播打算，估值年數一律固定為 20 年
     years = 20
     table = f"""<div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>資產／組合</th><th>年化報酬</th><th>年化波動</th><th>最大回撤</th></tr></thead>
+        <thead><tr>
+          <th>{T('guide.backtest.col.asset', *ui_pair('guide.backtest.col.asset'))}</th>
+          <th>{T('guide.backtest.col.ret', *ui_pair('guide.backtest.col.ret'))}</th>
+          <th>{T('guide.backtest.col.vol', *ui_pair('guide.backtest.col.vol'))}</th>
+          <th>{T('guide.backtest.col.mdd', *ui_pair('guide.backtest.col.mdd'))}</th>
+        </tr></thead>
         <tbody>{"".join(stat_rows)}</tbody>
       </table>
     </div>"""
@@ -1574,17 +1791,27 @@ def render_backtest_section(backtest: dict) -> str:
             end_val = growth_end_value(ret, years)
             if end_val is not None:
                 row_cls = ' class="guide-row-highlight"' if label == highlight else ""
-                growth_rows.append(
-                    f"<tr{row_cls}><td>{esc(label)}</td><td>${end_val:,.1f}</td></tr>"
+                label_html = T(
+                    f"etf.{slug}.backtest.stat.{risk_i18n_key(label)}",
+                    label,
+                    translate_analytics_label(label),
                 )
+                growth_rows.append(
+                    f"<tr{row_cls}><td>{label_html}</td><td>${end_val:,.1f}</td></tr>"
+                )
+    growth_title_zh = f"Growth of $100（{int(years)} 年後估算終值）"
+    growth_title_en = f"Growth of $100 (estimated after {int(years)} years)"
     growth_block = ""
     if growth_rows:
         growth_block = f"""
         <div class="guide-backtest-col guide-backtest-col-growth">
-          <p class="guide-backtest-col-label">Growth of $100（{int(years)} 年後估算終值）</p>
+          <p class="guide-backtest-col-label">{T(f'etf.{slug}.backtest.growth.title', growth_title_zh, growth_title_en)}</p>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
             <table class="quotes guide-table guide-table-num">
-              <thead><tr><th>資產／組合</th><th>{int(years)} 年後</th></tr></thead>
+              <thead><tr>
+                <th>{T('guide.backtest.col.asset', *ui_pair('guide.backtest.col.asset'))}</th>
+                <th>{T(f'etf.{slug}.backtest.growth.col', f'{int(years)} 年後', f'After {int(years)} years')}</th>
+              </tr></thead>
               <tbody>{"".join(growth_rows)}</tbody>
             </table>
           </div>
@@ -1593,9 +1820,8 @@ def render_backtest_section(backtest: dict) -> str:
     if growth_block:
         foot_items.append(
             f'<p class="fineprint guide-fineprint guide-backtest-growth-note">'
-            f"※「歷史回測」年化報酬數據源自官方歷史回測資料；"
-            f"「{int(years)} 年後估算終值」為本站依此報酬率複利自行推算，"
-            f"非官方數據，亦非逐日回測曲線。</p>"
+            f"{T('guide.backtest.growth.note', *ui_pair('guide.backtest.growth.note'))}"
+            f"</p>"
         )
         tables = f"""<div class="guide-backtest-layout">
         <div class="guide-backtest-col guide-backtest-col-stats">
@@ -1606,41 +1832,84 @@ def render_backtest_section(backtest: dict) -> str:
       </div>"""
     else:
         tables = table
-    foot_items.append(
-        f"{esc(note)} 過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。"
-    )
+    if note:
+        note_en = BACKTEST_NOTES.get(slug, note)
+        register_i18n(f"etf.{slug}.backtest.note", note, note_en)
+        foot_items.append(
+            f'<p class="fineprint guide-fineprint">'
+            f"{T(f'etf.{slug}.backtest.note', note, note_en)} "
+            f"{T('guide.backtest.footnote', *ui_pair('guide.backtest.footnote'))}"
+            f"</p>"
+        )
+    else:
+        foot_items.append(
+            f'<p class="fineprint guide-fineprint">'
+            f"{T('guide.backtest.footnote', *ui_pair('guide.backtest.footnote'))}"
+            f"</p>"
+        )
     footnotes = render_card_foot(*foot_items)
+    title_zh = f"Stacking in Action（{period}）"
+    title_en = f"Stacking in Action ({period})"
     return f"""
       <section class="card guide-backtest-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">官方歷史回測</p><h2>Stacking in Action（{esc(period)}）</h2></div></div>
+        <div class="section-head section-head-tight"><div>
+          <p class="section-kicker">{T('guide.backtest.kicker', *ui_pair('guide.backtest.kicker'))}</p>
+          <h2>{T(f'etf.{slug}.backtest.title', title_zh, title_en)}</h2>
+        </div></div>
         {tables}
         {footnotes}
       </section>"""
 
 
-def render_regime_section(regimes: dict) -> str:
+def render_regime_section(regimes: dict, slug: str = "") -> str:
     if not regimes or not regimes.get("rows"):
         return ""
-    return f"""
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">市場環境</p><h2>不同股價環境下的年化報酬</h2></div></div>
-        {render_table(regimes["headers"], regimes["rows"], compact=True)}
-        {render_card_foot(regimes.get("note", ""))}
-      </section>"""
+    headers = register_table_headers(f"etf.{slug}.regime.header", regimes["headers"])
+    rows = register_table_rows(f"etf.{slug}.regime", regimes["rows"])
+    note = regimes.get("note", "")
+    note_en = ui_pair("guide.regime.note")[1]
+    body = render_table(headers, rows, compact=True, html_cells=True)
+    return render_card_i18n(
+        "guide.regime.kicker",
+        ui_pair("guide.regime.kicker")[0],
+        "guide.regime.title",
+        ui_pair("guide.regime.title")[0],
+        body,
+        footnote_key="guide.regime.note" if note else "",
+        footnote_zh=note or ui_pair("guide.regime.note")[0],
+    )
 
 
-def render_replication_section(replication: dict) -> str:
+def render_replication_section(replication: dict, slug: str = "") -> str:
     if not replication or not replication.get("rows"):
         return ""
-    return f"""
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">複製品質</p><h2>管理期貨複製模型（3 年回顧）</h2></div></div>
-        {render_table(replication["headers"], replication["rows"], compact=True)}
-        {render_card_foot(replication.get("note", ""))}
-      </section>"""
+    headers = register_table_headers(f"etf.{slug}.replication.header", replication["headers"])
+    rows = []
+    for ridx, row in enumerate(replication["rows"]):
+        cells = [esc(row[0])]
+        for cell in row[1:]:
+            cells.append(esc(cell))
+        rows.append(tuple(cells))
+    note = replication.get("note", "")
+    if note:
+        register_i18n(
+            f"etf.{slug}.replication.note",
+            note,
+            REPLICATION_NOTES.get(slug, note),
+        )
+    body = render_table(headers, rows, compact=True)
+    return render_card_i18n(
+        "guide.replication.kicker",
+        ui_pair("guide.replication.kicker")[0],
+        "guide.replication.title",
+        ui_pair("guide.replication.title")[0],
+        body,
+        footnote_key=f"etf.{slug}.replication.note" if note else "",
+        footnote_zh=note,
+    )
 
 
-def render_corr_matrix(corr: list[tuple]) -> str:
+def render_corr_matrix(corr: list[tuple], slug: str = "") -> str:
     if not corr:
         return ""
     headers = corr[0]
@@ -1650,13 +1919,15 @@ def render_corr_matrix(corr: list[tuple]) -> str:
         if idx == 0:
             th_parts.append(f'<th class="guide-corr-corner">{esc(label)}</th>')
         else:
-            th_parts.append(f"<th>{esc(label)}</th>")
+            key = f"etf.{slug}.corr.header.{risk_i18n_key(label)}"
+            th_parts.append(f"<th>{T(key, label, translate_corr(label))}</th>")
     body = []
     for row in rows:
         tds = []
         for idx, cell in enumerate(row):
             if idx == 0:
-                tds.append(f'<td class="guide-corr-rowhead">{esc(cell)}</td>')
+                key = f"etf.{slug}.corr.row.{risk_i18n_key(cell)}"
+                tds.append(f'<td class="guide-corr-rowhead">{T(key, cell, translate_corr(cell))}</td>')
             else:
                 cls = "guide-corr-val"
                 if cell == "1.00":
@@ -1671,15 +1942,43 @@ def render_corr_matrix(corr: list[tuple]) -> str:
     </div>"""
 
 
-def render_benchmark_section(benchmark: dict) -> str:
+def render_benchmark_section(benchmark: dict, slug: str = "") -> str:
     if not benchmark or not benchmark.get("rows"):
         return ""
-    return f"""
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">基準對照</p><h2>與基準指數及 100/100 組合對照</h2></div></div>
-        {render_table(benchmark["headers"], benchmark["rows"], compact=True)}
-        {render_card_foot(benchmark.get("note", ""))}
-      </section>"""
+    headers = []
+    for idx, label in enumerate(benchmark["headers"]):
+        if idx == 0:
+            headers.append(("guide.table.period", label))
+        else:
+            key = f"etf.{slug}.bench.header.{idx}"
+            headers.append((key, label))
+            register_i18n(key, label, BENCHMARK_HEADER_EN.get(label, label))
+    rows = []
+    for row in benchmark["rows"]:
+        period = row[0]
+        period_html = T(
+            f"etf.{slug}.bench.period.{risk_i18n_key(period)}",
+            period,
+            translate_period(period),
+        )
+        rows.append((period_html, *row[1:]))
+    note = benchmark.get("note", "")
+    if note and slug:
+        register_i18n(
+            f"etf.{slug}.bench.note",
+            note,
+            BENCHMARK_NOTES.get(slug, note),
+        )
+    body = render_table(headers, rows, compact=True, html_cells=True)
+    return render_card_i18n(
+        "guide.etf.section.benchmark.kicker",
+        "基準對照",
+        "guide.etf.section.benchmark.title",
+        "與基準指數及 100/100 組合對照",
+        body,
+        footnote_key=f"etf.{slug}.bench.note" if note else "",
+        footnote_zh=note,
+    )
 
 
 def tim_configured(row: tuple) -> bool:
@@ -1907,9 +2206,9 @@ def build_etfs_index() -> str:
             <div><dt data-i18n="guide.etfs.meta.layer1">第一層</dt><dd>{T(f"etf.{slug}.base", base, BASE_EN.get(base, base))}</dd></div>
             <div><dt data-i18n="guide.etfs.meta.layer2">第二層</dt><dd>{T(f"etf.{slug}.stack", stack, STACK_EN.get(stack, stack))}</dd></div>
             <div><dt data-i18n="guide.etfs.meta.inception">成立</dt><dd>{esc(launch)}</dd></div>
-            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>{esc(aum)}</dd></div>
+            <div><dt data-i18n="guide.table.aum">AUM</dt><dd>{T(f"etf.{slug}.aum", aum, translate_aum(aum))}</dd></div>
           </dl>
-          <p class="guide-etf-blurb">{esc(ETF_DETAILS[slug]["tagline"])}</p>
+          <p class="guide-etf-blurb">{T(f"etf.{slug}.tagline", ETF_DETAILS[slug]["tagline"], etf_en(slug, "tagline", ETF_DETAILS[slug]["tagline"]))}</p>
           <a class="btn-secondary guide-etf-card-btn" href="etfs/{slug}.html" data-i18n="guide.etfs.card.read">閱讀完整說明</a>
         </article>"""
         )
@@ -1952,7 +2251,7 @@ def build_etfs_index() -> str:
         + f"""
       <section class="card" aria-label="ETF lineup table">
         <div class="section-head section-head-tight">
-          <div><p class="section-kicker">總表</p><h2 data-i18n="guide.etfs.table.title">8 檔對照</h2></div>
+          <div><p class="section-kicker">{T('guide.etfs.table.kicker', *ui_pair('guide.etfs.table.kicker', '總表'))}</p><h2 data-i18n="guide.etfs.table.title">8 檔對照</h2></div>
         </div>
         {suite_table}
       </section>
@@ -1972,6 +2271,9 @@ def build_etf_page(slug: str) -> str:
     ticker, zh, en, base, stack, launch, aum, tone, in_port = meta
     d = ETF_DETAILS[slug]
     f = d["fund"]
+    page_id = f"etf-{slug}"
+    meta_en = META_ETF.get(page_id, {})
+    display_en = etf_en(slug, "display_name", en)
 
     fund_rows = [
         ("交易所", f["exchange"]),
@@ -1985,81 +2287,146 @@ def build_etf_page(slug: str) -> str:
         fund_rows.append(("費率備註", f["expense_note"]))
 
     layers_html_parts = []
-    for title, body in d["layers"]:
+    for idx, (title, body) in enumerate(d["layers"]):
+        title_html = T(
+            f"etf.{slug}.layer.{idx}.title",
+            title,
+            etf_en(slug, "layer_title", title, index=idx),
+        )
+        body_html = T(
+            f"etf.{slug}.layer.{idx}.body",
+            body,
+            etf_en(slug, "layer_body", body, index=idx),
+        )
         layers_html_parts.append(
-            f'<div class="guide-layer-block"><h3>{esc(title)}</h3>'
-            f"<p>{esc(body)}</p></div>"
+            f'<div class="guide-layer-block"><h3>{title_html}</h3><p>{body_html}</p></div>'
         )
     layers_html = "".join(layers_html_parts)
-    why_html = render_why_section(d["why"])
-    risks_html = "".join(f"<li>{esc(x)}</li>" for x in d["risks"])
+    why_html = render_why_section(d["why"], slug)
+    risks_html = "".join(
+        f"<li>{T(f'guide.risk.{risk_i18n_key(x)}', x, translate_risk(x))}</li>" for x in d["risks"]
+    )
+
+    base_label = T(f"etf.{slug}.base", base, BASE_EN.get(base, base))
+    stack_label = T(f"etf.{slug}.stack", stack, STACK_EN.get(stack, stack))
 
     holdings_html = ""
     if d["holdings"]:
-        holdings_html = render_card(
+        holdings_html = render_card_i18n(
+            "guide.etf.section.holdings.kicker",
             "持股",
+            "guide.etf.section.holdings.title",
             "主要持倉（2026-03-31）",
-            render_holdings_section(d["holdings"], base, stack, ticker, f.get("holdings", "")),
+            render_holdings_section(d["holdings"], base, stack, ticker, f.get("holdings", ""), slug),
             "guide-holdings-card",
+            "guide.etf.section.holdings.foot",
             "持倉會變動，僅供理解結構，非即時資料。占比摘自官方 Q1 Commentary。",
         )
 
     perf_html = ""
     if d["perf"]:
-        perf_html = render_card(
+        perf_rows = []
+        for row in d["perf"]:
+            period = row[0]
+            period_html = T(
+                f"etf.{slug}.perf.{period}",
+                period,
+                translate_period(period),
+            )
+            perf_rows.append((period_html, row[1], row[2]))
+        perf_html = render_card_i18n(
+            "guide.etf.section.perf.kicker",
             "績效",
+            "guide.etf.section.perf.title",
             "基金報酬（截至 2026-03-31）",
-            render_table(["期間", "NAV", "市價"], d["perf"], compact=True),
-            footnote="過往績效不代表未來結果。短於一年為累計報酬。",
+            render_table(
+                [
+                    ("guide.table.period", "期間"),
+                    ("guide.table.nav", "NAV"),
+                    ("guide.table.market", "市價"),
+                ],
+                perf_rows,
+                compact=True,
+                html_cells=True,
+            ),
+            footnote_key="guide.etf.section.perf.foot",
+            footnote_zh="過往績效不代表未來結果。短於一年為累計報酬。",
         )
 
-    fund_card = render_card(
+    fund_card = render_card_i18n(
+        "guide.etf.section.fund.kicker",
         "基金資料",
+        "guide.etf.section.fund.title",
         "規格表",
-        render_spec_dl(fund_rows),
+        render_spec_dl(fund_rows, slug),
     )
 
-    structure_card = render_card(
+    structure_card = render_card_i18n(
+        "guide.etf.section.structure.kicker",
         "雙層結構",
+        "guide.etf.section.structure.title",
         "這一檔怎麼疊？",
-        f'<div class="guide-layers">{layers_html}</div>{render_layer2_explainer(stack, ticker, compact=True)}',
+        f'<div class="guide-layers">{layers_html}</div>{render_layer2_explainer(stack, ticker, compact=True, slug=slug)}',
     )
 
-    why_card = render_card(
+    why_card = render_card_i18n(
+        "guide.etf.section.why.kicker",
         "為什麼存在",
+        "guide.etf.section.why.title",
         "設計邏輯與使用情境",
         why_html,
         "guide-why-card",
     )
 
-    benchmark_html = render_benchmark_section(d.get("benchmark"))
-    backtest_html = render_backtest_section(d.get("backtest") or {})
-    regime_html = render_regime_section(d.get("regimes") or {})
-    replication_html = render_replication_section(d.get("replication") or {})
+    benchmark_html = render_benchmark_section(d.get("benchmark"), slug)
+    backtest_html = render_backtest_section(d.get("backtest") or {}, slug)
+    regime_html = render_regime_section(d.get("regimes") or {}, slug)
+    replication_html = render_replication_section(d.get("replication") or {}, slug)
 
     corr_html = ""
     if d["corr"]:
-        corr_html = render_card(
+        corr_html = render_card_i18n(
+            "guide.etf.section.corr.kicker",
             "相關性",
+            "guide.etf.section.corr.title",
             "歷史相關矩陣（官方 Product Brief）",
-            render_corr_matrix(d["corr"]),
-            footnote="相關性會隨時間改變，僅供理解第二層與核心的關係。",
+            render_corr_matrix(d["corr"], slug),
+            footnote_key="guide.etf.section.corr.foot",
+            footnote_zh="相關性會隨時間改變，僅供理解第二層與核心的關係。",
         )
 
     badge = "guide-badge-live" if in_port else "guide-badge-ref"
-    badge_text = "Tim 實測有配置" if in_port else "Tim 實測未配置"
-    tim_holdings_link = (
-        f'<p><a class="card-jump-link" href="../index.html">在總覽看 {esc(ticker)} 持倉 →</a></p>'
-        if in_port
-        else ""
+    badge_key = "guide.etf.holdings" if in_port else "guide.etf.holdings.no"
+    badge_zh = "Tim 實測有配置" if in_port else "Tim 實測未配置"
+    badge_html = T(badge_key, badge_zh, ui_en(badge_key, badge_zh))
+    tim_note_html = T(
+        f"etf.{slug}.tim_note",
+        d["tim_note"],
+        etf_en(slug, "tim_note", d["tim_note"]),
     )
+    tim_holdings_link = ""
+    if in_port:
+        link_zh = f"在總覽看 {ticker} 持倉 →"
+        link_en = f"View {ticker} on overview →"
+        link_html = T(f"etf.{slug}.holdings_link", link_zh, link_en)
+        tim_holdings_link = f'<p><a class="card-jump-link" href="../index.html">{link_html}</a></p>'
+
+    title_zh = f"{ticker} · {zh} | ETF 百科"
+    title_en = meta_en.get("title", f"{ticker} · {display_en} | ETF Guide")
+    desc_en = meta_en.get("desc", etf_en(slug, "tagline", d["tagline"]))
 
     return (
-        head(f"{ticker} · {zh} | ETF 百科", d["tagline"], f"etf-{slug}")
-        + shell_start("etfs", f"etf-{slug}")
+        head(
+            title_zh,
+            d["tagline"],
+            page_id,
+            title_en=title_en,
+            desc_en=desc_en,
+        )
+        + shell_start("etfs", page_id)
         + f"""
-      <nav class="guide-breadcrumb" aria-label="麵包屑">
-        <span>ETF 百科</span>
+      <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+        <span data-i18n="guide.etf.breadcrumb">ETF 百科</span>
         <span aria-hidden="true">/</span>
         <span>{esc(ticker)}</span>
       </nav>
@@ -2067,17 +2434,17 @@ def build_etf_page(slug: str) -> str:
       <header class="hero hero-compact guide-hero guide-etf-hero">
         <div class="hero-copy hero-copy-compact guide-hero-copy">
           <p class="hero-tag">{esc(en)}</p>
-          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">{esc(ticker)}</span> {esc(zh)}</h1>
-          <p class="guide-lead">{esc(d["tagline"])}</p>
-          <span class="guide-badge {badge}">{badge_text}</span>
+          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">{esc(ticker)}</span> {T(f"etf.{slug}.display_name", zh, display_en)}</h1>
+          <p class="guide-lead">{T(f"etf.{slug}.tagline", d["tagline"], etf_en(slug, "tagline", d["tagline"]))}</p>
+          <span class="guide-badge {badge}">{badge_html}</span>
         </div>
       </header>
 
       <section class="guide-metric-strip focus-metric-grid" aria-label="Quick facts">
-        <article class="focus-metric"><span class="focus-metric-label">第一層</span><strong class="focus-metric-value guide-metric-text">{esc(base)}</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">第二層</span><strong class="focus-metric-value guide-metric-text">{esc(stack)}</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer1">第一層</span><strong class="focus-metric-value guide-metric-text">{base_label}</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer2">第二層</span><strong class="focus-metric-value guide-metric-text">{stack_label}</strong></article>
         <article class="focus-metric"><span class="focus-metric-label">AUM</span><strong class="focus-metric-value">{esc(aum)}</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">淨費率</span><strong class="focus-metric-value">{esc(f["expense_net"])}</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label">{T("guide.etf.metric.net_fee", "淨費率", ui_en("guide.etf.metric.net_fee", "淨費率"))}</span><strong class="focus-metric-value">{esc(f["expense_net"])}</strong></article>
       </section>
 
       {render_split_row(structure_card, "")}
@@ -2089,33 +2456,38 @@ def build_etf_page(slug: str) -> str:
       {render_split_row(regime_html, replication_html)}
 
       {render_split_row(
-        render_card(
-          "Tim Wei 實測",
-          "這一檔與本實驗的關係",
-          f"<p>{esc(d['tim_note'])}</p>{tim_holdings_link}",
-          "guide-card-accent-soft",
+        render_card_i18n(
+            "guide.etf.section.tim.kicker",
+            "Tim Wei 實測",
+            "guide.etf.section.tim.title",
+            "這一檔與本實驗的關係",
+            f"<p>{tim_note_html}</p>{tim_holdings_link}",
+            "guide-card-accent-soft",
         ),
-        render_card(
-          "主要風險",
-          "投資前必知（摘要）",
-          f'<ul class="guide-list guide-list-compact">{risks_html}</ul>',
-          "guide-card-warn",
-          "完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。",
+        render_card_i18n(
+            "guide.etf.section.risk.kicker",
+            "主要風險",
+            "guide.etf.section.risk.title",
+            "投資前必知（摘要）",
+            f'<ul class="guide-list guide-list-compact">{risks_html}</ul>',
+            "guide-card-warn",
+            "guide.etf.section.risk.foot",
+            "完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。",
         ),
       )}
 
-      <nav class="guide-etf-nav card" aria-label="其他 ETF">
+      <nav class="guide-etf-nav card" aria-label="Other ETFs">
         <div class="section-head section-head-tight">
           <div>
-            <p class="section-kicker">延伸閱讀</p>
-            <h2>Return Stacked 系列其他標的</h2>
+            <p class="section-kicker" data-i18n="guide.etf.nav.kicker">延伸閱讀</p>
+            <h2 data-i18n="guide.etf.nav.title">Return Stacked 系列其他標的</h2>
           </div>
         </div>
-        <p class="guide-nav-desc">目前頁面為 <strong>{esc(ticker)}</strong>。其他標的：</p>
+        <p class="guide-nav-desc">{T(f"etf.{slug}.nav.desc", f"目前頁面為 {ticker}。其他標的：", f"Current page: {ticker}. Other tickers:")}</p>
         {render_etf_nav_tags(slug)}
       </nav>
 """
-        + shell_end(f"etf-{slug}")
+        + shell_end(page_id)
     )
 
 

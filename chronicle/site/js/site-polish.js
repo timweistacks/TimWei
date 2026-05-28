@@ -44,6 +44,9 @@
   function boot() {
     initLearnBanner();
     initReadProgress();
+    if (typeof global.initHorizontalScrollAffordances === "function") {
+      global.initHorizontalScrollAffordances();
+    }
   }
 
   if (document.readyState === "loading") {

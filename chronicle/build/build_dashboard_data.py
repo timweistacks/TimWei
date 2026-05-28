@@ -186,31 +186,24 @@ def compute_realized_pnl_from_trades(trades: list[dict]) -> dict[str, object]:
 
 
 def _position_nav_index_peak_drawdown(
-    nav_rows: list[dict], *, wealth_equity_mode: bool
+    nav_rows: list[dict],
 ) -> tuple[float | None, float | None, float | None]:
-    """Peak / last position-only NAV index and drawdown % from that peak.
+    """Peak / last NAV index and drawdown % from that peak.
 
-    Index = position_mv_usd / denominator * 100. Numerator is listed sleeves only
-    (excludes wallet USD and cash_like sleeve MV). Denominator matches the NAV chart:
-    funding_usd when equity_cash_ledger, else cumulative_invested_usd.
+    Uses each row's nav_index — the same unit-fund series as the NAV chart
+    (equity sleeve MV / fund units, FX excluded from units).
     """
 
     indices: list[float] = []
     for row in nav_rows:
-        pos_raw = row.get("position_mv_usd")
-        if pos_raw is None:
+        raw = row.get("nav_index")
+        if raw is None:
             continue
-        pos_f = float(pos_raw)
-        if wealth_equity_mode:
-            den_raw = row.get("funding_usd")
-        else:
-            den_raw = row.get("cumulative_invested_usd")
-        if den_raw is None:
+        try:
+            val = float(raw)
+        except (TypeError, ValueError):
             continue
-        den = float(den_raw)
-        if den <= 1e-9:
-            continue
-        indices.append(pos_f / den * 100.0)
+        indices.append(val)
     if not indices:
         return None, None, None
     peak = max(indices)
@@ -871,8 +864,6 @@ def main() -> None:
     manual_peak = dd.get("peak_investment_value_twd")
     manual_peak_f = float(manual_peak) if manual_peak is not None else None
 
-    wealth_equity_dd = nav_summary.get("nav_model") == "equity_cash_ledger"
-
     drawdown_ui: dict = {
         "peak_investment_value_twd": manual_peak,
         "trigger_drawdown_from_peak_pct": trigger_pct,
@@ -886,9 +877,7 @@ def main() -> None:
         )
         drawdown_ui["trigger_level_twd"] = round(manual_peak_f * (1.0 - trigger_pct), 2)
     else:
-        peak_idx, cur_idx, dd_pct = _position_nav_index_peak_drawdown(
-            nav_rows, wealth_equity_mode=wealth_equity_dd
-        )
+        peak_idx, cur_idx, dd_pct = _position_nav_index_peak_drawdown(nav_rows)
         if peak_idx is not None and cur_idx is not None and dd_pct is not None:
             peak_idx_f = float(peak_idx)
             drawdown_ui["effective_peak_nav_index"] = round(peak_idx_f, 4)

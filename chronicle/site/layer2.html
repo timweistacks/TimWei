@@ -6,10 +6,6 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <title>第二層策略 · Return Stacking | Tim Wei</title>
     <meta name="description" content="管理期貨、期貨展期收益、黃金比特幣、併購套利——白話拆解多出來的 100% 在買什麼。" />
-    <meta property="og:title" content="第二層策略 · Return Stacking | Tim Wei" />
-    <meta property="og:description" content="管理期貨、期貨展期收益、黃金比特幣、併購套利——白話拆解多出來的 100% 在買什麼。" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1F0YJSFDW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -22,12 +18,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=16" />
-    <link rel="stylesheet" href="guide.css?v=30" />
+    <link rel="stylesheet" href="styles.css?v=14" />
+    <link rel="stylesheet" href="guide.css?v=32" />
   </head>
   <body class="guide-page">
-    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
-    <div class="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
     <div class="paper-noise" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
@@ -53,7 +47,6 @@
           </div>
         </div>
       </nav>
-      <main id="main-content">
       <header class="hero hero-compact guide-hero">
         <div class="hero-copy hero-copy-compact guide-hero-copy">
           <p class="hero-tag" data-i18n="guide.l2.hero.tag">第二層策略</p>
@@ -86,9 +79,9 @@
               <div class="guide-l2-ladder-bar" style="--h:42%"><span>2Y</span></div>
               <div class="guide-l2-ladder-bar" style="--h:58%"><span>5Y</span></div>
               <div class="guide-l2-ladder-bar" style="--h:72%"><span>10Y</span></div>
-              <div class="guide-l2-ladder-bar" style="--h:88%"><span>長天期</span></div>
+              <div class="guide-l2-ladder-bar" style="--h:88%"><span><span data-i18n="layer2.viz.us-bonds.long">長天期</span></span></div>
             </div>
-            <p class="guide-l2-viz-cap">美債期貨梯 · 等權分散</p>
+            <p class="guide-l2-viz-cap"><span data-i18n="layer2.viz.us-bonds.cap">Treasury ladder · equal weight</span></p>
           </div>
           </div>
         </div>
@@ -141,10 +134,10 @@
               <polyline points="8,58 40,48 72,52 104,28 152,12" />
             </svg>
             <div class="guide-l2-trend-tags">
-              <span class="guide-l2-pill guide-l2-pill-up">上升 → 做多</span>
-              <span class="guide-l2-pill guide-l2-pill-down">下降 → 做空</span>
+              <span class="guide-l2-pill guide-l2-pill-up"><span data-i18n="layer2.viz.managed-futures.up">上升 → 做多</span></span>
+              <span class="guide-l2-pill guide-l2-pill-down"><span data-i18n="layer2.viz.managed-futures.down">下降 → 做空</span></span>
             </div>
-            <p class="guide-l2-viz-cap">跟價格走 · 約 27 種期貨</p>
+            <p class="guide-l2-viz-cap"><span data-i18n="layer2.viz.managed-futures.cap">Follow price · ~27 futures</span></p>
           </div>
           </div>
         </div>
@@ -197,14 +190,14 @@
             
           <div class="guide-l2-viz guide-l2-viz-carry">
             <div class="guide-l2-carry-row">
-              <span class="guide-l2-carry-label">近月</span>
-              <div class="guide-l2-carry-bar guide-l2-carry-bar-high"><span>較貴</span></div>
+              <span class="guide-l2-carry-label"><span data-i18n="layer2.viz.futures-carry.near">近月</span></span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-high"><span><span data-i18n="layer2.viz.futures-carry.expensive">較貴</span></span></div>
             </div>
             <div class="guide-l2-carry-row">
-              <span class="guide-l2-carry-label">遠月</span>
-              <div class="guide-l2-carry-bar guide-l2-carry-bar-low"><span>較便宜</span></div>
+              <span class="guide-l2-carry-label"><span data-i18n="layer2.viz.futures-carry.far">遠月</span></span>
+              <div class="guide-l2-carry-bar guide-l2-carry-bar-low"><span><span data-i18n="layer2.viz.futures-carry.cheap">較便宜</span></span></div>
             </div>
-            <p class="guide-l2-viz-cap">逆價差 · 換月可能賺展期</p>
+            <p class="guide-l2-viz-cap"><span data-i18n="layer2.viz.futures-carry.cap">Backwardation · roll yield</span></p>
           </div>
           </div>
         </div>
@@ -256,15 +249,15 @@
             <div class="guide-l2-balance">
               <div class="guide-l2-balance-side">
                 <span class="guide-l2-balance-icon guide-l2-balance-gold"></span>
-                <span>黃金</span>
+                <span><span data-i18n="layer2.viz.gold-bitcoin.gold">黃金</span></span>
               </div>
               <div class="guide-l2-balance-beam" aria-hidden="true"></div>
               <div class="guide-l2-balance-side">
                 <span class="guide-l2-balance-icon guide-l2-balance-btc"></span>
-                <span>比特幣</span>
+                <span><span data-i18n="layer2.viz.gold-bitcoin.btc">比特幣</span></span>
               </div>
             </div>
-            <p class="guide-l2-viz-cap">63 天波動 · 動態調權</p>
+            <p class="guide-l2-viz-cap"><span data-i18n="layer2.viz.gold-bitcoin.cap">63-day vol · dynamic weights</span></p>
           </div>
           </div>
         </div>
@@ -314,11 +307,11 @@
             
           <div class="guide-l2-viz guide-l2-viz-arb">
             <div class="guide-l2-arb-track">
-              <span class="guide-l2-arb-price">市價 45</span>
-              <span class="guide-l2-arb-gap">價差</span>
-              <span class="guide-l2-arb-price guide-l2-arb-target">收購價 50</span>
+              <span class="guide-l2-arb-price"><span data-i18n="layer2.viz.merger-arb.market">市價 45</span></span>
+              <span class="guide-l2-arb-gap"><span data-i18n="layer2.viz.merger-arb.gap">價差</span></span>
+              <span class="guide-l2-arb-price guide-l2-arb-target"><span data-i18n="layer2.viz.merger-arb.target">收購價 50</span></span>
             </div>
-            <p class="guide-l2-viz-cap">成交 → 價差收斂</p>
+            <p class="guide-l2-viz-cap"><span data-i18n="layer2.viz.merger-arb.cap">Deal closes → spread narrows</span></p>
           </div>
           </div>
         </div>
@@ -367,13 +360,11 @@
           <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
         </div>
       </div>
-      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
-    <script src="locale.js?v=8"></script>
-    <script src="guide-locale.js?v=30"></script>
+    <script src="locale.js?v=11"></script>
+    <script src="guide-locale.js?v=32"></script>
     <script src="js/guide.js?v=11"></script>
     <script src="js/social-dock.js"></script>
-    <script src="js/site-polish.js"></script>
   </body>
 </html>

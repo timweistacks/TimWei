@@ -18,12 +18,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=16" />
-    <link rel="stylesheet" href="../guide.css?v=30" />
+    <link rel="stylesheet" href="../styles.css?v=14" />
+    <link rel="stylesheet" href="../guide.css?v=32" />
   </head>
   <body class="guide-page">
-    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">跳至主要內容</a>
-    <div class="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
     <div class="paper-noise" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
@@ -49,80 +47,77 @@
           </div>
         </div>
       </nav>
-      <nav class="guide-breadcrumb" aria-label="麵包屑">
-        <span>ETF 百科</span>
+      <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+        <span data-i18n="guide.etf.breadcrumb">ETF 百科</span>
         <span aria-hidden="true">/</span>
         <span>RSSB</span>
       </nav>
 
-      <main id="main-content">
-
       <header class="hero hero-compact guide-hero guide-etf-hero">
         <div class="hero-copy hero-copy-compact guide-hero-copy">
           <p class="hero-tag">Global Stocks &amp; Bonds</p>
-          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">RSSB</span> 全球股債</h1>
-          <p class="guide-lead">Return Stacked 系列的地基：100% 全球股 ＋ 100% 美債，一檔 ETF 搞定 200% 曝險。</p>
-          <span class="guide-badge guide-badge-live">Tim 實測有配置</span>
+          <h1><span class="guide-etf-ticker guide-etf-ticker-lg">RSSB</span> <span data-i18n="etf.rssb.display_name">全球股債</span></h1>
+          <p class="guide-lead"><span data-i18n="etf.rssb.tagline">Return Stacked 系列的地基：100% 全球股 ＋ 100% 美債，一檔 ETF 搞定 200% 曝險。</span></p>
+          <span class="guide-badge guide-badge-live"><span data-i18n="guide.etf.holdings">Tim 實測有配置</span></span>
         </div>
       </header>
 
       <section class="guide-metric-strip focus-metric-grid" aria-label="Quick facts">
-        <article class="focus-metric"><span class="focus-metric-label">第一層</span><strong class="focus-metric-value guide-metric-text">全球股票</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">第二層</span><strong class="focus-metric-value guide-metric-text">美國公債</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer1">第一層</span><strong class="focus-metric-value guide-metric-text"><span data-i18n="etf.rssb.base">全球股票</span></strong></article>
+        <article class="focus-metric"><span class="focus-metric-label" data-i18n="guide.etfs.meta.layer2">第二層</span><strong class="focus-metric-value guide-metric-text"><span data-i18n="etf.rssb.stack">美國公債</span></strong></article>
         <article class="focus-metric"><span class="focus-metric-label">AUM</span><strong class="focus-metric-value">$431.6M</strong></article>
-        <article class="focus-metric"><span class="focus-metric-label">淨費率</span><strong class="focus-metric-value">0.40%</strong></article>
+        <article class="focus-metric"><span class="focus-metric-label"><span data-i18n="guide.etf.metric.net_fee">淨費率</span></span><strong class="focus-metric-value">0.40%</strong></article>
       </section>
 
       <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">雙層結構</p><h2>這一檔怎麼疊？</h2></div></div>
-        <div class="guide-layers"><div class="guide-layer-block"><h3>第一層 · 全球股票 100%</h3><p>追蹤全球市值加權股票（SPTM + VXUS 等），目標覆蓋全球可投資股票市場。</p></div><div class="guide-layer-block"><h3>第二層 · 美國公債 100%</h3><p>等權配置 2 年、5 年、10 年、長天期美債期貨，提供與股票低相關的債券曝險。</p></div></div><div class="guide-layer2-deep guide-layer2-deep-compact">
-        <p class="guide-layer2-deep-kicker">第二層策略 · 美國公債</p>
-        <p class="guide-layer2-card-lead">若第二層選美國公債，代表用多出來的資金建立「約 100% 美國公債曝險」。實務上通常不是去買整張美債本票，而是買美國公債期貨——2 年、5 年、10 年、長天期等，多半等權分散。債券報酬主要來自兩塊：持有一天算一天的利息（債息），以及利率變化造成的價格漲跌（利率升，債價通常跌；利率降，債價通常漲）。</p>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.structure.kicker">雙層結構</span></p><h2><span data-i18n="guide.etf.section.structure.title">這一檔怎麼疊？</span></h2></div></div>
+        <div class="guide-layers"><div class="guide-layer-block"><h3><span data-i18n="etf.rssb.layer.0.title">第一層 · 全球股票 100%</span></h3><p><span data-i18n="etf.rssb.layer.0.body">追蹤全球市值加權股票（SPTM + VXUS 等），目標覆蓋全球可投資股票市場。</span></p></div><div class="guide-layer-block"><h3><span data-i18n="etf.rssb.layer.1.title">第二層 · 美國公債 100%</span></h3><p><span data-i18n="etf.rssb.layer.1.body">等權配置 2 年、5 年、10 年、長天期美債期貨，提供與股票低相關的債券曝險。</span></p></div></div><div class="guide-layer2-deep guide-layer2-deep-compact">
+        <p class="guide-layer2-deep-kicker"><span data-i18n="etf.rssb.l2.kicker">第二層策略 · 美國公債</span></p>
+        <p class="guide-layer2-card-lead"><span data-i18n="layer2.us-bonds.pitch">若第二層選美國公債，代表用多出來的資金建立「約 100% 美國公債曝險」。實務上通常不是去買整張美債本票，而是買美國公債期貨——2 年、5 年、10 年、長天期等，多半等權分散。債券報酬主要來自兩塊：持有一天算一天的利息（債息），以及利率變化造成的價格漲跌（利率升，債價通常跌；利率降，債價通常漲）。</span></p>
       </div>
         
       </section>
       <section class="card guide-why-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">為什麼存在</p><h2>設計邏輯與使用情境</h2></div></div>
-        <div class="why-grid"><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🗺️</span>    <h4 class="why-card-title">資本效率最大化</h4>  </div>  <p class="why-card-desc">每配置 10% 的 RSSB，相當於在投資組合中同時擁有 <strong>10% 全球股票</strong>與 <strong>10% 美國公債</strong>。這能<strong>釋放 10% 的閒置資金</strong>（透過衍生性商品融資槓桿實現），讓你可以配置到與股債低相關的非傳統策略（如 CTA、黃金或套利），極大化資金效率。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚡</span>    <h4 class="why-card-title">優化資產配置彈性</h4>  </div>  <p class="why-card-desc">傳統上要增加分散化資產（如 trend），必須砍掉原有的股票或債券曝險。使用 RSSB 後，你可以賣掉原先 100% 股債的部分倉位，改買 RSSB，在維持「<strong>完全相同的股債曝險</strong>」的同時，<strong>騰出寶貴現金</strong>配置在新資產上。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🧠</span>    <h4 class="why-card-title">降低行為金融學偏差</h4>  </div>  <p class="why-card-desc">當股票大漲、債券表現平平或回檔時，投資人往往會因為痛苦而手癢砍掉用來分散風險的債券部位。將股票與債券「疊加」在同一檔 ETF，在報表上只會看到單一淨值波動，能<strong>有效降低投資人因單一資產回撤而過早放棄分散配置的心理偏差</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚙️</span>    <h4 class="why-card-title">自動化槓桿融資</h4>  </div>  <p class="why-card-desc">透過 ETF 內部合約，投資人<strong>無需自行開立保證金帳戶</strong>或進行期貨滾倉操作，即可自動獲得低成本的短期國庫券融資，免去個人操作的稅務與保證金追繳風險。</p></div></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.why.kicker">為什麼存在</span></p><h2><span data-i18n="guide.etf.section.why.title">設計邏輯與使用情境</span></h2></div></div>
+        <div class="why-grid"><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🗺️</span>    <h4 class="why-card-title"><span data-i18n="etf.rssb.why.0.title">資本效率最大化</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rssb.why.0.desc">每配置 10% 的 RSSB，相當於在投資組合中同時擁有 <strong>10% 全球股票</strong>與 <strong>10% 美國公債</strong>。這能<strong>釋放 10% 的閒置資金</strong>（透過衍生性商品融資槓桿實現），讓你可以配置到與股債低相關的非傳統策略（如 CTA、黃金或套利），極大化資金效率。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚡</span>    <h4 class="why-card-title"><span data-i18n="etf.rssb.why.1.title">優化資產配置彈性</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rssb.why.1.desc">傳統上要增加分散化資產（如 trend），必須砍掉原有的股票或債券曝險。使用 RSSB 後，你可以賣掉原先 100% 股債的部分倉位，改買 RSSB，在維持「<strong>完全相同的股債曝險</strong>」的同時，<strong>騰出寶貴現金</strong>配置在新資產上。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">🧠</span>    <h4 class="why-card-title"><span data-i18n="etf.rssb.why.2.title">降低行為金融學偏差</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rssb.why.2.desc">當股票大漲、債券表現平平或回檔時，投資人往往會因為痛苦而手癢砍掉用來分散風險的債券部位。將股票與債券「疊加」在同一檔 ETF，在報表上只會看到單一淨值波動，能<strong>有效降低投資人因單一資產回撤而過早放棄分散配置的心理偏差</strong>。</p></div><div class="why-card">  <div class="why-card-header">    <span class="why-card-icon">⚙️</span>    <h4 class="why-card-title"><span data-i18n="etf.rssb.why.3.title">自動化槓桿融資</span></h4>  </div>  <p class="why-card-desc" data-i18n="etf.rssb.why.3.desc">透過 ETF 內部合約，投資人<strong>無需自行開立保證金帳戶</strong>或進行期貨滾倉操作，即可自動獲得低成本的短期國庫券融資，免去個人操作的稅務與保證金追繳風險。</p></div></div>
         
       </section>
       <div class="guide-split-row"><section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">績效</p><h2>基金報酬（截至 2026-03-31）</h2></div></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.perf.kicker">績效</span></p><h2><span data-i18n="guide.etf.section.perf.title">基金報酬（截至 2026-03-31）</span></h2></div></div>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>期間</th><th>NAV</th><th>市價</th></tr></thead>
-        <tbody><tr><td>YTD</td><td>-2.88%</td><td>-3.24%</td></tr><tr><td>1 個月</td><td>-8.28%</td><td>-8.72%</td></tr><tr><td>3 個月</td><td>-2.88%</td><td>-3.24%</td></tr><tr><td>6 個月</td><td>0.00%</td><td>-0.18%</td></tr><tr><td>1 年</td><td>20.72%</td><td>20.05%</td></tr><tr><td>成立以來</td><td>16.82%</td><td>16.67%</td></tr></tbody>
+        <thead><tr><th data-i18n="guide.table.period">期間</th><th data-i18n="guide.table.nav">NAV</th><th data-i18n="guide.table.market">市價</th></tr></thead>
+        <tbody><tr><td><span data-i18n="etf.rssb.perf.YTD">YTD</span></td><td>-2.88%</td><td>-3.24%</td></tr><tr><td><span data-i18n="etf.rssb.perf.1 個月">1 個月</span></td><td>-8.28%</td><td>-8.72%</td></tr><tr><td><span data-i18n="etf.rssb.perf.3 個月">3 個月</span></td><td>-2.88%</td><td>-3.24%</td></tr><tr><td><span data-i18n="etf.rssb.perf.6 個月">6 個月</span></td><td>0.00%</td><td>-0.18%</td></tr><tr><td><span data-i18n="etf.rssb.perf.1 年">1 年</span></td><td>20.72%</td><td>20.05%</td></tr><tr><td><span data-i18n="etf.rssb.perf.成立以來">成立以來</span></td><td>16.82%</td><td>16.67%</td></tr></tbody>
       </table>
     </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">過往績效不代表未來結果。短於一年為累計報酬。</p></div>
-      </section>
-      <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">基準對照</p><h2>與基準指數及 100/100 組合對照</h2></div></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.etf.section.perf.foot">過往績效不代表未來結果。短於一年為累計報酬。</span></p></div>
+      </section><section class="card">
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.benchmark.kicker">基準對照</span></p><h2><span data-i18n="guide.etf.section.benchmark.title">與基準指數及 100/100 組合對照</span></h2></div></div>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>期間</th><th>RSSB NAV</th><th>全球股票</th><th>美國公債</th><th>100/100 組合</th></tr></thead>
-        <tbody><tr><td>3 個月</td><td>-2.88%</td><td>-2.74%</td><td>-0.04%</td><td>-3.66%</td></tr><tr><td>6 個月</td><td>-0.04%</td><td>0.41%</td><td>0.86%</td><td>-0.63%</td></tr><tr><td>1 年</td><td>20.67%</td><td>20.75%</td><td>3.25%</td><td>19.72%</td></tr><tr><td>成立以來</td><td>16.77%</td><td>17.71%</td><td>4.15%</td><td>17.05%</td></tr></tbody>
+        <thead><tr><th data-i18n="guide.table.period">期間</th><th data-i18n="etf.rssb.bench.header.1">RSSB NAV</th><th data-i18n="etf.rssb.bench.header.2">全球股票</th><th data-i18n="etf.rssb.bench.header.3">美國公債</th><th data-i18n="etf.rssb.bench.header.4">100/100 組合</th></tr></thead>
+        <tbody><tr><td><span data-i18n="etf.rssb.bench.period.3_個月">3 個月</span></td><td>-2.88%</td><td>-2.74%</td><td>-0.04%</td><td>-3.66%</td></tr><tr><td><span data-i18n="etf.rssb.bench.period.6_個月">6 個月</span></td><td>-0.04%</td><td>0.41%</td><td>0.86%</td><td>-0.63%</td></tr><tr><td><span data-i18n="etf.rssb.bench.period.1_年">1 年</span></td><td>20.67%</td><td>20.75%</td><td>3.25%</td><td>19.72%</td></tr><tr><td><span data-i18n="etf.rssb.bench.period.成立以來">成立以來</span></td><td>16.77%</td><td>17.71%</td><td>4.15%</td><td>17.05%</td></tr></tbody>
       </table>
     </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">100/100 組合 ＝ 100% 全球股 ＋ 100% 美債期貨梯 － 100% 融資腿（國庫券）。截至 2026-03-31，摘自 Q1 2026 Commentary。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="etf.rssb.bench.note">100/100 組合 ＝ 100% 全球股 ＋ 100% 美債期貨梯 － 100% 融資腿（國庫券）。截至 2026-03-31，摘自 Q1 2026 Commentary。</span></p></div>
       </section></div>
       <section class="card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">基金資料</p><h2>規格表</h2></div></div>
-        <dl class="guide-spec-dl"><div class="guide-spec-row"><dt>交易所</dt><dd>CBOE</dd></div><div class="guide-spec-row"><dt>成立日</dt><dd>2023-12-04</dd></div><div class="guide-spec-row"><dt>持股數</dt><dd>7</dd></div><div class="guide-spec-row"><dt>總費率（毛）</dt><dd>0.55%</dd></div><div class="guide-spec-row"><dt>總費率（淨）</dt><dd>0.40%</dd></div><div class="guide-spec-row"><dt>30 日 SEC 殖利率</dt><dd>1.71%</dd></div><div class="guide-spec-row"><dt>費率備註</dt><dd>管理費減免至 2026-05-30，淨費率 0.40%</dd></div></dl>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.fund.kicker">基金資料</span></p><h2><span data-i18n="guide.etf.section.fund.title">規格表</span></h2></div></div>
+        <dl class="guide-spec-dl"><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.交易所">交易所</span></dt><dd>CBOE</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.成立日">成立日</span></dt><dd>2023-12-04</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.持股數">持股數</span></dt><dd>7</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.總費率_毛_">總費率（毛）</span></dt><dd>0.55%</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.總費率_淨_">總費率（淨）</span></dt><dd>0.40%</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.30_日_SEC_殖利率">30 日 SEC 殖利率</span></dt><dd>1.71%</dd></div><div class="guide-spec-row"><dt><span data-i18n="guide.fund.label.費率備註">費率備註</span></dt><dd><span data-i18n="etf.rssb.expense_note">管理費減免至 2026-05-30，淨費率 0.40%</span></dd></div></dl>
         
       </section>
       <section class="card guide-holdings-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">持股</p><h2>主要持倉（2026-03-31）</h2></div></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.holdings.kicker">持股</span></p><h2><span data-i18n="guide.etf.section.holdings.title">主要持倉（2026-03-31）</span></h2></div></div>
         <div class="guide-exposure-summary">
-        <p class="guide-exposure-lead">策略<strong>確實目標 200% 多頭曝險</strong>（100% ＋ 100%）。下方表列數字是「持倉市值占 NAV」，不是把曝險直接相加，所以<strong>不會</strong>加總成 200%。</p>
+        <p class="guide-exposure-lead"><span data-i18n="guide.holdings.lead">策略<strong>確實目標 200% 多頭曝險</strong>（100% ＋ 100%）。下方表列數字是「持倉市值占 NAV」，不是把曝險直接相加，所以<strong>不會</strong>加總成 200%。</span></p>
         <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
           <table class="quotes guide-table guide-exposure-table">
-            <thead><tr><th>項目</th><th>策略目標</th><th>前十大表列</th><th>為何不同</th></tr></thead>
+            <thead><tr><th><span data-i18n="guide.holdings.th.item">項目</span></th><th><span data-i18n="guide.holdings.th.target">策略目標</span></th><th><span data-i18n="guide.holdings.th.listed">前十大表列</span></th><th><span data-i18n="guide.holdings.th.why">為何不同</span></th></tr></thead>
             <tbody>
-              <tr><td>第一層 · 全球股票</td><td>100%</td><td>100.44%</td><td>現股 ETF 加股指期貨；期貨列的是保證金市值/NAV，不是 1:1 名義曝險</td></tr>
-              <tr><td>第二層 · 美國公債</td><td>100%</td><td>102.43%</td><td>僅列前十大；全組合約 7 檔，且期貨同樣有保證金槓桿</td></tr>
-              <tr><td>融資腿（國庫券）</td><td>-100%</td><td>不在前十</td><td>空頭 T-Bills 負責融資（RSSB 為 100/100/-100 結構），通常不跟多頭一起列在前十大</td></tr>
-              <tr class="guide-row-highlight"><td><strong>多頭合計</strong></td><td><strong>200%</strong></td><td>202.87%</td><td>200% 是疊加設計；表列 202.87% 是會計占比，兩者口徑不同</td></tr>
+              <tr><td><span data-i18n="etf.rssb.holdings.l1.label">第一層 · 全球股票</span></td><td>100%</td><td>100.44%</td><td><span data-i18n="guide.holdings.layer1.note">現股 ETF 加股指期貨；期貨列的是保證金市值/NAV，不是 1:1 名義曝險</span></td></tr>
+              <tr><td><span data-i18n="etf.rssb.holdings.l2.label">第二層 · 美國公債</span></td><td>100%</td><td>102.43%</td><td><span data-i18n="etf.rssb.holdings.l2.note">僅列前十大；全組合約 7 檔，且期貨同樣有保證金槓桿</span></td></tr>
+              <tr><td><span data-i18n="guide.holdings.tbills.item">融資腿（國庫券）</span></td><td><span data-i18n="guide.holdings.tbills.target">-100%</span></td><td><span data-i18n="guide.holdings.tbills.listed">不在前十</span></td><td><span data-i18n="etf.rssb.holdings.tbills.note">空頭 T-Bills 負責融資（RSSB 為 100/100/-100 結構），通常不跟多頭一起列在前十大</span></td></tr>
+              <tr class="guide-row-highlight"><td><strong><span data-i18n="guide.holdings.total.item">多頭合計</span></strong></td><td><strong>200%</strong></td><td>202.87%</td><td><span data-i18n="etf.rssb.holdings.total.note">200% 是疊加設計；表列 202.87% 是會計占比，兩者口徑不同</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -130,96 +125,107 @@
         <div class="guide-analogy-box">
           <div class="guide-analogy-header">
             <span class="guide-analogy-icon">💡</span>
-            <span class="guide-analogy-title">為什麼表格加總不等於 200%？（會計占比 vs. 真實曝險）</span>
+            <span class="guide-analogy-title"><span data-i18n="guide.holdings.analogy.title">為什麼表格加總不等於 200%？（會計占比 vs. 真實曝險）</span></span>
           </div>
           <div class="guide-analogy-content">
             <div class="guide-analogy-col">
               <div class="guide-analogy-card analogy-margin">
-                <span class="analogy-card-label">會計記帳 (官方持倉表)</span>
+                <span class="analogy-card-label"><span data-i18n="guide.holdings.analogy.margin.label">會計記帳 (官方持倉表)</span></span>
                 <span class="analogy-card-value">202.87%</span>
-                <p class="analogy-card-desc">僅記錄期貨的<strong>「保證金占比」</strong>（通常僅為 5% ~ 15%）而非 1:1 名義合約價值。</p>
+                <p class="analogy-card-desc"><span data-i18n="guide.holdings.analogy.margin.desc">僅記錄期貨的<strong>「保證金占比」</strong>（通常僅為 5% ~ 15%）而非 1:1 名義合約價值。</span></p>
               </div>
             </div>
             <div class="guide-analogy-col">
               <div class="guide-analogy-card analogy-notional">
-                <span class="analogy-card-label">策略目標 (真實曝險)</span>
+                <span class="analogy-card-label"><span data-i18n="guide.holdings.analogy.notional.label">策略目標 (真實曝險)</span></span>
                 <span class="analogy-card-value">200%</span>
-                <p class="analogy-card-desc">每投入 $1，即疊加 $1 基礎 ＋ $1 策略，獲取 200% 的<strong>名義曝險</strong>。</p>
+                <p class="analogy-card-desc"><span data-i18n="guide.holdings.analogy.notional.desc">每投入 $1，即疊加 $1 基礎 ＋ $1 策略，獲取 200% 的<strong>名義曝險</strong>。</span></p>
               </div>
             </div>
           </div>
           <div class="guide-analogy-example">
-            <span class="example-tag">🏠 生活比喻</span>
-            <p>買一間 <strong>1,000 萬</strong> 的房子，你只需支付 <strong>200 萬首付款</strong>（20% 資金占用），但你背後擁有的是 <strong>1,000 萬</strong> 的房價波動曝險（100% 名義曝險）。官方持倉表像<strong>首付款</strong>，而 200% 則是背後的<strong>總房屋價值</strong>。</p>
+            <span class="example-tag"><span data-i18n="guide.holdings.analogy.example.tag">🏠 生活比喻</span></span>
+            <p><span data-i18n="guide.holdings.analogy.example.body">買一間 <strong>1,000 萬</strong> 的房子，你只需支付 <strong>200 萬首付款</strong>（20% 資金占用），但你背後擁有的是 <strong>1,000 萬</strong> 的房價波動曝險（100% 名義曝險）。官方持倉表像<strong>首付款</strong>，而 200% 則是背後的<strong>總房屋價值</strong>。</span></p>
           </div>
         </div>
       </div>
       <div class="guide-holdings-tables"><div class="guide-split-row"><div class="guide-holdings-layer">
-          <h3 class="guide-holdings-layer-title">第一層 · 全球股票</h3>
+          <h3 class="guide-holdings-layer-title"><span data-i18n="etf.rssb.holdings.layer1.title">第一層 · 全球股票</span></h3>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-holdings">
-        <thead><tr><th>代碼</th><th>名稱</th><th>占比</th></tr></thead>
+        <thead><tr><th data-i18n="guide.holdings.col.ticker">代碼</th><th data-i18n="guide.holdings.col.name">名稱</th><th data-i18n="guide.holdings.col.weight">占比</th></tr></thead>
         <tbody><tr><td>SPTM</td><td>SPDR Portfolio S&amp;P 1500</td><td>53.03%</td></tr><tr><td>VXUS</td><td>Vanguard Total International Stock</td><td>37.44%</td></tr><tr><td>ESM6</td><td>S&amp;P 500 E-mini Fut Jun26</td><td>9.97%</td></tr></tbody>
       </table>
     </div>
         </div><div class="guide-holdings-layer">
-          <h3 class="guide-holdings-layer-title">第二層 · 美國公債</h3>
+          <h3 class="guide-holdings-layer-title"><span data-i18n="etf.rssb.holdings.layer2.title">第二層 · 美國公債</span></h3>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-holdings">
-        <thead><tr><th>代碼</th><th>名稱</th><th>占比</th></tr></thead>
+        <thead><tr><th data-i18n="guide.holdings.col.ticker">代碼</th><th data-i18n="guide.holdings.col.name">名稱</th><th data-i18n="guide.holdings.col.weight">占比</th></tr></thead>
         <tbody><tr><td>TUM6</td><td>US 2Y Treasury Note Fut Jun26</td><td>25.71%</td></tr><tr><td>FVM6</td><td>US 5Y Treasury Note Fut Jun26</td><td>25.61%</td></tr><tr><td>USM6</td><td>US Long Bond Fut Jun26</td><td>25.56%</td></tr><tr><td>TYM6</td><td>US 10Y Treasury Note Fut Jun26</td><td>25.55%</td></tr></tbody>
       </table>
     </div>
         </div></div></div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">持倉會變動，僅供理解結構，非即時資料。占比摘自官方 Q1 Commentary。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.etf.section.holdings.foot">持倉會變動，僅供理解結構，非即時資料。占比摘自官方 Q1 Commentary。</span></p></div>
       </section>
       
       <section class="card guide-backtest-card">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">官方歷史回測</p><h2>Stacking in Action（2002-12-31 ～ 2024-12-31）</h2></div></div>
+        <div class="section-head section-head-tight"><div>
+          <p class="section-kicker"><span data-i18n="guide.backtest.kicker">官方歷史回測</span></p>
+          <h2><span data-i18n="etf.rssb.backtest.title">Stacking in Action（2002-12-31 ～ 2024-12-31）</span></h2>
+        </div></div>
         <div class="guide-backtest-layout">
         <div class="guide-backtest-col guide-backtest-col-stats">
           <p class="guide-backtest-col-label guide-backtest-col-label-spacer" aria-hidden="true">Growth of $100</p>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
       <table class="quotes guide-table guide-table-num">
-        <thead><tr><th>資產／組合</th><th>年化報酬</th><th>年化波動</th><th>最大回撤</th></tr></thead>
-        <tbody><tr><td>全球股票</td><td>8.8%</td><td>15.7%</td><td>—</td></tr><tr><td>美國債券</td><td>3.1%</td><td>4.3%</td><td>—</td></tr><tr><td>現金（T-Bills）</td><td>1.6%</td><td>0.5%</td><td>—</td></tr><tr class="guide-row-highlight"><td>100/100（Return Stacked 組合）</td><td>10.4%</td><td>16.1%</td><td>—</td></tr></tbody>
+        <thead><tr>
+          <th><span data-i18n="guide.backtest.col.asset">資產／組合</span></th>
+          <th><span data-i18n="guide.backtest.col.ret">年化報酬</span></th>
+          <th><span data-i18n="guide.backtest.col.vol">年化波動</span></th>
+          <th><span data-i18n="guide.backtest.col.mdd">最大回撤</span></th>
+        </tr></thead>
+        <tbody><tr><td><span data-i18n="etf.rssb.backtest.stat.全球股票">全球股票</span></td><td>8.8%</td><td>15.7%</td><td>—</td></tr><tr><td><span data-i18n="etf.rssb.backtest.stat.美國債券">美國債券</span></td><td>3.1%</td><td>4.3%</td><td>—</td></tr><tr><td><span data-i18n="etf.rssb.backtest.stat.現金_T_Bills_">現金（T-Bills）</span></td><td>1.6%</td><td>0.5%</td><td>—</td></tr><tr class="guide-row-highlight"><td><span data-i18n="etf.rssb.backtest.stat.100_100_Return_Stacked_組合_">100/100（Return Stacked 組合）</span></td><td>10.4%</td><td>16.1%</td><td>—</td></tr></tbody>
       </table>
     </div>
         </div>
         
         <div class="guide-backtest-col guide-backtest-col-growth">
-          <p class="guide-backtest-col-label">Growth of $100（20 年後估算終值）</p>
+          <p class="guide-backtest-col-label"><span data-i18n="etf.rssb.backtest.growth.title">Growth of $100（20 年後估算終值）</span></p>
           <div class="table-wrap table-scroll guide-table-wrap guide-table-compact">
             <table class="quotes guide-table guide-table-num">
-              <thead><tr><th>資產／組合</th><th>20 年後</th></tr></thead>
-              <tbody><tr><td>全球股票</td><td>$540.2</td></tr><tr><td>美國債券</td><td>$184.2</td></tr><tr><td>現金（T-Bills）</td><td>$137.4</td></tr><tr class="guide-row-highlight"><td>100/100（Return Stacked 組合）</td><td>$723.4</td></tr></tbody>
+              <thead><tr>
+                <th><span data-i18n="guide.backtest.col.asset">資產／組合</span></th>
+                <th><span data-i18n="etf.rssb.backtest.growth.col">20 年後</span></th>
+              </tr></thead>
+              <tbody><tr><td><span data-i18n="etf.rssb.backtest.stat.全球股票">全球股票</span></td><td>$540.2</td></tr><tr><td><span data-i18n="etf.rssb.backtest.stat.美國債券">美國債券</span></td><td>$184.2</td></tr><tr><td><span data-i18n="etf.rssb.backtest.stat.現金_T_Bills_">現金（T-Bills）</span></td><td>$137.4</td></tr><tr class="guide-row-highlight"><td><span data-i18n="etf.rssb.backtest.stat.100_100_Return_Stacked_組合_">100/100（Return Stacked 組合）</span></td><td>$723.4</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint guide-backtest-growth-note">※「歷史回測」年化報酬數據源自官方歷史回測資料；「20 年後估算終值」為本站依此報酬率複利自行推算，非官方數據，亦非逐日回測曲線。</p><p class="fineprint guide-fineprint">100/100 組合同 Product Brief / Presentation。指數毛費用、稅前；你不能投資指數。 過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。</p></div>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint guide-backtest-growth-note"><span data-i18n="guide.backtest.growth.note">※「歷史回測」年化報酬數據源自官方歷史回測資料；「20 年後估算終值」為本站依此報酬率複利自行推算，非官方數據，亦非逐日回測曲線。</span></p><p class="fineprint guide-fineprint"><span data-i18n="etf.rssb.backtest.note">100/100 組合同 Product Brief / Presentation。指數毛費用、稅前；你不能投資指數。</span> <span data-i18n="guide.backtest.footnote">過往績效不代表未來結果；指數報酬為官方回測毛回報，未扣除費用與稅負。</span></p></div>
       </section>
       
 
       <div class="guide-split-row"><section class="card guide-card-accent-soft">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">Tim Wei 實測</p><h2>這一檔與本實驗的關係</h2></div></div>
-        <p>Tim Wei 實驗的核心地基。目前部位表可見 RSSB 持倉與占比變化。</p><p><a class="card-jump-link" href="../index.html">在總覽看 RSSB 持倉 →</a></p>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.tim.kicker">Tim Wei 實測</span></p><h2><span data-i18n="guide.etf.section.tim.title">這一檔與本實驗的關係</span></h2></div></div>
+        <p><span data-i18n="etf.rssb.tim_note">Tim Wei 實驗的核心地基。目前部位表可見 RSSB 持倉與占比變化。</span></p><p><a class="card-jump-link" href="../index.html"><span data-i18n="etf.rssb.holdings_link">在總覽看 RSSB 持倉 →</span></a></p>
         
       </section><section class="card guide-card-warn">
-        <div class="section-head section-head-tight"><div><p class="section-kicker">主要風險</p><h2>投資前必知（摘要）</h2></div></div>
-        <ul class="guide-list guide-list-compact"><li>衍生品／槓桿</li><li>債券利率</li><li>匯率</li><li>海外市場</li><li>非分散</li><li>標的 ETF 雙重費用</li><li>新基金</li></ul>
-        <div class="guide-card-foot"><p class="fineprint guide-fineprint">完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。</p></div>
+        <div class="section-head section-head-tight"><div><p class="section-kicker"><span data-i18n="guide.etf.section.risk.kicker">主要風險</span></p><h2><span data-i18n="guide.etf.section.risk.title">投資前必知（摘要）</span></h2></div></div>
+        <ul class="guide-list guide-list-compact"><li><span data-i18n="guide.risk.衍生品_槓桿">衍生品／槓桿</span></li><li><span data-i18n="guide.risk.債券利率">債券利率</span></li><li><span data-i18n="guide.risk.匯率">匯率</span></li><li><span data-i18n="guide.risk.海外市場">海外市場</span></li><li><span data-i18n="guide.risk.非分散">非分散</span></li><li><span data-i18n="guide.risk.標的_ETF_雙重費用">標的 ETF 雙重費用</span></li><li><span data-i18n="guide.risk.新基金">新基金</span></li></ul>
+        <div class="guide-card-foot"><p class="fineprint guide-fineprint"><span data-i18n="guide.etf.section.risk.foot">完整風險請見各檔公開說明書。本頁為教育整理，非投資建議。</span></p></div>
       </section></div>
 
-      <nav class="guide-etf-nav card" aria-label="其他 ETF">
+      <nav class="guide-etf-nav card" aria-label="Other ETFs">
         <div class="section-head section-head-tight">
           <div>
-            <p class="section-kicker">延伸閱讀</p>
-            <h2>Return Stacked 系列其他標的</h2>
+            <p class="section-kicker" data-i18n="guide.etf.nav.kicker">延伸閱讀</p>
+            <h2 data-i18n="guide.etf.nav.title">Return Stacked 系列其他標的</h2>
           </div>
         </div>
-        <p class="guide-nav-desc">目前頁面為 <strong>RSSB</strong>。其他標的：</p>
-        <div class="guide-inline-tags"><a class="guide-inline-tag" href="rsst.html"><span class="nav-ticker">RSST</span><span class="nav-name">美股＋管理期貨趨勢</span></a><a class="guide-inline-tag" href="rssy.html"><span class="nav-ticker">RSSY</span><span class="nav-name">美股＋期貨展期收益</span></a><a class="guide-inline-tag" href="rsit.html"><span class="nav-ticker">RSIT</span><span class="nav-name">國際股＋管理期貨</span></a><a class="guide-inline-tag" href="rssx.html"><span class="nav-ticker">RSSX</span><span class="nav-name">美股＋黃金／比特幣</span></a><a class="guide-inline-tag" href="rsbt.html"><span class="nav-ticker">RSBT</span><span class="nav-name">債券＋管理期貨</span></a><a class="guide-inline-tag" href="rsby.html"><span class="nav-ticker">RSBY</span><span class="nav-name">債券＋期貨展期收益</span></a><a class="guide-inline-tag" href="rsba.html"><span class="nav-ticker">RSBA</span><span class="nav-name">債券＋併購套利</span></a></div>
+        <p class="guide-nav-desc"><span data-i18n="etf.rssb.nav.desc">目前頁面為 RSSB。其他標的：</span></p>
+        <div class="guide-inline-tags"><a class="guide-inline-tag" href="rsst.html"><span class="nav-ticker">RSST</span><span class="nav-name"><span data-i18n="etf.rsst.name">美股＋管理期貨趨勢</span></span></a><a class="guide-inline-tag" href="rssy.html"><span class="nav-ticker">RSSY</span><span class="nav-name"><span data-i18n="etf.rssy.name">美股＋期貨展期收益</span></span></a><a class="guide-inline-tag" href="rsit.html"><span class="nav-ticker">RSIT</span><span class="nav-name"><span data-i18n="etf.rsit.name">國際股＋管理期貨</span></span></a><a class="guide-inline-tag" href="rssx.html"><span class="nav-ticker">RSSX</span><span class="nav-name"><span data-i18n="etf.rssx.name">美股＋黃金／比特幣</span></span></a><a class="guide-inline-tag" href="rsbt.html"><span class="nav-ticker">RSBT</span><span class="nav-name"><span data-i18n="etf.rsbt.name">債券＋管理期貨</span></span></a><a class="guide-inline-tag" href="rsby.html"><span class="nav-ticker">RSBY</span><span class="nav-name"><span data-i18n="etf.rsby.name">債券＋期貨展期收益</span></span></a><a class="guide-inline-tag" href="rsba.html"><span class="nav-ticker">RSBA</span><span class="nav-name"><span data-i18n="etf.rsba.name">債券＋併購套利</span></span></a></div>
       </nav>
 
       <div class="guide-footer-cta card">
@@ -234,13 +240,11 @@
           <a class="btn-secondary guide-btn-fb" href="https://www.facebook.com/share/g/18vB1iMhcY/" target="_blank" rel="noopener" data-i18n="social.join_fb">加入 FB 交流社團</a>
         </div>
       </div>
-      </main>
     </div>
     <aside id="social-dock" class="social-dock" hidden aria-label="Community links"></aside>
-    <script src="../locale.js?v=8"></script>
-    <script src="../guide-locale.js?v=30"></script>
+    <script src="../locale.js?v=11"></script>
+    <script src="../guide-locale.js?v=32"></script>
     <script src="../js/guide.js?v=11"></script>
     <script src="../js/social-dock.js"></script>
-    <script src="../js/site-polish.js"></script>
   </body>
 </html>

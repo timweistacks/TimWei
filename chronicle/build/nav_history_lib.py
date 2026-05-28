@@ -255,6 +255,7 @@ def _inject_first_trade_row(
     entry: dict[str, Any] = {
         "date": first_at,
         "mv_usd": round(cost, 4),
+        "position_mv_usd": round(cost, 4),
         "nav_index": 100.0,
         "spy_close": round(float(spy_anchor_close), 6),
         "spy_index": 100.0,
@@ -709,7 +710,7 @@ def sync_nav_history(
         opening_cash_usd=ledger_seed if wealth_mode else None,
         fx_events=fx_list if wealth_mode else None,
     )
-    if not wealth_mode and first_trade is not None and spy_anchor is not None:
+    if first_trade is not None and spy_anchor is not None:
         out = _inject_first_trade_row(out, trades, spy_anchor)
         out = _sort_nav_rows(out)
     from chronicle.build.nav_shadow_benchmark import enrich_nav_unit_and_shadows
