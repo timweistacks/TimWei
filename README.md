@@ -1,6 +1,6 @@
 # Investment Chronicle | 投資史冊
 
-公開、可驗證的個人投資紀錄：持倉、交易、NAV、貸款攤還、再平衡與配息。原始 JSON 與靜態網站同 repo 保存。
+公開、可驗證的個人投資紀錄：持倉、交易、NAV、貸款攤還、再平衡與配息；另含 Return Stacked 教材與 ETF 百科（中／英切換）。原始 JSON 與靜態網站同 repo 保存。
 
 > **Live site:** https://timweistacks.github.io/TimWei/
 
@@ -14,6 +14,8 @@
 │   ├── data/               # 帳本 JSON（source of truth）
 │   ├── build/              # Python 建置腳本
 │   ├── site/               # 靜態網站（GitHub Pages 根目錄）
+│   │                       #   index / details = 實測儀表板
+│   │                       #   learn / layer2 / etfs = 教材與 ETF 百科
 │   └── export/             # 自動產生的交接摘要
 ├── research/               # 選用：量化研究（公開 repo 內，不影響 Pages 部署）
 ├── scripts/                # 本機捷徑（.bat）
@@ -53,14 +55,19 @@
 ```powershell
 pip install -r requirements.txt
 python chronicle/build/build_dashboard_data.py
+python chronicle/build/build_guide_pages.py
+python chronicle/build/export_current_summary.py
 ```
 
-或雙擊：
+或雙擊 `scripts/open-site.bat`（依序 rebuild 儀表板快照、guide 頁、交接摘要，並開本機預覽 **8766**）。
 
 | 腳本 | 用途 |
 |------|------|
-| `scripts/open-site.bat` | rebuild → 開啟網站 |
-| `scripts/export-summary.bat` | rebuild → 開啟交接摘要 |
+| `scripts/open-site.bat` | 完整 rebuild → 本機預覽 |
+| `scripts/export-summary.bat` | rebuild 快照 + 摘要 |
+| `scripts/serve-site.bat` | 只開本機伺服器（不 rebuild） |
+
+改教材／ETF 百科／英文文案：編輯 `chronicle/build/build_guide_pages.py`、`guide_i18n_en.py`、`guide_etf_en.py` 後重跑 `build_guide_pages.py`（詳見 `chronicle/README.md`）。
 
 ---
 
@@ -122,8 +129,11 @@ GitHub **Insights → Traffic** 只統計 repo 頁面，**不是**網站訪客�
 | 情境 | 做法 |
 |------|------|
 | 改交易 / 持倉 | 編輯 `chronicle/data/*.json` → `git push` |
-| 每天 07:00 台灣更新報價 | GitHub Actions 排程自動 build |
+| 改教材 / ETF 頁 / 英文 | 改 `chronicle/build/` 下 guide 腳本 → `build_guide_pages.py` → `git push` |
+| 每天 07:00 台灣更新報價 | GitHub Actions 排程自動 build 儀表板快照並部署 |
 | 手動觸發 | Actions → **Publish Investment Chronicle** → Run workflow |
+
+Actions 會 rebuild **儀表板快照**（`snapshot.*`、`current_summary.md`）並推回 repo；**guide 頁**需在本機跑 `build_guide_pages.py` 後一併 commit。
 
 ---
 
