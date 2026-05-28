@@ -929,6 +929,16 @@
 
 .guide-page .guide-exposure-table {
   max-width: 920px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.guide-page .guide-exposure-table th:first-child,
+.guide-page .guide-exposure-table td:first-child {
+  width: 22%;
+  white-space: normal;
+  line-height: 1.45;
+  vertical-align: top;
 }
 
 .guide-page .guide-exposure-table th:nth-child(2),
@@ -938,6 +948,13 @@
   text-align: center;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  width: 14%;
+  vertical-align: top;
+}
+
+.guide-page .guide-exposure-table th:nth-child(3),
+.guide-page .guide-exposure-table td:nth-child(3) {
+  width: 16%;
 }
 
 .guide-page .guide-exposure-table th:nth-child(4),
@@ -945,7 +962,16 @@
   text-align: left;
   font-size: 0.8rem;
   line-height: 1.5;
-  min-width: 9rem;
+  width: 48%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  vertical-align: top;
+}
+
+.guide-page .guide-exposure-table th {
+  white-space: normal;
 }
 
 .guide-exposure-lead {
@@ -961,6 +987,8 @@
   border-radius: var(--radius-sm);
   border: 1px solid rgba(61, 107, 82, 0.2);
   background: rgba(61, 107, 82, 0.06);
+  min-width: 0;
+  overflow: visible;
 }
 
 /* 重新設計的曝險與持倉比對類比區塊 */
@@ -2375,6 +2403,16 @@ a.guide-etf-ticker:hover {
   .guide-table-wrap.guide-table-compact td:not(:first-child),
   .guide-table-wrap.guide-corr-wrap td:not(:first-child) {
     white-space: nowrap;
+  }
+
+  .guide-table-wrap.guide-table-compact .guide-exposure-table td:nth-child(1),
+  .guide-table-wrap.guide-table-compact .guide-exposure-table td:nth-child(4) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .guide-table-wrap.guide-table-compact .guide-exposure-table {
+    table-layout: fixed;
   }
 
   .guide-table-wrap:not(.guide-table-compact):not(.guide-corr-wrap) .guide-table {

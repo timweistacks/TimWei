@@ -29,7 +29,7 @@ from guide_i18n_en import (
 SITE = Path(__file__).resolve().parents[1] / "site"
 ETF_DIR = SITE / "etfs"
 
-CSS_VER = "33"
+CSS_VER = "34"
 JS_VER = "11"
 LOCALE_VER = "12"
 STYLES_VER = "14"
