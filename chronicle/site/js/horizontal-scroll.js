@@ -28,7 +28,10 @@
   }
 
   function ensureHint(affordance, panel) {
-    const existing = affordance.querySelector(".h-scroll-hint, .table-scroll-hint");
+    const anchor = panel.parentElement;
+    const existing =
+      (anchor && anchor.querySelector(":scope > .h-scroll-hint, :scope > .table-scroll-hint")) ||
+      affordance.querySelector(".h-scroll-hint, .table-scroll-hint");
     if (existing) {
       existing.classList.add("h-scroll-hint");
       return existing;
@@ -37,7 +40,11 @@
     hint.className = "h-scroll-hint table-scroll-hint";
     hint.setAttribute("aria-hidden", "true");
     hint.textContent = hintText();
-    affordance.insertBefore(hint, panel);
+    if (anchor) {
+      anchor.insertBefore(hint, panel);
+    } else {
+      affordance.prepend(hint);
+    }
     return hint;
   }
 
@@ -59,24 +66,29 @@
     if (panel.dataset.hScrollBound === "1") {
       return;
     }
-    panel.dataset.hScrollBound = "1";
-    panel.classList.add("h-scroll-panel");
+    try {
+      panel.dataset.hScrollBound = "1";
+      panel.classList.add("h-scroll-panel");
 
-    const affordance = affordanceRoot(panel);
-    affordance.classList.add("h-scroll-affordance");
-    ensureHint(affordance, panel);
+      const affordance = affordanceRoot(panel);
+      affordance.classList.add("h-scroll-affordance");
+      ensureHint(affordance, panel);
 
-    const refresh = () => updateAffordance(affordance, panel);
-    panel.addEventListener("scroll", refresh, { passive: true });
-    global.addEventListener("resize", refresh, { passive: true });
-    if (global.ResizeObserver) {
-      const observer = new global.ResizeObserver(refresh);
-      observer.observe(panel);
-      if (affordance !== panel) {
-        observer.observe(affordance);
+      const refresh = () => updateAffordance(affordance, panel);
+      panel.addEventListener("scroll", refresh, { passive: true });
+      global.addEventListener("resize", refresh, { passive: true });
+      if (global.ResizeObserver) {
+        const observer = new global.ResizeObserver(refresh);
+        observer.observe(panel);
+        if (affordance !== panel) {
+          observer.observe(affordance);
+        }
       }
+      refresh();
+    } catch (error) {
+      panel.dataset.hScrollBound = "0";
+      console.error("horizontal scroll affordance bind failed", error);
     }
-    refresh();
   }
 
   function initHorizontalScrollAffordances() {
