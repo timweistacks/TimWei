@@ -1644,10 +1644,11 @@ function benchmarkSummary(snapshot) {
   if (Math.abs(excess) < 0.05) {
     return { state: "neutral", text: pllT("spy.day_flat") };
   }
+  const formattedExcess = fmtSignedRatioPercent(excess);
   if (excess > 0) {
-    return { state: "good", text: pllT("spy.day_ahead") };
+    return { state: "good", text: pllT("spy.day_ahead", { n: formattedExcess }) };
   }
-  return { state: "bad", text: pllT("spy.day_behind") };
+  return { state: "bad", text: pllT("spy.day_behind", { n: formattedExcess }) };
 }
 
 function displayDateChip(raw) {
@@ -2977,8 +2978,11 @@ function renderLineChart(canvas, chartBlock, yAxisText) {
             maxTicksLimit: 5,
             callback: function(value, index, values) {
               const label = this.getLabelForValue(value);
-              if (typeof label === "string" && label.length === 10) {
-                return label.substring(5).replace("-", "/");
+              if (typeof label === "string") {
+                const match = label.match(/^(\d{4})[-/](\d{2})[-/](\d{2})(?!\d)/);
+                if (match) {
+                  return `${match[2]}/${match[3]}`;
+                }
               }
               return label;
             }
