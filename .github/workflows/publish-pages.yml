@@ -4,8 +4,8 @@ on:
   push:
     branches: [main, master]
   schedule:
-    # 07:00 Asia/Taipei (UTC+8) == 23:00 UTC previous calendar day
-    - cron: "0 23 * * *"
+    # 07:17 Asia/Taipei (UTC+8) == 23:17 UTC previous calendar day (避開整點流量洪峰，保證觸發)
+    - cron: "17 23 * * *"
   workflow_dispatch:
 
 concurrency:
