@@ -102,15 +102,15 @@
   "capital_summary": {
     "cash_twd": 0.0,
     "cash_usd": 10.2,
-    "cash_usd_twd": 321.49,
+    "cash_usd_twd": 321.94,
     "contract_principal_twd": 1350000.0,
     "deployment_ratio_pct": 99.98,
-    "investment_mv_twd": 1324337.1,
-    "liquid_assets_twd": 321.49,
+    "investment_mv_twd": 1320934.11,
+    "liquid_assets_twd": 321.94,
     "loan_outstanding_twd": 1336228.0,
     "net_to_account_twd": 1340970.0,
-    "net_worth_twd": -11569.41,
-    "project_assets_twd": 1324658.59,
+    "net_worth_twd": -14971.95,
+    "project_assets_twd": 1321256.05,
     "setup_cost_twd": 9030.0
   },
   "capital_deployed_chart": {
@@ -249,7 +249,7 @@
           43389.429756,
           43583.379721,
           41559.29007,
-          42017.10508
+          41850.715038
         ]
       }
     ],
@@ -367,8 +367,8 @@
     "peak_investment_value_twd": null,
     "trigger_drawdown_from_peak_pct": 0.2,
     "effective_peak_nav_index": 108.7676,
-    "current_position_nav_index": 104.3652,
-    "current_vs_peak_pct": 4.05,
+    "current_position_nav_index": 103.9519,
+    "current_vs_peak_pct": 4.43,
     "trigger_nav_index": 87.0141
   },
   "errors": [],
@@ -471,7 +471,7 @@
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-06-08",
+  "generated_at": "2026-06-09",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -1420,16 +1420,16 @@
   },
   "investment_cost": {
     "historical_cost_twd": 1315487.46,
-    "current_fx_equivalent_twd": 1308356.8,
+    "current_fx_equivalent_twd": 1310183.27,
     "invested_usd": 41510.1,
     "matched_flow_count": 18,
     "unmatched_flow_count": 0,
     "historical_fx_rate_avg": 31.5844,
     "twd_cost_method": "historical_fx_log",
-    "unrealized_pnl_twd": 8849.64
+    "unrealized_pnl_twd": 5446.65
   },
-  "investment_mv_twd": 1324337.1,
-  "investment_mv_usd": 42017.1051,
+  "investment_mv_twd": 1320934.11,
+  "investment_mv_usd": 41850.715,
   "liabilities": {
     "loan_next_due_amount_twd": 18765.0,
     "loan_next_due_date": "2026-06-13",
@@ -1553,7 +1553,7 @@
           107.7739,
           108.2557,
           103.2281,
-          104.3652
+          103.9519
         ]
       },
       {
@@ -1600,7 +1600,7 @@
           109.25,
           109.6628,
           106.8325,
-          107.6407
+          107.0744
         ]
       },
       {
@@ -1647,7 +1647,7 @@
           118.326,
           119.1493,
           112.9577,
-          114.69
+          113.4894
         ]
       }
     ]
@@ -1656,11 +1656,11 @@
   "nav_summary": {
     "cumulative_invested_usd": 41510.1,
     "invested_basis": "flows",
-    "mv_usd": 42017.10508,
+    "mv_usd": 41850.715038,
     "mv_as_of": "2026-06-08",
-    "nav_index_100": 104.3652,
+    "nav_index_100": 103.9519,
     "unrealized_pnl_usd": null,
-    "position_mv_usd": 42017.1051,
+    "position_mv_usd": 41850.715,
     "ledger_cash_usd": 10.2,
     "nav_funding_usd": 41088.65,
     "nav_index_basis": "unit_fund_deployed_on_trade",
@@ -1679,20 +1679,20 @@
       "interval": {
         "from_date": "2026-04-14T22:07:04",
         "to_date": "2026-06-08",
-        "nav_pct": 4.3652,
-        "spy_pct": 7.6407,
-        "excess_pct_points": -3.2755
+        "nav_pct": 3.9519,
+        "spy_pct": 7.0744,
+        "excess_pct_points": -3.1225
       },
       "prior_row": {
         "prior_date": "2026-06-05",
         "last_date": "2026-06-08",
-        "nav_1d_pct": 1.1015,
-        "spy_1d_pct": 0.7565,
-        "excess_pct_points": 0.345,
+        "nav_1d_pct": 0.7012,
+        "spy_1d_pct": 0.2264,
+        "excess_pct_points": 0.4748,
         "mv_usd_prior": 41569.49007,
-        "mv_usd_last": 42027.30508,
-        "mv_usd_delta": 457.815,
-        "mv_usd_pct": 1.1013
+        "mv_usd_last": 41860.915038,
+        "mv_usd_delta": 291.425,
+        "mv_usd_pct": 0.7011
       }
     },
     "sso_nav_benchmark_stats": {
@@ -1700,20 +1700,20 @@
       "interval": {
         "from_date": "2026-04-14T22:07:04",
         "to_date": "2026-06-08",
-        "nav_pct": 4.3652,
-        "spy_pct": 14.69,
-        "excess_pct_points": -10.3248
+        "nav_pct": 3.9519,
+        "spy_pct": 13.4894,
+        "excess_pct_points": -9.5375
       },
       "prior_row": {
         "prior_date": "2026-06-05",
         "last_date": "2026-06-08",
-        "nav_1d_pct": 1.1015,
-        "spy_1d_pct": 1.5336,
-        "excess_pct_points": -0.4321,
+        "nav_1d_pct": 0.7012,
+        "spy_1d_pct": 0.4707,
+        "excess_pct_points": 0.2305,
         "mv_usd_prior": 41569.49007,
-        "mv_usd_last": 42027.30508,
-        "mv_usd_delta": 457.815,
-        "mv_usd_pct": 1.1013
+        "mv_usd_last": 41860.915038,
+        "mv_usd_delta": 291.425,
+        "mv_usd_pct": 0.7011
       }
     },
     "first_trade_at": "2026-04-14T22:07:04",
@@ -1721,19 +1721,19 @@
     "nav_model": "equity_cash_ledger",
     "ledger_cash_seed_usd": 0.0,
     "nav_cash_includes_fx": true,
-    "equity_plus_cash_usd": 42027.31
+    "equity_plus_cash_usd": 41860.91
   },
   "net_worth": {
-    "assets_twd": 1324658.59,
-    "cash_total_twd": 321.49,
+    "assets_twd": 1321256.05,
+    "cash_total_twd": 321.94,
     "cash_usd_omitted": false,
-    "investment_positions_twd": 1324337.1,
+    "investment_positions_twd": 1320934.11,
     "liabilities_twd": 1336228.0,
-    "net_worth_twd": -11569.41
+    "net_worth_twd": -14971.95
   },
   "net_worth_note_zh": null,
   "overview": {
-    "assets_twd": 1324658.59,
+    "assets_twd": 1321256.05,
     "broker_cash_plus_boxx_mv_usd": 10.2,
     "broker_cash_plus_cash_like_mv_usd": 10.2,
     "boxx_market_value_usd": 0.0,
@@ -1742,11 +1742,11 @@
       "BOXX"
     ],
     "cash_like_note_zh": "券商 USD 餘額 + BOXX 市值（等同美金現金，計入淨資產現金側）；NAV 綠線與 SPY 影子僅跟權益型 ETF 買賣，不含閒置現金與 BOXX。",
-    "investment_mv_twd": 1324337.1,
+    "investment_mv_twd": 1320934.11,
     "liabilities_twd": 1336228.0,
     "loan_next_due_amount_twd": 18765.0,
     "loan_next_due_date": "2026-06-13",
-    "net_worth_twd": -11569.41,
+    "net_worth_twd": -14971.95,
     "phase_id": "phase-c",
     "phase_range": {
       "from": "2026-05-19",
@@ -1755,12 +1755,12 @@
     "project_buckets_note_zh": "",
     "project_buckets_total_twd": 0,
     "rebalance_needed": false,
-    "usd_twd": 31.518999099731445,
+    "usd_twd": 31.562999725341797,
     "usd_twd_source": "yahoo"
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-06-08",
+    "as_of": "2026-06-09",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
@@ -1802,10 +1802,10 @@
         }
       ]
     },
-    "positions_mv_usd_for_targets": 42017.1051,
+    "positions_mv_usd_for_targets": 41850.715,
     "rebalance_actions": [],
-    "rebalance_denominator_twd": 1324658.59,
-    "rebalance_denominator_usd": 42027.3051,
+    "rebalance_denominator_twd": 1321256.05,
+    "rebalance_denominator_usd": 41860.915,
     "rebalance_needed": false,
     "sleeves": [
       {
@@ -1813,18 +1813,18 @@
         "band_low_pct": 32.0,
         "buy_fee_min_notional_usd": null,
         "buy_fee_pct_if_traded": null,
-        "current_pct": 43.47,
+        "current_pct": 43.45,
         "current_units": 605.0,
-        "delta_mv_twd": -46020.21,
-        "delta_mv_usd": -1460.0785,
-        "last_twd": 951.87,
-        "last_usd": 30.2,
+        "delta_mv_twd": -45528.94,
+        "delta_mv_usd": -1442.4783,
+        "last_twd": 948.81,
+        "last_usd": 30.0609,
         "listed": true,
-        "mv_twd": 575883.65,
-        "mv_usd": 18271.0005,
+        "mv_twd": 574031.36,
+        "mv_usd": 18186.8443,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 529863.44,
-        "target_mv_usd": 16810.922,
+        "target_mv_twd": 528502.42,
+        "target_mv_usd": 16744.366,
         "status": "ok",
         "symbol": "RSSB",
         "trade_side": "hold",
@@ -1837,18 +1837,18 @@
         "band_low_pct": 24.0,
         "buy_fee_min_notional_usd": null,
         "buy_fee_pct_if_traded": null,
-        "current_pct": 29.59,
+        "current_pct": 29.54,
         "current_units": 379.0,
-        "delta_mv_twd": 5399.43,
-        "delta_mv_usd": 171.307,
-        "last_twd": 1034.3,
-        "last_usd": 32.815,
+        "delta_mv_twd": 6044.44,
+        "delta_mv_usd": 191.5041,
+        "last_twd": 1029.9,
+        "last_usd": 32.63,
         "listed": true,
-        "mv_twd": 391998.15,
-        "mv_usd": 12436.8845,
+        "mv_twd": 390332.37,
+        "mv_usd": 12366.7704,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 397397.58,
-        "target_mv_usd": 12608.1915,
+        "target_mv_twd": 396376.81,
+        "target_mv_usd": 12558.2745,
         "status": "ok",
         "symbol": "RSST",
         "trade_side": "hold",
@@ -1861,18 +1861,18 @@
         "band_low_pct": 12.0,
         "buy_fee_min_notional_usd": null,
         "buy_fee_pct_if_traded": null,
-        "current_pct": 13.56,
+        "current_pct": 13.57,
         "current_units": 227.0,
-        "delta_mv_twd": 19041.44,
-        "delta_mv_usd": 604.1257,
-        "last_twd": 791.44,
-        "last_usd": 25.11,
+        "delta_mv_twd": 18925.09,
+        "delta_mv_usd": 599.5972,
+        "last_twd": 789.71,
+        "last_usd": 25.02,
         "listed": true,
-        "mv_twd": 179657.35,
-        "mv_usd": 5699.9701,
+        "mv_twd": 179263.32,
+        "mv_usd": 5679.5401,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 198698.79,
-        "target_mv_usd": 6304.0958,
+        "target_mv_twd": 198188.41,
+        "target_mv_usd": 6279.1373,
         "status": "ok",
         "symbol": "RSSY",
         "trade_side": "hold",
@@ -1885,18 +1885,18 @@
         "band_low_pct": 12.0,
         "buy_fee_min_notional_usd": null,
         "buy_fee_pct_if_traded": null,
-        "current_pct": 13.35,
+        "current_pct": 13.42,
         "current_units": 277.0,
-        "delta_mv_twd": 21900.84,
-        "delta_mv_usd": 694.8458,
-        "last_twd": 638.26,
-        "last_usd": 20.25,
+        "delta_mv_twd": 20881.36,
+        "delta_mv_usd": 661.5771,
+        "last_twd": 640.1,
+        "last_usd": 20.28,
         "listed": true,
-        "mv_twd": 176797.95,
-        "mv_usd": 5609.25,
+        "mv_twd": 177307.05,
+        "mv_usd": 5617.5602,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 198698.79,
-        "target_mv_usd": 6304.0958,
+        "target_mv_twd": 198188.41,
+        "target_mv_usd": 6279.1373,
         "status": "ok",
         "symbol": "RSIT",
         "trade_side": "hold",
@@ -1905,8 +1905,8 @@
         "yahoo_ticker": "RSIT"
       }
     ],
-    "total_mv_twd": 1324337.1,
-    "total_mv_usd": 42017.1051
+    "total_mv_twd": 1320934.11,
+    "total_mv_usd": 41850.715
   },
   "refresh_hint_zh": "",
   "rebalance_log": {
@@ -1991,63 +1991,63 @@
       "listed": true,
       "symbol": "RSSB",
       "yahoo_ticker": "RSSB",
-      "last_usd": 30.200000762939453,
+      "last_usd": 30.06089973449707,
       "units": 605.0,
       "avg_entry_usd": 29.741008,
-      "unrealized_pnl_usd": 277.69,
-      "last_twd": 951.87
+      "unrealized_pnl_usd": 193.53,
+      "last_twd": 948.81
     },
     {
       "listed": true,
       "symbol": "RSIT",
       "yahoo_ticker": "RSIT",
-      "last_usd": 20.25,
+      "last_usd": 20.280000686645508,
       "units": 277.0,
       "avg_entry_usd": 20.511011,
-      "unrealized_pnl_usd": -72.3,
-      "last_twd": 638.26
+      "unrealized_pnl_usd": -63.99,
+      "last_twd": 640.1
     },
     {
       "listed": true,
       "symbol": "RSST",
       "yahoo_ticker": "RSST",
-      "last_usd": 32.814998626708984,
+      "last_usd": 32.630001068115234,
       "units": 379.0,
       "avg_entry_usd": 32.432665,
-      "unrealized_pnl_usd": 144.9,
-      "last_twd": 1034.3
+      "unrealized_pnl_usd": 74.79,
+      "last_twd": 1029.9
     },
     {
       "listed": true,
       "symbol": "RSSY",
       "yahoo_ticker": "RSSY",
-      "last_usd": 25.110000610351562,
+      "last_usd": 25.020000457763672,
       "units": 227.0,
       "avg_entry_usd": 24.761982,
-      "unrealized_pnl_usd": 79.0,
-      "last_twd": 791.44
+      "unrealized_pnl_usd": 58.57,
+      "last_twd": 789.71
     },
     {
       "listed": true,
       "symbol": "BOXX",
       "yahoo_ticker": "BOXX",
-      "last_usd": 116.94499969482422,
+      "last_usd": 116.94000244140625,
       "units": 0.0,
       "avg_entry_usd": null,
       "unrealized_pnl_usd": null,
-      "last_twd": 3685.99,
+      "last_twd": 3690.98,
       "cash_like": true
     },
     {
       "symbol": "SPY",
       "yahoo_ticker": "SPY",
-      "last_usd": 743.1300048828125,
+      "last_usd": 739.219970703125,
       "benchmark": true
     },
     {
       "symbol": "SSO",
       "yahoo_ticker": "SSO",
-      "last_usd": 66.87000274658203,
+      "last_usd": 66.16999816894531,
       "benchmark": true
     }
   ],
@@ -2129,7 +2129,7 @@
         "realized_pnl_usd": 82.34
       }
     ],
-    "total_realized_pnl_twd": 13607.7
+    "total_realized_pnl_twd": 13626.69
   },
   "rule_events": {
     "schema_version": 1,
@@ -2252,7 +2252,7 @@
           109.25,
           109.6628,
           106.8325,
-          107.6407
+          107.0744
         ]
       },
       {
@@ -2299,7 +2299,7 @@
           118.326,
           119.1493,
           112.9577,
-          114.69
+          113.4894
         ]
       }
     ]
@@ -2842,6 +2842,6 @@
       }
     ]
   },
-  "usd_twd": 31.518999099731445,
+  "usd_twd": 31.562999725341797,
   "usd_twd_source": "yahoo"
 }
