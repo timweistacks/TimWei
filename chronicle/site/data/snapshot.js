@@ -102,7 +102,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
   "capital_summary": {
     "cash_twd": 0.0,
     "cash_usd": 10.2,
-    "cash_usd_twd": 322.63,
+    "cash_usd_twd": 322.42,
     "contract_principal_twd": 1350000.0,
     "deployment_ratio_pct": null,
     "investment_mv_twd": NaN,
@@ -1423,7 +1423,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
   },
   "investment_cost": {
     "historical_cost_twd": 1315487.46,
-    "current_fx_equivalent_twd": 1312964.43,
+    "current_fx_equivalent_twd": 1312134.29,
     "invested_usd": 41510.1,
     "matched_flow_count": 18,
     "unmatched_flow_count": 0,
@@ -1762,7 +1762,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
     "project_buckets_note_zh": "",
     "project_buckets_total_twd": 0,
     "rebalance_needed": false,
-    "usd_twd": 31.6299991607666,
+    "usd_twd": 31.610000610351562,
     "usd_twd_source": "yahoo"
   },
   "platform_note_zh": "",
@@ -2136,7 +2136,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "realized_pnl_usd": 82.34
       }
     ],
-    "total_realized_pnl_twd": 13655.62
+    "total_realized_pnl_twd": 13646.99
   },
   "rule_events": {
     "schema_version": 1,
@@ -2852,6 +2852,6 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       }
     ]
   },
-  "usd_twd": 31.6299991607666,
+  "usd_twd": 31.610000610351562,
   "usd_twd_source": "yahoo"
 };
