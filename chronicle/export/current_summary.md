@@ -1,18 +1,18 @@
 # Current Summary
 
-- Generated on: 2026-06-10
-- Snapshot date: 2026-06-10
+- Generated on: 2026-06-11
+- Snapshot date: 2026-06-11
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
 
-- Net worth: TWD nan
-- Market value: TWD nan / USD nan
+- Net worth: TWD -42,256
+- Market value: TWD 1,293,650 / USD 40,917.57
 - Remaining liability: TWD 1,336,228
-- NAV index: nan
+- NAV index: 101.63
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD nan
-- Market vs debt: nan% market coverage
+- Unrealized PnL in TWD view: TWD -21,838
+- Market vs debt: 96.81% market coverage
 - Next loan payment: 2026-06-13 / TWD 18,765
 
 ## Capital Structure
@@ -27,11 +27,11 @@
 
 ## Holdings
 
-- RSSB: 605.0000 units, last USD nan
-- RSIT: 277.0000 units, last USD nan
-- RSST: 379.0000 units, last USD nan
-- RSSY: 227.0000 units, last USD nan
-- BOXX: 0.0000 units, last USD nan
+- RSSB: 605.0000 units, last USD 29.64
+- RSIT: 277.0000 units, last USD 19.65
+- RSST: 379.0000 units, last USD 31.42
+- RSSY: 227.0000 units, last USD 24.82
+- BOXX: 0.0000 units, last USD 116.99
 
 ## Rules And Risk
 
@@ -45,7 +45,7 @@
 
 - Trades logged: 21
 - FX events logged: 12
-- NAV history days: 41
+- NAV history days: 42
 - Cash snapshots logged: 0 (missing)
 
 ## Missing Information

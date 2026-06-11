@@ -678,17 +678,36 @@
   },
   {
     "date": "2026-06-09",
-    "mv_usd": NaN,
-    "nav_index": NaN,
-    "spy_close": NaN,
-    "spy_index": NaN,
+    "mv_usd": 41613.642419,
+    "nav_index": 103.3377,
+    "spy_close": 737.049988,
+    "spy_index": 107.1777,
     "cumulative_invested_usd": 41510.1,
-    "position_mv_usd": NaN,
+    "position_mv_usd": 41603.442419,
     "ledger_cash_usd": 10.2,
     "cash_like_mv_usd": 0.0,
     "funding_usd": 41088.65,
     "fund_units": 402.596761,
-    "spy_shadow_index_equity_usd": NaN,
-    "sso_shadow_index_equity_usd": NaN
+    "spy_shadow_index_equity_usd": 42480.17,
+    "spy_shadow_index": 106.76,
+    "sso_shadow_index_equity_usd": 43634.8418,
+    "sso_shadow_index": 112.8377
+  },
+  {
+    "date": "2026-06-10",
+    "mv_usd": 40927.769485,
+    "nav_index": 101.6341,
+    "spy_close": 725.429993,
+    "spy_index": 105.4879,
+    "cumulative_invested_usd": 41510.1,
+    "position_mv_usd": 40917.569485,
+    "ledger_cash_usd": 10.2,
+    "cash_like_mv_usd": 0.0,
+    "funding_usd": 41088.65,
+    "fund_units": 402.596761,
+    "spy_shadow_index_equity_usd": 41810.447,
+    "spy_shadow_index": 105.0769,
+    "sso_shadow_index_equity_usd": 42228.7621,
+    "sso_shadow_index": 109.2016
   }
 ]
