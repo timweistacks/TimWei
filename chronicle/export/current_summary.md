@@ -1,7 +1,7 @@
 # Current Summary
 
-- Generated on: 2026-06-13
-- Snapshot date: 2026-06-13
+- Generated on: 2026-06-14
+- Snapshot date: 2026-06-14
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
@@ -13,7 +13,7 @@
 - Unrealized PnL: USD —
 - Unrealized PnL in TWD view: TWD 18,508
 - Market vs debt: 100.86% market coverage
-- Next loan payment: 2026-06-13 / TWD 18,765
+- Next loan payment: 2026-07-13 / TWD 18,765
 
 ## Capital Structure
 

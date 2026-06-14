@@ -483,7 +483,7 @@
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -1444,7 +1444,7 @@
   "investment_mv_usd": 42201.6856,
   "liabilities": {
     "loan_next_due_amount_twd": 18765.0,
-    "loan_next_due_date": "2026-06-13",
+    "loan_next_due_date": "2026-07-13",
     "loan_outstanding_twd": 1322570.0,
     "net_worth_liabilities_twd": 1322570.0
   },
@@ -1461,7 +1461,7 @@
     "monthly_payment_twd": 18765.0,
     "net_to_account_twd": 1340970.0,
     "next_due_amount_twd": 18765.0,
-    "next_due_date": "2026-06-13",
+    "next_due_date": "2026-07-13",
     "origin_date": "2026-04-13",
     "outstanding_raw_twd": 1322570.0,
     "outstanding_twd": 1322570.0,
@@ -1773,7 +1773,7 @@
     "investment_mv_twd": 1333995.31,
     "liabilities_twd": 1322570.0,
     "loan_next_due_amount_twd": 18765.0,
-    "loan_next_due_date": "2026-06-13",
+    "loan_next_due_date": "2026-07-13",
     "net_worth_twd": 11747.73,
     "phase_id": "phase-c",
     "phase_range": {
@@ -1788,7 +1788,7 @@
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-06-13",
+    "as_of": "2026-06-14",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
