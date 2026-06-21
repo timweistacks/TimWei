@@ -622,7 +622,7 @@
     "fund_units": 402.596761,
     "spy_shadow_index_equity_usd": 43360.2645,
     "spy_shadow_index": 108.9692,
-    "sso_shadow_index_equity_usd": 45761.8985,
+    "sso_shadow_index_equity_usd": 45761.8986,
     "sso_shadow_index": 118.326
   },
   {
@@ -797,12 +797,12 @@
   },
   {
     "date": "2026-06-18",
-    "mv_usd": NaN,
-    "nav_index": NaN,
+    "mv_usd": 42834.19576,
+    "nav_index": 106.3694,
     "spy_close": 746.73999,
     "spy_index": 108.8665,
     "cumulative_invested_usd": 41510.1,
-    "position_mv_usd": NaN,
+    "position_mv_usd": 42823.99576,
     "ledger_cash_usd": 10.2,
     "cash_like_mv_usd": 0.0,
     "funding_usd": 41088.65,
