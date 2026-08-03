@@ -6,13 +6,13 @@
 
 ## Current State
 
-- Net worth: TWD 46,686
-- Market value: TWD 1,355,053 / USD 41,962.51
+- Net worth: TWD 51,361
+- Market value: TWD 1,330,607 / USD 41,055.46
 - Remaining liability: TWD 1,308,697
-- NAV index: 104.23
+- NAV index: 104.22
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 39,566
-- Market vs debt: 103.54% market coverage
+- Unrealized PnL in TWD view: TWD 43,359
+- Market vs debt: 101.67% market coverage
 - Next loan payment: 2026-08-13 / TWD 18,765
 
 ## Capital Structure
@@ -22,12 +22,12 @@
 - Self-funded capital: TWD 0 / USD 0.00
 - Total external capital logged: TWD 1,350,000 / USD 0.00
 - Average external contribution per active month: TWD 1,350,000 / USD 0.00
-- Deployed capital into positions: USD 41,510.10
-- TWD invested cost basis: TWD 1,315,487 (historical_fx_log)
+- Deployed capital into positions: USD 40,617.87
+- TWD invested cost basis: TWD 1,287,248 (historical_fx_log)
 
 ## Holdings
 
-- RSSB: 605.0000 units, last USD 30.24
+- RSSB: 575.0000 units, last USD 30.24
 - RSIT: 277.0000 units, last USD 20.44
 - RSST: 379.0000 units, last USD 32.59
 - RSSY: 227.0000 units, last USD 24.92
@@ -43,7 +43,7 @@
 
 ## Data Coverage
 
-- Trades logged: 21
+- Trades logged: 22
 - FX events logged: 12
 - NAV history days: 77
 - Cash snapshots logged: 0 (missing)
@@ -66,6 +66,7 @@
 
 ## Timeline
 
+- 2026-07-30T22:15:22: Trade: sell RSSB / 30.0000 units / USD 901.50
 - 2026-05-21T22:15:05: Trade: buy RSST / 95.0000 units / USD 3,166.35
 - 2026-05-21: FX: TWD 100,000 -> USD 3,164.56 @ 31.6000
 - 2026-05-19T22:07:16: Trade: buy RSST / 37.0000 units / USD 1,222.85
@@ -85,7 +86,6 @@
 - 2026-04-21T23:38:48: Trade: buy BOXX / 30.0000 units / USD 3,493.05
 - 2026-04-20T21:51:39: Trade: buy BOXX / 259.0000 units / USD 30,151.77
 - 2026-04-20: FX: TWD 100,000 -> USD 3,167.56 @ 31.5700
-- 2026-04-20: FX: TWD 50,000 -> USD 1,586.29 @ 31.5200
 
 ## Files Of Truth
 
