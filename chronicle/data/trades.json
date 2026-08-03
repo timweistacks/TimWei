@@ -238,6 +238,18 @@
       "symbol": "RSST",
       "total_usd": 3166.35,
       "units": 95
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-07-30T22:15:22",
+      "fee_usd": 3,
+      "other_fees_usd": 0.02,
+      "note": "補登 2026-07-30 RSSB 賣出。",
+      "price_usd": 30.05,
+      "side": "sell",
+      "symbol": "RSSB",
+      "total_usd": 901.5,
+      "units": 30
     }
   ],
   "note": "Buy: total_usd = principal (fill amount). fee_usd/other_fees_usd = separate charges; wallet debit = total_usd + fee_usd + other_fees_usd. No fee => use 0. Sell: total_usd = gross credit; net in = total_usd - fee_usd - other_fees_usd."

@@ -230,6 +230,17 @@
       "usd": 3166.35,
       "fees_usd": 3,
       "note": "phase-c: add RSST toward 30% target. Matches trades.json."
+    },
+    {
+      "date": "2026-07-30",
+      "executed_at": "2026-07-30T22:15:22",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 30,
+      "price_usd": 30.05,
+      "usd": -892.23,
+      "fees_usd": 0,
+      "note": "補登；以平均成本釋放持倉成本。成交總額 901.50，扣除手續費 3.00 與其他費用 0.02 後實際入帳 898.48 USD。"
     }
   ],
   "note": "Buys: usd = principal (same as trades total_usd), fees_usd = commission; deployed = usd+fees_usd. Sells: negative usd = cost basis released (avg cost) so cumulative flows match remaining portfolio cost_basis_usd."

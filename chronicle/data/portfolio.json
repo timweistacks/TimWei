@@ -1,6 +1,6 @@
 {
   "cash_twd": 0,
-  "cash_usd": 10.2,
+  "cash_usd": 908.68,
   "nav": {
     "cash_like_symbols": ["BOXX"],
     "equity_includes_cash_usd": true,
@@ -16,10 +16,10 @@
   },
   "positions": [
     {
-      "cost_basis_usd": 17993.31,
+      "cost_basis_usd": 17101.12,
       "symbol": "RSSB",
       "trade_fees_usd": 0,
-      "units": 605,
+      "units": 575,
       "yahoo_ticker": "RSSB"
     },
     {
