@@ -597,7 +597,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-08-07",
+  "generated_at": "2026-08-08",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -2054,7 +2054,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-08-07",
+    "as_of": "2026-08-08",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
