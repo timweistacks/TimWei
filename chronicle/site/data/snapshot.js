@@ -102,15 +102,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
   "capital_summary": {
     "cash_twd": 0.0,
     "cash_usd": 908.68,
-    "cash_usd_twd": 29291.3,
+    "cash_usd_twd": 29265.67,
     "contract_principal_twd": 1350000.0,
     "deployment_ratio_pct": 97.9,
-    "investment_mv_twd": 1364159.09,
-    "liquid_assets_twd": 29291.3,
+    "investment_mv_twd": 1362965.61,
+    "liquid_assets_twd": 29265.67,
     "loan_outstanding_twd": 1308697.0,
     "net_to_account_twd": 1340970.0,
-    "net_worth_twd": 84753.39,
-    "project_assets_twd": 1393450.39,
+    "net_worth_twd": 83534.28,
+    "project_assets_twd": 1392231.28,
     "setup_cost_twd": 9030.0
   },
   "capital_deployed_chart": {
@@ -597,7 +597,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-08-08",
+  "generated_at": "2026-08-09",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -1546,15 +1546,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
   },
   "investment_cost": {
     "historical_cost_twd": 1287248.16,
-    "current_fx_equivalent_twd": 1309317.06,
+    "current_fx_equivalent_twd": 1308171.56,
     "invested_usd": 40617.87,
     "matched_flow_count": 19,
     "unmatched_flow_count": 0,
     "historical_fx_rate_avg": 31.5878,
     "twd_cost_method": "historical_fx_log",
-    "unrealized_pnl_twd": 76910.93
+    "unrealized_pnl_twd": 75717.45
   },
-  "investment_mv_twd": 1364159.09,
+  "investment_mv_twd": 1362965.61,
   "investment_mv_usd": 42319.1893,
   "liabilities": {
     "loan_next_due_amount_twd": 18765.0,
@@ -2018,16 +2018,16 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
     "equity_plus_cash_usd": 43227.87
   },
   "net_worth": {
-    "assets_twd": 1393450.39,
-    "cash_total_twd": 29291.3,
+    "assets_twd": 1392231.28,
+    "cash_total_twd": 29265.67,
     "cash_usd_omitted": false,
-    "investment_positions_twd": 1364159.09,
+    "investment_positions_twd": 1362965.61,
     "liabilities_twd": 1308697.0,
-    "net_worth_twd": 84753.39
+    "net_worth_twd": 83534.28
   },
   "net_worth_note_zh": null,
   "overview": {
-    "assets_twd": 1393450.39,
+    "assets_twd": 1392231.28,
     "broker_cash_plus_boxx_mv_usd": 908.68,
     "broker_cash_plus_cash_like_mv_usd": 908.68,
     "boxx_market_value_usd": 0.0,
@@ -2036,11 +2036,11 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "BOXX"
     ],
     "cash_like_note_zh": "券商 USD 餘額 + BOXX 市值（等同美金現金，計入淨資產現金側）；NAV 綠線與 SPY 影子僅跟權益型 ETF 買賣，不含閒置現金與 BOXX。",
-    "investment_mv_twd": 1364159.09,
+    "investment_mv_twd": 1362965.61,
     "liabilities_twd": 1308697.0,
     "loan_next_due_amount_twd": 18765.0,
     "loan_next_due_date": "2026-08-13",
-    "net_worth_twd": 84753.39,
+    "net_worth_twd": 83534.28,
     "phase_id": "phase-c",
     "phase_range": {
       "from": "2026-05-19",
@@ -2049,12 +2049,12 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
     "project_buckets_note_zh": "",
     "project_buckets_total_twd": 0,
     "rebalance_needed": false,
-    "usd_twd": 32.23500061035156,
+    "usd_twd": 32.2067985534668,
     "usd_twd_source": "yahoo"
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-08-08",
+    "as_of": "2026-08-09",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
@@ -2098,7 +2098,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
     },
     "positions_mv_usd_for_targets": 42319.1893,
     "rebalance_actions": [],
-    "rebalance_denominator_twd": 1393450.39,
+    "rebalance_denominator_twd": 1392231.28,
     "rebalance_denominator_usd": 43227.8693,
     "rebalance_needed": false,
     "sleeves": [
@@ -2109,15 +2109,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "buy_fee_pct_if_traded": null,
         "current_pct": 41.59,
         "current_units": 575.0,
-        "delta_mv_twd": -22213.22,
+        "delta_mv_twd": -22193.79,
         "delta_mv_usd": -689.1026,
-        "last_twd": 1007.99,
+        "last_twd": 1007.11,
         "last_usd": 31.27,
         "listed": true,
-        "mv_twd": 579593.38,
+        "mv_twd": 579086.3,
         "mv_usd": 17980.2503,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 557380.16,
+        "target_mv_twd": 556892.51,
         "target_mv_usd": 17291.1477,
         "status": "ok",
         "symbol": "RSSB",
@@ -2133,15 +2133,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "buy_fee_pct_if_traded": null,
         "current_pct": 29.46,
         "current_units": 379.0,
-        "delta_mv_twd": 7541.75,
+        "delta_mv_twd": 7535.15,
         "delta_mv_usd": 233.9614,
-        "last_twd": 1083.1,
+        "last_twd": 1082.15,
         "last_usd": 33.6,
         "listed": true,
-        "mv_twd": 410493.37,
+        "mv_twd": 410134.24,
         "mv_usd": 12734.3994,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 418035.12,
+        "target_mv_twd": 417669.38,
         "target_mv_usd": 12968.3608,
         "status": "ok",
         "symbol": "RSST",
@@ -2157,15 +2157,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "buy_fee_pct_if_traded": null,
         "current_pct": 13.46,
         "current_units": 227.0,
-        "delta_mv_twd": 21474.01,
+        "delta_mv_twd": 21455.22,
         "delta_mv_usd": 666.1706,
-        "last_twd": 826.18,
+        "last_twd": 825.46,
         "last_usd": 25.63,
         "listed": true,
-        "mv_twd": 187543.55,
+        "mv_twd": 187379.47,
         "mv_usd": 5818.0098,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 209017.56,
+        "target_mv_twd": 208834.69,
         "target_mv_usd": 6484.1804,
         "status": "ok",
         "symbol": "RSSY",
@@ -2181,15 +2181,15 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "buy_fee_pct_if_traded": null,
         "current_pct": 13.39,
         "current_units": 277.0,
-        "delta_mv_twd": 22488.77,
+        "delta_mv_twd": 22469.09,
         "delta_mv_usd": 697.6506,
-        "last_twd": 673.39,
+        "last_twd": 672.8,
         "last_usd": 20.89,
         "listed": true,
-        "mv_twd": 186528.79,
+        "mv_twd": 186365.6,
         "mv_usd": 5786.5298,
         "recommendation_mode": "in_band",
-        "target_mv_twd": 209017.56,
+        "target_mv_twd": 208834.69,
         "target_mv_usd": 6484.1804,
         "status": "ok",
         "symbol": "RSIT",
@@ -2199,7 +2199,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "yahoo_ticker": "RSIT"
       }
     ],
-    "total_mv_twd": 1364159.09,
+    "total_mv_twd": 1362965.61,
     "total_mv_usd": 42319.1893
   },
   "refresh_hint_zh": "",
@@ -2289,7 +2289,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "units": 575.0,
       "avg_entry_usd": 29.741078,
       "unrealized_pnl_usd": 879.13,
-      "last_twd": 1007.99
+      "last_twd": 1007.11
     },
     {
       "listed": true,
@@ -2299,7 +2299,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "units": 277.0,
       "avg_entry_usd": 20.511011,
       "unrealized_pnl_usd": 104.98,
-      "last_twd": 673.39
+      "last_twd": 672.8
     },
     {
       "listed": true,
@@ -2309,7 +2309,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "units": 379.0,
       "avg_entry_usd": 32.432665,
       "unrealized_pnl_usd": 442.42,
-      "last_twd": 1083.1
+      "last_twd": 1082.15
     },
     {
       "listed": true,
@@ -2319,7 +2319,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "units": 227.0,
       "avg_entry_usd": 24.761982,
       "unrealized_pnl_usd": 197.04,
-      "last_twd": 826.18
+      "last_twd": 825.46
     },
     {
       "listed": true,
@@ -2329,7 +2329,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "units": 0.0,
       "avg_entry_usd": null,
       "unrealized_pnl_usd": null,
-      "last_twd": 3795.67,
+      "last_twd": 3792.35,
       "cash_like": true
     },
     {
@@ -2432,7 +2432,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "realized_pnl_usd": 6.24
       }
     ],
-    "total_realized_pnl_twd": 14118.29
+    "total_realized_pnl_twd": 14105.93
   },
   "rule_events": {
     "schema_version": 1,
@@ -3299,6 +3299,6 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       }
     ]
   },
-  "usd_twd": 32.23500061035156,
+  "usd_twd": 32.2067985534668,
   "usd_twd_source": "yahoo"
 };
