@@ -64,7 +64,7 @@ def _active_months(events: list[dict]) -> list[str]:
 def _timeline(capital_events: dict, trades: dict, fx: dict) -> list[tuple[str, str]]:
     rows: list[tuple[str, str]] = []
     for event in capital_events.get("events", []):
-        when = str(event.get("date", ""))
+        when = str(event.get("occurred_at", event.get("date", "")))
         amount_twd = event.get("amount_twd")
         amount_usd = event.get("amount_usd")
         rows.append(

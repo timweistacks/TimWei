@@ -32,6 +32,22 @@
       "counts_as_strategy_cash": true,
       "linked_file": "loan.json",
       "note_en": "Initial debt-funded capital allocated to the strategy."
+    },
+    {
+      "id": "cap-20260804-withdrawal-900usd",
+      "date": "2026-08-04",
+      "occurred_at": "2026-08-04T12:51:00+08:00",
+      "event_type": "withdrawal_from_strategy",
+      "direction": "out",
+      "source_kind": "strategy",
+      "source_name": "Broker USD cash withdrawal",
+      "amount_twd": null,
+      "amount_usd": -900,
+      "target_bucket_id": "strategy-usd-deploy",
+      "counts_as_external_capital": true,
+      "counts_as_strategy_cash": true,
+      "linked_file": null,
+      "note_zh": "2026-08-04 12:51 提領 900 USD。"
     }
   ],
   "event_type_reference": {

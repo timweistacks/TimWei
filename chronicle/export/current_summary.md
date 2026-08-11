@@ -66,6 +66,7 @@
 
 ## Timeline
 
+- 2026-08-04T12:51:00+08:00: Capital: withdrawal_from_strategy / TWD — / USD -900.00
 - 2026-07-30T22:15:22: Trade: sell RSSB / 30.0000 units / USD 901.50
 - 2026-05-21T22:15:05: Trade: buy RSST / 95.0000 units / USD 3,166.35
 - 2026-05-21: FX: TWD 100,000 -> USD 3,164.56 @ 31.6000
