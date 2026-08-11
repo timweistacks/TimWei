@@ -1,27 +1,27 @@
 # Current Summary
 
-- Generated on: 2026-08-10
-- Snapshot date: 2026-08-10
+- Generated on: 2026-08-11
+- Snapshot date: 2026-08-11
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
 
-- Net worth: TWD 87,194
-- Market value: TWD 1,366,600 / USD 42,394.77
+- Net worth: TWD 57,963
+- Market value: TWD 1,366,380 / USD 42,394.66
 - Remaining liability: TWD 1,308,697
 - NAV index: 107.62
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 79,352
-- Market vs debt: 104.42% market coverage
+- Unrealized PnL in TWD view: TWD 79,132
+- Market vs debt: 104.41% market coverage
 - Next loan payment: 2026-08-13 / TWD 18,765
 
 ## Capital Structure
 
-- External capital events: 1 (active months: 1)
+- External capital events: 2 (active months: 2)
 - Debt-funded capital: TWD 1,350,000 / USD 0.00
 - Self-funded capital: TWD 0 / USD 0.00
-- Total external capital logged: TWD 1,350,000 / USD 0.00
-- Average external contribution per active month: TWD 1,350,000 / USD 0.00
+- Total external capital logged: TWD 1,350,000 / USD -900.00
+- Average external contribution per active month: TWD 675,000 / USD -450.00
 - Deployed capital into positions: USD 40,617.87
 - TWD invested cost basis: TWD 1,287,248 (historical_fx_log)
 
@@ -86,7 +86,6 @@
 - 2026-04-27: FX: TWD 30,000 -> USD 954.50 @ 31.4300
 - 2026-04-21T23:38:48: Trade: buy BOXX / 30.0000 units / USD 3,493.05
 - 2026-04-20T21:51:39: Trade: buy BOXX / 259.0000 units / USD 30,151.77
-- 2026-04-20: FX: TWD 100,000 -> USD 3,167.56 @ 31.5700
 
 ## Files Of Truth
 
