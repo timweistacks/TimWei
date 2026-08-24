@@ -1,17 +1,17 @@
 # Current Summary
 
-- Generated on: 2026-08-24
-- Snapshot date: 2026-08-24
+- Generated on: 2026-08-25
+- Snapshot date: 2026-08-25
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
 
-- Net worth: TWD 46,673
-- Market value: TWD 1,341,410 / USD 42,164.14
+- Net worth: TWD 46,746
+- Market value: TWD 1,341,483 / USD 42,162.45
 - Remaining liability: TWD 1,294,934
 - NAV index: 107.02
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 48,189
+- Unrealized PnL in TWD view: TWD 48,262
 - Market vs debt: 103.59% market coverage
 - Next loan payment: 2026-09-13 / TWD 18,765
 
@@ -28,7 +28,7 @@
 ## Holdings
 
 - RSSB: 488.0000 units, last USD 31.03
-- RSIT: 299.0000 units, last USD 21.15
+- RSIT: 299.0000 units, last USD 21.14
 - RSST: 303.0000 units, last USD 33.46
 - RSSY: 248.0000 units, last USD 25.54
 - WQTM: 130.0000 units, last USD 32.51
