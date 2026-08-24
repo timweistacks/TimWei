@@ -296,8 +296,8 @@ function referenceTodayFromSnapshot(snapshot) {
   return new Date();
 }
 
-/** Closest calendar date to reference day first (for schedules with future rows). */
-function compareDateClosestTodayFirst(left, right, today) {
+/** Upcoming due dates first; already-passed due dates stay at the bottom. */
+function compareScheduleDueDateFutureFirst(left, right, today) {
   const leftDate = parseIsoDate(left);
   const rightDate = parseIsoDate(right);
   if (!leftDate && !rightDate) {
@@ -310,10 +310,13 @@ function compareDateClosestTodayFirst(left, right, today) {
     return -1;
   }
   const todayMs = today.getTime();
-  const leftDist = Math.abs(leftDate.getTime() - todayMs);
-  const rightDist = Math.abs(rightDate.getTime() - todayMs);
-  if (leftDist !== rightDist) {
-    return leftDist - rightDist;
+  const leftIsPast = leftDate.getTime() < todayMs;
+  const rightIsPast = rightDate.getTime() < todayMs;
+  if (leftIsPast !== rightIsPast) {
+    return leftIsPast ? 1 : -1;
+  }
+  if (!leftIsPast) {
+    return leftDate.getTime() - rightDate.getTime();
   }
   return rightDate.getTime() - leftDate.getTime();
 }
@@ -2766,7 +2769,7 @@ function renderLoanComputedTable(snapshot) {
   }
   const today = referenceTodayFromSnapshot(snapshot);
   const rows = [...(computed.rows || [])].sort((left, right) =>
-    compareDateClosestTodayFirst(left.payment_date, right.payment_date, today)
+    compareScheduleDueDateFutureFirst(left.payment_date, right.payment_date, today)
   );
   if (!rows.length) {
     tbody.innerHTML = `<tr><td colspan="7">${pllT("empty.no_data")}</td></tr>`;
