@@ -241,6 +241,61 @@
       "usd": -892.23,
       "fees_usd": 0,
       "note": "補登；以平均成本釋放持倉成本。成交總額 901.50，扣除手續費 3.00 與其他費用 0.02 後實際入帳 898.48 USD。"
+    },
+    {
+      "date": "2026-08-24",
+      "executed_at": "2026-08-24T23:46:46",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 87,
+      "price_usd": 31.04,
+      "usd": -2587.47,
+      "fees_usd": 0,
+      "note": "phase-d rebalance execution; average-cost basis released from RSSB. Gross sale 2700.48 USD; fee 3.00 USD."
+    },
+    {
+      "date": "2026-08-24",
+      "executed_at": "2026-08-24T23:47:13",
+      "symbol": "RSST",
+      "side": "sell",
+      "units": 76,
+      "price_usd": 33.475,
+      "usd": -2464.88,
+      "fees_usd": 0,
+      "note": "phase-d rebalance execution; average-cost basis released from RSST. Gross sale 2544.10 USD; fee 3.00 USD."
+    },
+    {
+      "date": "2026-08-24",
+      "executed_at": "2026-08-24T23:48:39",
+      "symbol": "RSIT",
+      "side": "buy",
+      "units": 22,
+      "price_usd": 21.1599,
+      "usd": 465.52,
+      "fees_usd": 3,
+      "note": "phase-d rebalance execution; matches trades.json."
+    },
+    {
+      "date": "2026-08-24",
+      "executed_at": "2026-08-24T23:49:28",
+      "symbol": "RSSY",
+      "side": "buy",
+      "units": 21,
+      "price_usd": 25.5399,
+      "usd": 536.34,
+      "fees_usd": 3,
+      "note": "phase-d rebalance execution; matches trades.json."
+    },
+    {
+      "date": "2026-08-24",
+      "executed_at": "2026-08-24T23:51:08",
+      "symbol": "WQTM",
+      "side": "buy",
+      "units": 130,
+      "price_usd": 32.54,
+      "usd": 4230.2,
+      "fees_usd": 3,
+      "note": "phase-d rebalance execution; open quantum-computing thematic sleeve. Matches trades.json."
     }
   ],
   "note": "Buys: usd = principal (same as trades total_usd), fees_usd = commission; deployed = usd+fees_usd. Sells: negative usd = cost basis released (avg cost) so cumulative flows match remaining portfolio cost_basis_usd."

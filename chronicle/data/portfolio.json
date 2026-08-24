@@ -1,6 +1,6 @@
 {
   "cash_twd": 0,
-  "cash_usd": 8.68,
+  "cash_usd": 6.2,
   "nav": {
     "cash_like_symbols": ["BOXX"],
     "equity_includes_cash_usd": true,
@@ -16,33 +16,42 @@
   },
   "positions": [
     {
-      "cost_basis_usd": 17101.12,
+      "cost_basis_usd": 14513.65,
       "symbol": "RSSB",
       "trade_fees_usd": 0,
-      "units": 575,
+      "units": 488,
       "yahoo_ticker": "RSSB"
     },
     {
-      "cost_basis_usd": 5681.55,
+      "cost_basis_usd": 6150.07,
       "listed": true,
       "symbol": "RSIT",
       "trade_fees_usd": 0,
-      "units": 277,
+      "units": 299,
       "yahoo_ticker": "RSIT"
     },
     {
-      "cost_basis_usd": 12291.98,
+      "cost_basis_usd": 9827.1,
       "symbol": "RSST",
       "trade_fees_usd": 0,
-      "units": 379,
+      "units": 303,
       "yahoo_ticker": "RSST"
     },
     {
-      "cost_basis_usd": 5620.97,
+      "cost_basis_usd": 6160.31,
       "symbol": "RSSY",
       "trade_fees_usd": 0,
-      "units": 227,
+      "units": 248,
       "yahoo_ticker": "RSSY"
+    },
+    {
+      "cost_basis_usd": 4233.2,
+      "listed": true,
+      "note": "Target sleeve added and first purchase recorded 2026-08-24. Price lookup uses the U.S.-listed WQTM ticker.",
+      "symbol": "WQTM",
+      "trade_fees_usd": 0,
+      "units": 130,
+      "yahoo_ticker": "WQTM"
     },
     {
       "cost_basis_usd": 0,

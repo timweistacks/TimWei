@@ -62,6 +62,83 @@
       "realized_pnl_usd": null,
       "linked_rule_event_id": null,
       "note_en": "Revert to phase-b (50/20/15/15) if easing resumes (e.g. inflation cools)."
+    },
+    {
+      "id": "rebalance-20260824-phase-d",
+      "decision_date": "2026-08-24",
+      "phase_id": "phase-d",
+      "trigger_reason": "phase_transition",
+      "before_weights": {
+        "RSSB": 42.3,
+        "RSST": 30.06,
+        "RSSY": 13.73,
+        "RSIT": 13.88,
+        "WQTM": 0.0,
+        "note": "Weights before the phase-d execution, using the 2026-08-24 pre-trade snapshot."
+      },
+      "recommended_actions": [
+        {
+          "action": "shift_targets",
+          "targets": "RSSB 36%, RSST 24%, RSSY 15%, RSIT 15%, WQTM 10%",
+          "rationale_en": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure."
+        },
+        {
+          "action": "rebalance",
+          "note": "Manual integer-share plan including USD 3 commission per trade."
+        }
+      ],
+      "executed_actions": [
+        {
+          "executed_at": "2026-08-24T23:46:46",
+          "symbol": "RSSB",
+          "side": "sell",
+          "units": 87,
+          "price_usd": 31.04,
+          "total_usd": 2700.48,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-24T23:47:13",
+          "symbol": "RSST",
+          "side": "sell",
+          "units": 76,
+          "price_usd": 33.475,
+          "total_usd": 2544.1,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-24T23:48:39",
+          "symbol": "RSIT",
+          "side": "buy",
+          "units": 22,
+          "price_usd": 21.1599,
+          "total_usd": 465.52,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-24T23:49:28",
+          "symbol": "RSSY",
+          "side": "buy",
+          "units": 21,
+          "price_usd": 25.5399,
+          "total_usd": 536.34,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-24T23:51:08",
+          "symbol": "WQTM",
+          "side": "buy",
+          "units": 130,
+          "price_usd": 32.54,
+          "total_usd": 4230.2,
+          "fee_usd": 3
+        }
+      ],
+      "difference_reason": null,
+      "fees_usd": 15,
+      "realized_pnl_usd": null,
+      "linked_rule_event_id": null,
+      "note_en": "Executed phase-d rebalance; no trade record was created before these fills."
     }
   ]
 }

@@ -250,6 +250,61 @@
       "symbol": "RSSB",
       "total_usd": 901.5,
       "units": 30
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-24T23:46:46",
+      "fee_usd": 3,
+      "note": "phase-d rebalance execution; total_usd = gross credit.",
+      "price_usd": 31.04,
+      "side": "sell",
+      "symbol": "RSSB",
+      "total_usd": 2700.48,
+      "units": 87
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-24T23:47:13",
+      "fee_usd": 3,
+      "note": "phase-d rebalance execution; total_usd = gross credit.",
+      "price_usd": 33.475,
+      "side": "sell",
+      "symbol": "RSST",
+      "total_usd": 2544.1,
+      "units": 76
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-24T23:48:39",
+      "fee_usd": 3,
+      "note": "phase-d rebalance execution; open RSIT sleeve toward target.",
+      "price_usd": 21.1599,
+      "side": "buy",
+      "symbol": "RSIT",
+      "total_usd": 465.52,
+      "units": 22
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-24T23:49:28",
+      "fee_usd": 3,
+      "note": "phase-d rebalance execution; add RSSY toward target.",
+      "price_usd": 25.5399,
+      "side": "buy",
+      "symbol": "RSSY",
+      "total_usd": 536.34,
+      "units": 21
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-24T23:51:08",
+      "fee_usd": 3,
+      "note": "phase-d rebalance execution; open WQTM thematic sleeve to increase quantum-computing exposure.",
+      "price_usd": 32.54,
+      "side": "buy",
+      "symbol": "WQTM",
+      "total_usd": 4230.2,
+      "units": 130
     }
   ],
   "note": "Buy: total_usd = principal (fill amount). fee_usd/other_fees_usd = separate charges; wallet debit = total_usd + fee_usd + other_fees_usd. No fee => use 0. Sell: total_usd = gross credit; net in = total_usd - fee_usd - other_fees_usd."

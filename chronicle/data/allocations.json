@@ -53,7 +53,7 @@
     },
     {
       "effective_from": "2026-05-19",
-      "effective_to": null,
+      "effective_to": "2026-08-23",
       "id": "phase-c",
       "note": "Hawkish macro: expect rate hikes or end of easing; overweight RSST vs phase-b. Revert to phase-b weights (50/20/15/15) if inflation eases and cuts resume.",
       "transition_reason_zh": "宏觀轉偏鷹：市場定價升息或至少非降息循環，故下調 RSSB、提高 RSST 曝險。若之後通膨回落、降息循環再起，可依設定回到 phase-b（RSSB 50% 等權重）。",
@@ -74,6 +74,35 @@
         {
           "symbol": "RSIT",
           "weight": 0.15
+        }
+      ]
+    },
+    {
+      "effective_from": "2026-08-24",
+      "effective_to": null,
+      "id": "phase-d",
+      "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. No WQTM trade has been recorded yet; this phase establishes target allocation and price lookup first.",
+      "transition_reason_zh": "2026-08-24 起調整為 RSSB 36%、RSST 24%、RSSY 15%、RSIT 15%、WQTM 10%。新增 WQTM 是為增加量子運算主題曝險；目前尚未下單，先建立目標配置與價格查詢。",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.36
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.24
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.15
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        },
+        {
+          "symbol": "WQTM",
+          "weight": 0.1
         }
       ]
     }

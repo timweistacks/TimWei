@@ -1,18 +1,18 @@
 # Current Summary
 
-- Generated on: 2026-08-23
-- Snapshot date: 2026-08-23
+- Generated on: 2026-08-25
+- Snapshot date: 2026-08-25
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
 
-- Net worth: TWD 54,913
-- Market value: TWD 1,349,571 / USD 42,388.28
+- Net worth: TWD 46,830
+- Market value: TWD 1,341,567 / USD 42,161.11
 - Remaining liability: TWD 1,294,934
-- NAV index: 107.60
+- NAV index: 107.01
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 62,323
-- Market vs debt: 104.22% market coverage
+- Unrealized PnL in TWD view: TWD 48,346
+- Market vs debt: 103.60% market coverage
 - Next loan payment: 2026-09-13 / TWD 18,765
 
 ## Capital Structure
@@ -22,15 +22,16 @@
 - Self-funded capital: TWD 0 / USD 0.00
 - Total external capital logged: TWD 1,350,000 / USD -900.00
 - Average external contribution per active month: TWD 675,000 / USD -450.00
-- Deployed capital into positions: USD 40,617.87
-- TWD invested cost basis: TWD 1,287,248 (historical_fx_log)
+- Deployed capital into positions: USD 40,806.58
+- TWD invested cost basis: TWD 1,293,221 (historical_fx_log)
 
 ## Holdings
 
-- RSSB: 575.0000 units, last USD 31.10
-- RSIT: 277.0000 units, last USD 21.32
-- RSST: 379.0000 units, last USD 33.69
-- RSSY: 227.0000 units, last USD 25.69
+- RSSB: 488.0000 units, last USD 31.03
+- RSIT: 299.0000 units, last USD 21.15
+- RSST: 303.0000 units, last USD 33.46
+- RSSY: 248.0000 units, last USD 25.53
+- WQTM: 130.0000 units, last USD 32.50
 - BOXX: 0.0000 units, last USD 117.96
 
 ## Rules And Risk
@@ -38,14 +39,14 @@
 - Rebalance band: ±20% of target weight
 - Drawdown add trigger: 20% below peak NAV
 - Peak NAV reference set: no
-- Rule events logged: 0 / Rebalance logs: 1
+- Rule events logged: 0 / Rebalance logs: 2
 - Income events logged: 0
 
 ## Data Coverage
 
-- Trades logged: 22
+- Trades logged: 27
 - FX events logged: 12
-- NAV history days: 92
+- NAV history days: 93
 - Cash snapshots logged: 0 (missing)
 
 ## Missing Information
@@ -66,6 +67,11 @@
 
 ## Timeline
 
+- 2026-08-24T23:51:08: Trade: buy WQTM / 130.0000 units / USD 4,230.20
+- 2026-08-24T23:49:28: Trade: buy RSSY / 21.0000 units / USD 536.34
+- 2026-08-24T23:48:39: Trade: buy RSIT / 22.0000 units / USD 465.52
+- 2026-08-24T23:47:13: Trade: sell RSST / 76.0000 units / USD 2,544.10
+- 2026-08-24T23:46:46: Trade: sell RSSB / 87.0000 units / USD 2,700.48
 - 2026-08-04T12:51:00+08:00: Capital: withdrawal_from_strategy / TWD — / USD -900.00
 - 2026-07-30T22:15:22: Trade: sell RSSB / 30.0000 units / USD 901.50
 - 2026-05-21T22:15:05: Trade: buy RSST / 95.0000 units / USD 3,166.35
@@ -81,11 +87,6 @@
 - 2026-05-05: FX: TWD 31,577 -> USD -998.00 @ 31.6398
 - 2026-05-04T22:18:15: Trade: buy RSSB / 433.0000 units / USD 12,873.05
 - 2026-05-04T22:17:01: Trade: buy RSST / 274.0000 units / USD 8,762.52
-- 2026-05-04T22:16:19: Trade: buy RSSY / 149.0000 units / USD 3,725.00
-- 2026-04-30T22:16:50: Trade: sell BOXX / 289.0000 units / USD 33,677.17
-- 2026-04-27: FX: TWD 30,000 -> USD 954.50 @ 31.4300
-- 2026-04-21T23:38:48: Trade: buy BOXX / 30.0000 units / USD 3,493.05
-- 2026-04-20T21:51:39: Trade: buy BOXX / 259.0000 units / USD 30,151.77
 
 ## Files Of Truth
 
