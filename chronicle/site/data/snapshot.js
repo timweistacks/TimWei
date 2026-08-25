@@ -82,8 +82,8 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
         "effective_from": "2026-08-24",
         "effective_to": null,
         "id": "phase-d",
-        "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. No WQTM trade has been recorded yet; this phase establishes target allocation and price lookup first.",
-        "transition_reason_zh": "2026-08-24 起調整為 RSSB 36%、RSST 24%、RSSY 15%、RSIT 15%、WQTM 10%。新增 WQTM 是為增加量子運算主題曝險；目前尚未下單，先建立目標配置與價格查詢。",
+        "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. The target sleeve has been established and the phase-d holdings are now recorded.",
+        "transition_reason_zh": "2026-08-24 起調整為 RSSB 36%、RSST 24%、RSSY 15%、RSIT 15%、WQTM 10%。新增 WQTM 是為增加量子運算主題曝險；目前已完成目標持倉建立。",
         "targets": [
           {
             "symbol": "RSSB",
@@ -2198,7 +2198,7 @@ window.__PERSONAL_LEDGER_SNAPSHOT__ = {
       "effective_from": "2026-08-24",
       "effective_to": null,
       "id": "phase-d",
-      "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. No WQTM trade has been recorded yet; this phase establishes target allocation and price lookup first.",
+      "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. The target sleeve has been established and the phase-d holdings are now recorded.",
       "targets": [
         {
           "symbol": "RSSB",
