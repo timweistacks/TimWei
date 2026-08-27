@@ -255,6 +255,7 @@
       "broker": "manual_import",
       "executed_at": "2026-08-24T23:46:46",
       "fee_usd": 3,
+      "other_fees_usd": 0.06,
       "note": "phase-d rebalance execution; total_usd = gross credit.",
       "price_usd": 31.04,
       "side": "sell",
@@ -266,6 +267,7 @@
       "broker": "manual_import",
       "executed_at": "2026-08-24T23:47:13",
       "fee_usd": 3,
+      "other_fees_usd": 0.06,
       "note": "phase-d rebalance execution; total_usd = gross credit.",
       "price_usd": 33.475,
       "side": "sell",
@@ -305,6 +307,29 @@
       "symbol": "WQTM",
       "total_usd": 4230.2,
       "units": 130
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-27T01:36:04",
+      "fee_usd": 3,
+      "other_fees_usd": 0.05,
+      "note": "phase-e rebalance execution; reduce RSSB and fund the WDIG metals sleeve.",
+      "price_usd": 31.2,
+      "side": "sell",
+      "symbol": "RSSB",
+      "total_usd": 2121.6,
+      "units": 68
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-27T21:48:10",
+      "fee_usd": 3,
+      "note": "phase-e rebalance execution; establish the WDIG metals sleeve.",
+      "price_usd": 47.8,
+      "side": "buy",
+      "symbol": "WDIG",
+      "total_usd": 2103.2,
+      "units": 44
     }
   ],
   "note": "Buy: total_usd = principal (fill amount). fee_usd/other_fees_usd = separate charges; wallet debit = total_usd + fee_usd + other_fees_usd. No fee => use 0. Sell: total_usd = gross credit; net in = total_usd - fee_usd - other_fees_usd."

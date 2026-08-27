@@ -251,7 +251,8 @@
       "price_usd": 31.04,
       "usd": -2587.47,
       "fees_usd": 0,
-      "note": "phase-d rebalance execution; average-cost basis released from RSSB. Gross sale 2700.48 USD; fee 3.00 USD."
+      "other_fees_usd": 0.06,
+      "note": "phase-d rebalance execution; average-cost basis released from RSSB. Gross sale 2700.48 USD; fee 3.00 USD; other fees 0.06 USD."
     },
     {
       "date": "2026-08-24",
@@ -262,7 +263,8 @@
       "price_usd": 33.475,
       "usd": -2464.88,
       "fees_usd": 0,
-      "note": "phase-d rebalance execution; average-cost basis released from RSST. Gross sale 2544.10 USD; fee 3.00 USD."
+      "other_fees_usd": 0.06,
+      "note": "phase-d rebalance execution; average-cost basis released from RSST. Gross sale 2544.10 USD; fee 3.00 USD; other fees 0.06 USD."
     },
     {
       "date": "2026-08-24",
@@ -296,6 +298,30 @@
       "usd": 4230.2,
       "fees_usd": 3,
       "note": "phase-d rebalance execution; open quantum-computing thematic sleeve. Matches trades.json."
+    },
+    {
+      "date": "2026-08-27",
+      "executed_at": "2026-08-27T01:36:04",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 68,
+      "price_usd": 31.2,
+      "usd": -2022.39,
+      "fees_usd": 0,
+      "other_fees_usd": 0.05,
+      "note": "phase-e rebalance execution; average-cost basis released from RSSB. Gross sale 2121.60 USD; fee 3.00 USD; other fees 0.05 USD."
+    },
+    {
+      "date": "2026-08-27",
+      "executed_at": "2026-08-27T21:48:10",
+      "symbol": "WDIG",
+      "side": "buy",
+      "units": 44,
+      "price_usd": 47.8,
+      "usd": 2103.2,
+      "fees_usd": 3,
+      "other_fees_usd": 0,
+      "note": "phase-e rebalance execution; establish the long-term metals sleeve. Matches trades.json."
     }
   ],
   "note": "Buys: usd = principal (same as trades total_usd), fees_usd = commission; deployed = usd+fees_usd. Sells: negative usd = cost basis released (avg cost) so cumulative flows match remaining portfolio cost_basis_usd."

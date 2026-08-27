@@ -378,7 +378,7 @@ function setState(element, text, state = "neutral") {
   }
 }
 
-const PHASE_TARGET_SYMBOL_ORDER = ["RSSB", "RSST", "RSSY", "RSIT", "WQTM"];
+const PHASE_TARGET_SYMBOL_ORDER = ["RSSB", "RSST", "RSSY", "RSIT", "WQTM", "WDIG"];
 
 function sortPhaseTargets(targets) {
   const rank = Object.fromEntries(

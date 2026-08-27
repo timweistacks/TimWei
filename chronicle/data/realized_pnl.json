@@ -1,8 +1,8 @@
 {
   "generated_at": "2026-08-27",
   "cost_method": "average_cost",
-  "total_realized_pnl_usd": 639.79,
-  "sell_count": 11,
+  "total_realized_pnl_usd": 735.81,
+  "sell_count": 12,
   "rows": [
     {
       "executed_at": "2026-04-16T21:55:46",
@@ -90,19 +90,28 @@
       "symbol": "RSSB",
       "side": "sell",
       "units": 87.0,
-      "net_proceeds_usd": 2697.48,
+      "net_proceeds_usd": 2697.42,
       "cost_basis_usd": 2587.48,
-      "realized_pnl_usd": 110.0
+      "realized_pnl_usd": 109.94
     },
     {
       "executed_at": "2026-08-24T23:47:13",
       "symbol": "RSST",
       "side": "sell",
       "units": 76.0,
-      "net_proceeds_usd": 2541.1,
+      "net_proceeds_usd": 2541.04,
       "cost_basis_usd": 2449.29,
-      "realized_pnl_usd": 91.81
+      "realized_pnl_usd": 91.75
+    },
+    {
+      "executed_at": "2026-08-27T01:36:04",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 68.0,
+      "net_proceeds_usd": 2118.55,
+      "cost_basis_usd": 2022.4,
+      "realized_pnl_usd": 96.15
     }
   ],
-  "total_realized_pnl_twd": 20296.7
+  "total_realized_pnl_twd": 23322.97
 }

@@ -79,7 +79,7 @@
     },
     {
       "effective_from": "2026-08-24",
-      "effective_to": null,
+      "effective_to": "2026-08-26",
       "id": "phase-d",
       "note": "Add a 10% WQTM thematic sleeve to increase quantum-computing exposure. The target sleeve has been established and the phase-d holdings are now recorded.",
       "transition_reason_zh": "2026-08-24 起調整為 RSSB 36%、RSST 24%、RSSY 15%、RSIT 15%、WQTM 10%。新增 WQTM 是為增加量子運算主題曝險；目前已完成目標持倉建立。",
@@ -103,6 +103,39 @@
         {
           "symbol": "WQTM",
           "weight": 0.1
+        }
+      ]
+    },
+    {
+      "effective_from": "2026-08-27",
+      "effective_to": null,
+      "id": "phase-e",
+      "note": "Reduce RSSB from 36% to 31% and allocate the released 5% to WDIG. The WDIG sleeve was executed on 2026-08-27.",
+      "transition_reason_zh": "2026-08-27 起將 RSSB 由 36% 降至 31%，釋出的 5% 改配置 WDIG 5%，以增加金屬長期資產的曝險；WDIG 已於當日完成建倉。",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.31
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.24
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.15
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        },
+        {
+          "symbol": "WQTM",
+          "weight": 0.1
+        },
+        {
+          "symbol": "WDIG",
+          "weight": 0.05
         }
       ]
     }
