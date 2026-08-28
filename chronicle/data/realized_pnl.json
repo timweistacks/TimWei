@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27",
+  "generated_at": "2026-08-28",
   "cost_method": "average_cost",
   "total_realized_pnl_usd": 735.81,
   "sell_count": 12,
@@ -113,5 +113,5 @@
       "realized_pnl_usd": 96.15
     }
   ],
-  "total_realized_pnl_twd": 23320.76
+  "total_realized_pnl_twd": 23246.45
 }
