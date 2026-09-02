@@ -891,6 +891,7 @@ def main() -> None:
         sum(float(b.get("amount_twd", 0) or 0) for b in bucket_list), 2
     )
     reb_cfg = alloc.get("rebalance") or {}
+    cash_target_symbol = str(reb_cfg.get("cash_target_symbol") or "CASH_USD").strip()
     inc_cash_denom = bool(reb_cfg.get("include_cash_usd_in_denominator", False))
     rebalance_cash_usd: float | None = None
     if inc_cash_denom:
@@ -916,6 +917,8 @@ def main() -> None:
         rebalance_cash_usd=rebalance_cash_usd,
         deploy_all_cash_usd=deploy_all_cash,
         exact_target_min_trade_usd=exact_min_usd,
+        cash_like_symbols=cash_like_syms,
+        cash_target_symbol=cash_target_symbol,
     )
     ph = portfolio_view.get("phase") or {}
     cash_like_usd = (
@@ -943,7 +946,7 @@ def main() -> None:
         else 0.0,
         "cash_like_symbols": sorted(cash_like_syms),
         "cash_like_note_zh": (
-            "券商 USD 餘額 + BOXX 市值（等同美金現金，計入淨資產現金側）；"
+            "券商 USD 餘額（目前現金部位）+ BOXX 市值（僅在實際持有 BOXX 時計入）；"
             "NAV 綠線與 SPY 影子僅跟權益型 ETF 買賣，不含閒置現金與 BOXX。"
         ),
         "investment_mv_twd": inv_mv_twd,

@@ -18,6 +18,7 @@ from chronicle.build.nav_history_lib import (
     _trade_cash_delta,
     _trade_date,
     _trade_event_dt,
+    _trade_market_date,
     _trade_units_delta,
 )
 
@@ -127,7 +128,7 @@ def enrich_trades_with_nav_touchpoints(
         idx = int(payload)
         trade = trades[idx]
         sym = str(trade.get("symbol", "") or "")
-        td = _trade_date(trade)
+        td = _trade_market_date(trade)
         if td is None:
             extras_by_idx[idx] = {
                 "nav_touch_pts": None,

@@ -1,4 +1,4 @@
-"""Unit-based NAV index and trade-mirrored shadow benchmarks (SPY, SSO 2x)."""
+"""Unit-based NAV and event-replayed SPY/SSO shadow benchmarks."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from chronicle.build.nav_history_lib import (
     _series_close_on,
     _trade_cash_delta,
     _trade_event_dt,
+    _trade_market_date,
     _trade_units_delta,
 )
 
@@ -34,24 +35,6 @@ def _row_snapshot_key(raw_date: str) -> str | None:
     if key.count(":") == 1:
         key = f"{key}:00"
     return key[:19] if len(key) >= 19 else None
-
-
-def _first_equity_buy_trade(
-    trades: list[dict[str, Any]], cash_equiv: frozenset[str]
-) -> dict[str, Any] | None:
-    best: dict[str, Any] | None = None
-    best_dt: datetime | None = None
-    for trade in trades:
-        symbol = str(trade.get("symbol", ""))
-        if symbol in cash_equiv:
-            continue
-        if str(trade.get("side", "")).strip().lower() != "buy":
-            continue
-        dt = _trade_event_dt(trade)
-        if best_dt is None or dt < best_dt:
-            best_dt = dt
-            best = trade
-    return best
 
 
 def _first_equity_trade_key(
@@ -131,18 +114,6 @@ def _position_mv_usd(
     return total
 
 
-def _shadow_equity_usd(
-    book: dict[str, float],
-    series_map: dict,
-    bench_ticker: str,
-    as_of: date,
-) -> float | None:
-    bench_px = _series_close_on(series_map, bench_ticker, as_of)
-    if bench_px is None:
-        return None
-    return book["shares"] * bench_px
-
-
 def _build_events(
     trades: list[dict[str, Any]],
     fx_events: list[dict[str, Any]],
@@ -166,11 +137,134 @@ def _shadow_fill_price(
         quote = intraday.price_at_trade(trade, ticker)
         if quote is not None and quote.price_usd > 1e-9:
             return float(quote.price_usd)
-    td = _trade_event_dt(trade).date()
+    td = _trade_market_date(trade) or _trade_event_dt(trade).date()
     px = _series_close_on(series_map, ticker, td)
     if px is None or px <= 1e-9:
         return None
     return float(px)
+
+
+def _new_shadow_book() -> dict[str, float | bool | None]:
+    return {
+        "shares": 0.0,
+        "fund_units": 0.0,
+        "index": 100.0,
+        "last_price": None,
+        "started": False,
+    }
+
+
+def _advance_shadow_book(
+    book: dict[str, float | bool | None], price: float
+) -> None:
+    """Advance a shadow fund to a benchmark price before the next event."""
+    if bool(book["started"]):
+        last_price = book["last_price"]
+        shares = float(book["shares"] or 0.0)
+        if last_price is not None and shares > 1e-9:
+            book["index"] = float(book["index"]) * price / float(last_price)
+    book["last_price"] = price
+
+
+def _apply_shadow_trade(
+    book: dict[str, float | bool | None], trade: dict[str, Any], price: float
+) -> None:
+    """Apply one mirrored trade at its transaction-time benchmark price."""
+    side = str(trade.get("side", "")).strip().lower()
+    notional = _trade_notional_usd(trade)
+    if side not in ("buy", "sell") or notional <= 1e-9 or price <= 1e-9:
+        return
+
+    if not bool(book["started"]):
+        if side != "buy":
+            return
+        book["started"] = True
+        book["index"] = 100.0
+        book["last_price"] = price
+    else:
+        _advance_shadow_book(book, price)
+
+    index = float(book["index"])
+    if index <= 1e-9:
+        return
+    if side == "buy":
+        book["shares"] = float(book["shares"]) + notional / price
+        book["fund_units"] = float(book["fund_units"]) + notional / index
+        return
+
+    shares_to_sell = min(float(book["shares"]), notional / price)
+    book["shares"] = max(0.0, float(book["shares"]) - shares_to_sell)
+    book["fund_units"] = max(
+        0.0,
+        float(book["fund_units"]) - (shares_to_sell * price / index),
+    )
+
+
+def _replay_shadow_benchmark_snapshots(
+    nav_rows: list[dict[str, Any]],
+    trades: list[dict[str, Any]],
+    series_map: dict,
+    cash_equiv: frozenset[str],
+    intraday_lookup: IntradayPriceLookup | None,
+) -> tuple[
+    dict[str, dict[str, dict[str, float | bool | None]]],
+    dict[str, dict[str, dict[str, float | bool | None]]],
+]:
+    """Replay benchmark books at trade bars and then at each market close."""
+    trades_by_day: dict[str, list[tuple[datetime, dict[str, Any]]]] = {}
+    days: set[str] = set()
+
+    for row in nav_rows:
+        day = _calendar_key(str(row.get("date", "")))
+        if day:
+            days.add(day)
+
+    for trade in trades:
+        symbol = str(trade.get("symbol", "") or "")
+        side = str(trade.get("side", "")).strip().lower()
+        if symbol in cash_equiv or side not in ("buy", "sell"):
+            continue
+        market_day = _trade_market_date(trade)
+        if market_day is None:
+            continue
+        day = market_day.isoformat()
+        days.add(day)
+        trades_by_day.setdefault(day, []).append((_trade_event_dt(trade), trade))
+
+    books: dict[str, dict[str, float | bool | None]] = {
+        ticker: _new_shadow_book() for ticker, _, _ in SHADOW_BENCHMARKS
+    }
+    event_snapshots: dict[
+        str, dict[str, dict[str, float | bool | None]]
+    ] = {}
+    day_snapshots: dict[
+        str, dict[str, dict[str, float | bool | None]]
+    ] = {}
+
+    for day in sorted(days):
+        day_trades = sorted(
+            trades_by_day.get(day, []),
+            key=lambda item: item[0],
+        )
+        for event_dt, trade in day_trades:
+            for ticker, _, _ in SHADOW_BENCHMARKS:
+                price = _shadow_fill_price(
+                    trade, ticker, series_map, intraday_lookup
+                )
+                if price is not None:
+                    _apply_shadow_trade(books[ticker], trade, price)
+            event_snapshots[_event_snapshot_key(event_dt)] = (
+                deepcopy(books)
+            )
+
+        market_day = parse_iso_date(day)
+        for ticker, _, _ in SHADOW_BENCHMARKS:
+            close = _series_close_on(series_map, ticker, market_day)
+            if close is not None:
+                _advance_shadow_book(books[ticker], close)
+        day_snapshots[day] = deepcopy(books)
+
+    return event_snapshots, day_snapshots
 
 
 def enrich_nav_unit_and_shadows(
@@ -186,8 +280,9 @@ def enrich_nav_unit_and_shadows(
 
     - FX: wallet cash only (no fund_units, no shadow shares).
     - Equity buy/sell: adjust fund_units; mirror notional in SPY/SSO shadow shares.
-    - Shadow index: chained benchmark daily return while shadow holds shares (not
-      shadow_equity/fund_units, which cliffs when cash redeploys into stocks).
+    - Shadow index: event-replayed, unitized benchmark NAV. Each equity buy/sell
+      is applied at its SPY/SSO minute fill when available; daily closes advance
+      only the shares that remain after the event.
     - BOXX (cash_equiv): wallet cash only (no units, no shadow).
     """
     cash_equiv = cash_like_symbols if cash_like_symbols is not None else frozenset()
@@ -196,128 +291,88 @@ def enrich_nav_unit_and_shadows(
         return nav_rows, {"nav_index_basis": "unit_fund", "shadow_ready": False}
 
     fund_units = 0.0
-    cash_usd = 0.0
     units_by_symbol: dict[str, float] = {}
-    shadow: dict[str, dict[str, float]] = {
-        "SPY": {"shares": 0.0},
-        "SSO": {"shares": 0.0},
-    }
-    day_snapshots: dict[str, dict[str, Any]] = {}
-    event_snapshots: dict[str, dict[str, Any]] = {}
+    fund_day_snapshots: dict[str, dict[str, Any]] = {}
+    fund_event_snapshots: dict[str, dict[str, Any]] = {}
     first_equity_trade_key = _first_equity_trade_key(trades, cash_equiv)
 
     for dt, kind, payload in events:
-        day = dt.date().isoformat()
-        as_of = dt.date()
+        if kind != "trade":
+            continue
+        as_of = _trade_market_date(payload) or dt.date()
+        day = as_of.isoformat()
         deployed_equity = _position_mv_usd(
             units_by_symbol, series_map, as_of, cash_equiv
         )
 
-        if kind == "fx":
-            cash_usd += float(payload.get("usd_amount", 0) or 0)
-        else:
-            trade = payload
-            symbol = str(trade.get("symbol", ""))
-            notional = _trade_notional_usd(trade)
-            side = str(trade.get("side", "")).strip().lower()
-            is_equity = symbol not in cash_equiv
-            if (
-                is_equity
-                and notional > 1e-9
-                and side in ("buy", "sell")
-            ):
-                signed = notional if side == "buy" else -notional
-                fund_units = _apply_unit_flow(fund_units, deployed_equity, signed)
-            cash_usd += _trade_cash_delta(trade)
-            if is_equity:
-                units_by_symbol[symbol] = units_by_symbol.get(symbol, 0.0) + _trade_units_delta(
-                    trade
-                )
-            if is_equity and notional > 1e-9 and side in ("buy", "sell"):
-                for spec in SHADOW_BENCHMARKS:
-                    ticker = spec[0]
-                    px = _shadow_fill_price(
-                        trade, ticker, series_map, intraday_lookup
-                    )
-                    if px is None or px <= 1e-9:
-                        continue
-                    book = shadow[ticker]
-                    shares_delta = notional / px
-                    if side == "buy":
-                        book["shares"] += shares_delta
-                    elif side == "sell":
-                        book["shares"] = max(
-                            0.0, book["shares"] - min(book["shares"], shares_delta)
-                        )
+        trade = payload
+        symbol = str(trade.get("symbol", ""))
+        notional = _trade_notional_usd(trade)
+        side = str(trade.get("side", "")).strip().lower()
+        is_equity = symbol not in cash_equiv
+        if is_equity and notional > 1e-9 and side in ("buy", "sell"):
+            signed = notional if side == "buy" else -notional
+            fund_units = _apply_unit_flow(fund_units, deployed_equity, signed)
+        if is_equity:
+            units_by_symbol[symbol] = units_by_symbol.get(symbol, 0.0) + _trade_units_delta(
+                trade
+            )
 
         snap = {
             "fund_units": fund_units,
-            "shadow": deepcopy(shadow),
         }
-        event_snapshots[_event_snapshot_key(dt)] = snap
-        day_snapshots[day] = snap
+        fund_event_snapshots[_event_snapshot_key(dt)] = snap
+        fund_day_snapshots[day] = snap
 
-    shadow_idx: dict[str, float] = {t[0]: 100.0 for t in SHADOW_BENCHMARKS}
-    prev_close: dict[str, float | None] = {t[0]: None for t in SHADOW_BENCHMARKS}
-    shadow_started: dict[str, bool] = {t[0]: False for t in SHADOW_BENCHMARKS}
-    first_equity_trade = _first_equity_buy_trade(trades, cash_equiv)
-    first_fill_px: dict[str, float | None] = {t[0]: None for t in SHADOW_BENCHMARKS}
-    if first_equity_trade is not None:
-        for ticker, _, _ in SHADOW_BENCHMARKS:
-            px = _shadow_fill_price(
-                first_equity_trade, ticker, series_map, intraday_lookup
-            )
-            if px is not None and px > 1e-9:
-                first_fill_px[ticker] = float(px)
+    shadow_event_snapshots, shadow_day_snapshots = (
+        _replay_shadow_benchmark_snapshots(
+            nav_rows,
+            trades,
+            series_map,
+            cash_equiv,
+            intraday_lookup,
+        )
+    )
 
     out: list[dict[str, Any]] = []
-    last_snap: dict[str, Any] | None = None
+    last_fund_snap: dict[str, Any] | None = None
+    last_shadow_snap: dict[str, Any] | None = None
     for row in nav_rows:
         row_out = dict(row)
         raw_date = str(row.get("date", ""))
         day = _calendar_key(raw_date)
-        snap = _resolve_row_snapshot(
-            raw_date, day, event_snapshots, day_snapshots, last_snap
+        fund_snap = _resolve_row_snapshot(
+            raw_date, day, fund_event_snapshots, fund_day_snapshots, last_fund_snap
         )
-        if snap is None:
-            out.append(row_out)
-            continue
-        last_snap = snap
-        units = float(snap["fund_units"])
-        nav_mv = float(row.get("position_mv_usd") or row.get("mv_usd", 0) or 0)
-        as_of = parse_iso_date(day) if day else date.today()
-        row_key = _row_snapshot_key(raw_date)
-        if units > 1e-9:
-            if first_equity_trade_key and row_key == first_equity_trade_key:
-                row_out["nav_index"] = 100.0
-            else:
-                row_out["nav_index"] = round(nav_mv / units, 4)
-            row_out["fund_units"] = round(units, 6)
+        shadow_snap = _resolve_row_snapshot(
+            raw_date, day, shadow_event_snapshots, shadow_day_snapshots, last_shadow_snap
+        )
+        if fund_snap is not None:
+            last_fund_snap = fund_snap
+            units = float(fund_snap["fund_units"])
+            nav_mv = float(row.get("position_mv_usd") or row.get("mv_usd", 0) or 0)
+            row_key = _row_snapshot_key(raw_date)
+            if units > 1e-9:
+                if first_equity_trade_key and row_key == first_equity_trade_key:
+                    row_out["nav_index"] = 100.0
+                else:
+                    row_out["nav_index"] = round(nav_mv / units, 4)
+                row_out["fund_units"] = round(units, 6)
+        if shadow_snap is not None:
+            last_shadow_snap = shadow_snap
         for ticker, field, _ in SHADOW_BENCHMARKS:
-            book = snap["shadow"][ticker]
-            shares = float(book["shares"])
-            bench_equity = _shadow_equity_usd(book, series_map, ticker, as_of)
-            close_px = _series_close_on(series_map, ticker, as_of)
-            if bench_equity is not None:
-                row_out[f"{field}_equity_usd"] = round(bench_equity, 4)
-            if close_px is None:
+            if shadow_snap is None:
                 continue
-            if shares > 1e-9:
-                if not shadow_started[ticker]:
-                    shadow_idx[ticker] = 100.0
-                    shadow_started[ticker] = True
-                    fill_px = first_fill_px.get(ticker)
-                    if fill_px is not None and fill_px > 1e-9:
-                        prev_close[ticker] = fill_px
-                    row_out[field] = round(shadow_idx[ticker], 4)
-                elif (
-                    prev_close[ticker] is not None
-                    and prev_close[ticker] > 1e-9
-                    and close_px > 1e-9
-                ):
-                    shadow_idx[ticker] *= close_px / prev_close[ticker]
-                    prev_close[ticker] = close_px
-                    row_out[field] = round(shadow_idx[ticker], 4)
+            book = shadow_snap[ticker]
+            if not bool(book["started"]):
+                continue
+            shares = float(book["shares"])
+            mark_price = book["last_price"]
+            if mark_price is not None:
+                row_out[f"{field}_equity_usd"] = round(
+                    shares * float(mark_price), 4
+                )
+            row_out[field] = round(float(book["index"]), 4)
         out.append(row_out)
 
     return out, {
@@ -325,7 +380,7 @@ def enrich_nav_unit_and_shadows(
         "nav_anchor_first_trade": first_equity_trade_key,
         "shadow_ready": True,
         "shadow_tickers": [s[0] for s in SHADOW_BENCHMARKS],
-        "shadow_index_basis": "chained_benchmark_return_with_mirrored_shares",
+        "shadow_index_basis": "event_replayed_benchmark_return_with_mirrored_shares",
         "shadow_fill_price_basis": (
             "intraday_bar_at_executed_at"
             if intraday_lookup is not None

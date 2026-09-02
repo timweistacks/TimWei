@@ -1,8 +1,8 @@
 {
   "generated_at": "2026-09-02",
   "cost_method": "average_cost",
-  "total_realized_pnl_usd": 735.81,
-  "sell_count": 12,
+  "total_realized_pnl_usd": 1051.73,
+  "sell_count": 16,
   "rows": [
     {
       "executed_at": "2026-04-16T21:55:46",
@@ -111,7 +111,43 @@
       "net_proceeds_usd": 2118.55,
       "cost_basis_usd": 2022.4,
       "realized_pnl_usd": 96.15
+    },
+    {
+      "executed_at": "2026-08-29T01:10:14",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 150.0,
+      "net_proceeds_usd": 4660.52,
+      "cost_basis_usd": 4461.18,
+      "realized_pnl_usd": 199.34
+    },
+    {
+      "executed_at": "2026-08-29T01:10:43",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 99.0,
+      "net_proceeds_usd": 2538.83,
+      "cost_basis_usd": 2459.19,
+      "realized_pnl_usd": 79.64
+    },
+    {
+      "executed_at": "2026-08-29T01:11:21",
+      "symbol": "WQTM",
+      "side": "sell",
+      "units": 39.0,
+      "net_proceeds_usd": 1242.66,
+      "cost_basis_usd": 1269.96,
+      "realized_pnl_usd": -27.3
+    },
+    {
+      "executed_at": "2026-09-02T01:39:49",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 68.0,
+      "net_proceeds_usd": 2086.64,
+      "cost_basis_usd": 2022.4,
+      "realized_pnl_usd": 64.24
     }
   ],
-  "total_realized_pnl_twd": 23288.39
+  "total_realized_pnl_twd": 33389.27
 }

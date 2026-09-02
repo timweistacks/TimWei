@@ -35,17 +35,10 @@ def _parse_trade_dt(executed_at: str) -> datetime | None:
         return None
     raw = raw.replace("Z", "+00:00")
     try:
-        if "+" in raw[10:]:
-            dt = datetime.fromisoformat(raw)
-            if dt.tzinfo is None:
-                return dt.replace(tzinfo=TRADE_TIMESTAMP_TZ)
-            return dt
-        if len(raw) >= 19:
-            naive = datetime.fromisoformat(raw[:19])
-            return naive.replace(tzinfo=TRADE_TIMESTAMP_TZ)
-        if len(raw) >= 10:
-            naive = datetime.fromisoformat(raw[:10] + "T12:00:00")
-            return naive.replace(tzinfo=TRADE_TIMESTAMP_TZ)
+        dt = datetime.fromisoformat(raw)
+        if dt.tzinfo is None:
+            return dt.replace(tzinfo=TRADE_TIMESTAMP_TZ)
+        return dt
     except ValueError:
         return None
     return None
@@ -349,7 +342,10 @@ class IntradayPriceLookup:
                         bar_at=bar_ts.isoformat(),
                         interval=interval,
                     )
-        td = _trade_date(trade) or session_day
+        # The fallback must use the same New York session date as the
+        # intraday lookup.  A Taiwan early-morning execution can otherwise
+        # incorrectly fall through to the following calendar day's close.
+        td = session_day
         px = _series_close_on(self._series_map, ticker, td)
         if px is None or px <= 1e-9:
             return None

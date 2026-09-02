@@ -378,7 +378,14 @@ function setState(element, text, state = "neutral") {
   }
 }
 
-const PHASE_TARGET_SYMBOL_ORDER = ["RSSB", "RSST", "RSSY", "RSIT", "WQTM", "WDIG"];
+const PHASE_TARGET_SYMBOL_ORDER = ["RSSB", "RSST", "RSSY", "RSIT", "WQTM", "WDIG", "CASH_USD"];
+
+function displaySymbolLabel(symbol) {
+  if (symbol === "CASH_USD") {
+    return isEnLocale() ? "USD Cash" : "USD 現金";
+  }
+  return symbol || "—";
+}
 
 function sortPhaseTargets(targets) {
   const rank = Object.fromEntries(
@@ -396,7 +403,7 @@ function sortPhaseTargets(targets) {
 
 function phaseTargetsText(phase) {
   return sortPhaseTargets(phase?.targets)
-    .map((target) => `${target.symbol} ${((target.weight || 0) * 100).toFixed(0)}%`)
+    .map((target) => `${displaySymbolLabel(target.symbol)} ${((target.weight || 0) * 100).toFixed(0)}%`)
     .join(" / ");
 }
 
@@ -541,9 +548,9 @@ function formatChartAxisLabel(raw) {
 }
 
 function positionSymbolLabel(row) {
-  const sym = row.symbol || "—";
+  const sym = displaySymbolLabel(row.symbol);
   const t = row.yahoo_ticker;
-  if (!t || t === sym) {
+  if (!t || t === row.symbol) {
     return sym;
   }
   return `${sym}（${t}）`;
@@ -636,7 +643,7 @@ function phaseTargetsChipsHtml(phase) {
   const chips = sortPhaseTargets(phase?.targets)
     .map(
       (t) =>
-        `<span class="phase-target-chip">${t.symbol} ${((t.weight || 0) * 100).toFixed(0)}%</span>`
+        `<span class="phase-target-chip">${displaySymbolLabel(t.symbol)} ${((t.weight || 0) * 100).toFixed(0)}%</span>`
     )
     .join("");
   return chips || "—";
@@ -662,7 +669,8 @@ function phaseTargetsChipsWithDeltaHtml(phase, priorPhase) {
       const sym = target.symbol;
       const pct = (currentMap[sym] || 0) * 100;
       const hasCurrent = (currentMap[sym] || 0) > 0;
-      const label = hasCurrent ? `${sym} ${pct.toFixed(0)}%` : `${sym} 0%`;
+      const displaySym = displaySymbolLabel(sym);
+      const label = hasCurrent ? `${displaySym} ${pct.toFixed(0)}%` : `${displaySym} 0%`;
       let deltaHtml = "";
       if (prior) {
         const prevPct = (prior[sym] || 0) * 100;
@@ -1847,7 +1855,7 @@ function rebalanceActionCardHtml(action, snapshot) {
   return `
     <article class="rebalance-action-item rebalance-action-item-simple">
       <div class="rebalance-action-primary">
-        <span class="rebalance-action-symbol">${action.symbol}</span>
+        <span class="rebalance-action-symbol">${displaySymbolLabel(action.symbol)}</span>
         <span class="rebalance-action-side">${sideLabel} ${units} ${pllT("trade.shares")}</span>
       </div>
       <div class="rebalance-action-amount">
@@ -1866,7 +1874,7 @@ function rebalanceDeferredCardHtml(row, snapshot) {
   return `
     <article class="rebalance-action-item rebalance-action-item-simple rebalance-action-item-deferred">
       <div class="rebalance-action-primary">
-        <span class="rebalance-action-symbol">${row.symbol}</span>
+        <span class="rebalance-action-symbol">${displaySymbolLabel(row.symbol)}</span>
         <span class="rebalance-action-side">${pllT("rec.defer_later")}</span>
       </div>
       <p class="rebalance-action-meta">${pllT("rec.gap_min", { gap, min: minU })}</p>
@@ -1974,7 +1982,7 @@ function renderOverviewPositionTable(snapshot) {
             <div class="overview-pos-row" role="row">
               <div class="ov-col ov-col-sym sym" role="cell">
                 <div class="symbol-with-spark">
-                  <strong>${sleeve.symbol}</strong>
+                  <strong>${displaySymbolLabel(sleeve.symbol)}</strong>
                   ${generateExposureSparkBarHtml(sleeve.symbol)}
                 </div>
               </div>
@@ -1983,7 +1991,7 @@ function renderOverviewPositionTable(snapshot) {
               <div class="ov-col ov-col-money" role="cell">${lastCell}</div>
               <div class="ov-col ov-col-mv" role="cell">${formatPositionMvCell(sleeve)}</div>
               <div class="ov-col ov-col-pnl" role="cell">${quote ? formatPositionUnrealizedCell(quote) : "—"}</div>
-              <div class="ov-col ov-col-units" role="cell">${fmtUnits(quote?.units ?? sleeve.current_units)}</div>
+                  <div class="ov-col ov-col-units" role="cell">${sleeve.symbol === "CASH_USD" ? (isEnLocale() ? "cash" : "現金") : fmtUnits(quote?.units ?? sleeve.current_units)}</div>
               <div class="ov-col ov-col-advice" role="cell">
                 <div class="action-cell action-cell-compact action-cell-overview">
                   <span class="${portfolioStatusClass(sleeve.status)}">${portfolioStatusLabel(
@@ -2039,7 +2047,7 @@ function renderRebalanceActions(snapshot, rootId) {
               (sleeve) => `
                 <article class="rebalance-action-item">
                   <div class="rebalance-action-line">
-                    <strong>${sleeve.symbol}</strong>
+                    <strong>${displaySymbolLabel(sleeve.symbol)}</strong>
                     <span>${fmtPct(sleeve.target_pct)}</span>
                   </div>
                   <p class="rebalance-action-note">${pllT("rebalance.await_build_note")}</p>
@@ -2525,7 +2533,7 @@ function renderAllocationTable(snapshot) {
                 <tr>
                   <td class="sym">
                     <div class="symbol-with-spark">
-                      <strong>${sleeve.symbol}</strong>
+                      <strong>${displaySymbolLabel(sleeve.symbol)}</strong>
                       ${generateExposureSparkBarHtml(sleeve.symbol)}
                     </div>
                   </td>

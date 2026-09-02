@@ -108,7 +108,7 @@
     },
     {
       "effective_from": "2026-08-27",
-      "effective_to": null,
+      "effective_to": "2026-08-28",
       "id": "phase-e",
       "note": "Reduce RSSB from 36% to 31% and allocate the released 5% to WDIG. The WDIG sleeve was executed on 2026-08-27.",
       "transition_reason_zh": "2026-08-27 起將 RSSB 由 36% 降至 31%，釋出的 5% 改配置 WDIG 5%，以增加金屬長期資產的曝險；WDIG 已於當日完成建倉。",
@@ -138,9 +138,85 @@
           "weight": 0.05
         }
       ]
+    },
+    {
+      "effective_from": "2026-08-29",
+      "effective_to": "2026-09-01",
+      "id": "phase-f",
+      "note": "Reduce systemic risk by moving 20% of the portfolio into broker USD cash after bond yields rose.",
+      "transition_reason_zh": "2026-08-29 因債券收益率升高，為降低系統性風險，RSSB 下調 11 個百分點、RSSY 下調 6 個百分點、WQTM 下調 3 個百分點，釋出的 20 個百分點轉入券商 USD 現金。",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.2
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.24
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.09
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        },
+        {
+          "symbol": "WQTM",
+          "weight": 0.07
+        },
+        {
+          "symbol": "WDIG",
+          "weight": 0.05
+        },
+        {
+          "symbol": "CASH_USD",
+          "weight": 0.2
+        }
+      ]
+    },
+    {
+      "effective_from": "2026-09-02",
+      "effective_to": null,
+      "id": "phase-g",
+      "note": "Reduce RSSB from 20% to 15% and raise the broker USD cash target from 20% to 25% after the 2026-09-02 RSSB trim.",
+      "transition_reason_zh": "2026-09-02 再將 RSSB 下調 5 個百分點至 15%，釋出的資金轉入現金部位，使現金目標提高至 25%；實際資金目前留在券商 USD 現金。",
+      "targets": [
+        {
+          "symbol": "RSSB",
+          "weight": 0.15
+        },
+        {
+          "symbol": "RSST",
+          "weight": 0.24
+        },
+        {
+          "symbol": "RSSY",
+          "weight": 0.09
+        },
+        {
+          "symbol": "RSIT",
+          "weight": 0.15
+        },
+        {
+          "symbol": "WQTM",
+          "weight": 0.07
+        },
+        {
+          "symbol": "WDIG",
+          "weight": 0.05
+        },
+        {
+          "symbol": "CASH_USD",
+          "weight": 0.25
+        }
+      ]
     }
   ],
   "rebalance": {
+    "cash_target_symbol": "CASH_USD",
+    "cash_target_note_zh": "CASH_USD 代表券商 USD 現金，不是 BOXX ETF。",
     "band_relative_to_target": 0.2,
     "broker_fee_usd_per_trade": 3,
     "buy_fee_min_notional_multiplier_other": 1.15,

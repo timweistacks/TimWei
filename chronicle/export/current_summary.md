@@ -6,13 +6,13 @@
 
 ## Current State
 
-- Net worth: TWD 34,426
-- Market value: TWD 1,328,773 / USD 41,983.34
+- Net worth: TWD 40,173
+- Market value: TWD 1,000,265 / USD 31,507.39
 - Remaining liability: TWD 1,294,934
-- NAV index: 106.59
+- NAV index: 106.79
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 32,899
-- Market vs debt: 102.61% market coverage
+- Unrealized PnL in TWD view: TWD 27,625
+- Market vs debt: 77.24% market coverage
 - Next loan payment: 2026-09-13 / TWD 18,765
 
 ## Capital Structure
@@ -22,16 +22,16 @@
 - Self-funded capital: TWD 0 / USD 0.00
 - Total external capital logged: TWD 1,350,000 / USD -900.00
 - Average external contribution per active month: TWD 675,000 / USD -450.00
-- Deployed capital into positions: USD 40,890.39
-- TWD invested cost basis: TWD 1,295,873 (historical_fx_log)
+- Deployed capital into positions: USD 32,700.11
+- TWD invested cost basis: TWD 972,640 (historical_fx_log)
 
 ## Holdings
 
-- RSSB: 420.0000 units, last USD 30.67
+- RSSB: 202.0000 units, last USD 30.67
 - RSIT: 299.0000 units, last USD 21.20
 - RSST: 303.0000 units, last USD 33.90
-- RSSY: 248.0000 units, last USD 25.98
-- WQTM: 130.0000 units, last USD 31.23
+- RSSY: 149.0000 units, last USD 25.98
+- WQTM: 91.0000 units, last USD 31.23
 - WDIG: 44.0000 units, last USD 45.20
 - BOXX: 0.0000 units, last USD 118.11
 
@@ -40,12 +40,12 @@
 - Rebalance band: ±20% of target weight
 - Drawdown add trigger: 20% below peak NAV
 - Peak NAV reference set: no
-- Rule events logged: 0 / Rebalance logs: 3
+- Rule events logged: 0 / Rebalance logs: 5
 - Income events logged: 0
 
 ## Data Coverage
 
-- Trades logged: 29
+- Trades logged: 33
 - FX events logged: 12
 - NAV history days: 99
 - Cash snapshots logged: 0 (missing)
@@ -68,6 +68,10 @@
 
 ## Timeline
 
+- 2026-09-02T01:39:49: Trade: sell RSSB / 68.0000 units / USD 2,089.64
+- 2026-08-29T01:11:21: Trade: sell WQTM / 39.0000 units / USD 1,245.66
+- 2026-08-29T01:10:43: Trade: sell RSSY / 99.0000 units / USD 2,541.83
+- 2026-08-29T01:10:14: Trade: sell RSSB / 150.0000 units / USD 4,663.52
 - 2026-08-27T21:48:10: Trade: buy WDIG / 44.0000 units / USD 2,103.20
 - 2026-08-27T01:36:04: Trade: sell RSSB / 68.0000 units / USD 2,121.60
 - 2026-08-24T23:51:08: Trade: buy WQTM / 130.0000 units / USD 4,230.20
@@ -84,10 +88,6 @@
 - 2026-05-07T22:27:59: Trade: buy RSSB / 72.0000 units / USD 2,200.32
 - 2026-05-07T22:14:40: Trade: buy RSIT / 277.0000 units / USD 5,678.50
 - 2026-05-07T22:12:48: Trade: sell RSST / 100.0000 units / USD 3,251.00
-- 2026-05-07T22:09:58: Trade: buy RSSY / 37.0000 units / USD 927.59
-- 2026-05-07: FX: TWD 72,305 -> USD 2,304.17 @ 31.3800
-- 2026-05-06: FX: TWD 157,450 -> USD -5,000.00 @ 31.4900
-- 2026-05-05: FX: TWD 31,577 -> USD -998.00 @ 31.6398
 
 ## Files Of Truth
 

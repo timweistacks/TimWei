@@ -322,6 +322,50 @@
       "fees_usd": 3,
       "other_fees_usd": 0,
       "note": "phase-e rebalance execution; establish the long-term metals sleeve. Matches trades.json."
+    },
+    {
+      "date": "2026-08-29",
+      "executed_at": "2026-08-29T01:10:14",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 150,
+      "price_usd": 31.0901,
+      "usd": -4461.16,
+      "fees_usd": 0,
+      "note": "Systemic-risk reduction; average-cost basis released from RSSB. Gross sale 4663.52 USD; fee 3.00 USD."
+    },
+    {
+      "date": "2026-08-29",
+      "executed_at": "2026-08-29T01:10:43",
+      "symbol": "RSSY",
+      "side": "sell",
+      "units": 99,
+      "price_usd": 25.675,
+      "usd": -2459.16,
+      "fees_usd": 0,
+      "note": "Systemic-risk reduction; average-cost basis released from RSSY. Gross sale 2541.83 USD; fee 3.00 USD."
+    },
+    {
+      "date": "2026-08-29",
+      "executed_at": "2026-08-29T01:11:21",
+      "symbol": "WQTM",
+      "side": "sell",
+      "units": 39,
+      "price_usd": 31.94,
+      "usd": -1269.96,
+      "fees_usd": 0,
+      "note": "Systemic-risk reduction; average-cost basis released from WQTM. Gross sale 1245.66 USD; fee 3.00 USD."
+    },
+    {
+      "date": "2026-09-02",
+      "executed_at": "2026-09-02T01:39:49",
+      "symbol": "RSSB",
+      "side": "sell",
+      "units": 68,
+      "price_usd": 30.73,
+      "usd": -2022.39,
+      "fees_usd": 0,
+      "note": "Manual defensive rebalance; average-cost basis released from RSSB. Gross sale 2089.64 USD; fee 3.00 USD."
     }
   ],
   "note": "Buys: usd = principal (same as trades total_usd), fees_usd = commission; deployed = usd+fees_usd. Sells: negative usd = cost basis released (avg cost) so cumulative flows match remaining portfolio cost_basis_usd."

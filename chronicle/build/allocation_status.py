@@ -91,6 +91,8 @@ def sleeve_rows(
     deploy_all_cash_usd: bool = False,
     exact_target_min_trade_usd: float = 5.0,
     buy_fee_rules: dict[str, Any] | None = None,
+    cash_like_symbols: frozenset[str] | None = None,
+    cash_target_symbol: str | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, float | None]]:
     """
     Current weight vs target for each symbol in targets.
@@ -98,6 +100,9 @@ def sleeve_rows(
     Denominator (for current_pct and target_mv_usd) is either:
     - sum of MV of target symbols only (cash_usd_in_denominator is None), or
     - that sum plus broker USD cash (when cash_usd_in_denominator is set).
+
+    When cash_target_symbol is set, broker USD cash is shown in that explicit
+    cash target row. It is kept separate from cash-like ETFs such as BOXX.
 
     When deploy_all_cash_usd is True, sleeve status uses exact target MV deltas
     (skip band) so recommendations deploy idle USD cash into sleeves.
@@ -138,12 +143,13 @@ def sleeve_rows(
                 round(last_usd * float(usd_twd), 2) if usd_twd is not None else None
             )
 
-    positions_mv_total = sum(mv_by_symbol.get(t["symbol"], 0.0) for t in targets)
     cash_den = (
         max(0.0, float(cash_usd_in_denominator))
         if cash_usd_in_denominator is not None
         else 0.0
     )
+    cash_symbol = str(cash_target_symbol or "").strip()
+    positions_mv_total = sum(mv_by_symbol.get(t["symbol"], 0.0) for t in targets)
     denominator_usd = (
         positions_mv_total + cash_den
         if cash_usd_in_denominator is not None
@@ -163,6 +169,9 @@ def sleeve_rows(
         sym = t["symbol"]
         tgt = float(t["weight"])
         mv = mv_by_symbol.get(sym, 0.0)
+        is_cash_target = sym == cash_symbol and cash_usd_in_denominator is not None
+        if is_cash_target:
+            mv = cash_den
         units = units_by_symbol.get(sym, 0.0)
         last_usd = last_usd_by_symbol.get(sym)
         last_twd = last_twd_by_symbol.get(sym)
@@ -209,7 +218,11 @@ def sleeve_rows(
         recommendation_mode = "await_first_buy"
         row_fee_pct: float | None = None
         if denominator_usd > 1e-12:
-            if last_usd is None or last_usd <= 0:
+            if is_cash_target:
+                # Broker USD cash has no quote or share count to trade here;
+                # the row only reports whether the cash target is in band.
+                recommendation_mode = "in_band" if st == "ok" else "cash_target_drift"
+            elif last_usd is None or last_usd <= 0:
                 recommendation_mode = "missing_quote"
                 trade_side = "unknown"
             elif st == "ok":
@@ -305,6 +318,8 @@ def build_portfolio_view(
     rebalance_cash_usd: float | None = None,
     deploy_all_cash_usd: bool = False,
     exact_target_min_trade_usd: float = 5.0,
+    cash_like_symbols: frozenset[str] | None = None,
+    cash_target_symbol: str | None = None,
 ) -> dict[str, Any]:
     phases = alloc.get("phases", [])
     reb_all = alloc.get("rebalance") or {}
@@ -331,6 +346,8 @@ def build_portfolio_view(
         deploy_all_cash_usd,
         exact_target_min_trade_usd,
         buy_fee_rules,
+        cash_like_symbols,
+        cash_target_symbol,
     )
     need = any(s.get("recommendation_mode") == "rebalance" for s in sleeves)
     deferred_buy_actions = [

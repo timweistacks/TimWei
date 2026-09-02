@@ -330,6 +330,50 @@
       "symbol": "WDIG",
       "total_usd": 2103.2,
       "units": 44
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-29T01:10:14",
+      "fee_usd": 3,
+      "note": "Systemic-risk reduction; reduce RSSB exposure.",
+      "price_usd": 31.0901,
+      "side": "sell",
+      "symbol": "RSSB",
+      "total_usd": 4663.52,
+      "units": 150
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-29T01:10:43",
+      "fee_usd": 3,
+      "note": "Systemic-risk reduction; reduce RSSY exposure.",
+      "price_usd": 25.675,
+      "side": "sell",
+      "symbol": "RSSY",
+      "total_usd": 2541.83,
+      "units": 99
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-08-29T01:11:21",
+      "fee_usd": 3,
+      "note": "Systemic-risk reduction; reduce WQTM exposure.",
+      "price_usd": 31.94,
+      "side": "sell",
+      "symbol": "WQTM",
+      "total_usd": 1245.66,
+      "units": 39
+    },
+    {
+      "broker": "manual_import",
+      "executed_at": "2026-09-02T01:39:49",
+      "fee_usd": 3,
+      "note": "Reduce RSSB target from 20% to 15%; raise broker USD cash target to 25%.",
+      "price_usd": 30.73,
+      "side": "sell",
+      "symbol": "RSSB",
+      "total_usd": 2089.64,
+      "units": 68
     }
   ],
   "note": "Buy: total_usd = principal (fill amount). fee_usd/other_fees_usd = separate charges; wallet debit = total_usd + fee_usd + other_fees_usd. No fee => use 0. Sell: total_usd = gross credit; net in = total_usd - fee_usd - other_fees_usd."

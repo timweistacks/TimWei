@@ -7,10 +7,15 @@ import json
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
 from chronicle.build.amortization import parse_iso_date
+
+
+TRADE_TIMESTAMP_TZ = ZoneInfo("Asia/Taipei")
+MARKET_TZ = ZoneInfo("America/New_York")
 
 
 def _calendar_date_from_row(raw_date: str) -> date:
@@ -62,6 +67,49 @@ def _trade_date(trade: dict[str, Any]) -> date | None:
     return None
 
 
+def _parse_trade_datetime(raw_value: Any) -> datetime | None:
+    """Parse an executed_at value, treating naive timestamps as Asia/Taipei."""
+    raw = str(raw_value or "").strip()
+    if not raw:
+        return None
+    raw = raw.replace("Z", "+00:00")
+    try:
+        if len(raw) >= 19:
+            dt = datetime.fromisoformat(raw)
+            if dt.tzinfo is None:
+                return dt.replace(tzinfo=TRADE_TIMESTAMP_TZ)
+            return dt
+        if len(raw) >= 10:
+            return datetime.fromisoformat(
+                raw[:10] + "T12:00:00"
+            ).replace(tzinfo=TRADE_TIMESTAMP_TZ)
+    except ValueError:
+        return None
+    return None
+
+
+def _trade_market_datetime(trade: dict[str, Any]) -> datetime | None:
+    """Return executed_at in America/New_York for market-session bookkeeping."""
+    dt = _parse_trade_datetime(trade.get("executed_at"))
+    if dt is None:
+        raw_date = trade.get("date")
+        if not isinstance(raw_date, str) or not raw_date:
+            return None
+        try:
+            dt = datetime.fromisoformat(raw_date[:10] + "T12:00:00").replace(
+                tzinfo=MARKET_TZ
+            )
+        except ValueError:
+            return None
+    return dt.astimezone(MARKET_TZ)
+
+
+def _trade_market_date(trade: dict[str, Any]) -> date | None:
+    """Return the New York trading-session date for a trade."""
+    market_dt = _trade_market_datetime(trade)
+    return market_dt.date() if market_dt is not None else None
+
+
 def _trade_units_delta(trade: dict[str, Any]) -> float:
     side = str(trade.get("side", "")).strip().lower()
     units = float(trade.get("units", 0) or 0)
@@ -98,7 +146,7 @@ def _trade_cash_delta(trade: dict[str, Any]) -> float:
 def _net_cashflow_from_trades_through(trades: list[dict], end: date) -> float:
     total = 0.0
     for t in trades:
-        td = _trade_date(t)
+        td = _trade_market_date(t)
         if td is None or td > end:
             continue
         total += _trade_cash_delta(t)
@@ -137,18 +185,19 @@ def _fx_event_dt(e: dict[str, Any]) -> datetime:
 
 def _trade_event_dt(trade: dict[str, Any]) -> datetime:
     raw = str(trade.get("executed_at", "")).strip()
+    parsed = _parse_trade_datetime(raw)
+    if parsed is not None:
+        # Keep the event timeline in the canonical Taiwan-local wall clock so
+        # existing intraday NAV row keys continue to match executed_at.
+        return parsed.astimezone(TRADE_TIMESTAMP_TZ).replace(tzinfo=None)
     if not raw:
         td = _trade_date(trade)
         if td is None:
             return datetime.combine(date.min, datetime.min.time())
         return datetime.combine(td, datetime.min.time())
-    raw = raw.replace("Z", "+00:00")
-    if "+" in raw:
-        raw = raw.split("+")[0]
-    if len(raw) >= 19:
-        return datetime.fromisoformat(raw[:19])
-    if len(raw) >= 10:
-        return datetime.fromisoformat(raw[:10] + "T12:00:00")
+    td = _trade_date(trade)
+    if td is not None:
+        return datetime.combine(td, datetime.min.time())
     return datetime.combine(date.min, datetime.min.time())
 
 
@@ -199,9 +248,13 @@ def _series_close_on(
     if series is None or series.empty:
         return None
     ts = pd.Timestamp(as_of)
-    if ts not in series.index:
+    prior = series.loc[:ts]
+    if prior.empty:
         return None
-    return float(series.loc[ts])
+    # A daily series can legitimately miss a market date for one ticker while
+    # the rest of the portfolio has a quote. Carry the last available close
+    # forward instead of treating that holding as having zero market value.
+    return float(prior.iloc[-1])
 
 
 def _series_open_on(
@@ -238,7 +291,7 @@ def _inject_first_trade_row(
     first = _earliest_trade_row(trades)
     if first is None or spy_anchor_close is None or spy_anchor_close <= 0:
         return rows
-    fd = _trade_date(first)
+    fd = _trade_market_date(first)
     if fd is None:
         return rows
     day_key = fd.isoformat()
@@ -315,7 +368,7 @@ def _backfilled_rows(
     dates = _history_dates(series_map, tickers, start, end)
     trades_by_date: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for trade in trades:
-        td = _trade_date(trade)
+        td = _trade_market_date(trade)
         if td is None or td < start or td > end:
             continue
         trades_by_date[td].append(trade)
@@ -637,7 +690,7 @@ def sync_nav_history(
         if isinstance(raw_date, str) and raw_date:
             start_candidates.append(parse_iso_date(raw_date))
     for trade in trades:
-        td = _trade_date(trade)
+        td = _trade_market_date(trade)
         if td is not None:
             start_candidates.append(td)
     for e in fx_list:
@@ -691,7 +744,7 @@ def sync_nav_history(
     spy_anchor: float | None = None
     anchor_source: str | None = None
     if first_trade is not None:
-        fd = _trade_date(first_trade)
+        fd = _trade_market_date(first_trade)
         if fd is not None:
             spy_anchor = _series_open_on(series_map, benchmark_ticker, fd)
             if spy_anchor is not None:

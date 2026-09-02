@@ -1,10 +1,10 @@
 {
   "cash_twd": 0,
-  "cash_usd": 18.55,
+  "cash_usd": 10547.2,
   "nav": {
     "cash_like_symbols": ["BOXX"],
     "equity_includes_cash_usd": true,
-    "note_zh": "NAV green line: equity sleeve only (position_mv). Idle broker USD and BOXX are USD cash, not NAV units. Units change on equity ETF buy/sell only; FX does not change units. Shadow SPY/SSO mirrors equity trades only."
+    "note_zh": "NAV green line: equity sleeve only (position_mv). Idle broker USD is cash, not NAV units; BOXX is cash-like only if an actual BOXX position is held. Units change on equity ETF buy/sell only; FX does not change units. Shadow SPY/SSO mirrors equity trades only."
   },
   "cash_usd_note": "trades.json buys: cash debit = total_usd + fee_usd + other_fees_usd (principal vs fees explicit). cash_usd = broker wallet.",
   "drawdown_reinvest": {
@@ -16,10 +16,10 @@
   },
   "positions": [
     {
-      "cost_basis_usd": 12491.26,
+      "cost_basis_usd": 6007.71,
       "symbol": "RSSB",
       "trade_fees_usd": 0,
-      "units": 420,
+      "units": 202,
       "yahoo_ticker": "RSSB"
     },
     {
@@ -38,19 +38,19 @@
       "yahoo_ticker": "RSST"
     },
     {
-      "cost_basis_usd": 6160.31,
+      "cost_basis_usd": 3701.15,
       "symbol": "RSSY",
       "trade_fees_usd": 0,
-      "units": 248,
+      "units": 149,
       "yahoo_ticker": "RSSY"
     },
     {
-      "cost_basis_usd": 4233.2,
+      "cost_basis_usd": 2963.24,
       "listed": true,
       "note": "Target sleeve added and first purchase recorded 2026-08-24. Price lookup uses the U.S.-listed WQTM ticker.",
       "symbol": "WQTM",
       "trade_fees_usd": 0,
-      "units": 130,
+      "units": 91,
       "yahoo_ticker": "WQTM"
     },
     {
@@ -64,7 +64,7 @@
     },
     {
       "cost_basis_usd": 0,
-      "note": "BOXX position closed 2026-04-30; cash-like via broker USD if re-opened.",
+      "note": "Historical BOXX position closed 2026-04-30; current cash allocation is held as broker USD, not BOXX.",
       "symbol": "BOXX",
       "trade_fees_usd": 0,
       "units": 0,

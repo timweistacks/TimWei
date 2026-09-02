@@ -194,6 +194,96 @@
       "realized_pnl_usd": null,
       "linked_rule_event_id": null,
       "note_en": "Executed phase-e rebalance; WDIG adds long-term metals exposure."
+    },
+    {
+      "id": "rebalance-20260829-phase-f",
+      "decision_date": "2026-08-29",
+      "phase_id": "phase-f",
+      "trigger_reason": "manual_macro_view",
+      "before_weights": {
+        "note": "Prior active phase: phase-e. Three risk-reduction sales executed on 2026-08-29; proceeds remain as broker USD cash."
+      },
+      "recommended_actions": [
+        {
+          "action": "shift_targets",
+          "targets": "RSSB 20%, RSST 24%, RSSY 9%, RSIT 15%, WQTM 7%, WDIG 5%, CASH_USD 20%",
+          "rationale_en": "Bond yields rose; reduce systemic risk by moving 20 percentage points into broker USD cash."
+        },
+        {
+          "action": "rebalance",
+          "note": "Manual integer-share risk-reduction plan; sale proceeds are held as broker USD cash."
+        }
+      ],
+      "executed_actions": [
+        {
+          "executed_at": "2026-08-29T01:10:14",
+          "symbol": "RSSB",
+          "side": "sell",
+          "units": 150,
+          "price_usd": 31.0901,
+          "total_usd": 4663.52,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-29T01:10:43",
+          "symbol": "RSSY",
+          "side": "sell",
+          "units": 99,
+          "price_usd": 25.675,
+          "total_usd": 2541.83,
+          "fee_usd": 3
+        },
+        {
+          "executed_at": "2026-08-29T01:11:21",
+          "symbol": "WQTM",
+          "side": "sell",
+          "units": 39,
+          "price_usd": 31.94,
+          "total_usd": 1245.66,
+          "fee_usd": 3
+        }
+      ],
+      "difference_reason": "Sale proceeds remain as broker USD cash; no BOXX purchase was recorded.",
+      "fees_usd": 9,
+      "realized_pnl_usd": null,
+      "linked_rule_event_id": null,
+      "note_en": "Phase-f records the 2026-08-29 defensive allocation change with proceeds held as broker USD cash."
+    },
+    {
+      "id": "rebalance-20260902-phase-g",
+      "decision_date": "2026-09-02",
+      "phase_id": "phase-g",
+      "trigger_reason": "manual_cash_increase",
+      "before_weights": {
+        "note": "Prior active phase: phase-f. RSSB was trimmed by 68 shares; proceeds remain as broker USD cash."
+      },
+      "recommended_actions": [
+        {
+          "action": "shift_targets",
+          "targets": "RSSB 15%, RSST 24%, RSSY 9%, RSIT 15%, WQTM 7%, WDIG 5%, CASH_USD 25%",
+          "rationale_en": "Reduce RSSB by another 5 percentage points and raise the broker USD cash target to 25% for lower portfolio risk."
+        },
+        {
+          "action": "rebalance",
+          "note": "Manual 68-share RSSB trim; proceeds are held as broker USD cash."
+        }
+      ],
+      "executed_actions": [
+        {
+          "executed_at": "2026-09-02T01:39:49",
+          "symbol": "RSSB",
+          "side": "sell",
+          "units": 68,
+          "price_usd": 30.73,
+          "total_usd": 2089.64,
+          "fee_usd": 3
+        }
+      ],
+      "difference_reason": "The 25% cash target is held in broker USD cash; no separate BOXX buy was recorded.",
+      "fees_usd": 3,
+      "realized_pnl_usd": null,
+      "linked_rule_event_id": null,
+      "note_en": "Phase-g records the 2026-09-02 RSSB trim and the increase of the cash target to 25%."
     }
   ]
 }
