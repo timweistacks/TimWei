@@ -1,18 +1,18 @@
 # Current Summary
 
-- Generated on: 2026-09-02
-- Snapshot date: 2026-09-02
+- Generated on: 2026-09-03
+- Snapshot date: 2026-09-03
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
 
-- Net worth: TWD 41,140
-- Market value: TWD 1,000,990 / USD 31,507.39
+- Net worth: TWD nan
+- Market value: TWD nan / USD nan
 - Remaining liability: TWD 1,294,934
-- NAV index: 106.79
+- NAV index: nan
 - Unrealized PnL: USD —
-- Unrealized PnL in TWD view: TWD 28,350
-- Market vs debt: 77.30% market coverage
+- Unrealized PnL in TWD view: TWD nan
+- Market vs debt: nan% market coverage
 - Next loan payment: 2026-09-13 / TWD 18,765
 
 ## Capital Structure
@@ -22,18 +22,18 @@
 - Self-funded capital: TWD 0 / USD 0.00
 - Total external capital logged: TWD 1,350,000 / USD -900.00
 - Average external contribution per active month: TWD 675,000 / USD -450.00
-- Deployed capital into positions: USD 32,700.11
+- Deployed capital into positions: USD 30,677.72
 - TWD invested cost basis: TWD 972,640 (historical_fx_log)
 
 ## Holdings
 
-- RSSB: 202.0000 units, last USD 30.67
-- RSIT: 299.0000 units, last USD 21.20
-- RSST: 303.0000 units, last USD 33.90
-- RSSY: 149.0000 units, last USD 25.98
-- WQTM: 91.0000 units, last USD 31.23
-- WDIG: 44.0000 units, last USD 45.20
-- BOXX: 0.0000 units, last USD 118.11
+- RSSB: 202.0000 units, last USD nan
+- RSIT: 299.0000 units, last USD nan
+- RSST: 303.0000 units, last USD nan
+- RSSY: 149.0000 units, last USD nan
+- WQTM: 91.0000 units, last USD nan
+- WDIG: 44.0000 units, last USD nan
+- BOXX: 0.0000 units, last USD nan
 
 ## Rules And Risk
 
@@ -47,7 +47,7 @@
 
 - Trades logged: 33
 - FX events logged: 12
-- NAV history days: 99
+- NAV history days: 100
 - Cash snapshots logged: 0 (missing)
 
 ## Missing Information
