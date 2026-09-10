@@ -1,7 +1,7 @@
 # Current Summary
 
-- Generated on: 2026-09-09
-- Snapshot date: 2026-09-09
+- Generated on: 2026-09-10
+- Snapshot date: 2026-09-10
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
@@ -32,7 +32,7 @@
 - RSST: 303.0000 units, last USD nan
 - RSSY: 149.0000 units, last USD nan
 - WQTM: 91.0000 units, last USD nan
-- WDIG: 44.0000 units, last USD 46.44
+- WDIG: 44.0000 units, last USD nan
 - BOXX: 0.0000 units, last USD nan
 
 ## Rules And Risk
@@ -47,7 +47,7 @@
 
 - Trades logged: 33
 - FX events logged: 12
-- NAV history days: 103
+- NAV history days: 104
 - Cash snapshots logged: 0 (missing)
 
 ## Missing Information
