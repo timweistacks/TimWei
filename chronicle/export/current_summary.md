@@ -1,7 +1,7 @@
 # Current Summary
 
-- Generated on: 2026-09-10
-- Snapshot date: 2026-09-10
+- Generated on: 2026-09-11
+- Snapshot date: 2026-09-11
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
@@ -47,7 +47,7 @@
 
 - Trades logged: 33
 - FX events logged: 12
-- NAV history days: 104
+- NAV history days: 105
 - Cash snapshots logged: 0 (missing)
 
 ## Missing Information
