@@ -240,7 +240,7 @@
   "capital_summary": {
     "cash_twd": 0.0,
     "cash_usd": 10547.2,
-    "cash_usd_twd": 336561.15,
+    "cash_usd_twd": 336118.17,
     "contract_principal_twd": 1350000.0,
     "deployment_ratio_pct": null,
     "investment_mv_twd": NaN,
@@ -361,7 +361,8 @@
       "2026-09-10",
       "2026-09-11",
       "2026-09-14",
-      "2026-09-15"
+      "2026-09-15",
+      "2026-09-16"
     ],
     "datasets": [
       {
@@ -397,6 +398,7 @@
           35823.96,
           37024.21,
           37024.21,
+          40188.77,
           40188.77,
           40188.77,
           40188.77,
@@ -591,6 +593,7 @@
           31763.010357,
           31970.969458,
           31641.449615,
+          31596.719172,
           NaN
         ]
       }
@@ -829,7 +832,7 @@
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-09-16",
+  "generated_at": "2026-09-17",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -1778,7 +1781,7 @@
   },
   "investment_cost": {
     "historical_cost_twd": 972639.98,
-    "current_fx_equivalent_twd": 978926.04,
+    "current_fx_equivalent_twd": 977637.58,
     "invested_usd": 30677.72,
     "matched_flow_count": 30,
     "unmatched_flow_count": 0,
@@ -1932,7 +1935,8 @@
       "2026-09-10",
       "2026-09-11",
       "2026-09-14",
-      "2026-09-15"
+      "2026-09-15",
+      "2026-09-16"
     ],
     "datasets": [
       {
@@ -2047,6 +2051,7 @@
           107.7983,
           108.5041,
           107.3857,
+          107.2339,
           NaN
         ]
       },
@@ -2162,7 +2167,8 @@
           109.77,
           110.7057,
           110.2118,
-          NaN
+          109.7063,
+          109.2225
         ]
       },
       {
@@ -2277,17 +2283,18 @@
           117.4856,
           119.4237,
           118.326,
-          NaN
+          117.2798,
+          116.2336
         ]
       }
     ]
   },
-  "nav_history_days": 108,
+  "nav_history_days": 109,
   "nav_summary": {
     "cumulative_invested_usd": 30677.72,
     "invested_basis": "flows",
     "mv_usd": NaN,
-    "mv_as_of": "2026-09-15",
+    "mv_as_of": "2026-09-16",
     "nav_index_100": NaN,
     "unrealized_pnl_usd": null,
     "position_mv_usd": NaN,
@@ -2308,18 +2315,18 @@
       "ready": true,
       "interval": {
         "from_date": "2026-04-14T22:07:04",
-        "to_date": "2026-09-15",
+        "to_date": "2026-09-16",
         "nav_pct": NaN,
-        "spy_pct": NaN,
+        "spy_pct": 9.2225,
         "excess_pct_points": NaN
       },
       "prior_row": {
-        "prior_date": "2026-09-14",
-        "last_date": "2026-09-15",
+        "prior_date": "2026-09-15",
+        "last_date": "2026-09-16",
         "nav_1d_pct": NaN,
-        "spy_1d_pct": NaN,
+        "spy_1d_pct": -0.441,
         "excess_pct_points": NaN,
-        "mv_usd_prior": 42188.649615,
+        "mv_usd_prior": 42143.919172,
         "mv_usd_last": NaN,
         "mv_usd_delta": NaN,
         "mv_usd_pct": NaN
@@ -2329,18 +2336,18 @@
       "ready": true,
       "interval": {
         "from_date": "2026-04-14T22:07:04",
-        "to_date": "2026-09-15",
+        "to_date": "2026-09-16",
         "nav_pct": NaN,
-        "spy_pct": NaN,
+        "spy_pct": 16.2336,
         "excess_pct_points": NaN
       },
       "prior_row": {
-        "prior_date": "2026-09-14",
-        "last_date": "2026-09-15",
+        "prior_date": "2026-09-15",
+        "last_date": "2026-09-16",
         "nav_1d_pct": NaN,
-        "spy_1d_pct": NaN,
+        "spy_1d_pct": -0.8921,
         "excess_pct_points": NaN,
-        "mv_usd_prior": 42188.649615,
+        "mv_usd_prior": 42143.919172,
         "mv_usd_last": NaN,
         "mv_usd_delta": NaN,
         "mv_usd_pct": NaN
@@ -2385,12 +2392,12 @@
     "project_buckets_note_zh": "",
     "project_buckets_total_twd": 0,
     "rebalance_needed": false,
-    "usd_twd": 31.90999984741211,
+    "usd_twd": 31.868000030517578,
     "usd_twd_source": "yahoo"
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-09-16",
+    "as_of": "2026-09-17",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
@@ -2606,7 +2613,7 @@
         "last_twd": null,
         "last_usd": null,
         "listed": true,
-        "mv_twd": 336561.15,
+        "mv_twd": 336118.17,
         "mv_usd": 10547.2,
         "recommendation_mode": "await_first_buy",
         "target_mv_twd": null,
@@ -2997,13 +3004,13 @@
     {
       "symbol": "SPY",
       "yahoo_ticker": "SPY",
-      "last_usd": NaN,
+      "last_usd": 754.0499877929688,
       "benchmark": true
     },
     {
       "symbol": "SSO",
       "yahoo_ticker": "SSO",
-      "last_usd": NaN,
+      "last_usd": 67.7699966430664,
       "benchmark": true
     }
   ],
@@ -3157,7 +3164,7 @@
         "realized_pnl_usd": 64.24
       }
     ],
-    "total_realized_pnl_twd": 33560.7
+    "total_realized_pnl_twd": 33516.53
   },
   "rule_events": {
     "schema_version": 1,
@@ -3301,7 +3308,8 @@
       "2026-09-10",
       "2026-09-11",
       "2026-09-14",
-      "2026-09-15"
+      "2026-09-15",
+      "2026-09-16"
     ],
     "datasets": [
       {
@@ -3416,7 +3424,8 @@
           109.77,
           110.7057,
           110.2118,
-          NaN
+          109.7063,
+          109.2225
         ]
       },
       {
@@ -3531,7 +3540,8 @@
           117.4856,
           119.4237,
           118.326,
-          NaN
+          117.2798,
+          116.2336
         ]
       }
     ]
@@ -4402,6 +4412,6 @@
       }
     ]
   },
-  "usd_twd": 31.90999984741211,
+  "usd_twd": 31.868000030517578,
   "usd_twd_source": "yahoo"
 }
