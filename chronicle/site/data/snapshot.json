@@ -240,7 +240,7 @@
   "capital_summary": {
     "cash_twd": 0.0,
     "cash_usd": 10547.2,
-    "cash_usd_twd": 336118.17,
+    "cash_usd_twd": 335886.14,
     "contract_principal_twd": 1350000.0,
     "deployment_ratio_pct": null,
     "investment_mv_twd": NaN,
@@ -362,7 +362,8 @@
       "2026-09-11",
       "2026-09-14",
       "2026-09-15",
-      "2026-09-16"
+      "2026-09-16",
+      "2026-09-17"
     ],
     "datasets": [
       {
@@ -398,6 +399,7 @@
           35823.96,
           37024.21,
           37024.21,
+          40188.77,
           40188.77,
           40188.77,
           40188.77,
@@ -594,6 +596,7 @@
           31970.969458,
           31641.449615,
           31596.719172,
+          31532.289822,
           NaN
         ]
       }
@@ -832,7 +835,7 @@
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-09-17",
+  "generated_at": "2026-09-18",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -1781,7 +1784,7 @@
   },
   "investment_cost": {
     "historical_cost_twd": 972639.98,
-    "current_fx_equivalent_twd": 977637.58,
+    "current_fx_equivalent_twd": 976962.69,
     "invested_usd": 30677.72,
     "matched_flow_count": 30,
     "unmatched_flow_count": 0,
@@ -1936,7 +1939,8 @@
       "2026-09-11",
       "2026-09-14",
       "2026-09-15",
-      "2026-09-16"
+      "2026-09-16",
+      "2026-09-17"
     ],
     "datasets": [
       {
@@ -2052,6 +2056,7 @@
           108.5041,
           107.3857,
           107.2339,
+          107.0153,
           NaN
         ]
       },
@@ -2168,7 +2173,8 @@
           110.7057,
           110.2118,
           109.7063,
-          109.2225
+          109.2225,
+          NaN
         ]
       },
       {
@@ -2284,17 +2290,18 @@
           119.4237,
           118.326,
           117.2798,
-          116.2336
+          116.2336,
+          NaN
         ]
       }
     ]
   },
-  "nav_history_days": 109,
+  "nav_history_days": 110,
   "nav_summary": {
     "cumulative_invested_usd": 30677.72,
     "invested_basis": "flows",
     "mv_usd": NaN,
-    "mv_as_of": "2026-09-16",
+    "mv_as_of": "2026-09-17",
     "nav_index_100": NaN,
     "unrealized_pnl_usd": null,
     "position_mv_usd": NaN,
@@ -2315,18 +2322,18 @@
       "ready": true,
       "interval": {
         "from_date": "2026-04-14T22:07:04",
-        "to_date": "2026-09-16",
+        "to_date": "2026-09-17",
         "nav_pct": NaN,
-        "spy_pct": 9.2225,
+        "spy_pct": NaN,
         "excess_pct_points": NaN
       },
       "prior_row": {
-        "prior_date": "2026-09-15",
-        "last_date": "2026-09-16",
+        "prior_date": "2026-09-16",
+        "last_date": "2026-09-17",
         "nav_1d_pct": NaN,
-        "spy_1d_pct": -0.441,
+        "spy_1d_pct": NaN,
         "excess_pct_points": NaN,
-        "mv_usd_prior": 42143.919172,
+        "mv_usd_prior": 42079.489822,
         "mv_usd_last": NaN,
         "mv_usd_delta": NaN,
         "mv_usd_pct": NaN
@@ -2336,18 +2343,18 @@
       "ready": true,
       "interval": {
         "from_date": "2026-04-14T22:07:04",
-        "to_date": "2026-09-16",
+        "to_date": "2026-09-17",
         "nav_pct": NaN,
-        "spy_pct": 16.2336,
+        "spy_pct": NaN,
         "excess_pct_points": NaN
       },
       "prior_row": {
-        "prior_date": "2026-09-15",
-        "last_date": "2026-09-16",
+        "prior_date": "2026-09-16",
+        "last_date": "2026-09-17",
         "nav_1d_pct": NaN,
-        "spy_1d_pct": -0.8921,
+        "spy_1d_pct": NaN,
         "excess_pct_points": NaN,
-        "mv_usd_prior": 42143.919172,
+        "mv_usd_prior": 42079.489822,
         "mv_usd_last": NaN,
         "mv_usd_delta": NaN,
         "mv_usd_pct": NaN
@@ -2392,12 +2399,12 @@
     "project_buckets_note_zh": "",
     "project_buckets_total_twd": 0,
     "rebalance_needed": false,
-    "usd_twd": 31.868000030517578,
+    "usd_twd": 31.84600067138672,
     "usd_twd_source": "yahoo"
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-09-17",
+    "as_of": "2026-09-18",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
@@ -2586,11 +2593,11 @@
         "current_units": 44.0,
         "delta_mv_twd": null,
         "delta_mv_usd": null,
-        "last_twd": NaN,
-        "last_usd": NaN,
+        "last_twd": 1327.66,
+        "last_usd": 41.69,
         "listed": true,
-        "mv_twd": NaN,
-        "mv_usd": NaN,
+        "mv_twd": 58417.03,
+        "mv_usd": 1834.3599,
         "recommendation_mode": "await_first_buy",
         "target_mv_twd": null,
         "target_mv_usd": null,
@@ -2613,7 +2620,7 @@
         "last_twd": null,
         "last_usd": null,
         "listed": true,
-        "mv_twd": 336118.17,
+        "mv_twd": 335886.14,
         "mv_usd": 10547.2,
         "recommendation_mode": "await_first_buy",
         "target_mv_twd": null,
@@ -2984,11 +2991,11 @@
       "listed": true,
       "symbol": "WDIG",
       "yahoo_ticker": "WDIG",
-      "last_usd": NaN,
+      "last_usd": 41.689998626708984,
       "units": 44.0,
       "avg_entry_usd": 47.868182,
-      "unrealized_pnl_usd": NaN,
-      "last_twd": NaN
+      "unrealized_pnl_usd": -271.84,
+      "last_twd": 1327.66
     },
     {
       "listed": true,
@@ -3004,13 +3011,13 @@
     {
       "symbol": "SPY",
       "yahoo_ticker": "SPY",
-      "last_usd": 754.0499877929688,
+      "last_usd": NaN,
       "benchmark": true
     },
     {
       "symbol": "SSO",
       "yahoo_ticker": "SSO",
-      "last_usd": 67.7699966430664,
+      "last_usd": NaN,
       "benchmark": true
     }
   ],
@@ -3164,7 +3171,7 @@
         "realized_pnl_usd": 64.24
       }
     ],
-    "total_realized_pnl_twd": 33516.53
+    "total_realized_pnl_twd": 33493.39
   },
   "rule_events": {
     "schema_version": 1,
@@ -3309,7 +3316,8 @@
       "2026-09-11",
       "2026-09-14",
       "2026-09-15",
-      "2026-09-16"
+      "2026-09-16",
+      "2026-09-17"
     ],
     "datasets": [
       {
@@ -3425,7 +3433,8 @@
           110.7057,
           110.2118,
           109.7063,
-          109.2225
+          109.2225,
+          NaN
         ]
       },
       {
@@ -3541,7 +3550,8 @@
           119.4237,
           118.326,
           117.2798,
-          116.2336
+          116.2336,
+          NaN
         ]
       }
     ]
@@ -4412,6 +4422,6 @@
       }
     ]
   },
-  "usd_twd": 31.868000030517578,
+  "usd_twd": 31.84600067138672,
   "usd_twd_source": "yahoo"
 }
