@@ -1572,9 +1572,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 392.610199,
-    "spy_shadow_index_equity_usd": 42971.246,
+    "spy_shadow_index_equity_usd": 42969.9316,
     "spy_shadow_index": 110.313,
-    "sso_shadow_index_equity_usd": 45298.5431,
+    "sso_shadow_index_equity_usd": 45296.328,
     "sso_shadow_index": 119.5952
   },
   {
@@ -1589,9 +1589,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 392.610199,
-    "spy_shadow_index_equity_usd": 43108.5796,
+    "spy_shadow_index_equity_usd": 43107.2609,
     "spy_shadow_index": 110.6655,
-    "sso_shadow_index_equity_usd": 45571.3855,
+    "sso_shadow_index_equity_usd": 45569.1571,
     "sso_shadow_index": 120.3156
   },
   {
@@ -1606,9 +1606,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 372.941346,
-    "spy_shadow_index_equity_usd": 41003.7714,
+    "spy_shadow_index_equity_usd": 41002.4524,
     "spy_shadow_index": 110.6901,
-    "sso_shadow_index_equity_usd": 43458.1246,
+    "sso_shadow_index_equity_usd": 43455.8959,
     "sso_shadow_index": 120.3327
   },
   {
@@ -1623,9 +1623,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 392.342152,
-    "spy_shadow_index_equity_usd": 43381.3494,
+    "spy_shadow_index_equity_usd": 43380.0218,
     "spy_shadow_index": 111.4154,
-    "sso_shadow_index_equity_usd": 46143.5134,
+    "sso_shadow_index_equity_usd": 46141.2558,
     "sso_shadow_index": 121.8935
   },
   {
@@ -1640,9 +1640,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 314.16694,
-    "spy_shadow_index_equity_usd": 34853.5448,
+    "spy_shadow_index_equity_usd": 34852.2202,
     "spy_shadow_index": 111.1626,
-    "sso_shadow_index_equity_usd": 37471.2099,
+    "sso_shadow_index_equity_usd": 37468.9628,
     "sso_shadow_index": 121.3275
   },
   {
@@ -1657,9 +1657,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 314.16694,
-    "spy_shadow_index_equity_usd": 34749.3484,
+    "spy_shadow_index_equity_usd": 34748.0278,
     "spy_shadow_index": 110.8303,
-    "sso_shadow_index_equity_usd": 37232.845,
+    "sso_shadow_index_equity_usd": 37230.6122,
     "sso_shadow_index": 120.5557
   },
   {
@@ -1674,9 +1674,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32429.5034,
+    "spy_shadow_index_equity_usd": 32428.1918,
     "spy_shadow_index": 110.0688,
-    "sso_shadow_index_equity_usd": 34628.899,
+    "sso_shadow_index_equity_usd": 34626.6973,
     "sso_shadow_index": 118.8749
   },
   {
@@ -1691,9 +1691,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32573.3904,
+    "spy_shadow_index_equity_usd": 32572.073,
     "spy_shadow_index": 110.5572,
-    "sso_shadow_index_equity_usd": 34938.6669,
+    "sso_shadow_index_equity_usd": 34936.4455,
     "sso_shadow_index": 119.9383
   },
   {
@@ -1708,9 +1708,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32914.3822,
+    "spy_shadow_index_equity_usd": 32913.0511,
     "spy_shadow_index": 111.7145,
-    "sso_shadow_index_equity_usd": 35658.1258,
+    "sso_shadow_index_equity_usd": 35655.8587,
     "sso_shadow_index": 122.408
   },
   {
@@ -1725,9 +1725,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32787.5226,
+    "spy_shadow_index_equity_usd": 32786.1965,
     "spy_shadow_index": 111.284,
-    "sso_shadow_index_equity_usd": 35373.3406,
+    "sso_shadow_index_equity_usd": 35371.0916,
     "sso_shadow_index": 121.4304
   },
   {
@@ -1742,9 +1742,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32607.4476,
+    "spy_shadow_index_equity_usd": 32606.1289,
     "spy_shadow_index": 110.6728,
-    "sso_shadow_index_equity_usd": 34978.6377,
+    "sso_shadow_index_equity_usd": 34976.4137,
     "sso_shadow_index": 120.0755
   },
   {
@@ -1759,9 +1759,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32455.8974,
+    "spy_shadow_index_equity_usd": 32454.5848,
     "spy_shadow_index": 110.1584,
-    "sso_shadow_index_equity_usd": 34648.8844,
+    "sso_shadow_index_equity_usd": 34646.6814,
     "sso_shadow_index": 118.9435
   },
   {
@@ -1776,9 +1776,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32261.3478,
+    "spy_shadow_index_equity_usd": 32260.0431,
     "spy_shadow_index": 109.4981,
-    "sso_shadow_index_equity_usd": 34224.2052,
+    "sso_shadow_index_equity_usd": 34222.0293,
     "sso_shadow_index": 117.4856
   },
   {
@@ -1793,9 +1793,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32536.3533,
+    "spy_shadow_index_equity_usd": 32535.0374,
     "spy_shadow_index": 110.4315,
-    "sso_shadow_index_equity_usd": 34788.7783,
+    "sso_shadow_index_equity_usd": 34786.5665,
     "sso_shadow_index": 119.4237
   },
   {
@@ -1810,9 +1810,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32391.1874,
+    "spy_shadow_index_equity_usd": 32389.8774,
     "spy_shadow_index": 109.9388,
-    "sso_shadow_index_equity_usd": 34469.0196,
+    "sso_shadow_index_equity_usd": 34466.8281,
     "sso_shadow_index": 118.326
   },
   {
@@ -1827,9 +1827,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32242.617,
+    "spy_shadow_index_equity_usd": 32241.313,
     "spy_shadow_index": 109.4345,
-    "sso_shadow_index_equity_usd": 34164.249,
+    "sso_shadow_index_equity_usd": 34162.0769,
     "sso_shadow_index": 117.2798
   },
   {
@@ -1844,9 +1844,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32100.4309,
+    "spy_shadow_index_equity_usd": 32099.1327,
     "spy_shadow_index": 108.9519,
-    "sso_shadow_index_equity_usd": 33859.4784,
+    "sso_shadow_index_equity_usd": 33857.3257,
     "sso_shadow_index": 116.2336
   },
   {
@@ -1861,9 +1861,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32464.4098,
+    "spy_shadow_index_equity_usd": 32463.0968,
     "spy_shadow_index": 110.1873,
-    "sso_shadow_index_equity_usd": 34618.9082,
+    "sso_shadow_index_equity_usd": 34616.7071,
     "sso_shadow_index": 118.8406
   },
   {
@@ -1878,9 +1878,9 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 32506.1902,
+    "spy_shadow_index_equity_usd": 32504.8755,
     "spy_shadow_index": 110.3291,
-    "sso_shadow_index_equity_usd": 34668.8698,
+    "sso_shadow_index_equity_usd": 34666.6655,
     "sso_shadow_index": 119.0121
   },
   {
@@ -1895,9 +1895,26 @@
     "cash_like_mv_usd": 0.0,
     "funding_usd": 40188.77,
     "fund_units": 294.65229,
-    "spy_shadow_index_equity_usd": 33010.1984,
+    "spy_shadow_index_equity_usd": 33008.8633,
     "spy_shadow_index": 112.0397,
-    "sso_shadow_index_equity_usd": 35748.0582,
+    "sso_shadow_index_equity_usd": 35745.7854,
     "sso_shadow_index": 122.7168
+  },
+  {
+    "date": "2026-09-22",
+    "mv_usd": NaN,
+    "nav_index": NaN,
+    "spy_close": NaN,
+    "spy_index": NaN,
+    "cumulative_invested_usd": 30677.72,
+    "position_mv_usd": NaN,
+    "ledger_cash_usd": 10547.2,
+    "cash_like_mv_usd": 0.0,
+    "funding_usd": 40188.77,
+    "fund_units": 294.65229,
+    "spy_shadow_index_equity_usd": NaN,
+    "spy_shadow_index": NaN,
+    "sso_shadow_index_equity_usd": NaN,
+    "sso_shadow_index": NaN
   }
 ]
