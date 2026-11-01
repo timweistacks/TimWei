@@ -928,7 +928,7 @@
       "usd_amount": 3164.56
     }
   ],
-  "generated_at": "2026-10-31",
+  "generated_at": "2026-11-01",
   "income_events": {
     "schema_version": 1,
     "summary_note_en": "Income events record dividends, distributions, withholding taxes, and where the cash went next. Keep this separate from trade history.",
@@ -2408,7 +2408,7 @@
           118.7195,
           112.5503,
           113.08,
-          112.4306,
+          112.4307,
           108.8077,
           112.499,
           113.6611,
@@ -2416,7 +2416,7 @@
           116.2758,
           113.3877,
           115.5409,
-          114.8402,
+          114.8403,
           111.5591,
           111.4016,
           111.3844,
@@ -2621,7 +2621,7 @@
   },
   "platform_note_zh": "",
   "portfolio_view": {
-    "as_of": "2026-10-31",
+    "as_of": "2026-11-01",
     "buy_fee_policy": {
       "active": true,
       "broker_fee_usd_per_trade": 3.0,
@@ -3761,7 +3761,7 @@
           118.7195,
           112.5503,
           113.08,
-          112.4306,
+          112.4307,
           108.8077,
           112.499,
           113.6611,
@@ -3769,7 +3769,7 @@
           116.2758,
           113.3877,
           115.5409,
-          114.8402,
+          114.8403,
           111.5591,
           111.4016,
           111.3844,
