@@ -1,7 +1,7 @@
 # Current Summary
 
-- Generated on: 2026-11-21
-- Snapshot date: 2026-11-21
+- Generated on: 2026-11-22
+- Snapshot date: 2026-11-22
 - Purpose: portable summary for future AI review and handoff.
 
 ## Current State
